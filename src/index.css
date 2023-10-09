@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer components{
+    .wrap{
+        @apply px-10
+    }
+    .flex-b{
+        @apply flex  items-center justify-between
+    }
+    .item {
+        @apply ml-6 text-lg font-semibold
+    } 
+    .icons{
+        @apply ml-3 text-2xl
+    }
+    .button{
+        @apply py-2 px-3 bg-red-500 font-semibold rounded-sm
+    }
+}
+
+@layer base{
+    .inset-center {
+        position: absolute;
+        top: 50%; 
+        transform: translate(-50%, -50%);
+      }
+      .formGroup{
+        width: 48%;
+      }
+      .input{
+        width: 100%;
+        padding: 10px 15px ;
+        border: 1px solid gainsboro;
+      }
+      .ul li{
+        margin-top: 10px;
+      }
+}
