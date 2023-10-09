@@ -37,4 +37,12 @@
       .ul li{
         margin-top: 10px;
       }
+      .volanteer_bg{
+        background-image: url('./images/volanteer.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 80vh; 
+      }
 }
+
+ 

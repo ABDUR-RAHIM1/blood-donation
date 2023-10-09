@@ -5,16 +5,18 @@ import AddBanner from './AddBanner'
 import DonationProccess from './DonationProccess'
 import Appoinment from './Appoinment' 
 import Up from '../utils/Up'
+import Volantiars from './Volantiars'
 
 function Home() { 
  
   return (
     <div> 
-        <Header/>
+     
         <Slider/>
         <AddBanner/>
         <DonationProccess/>
         <Appoinment/>
+        <Volantiars/>
         <Up/>
     </div>
   )
