@@ -12,7 +12,7 @@ function Header() {
             <Banner />
             <header className='bg-gray-100 wrap'>
                 <Navbar expand="lg">
-                    <Link className='text-3xl'>
+                    <Link to='/' className='text-3xl'>
                         <span className='text-5xl text-red-500'>𝓡</span>𝓸𝓴𝓽𝓸𝓓𝓲𝓫𝓸
                     </Link>
 
@@ -22,10 +22,10 @@ function Header() {
                             className="ms-auto my-2 my-lg-0"
                             navbarScroll
                         >
-                            <Link className='item'>Home</Link>
-                            <Link className='item'>Home</Link>
-                            <Link className='item'>Home</Link>
-                            <Link className='item'>Home</Link>
+                            <Link to='/' className='item'>Home</Link>
+                            <Link to='/about' className='item'>About</Link>
+                            <Link to='/blogs' className='item'>Blogs</Link>
+                            <Link to='/login' className='item'>login</Link>
                         </Nav>
                         <Form className="d-none">
                             <Form.Control

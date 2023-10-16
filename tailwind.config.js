@@ -8,6 +8,8 @@ export default {
     extend: {
       width: {
         '23': '23%',  
+        '31' : '31%',
+        '48' :'48%'
       },
 
       height:{

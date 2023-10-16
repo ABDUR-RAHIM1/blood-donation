@@ -6,6 +6,15 @@ export const userRegister = {
   location: '',
   date: '',
   time: '',
+  gender: '',
+  bloodGroup: '',
+  weight: '',
+  beforeDonate: '',
+  medicalCondition: '',
+  preferCenter: '',
+  frequencyDonationn: '',
+  emergencyContact: '',
+  relationshipContact: '',
   message: ''
 
 }

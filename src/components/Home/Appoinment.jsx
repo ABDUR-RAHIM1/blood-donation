@@ -5,9 +5,9 @@ import Register from '../utils/Register'
 function Appoinment() {
 
     return (
-        <section>
+        <section className='text overflow-hiddens'>
             <img className='h-450 w-full' src={img} alt="" />
-            <div className='my-5 wrap flex-wrap flex-b items-start'>
+            <div className='mt-5 wrap flex-wrap flex-b items-start'>
                 <div className="text w-full mb-20 md:w-2/5">
                     <h3 className='text-lg relative'>
                         জেনে রাখা ভালো

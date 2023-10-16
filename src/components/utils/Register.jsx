@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Inputs from './Inputs'
 import TextArea from './TextArea'
 import { userRegister } from './RegisterInfo'
 import { useLocation } from 'react-router-dom'
+import { GlobalState } from '../../State/State'
 
 function Register() {
-    const path = useLocation().pathname;
-    console.log(path)
-    const [register, setRegister] = useState(userRegister)
+    const path = useLocation().pathname; 
+   const {register , setRegister} = useContext(GlobalState)
     const handleChange = (e) => {
         setRegister({ ...register, [e.target.name]: e.target.value })
     }
@@ -28,7 +28,7 @@ function Register() {
                     lable="Enter Your Good Name"
                 />
                 <Inputs
-                    type="text"
+                    type="email"
                     name="email"
                     placeholder="Enter Email"
                     handleChange={handleChange}

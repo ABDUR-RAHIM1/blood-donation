@@ -12,7 +12,7 @@ function ProcessCard(props) {
             </div>
             <hr className='mt-2' />
             <div className='px-2 py-4'>
-                <h2 className='text-center font-semibold text-xl mb-3 text-red-500'>{title}</h2>
+                <h2 className='text-center font-semibold text-xl mb-3 text-slate-600'>{title}</h2>
                 <p>{text}</p>
             </div>
         </section>
