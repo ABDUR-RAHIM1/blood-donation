@@ -1,50 +1,125 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .wrap {
+    @apply px-10
+  }
+
+  .flex-b {
+    @apply flex items-center justify-between
+  }
+
+  .item {
+    @apply ml-6 text-lg font-semibold
+  }
+
+  .menu {
+    @apply w-10 h-1 bg-red-500 m-2 cursor-pointer
+  }
+
+  .form-w {
+    @apply w-2/4 m-auto
+  }
+
+  .addBanner {
+    @apply w-2/4 p-2 text-slate-200 cursor-pointer hover:text-slate-300
+  }
+
+  .icons {
+    @apply ml-3 text-2xl bg-white p-1 hover:cursor-pointer hover:bg-red-800 hover:text-white
+  }
+
+  .button {
+    @apply py-2 px-3 bg-red-500 font-semibold rounded-sm
+  }
+
+  /*  register , login  type text */
+  .loginText {
+    @apply text-red-300 font-semibold text-center block cursor-pointer italic underline
+  }
+
+  /* blog details page  */
+  .details {
+    @apply w-9/12 py-10 border-r border-solid border-slate-300 pr-3
+  }
+
+  .page-sidebar {
+    @apply flex-1 ml-5 py-10
+  }
+
+  /* blog details page  */
+
+  /*  footer */
+  .newsletter {
+    @apply py-7 border-t border-slate-100 flex justify-between items-center flex-wrap
+  }
+
+  .newsletter p {
+    @apply mb-3
+  }
+
+  .newsletter input {
+    @apply w-full p-3 text-black
+  }
+
+  /*  footer */
+
+  /*  admin ddasbboard */
+  .sidebar {
+    @apply bg-slate-600 h-screen px-3 py-10 duration-300
+  }
+
+  .sidebarBtn {
+    @apply w-full px-3 py-2 text-center rounded-sm text-white bg-slate-500 cursor-pointer font-semibold my-3 uppercase hover:bg-slate-400 duration-150
+  }
+
+  .arrow {
+    @apply w-10 absolute top-0 -right-7 cursor-pointer
+  }
+
+  .main {
+    @apply flex-1 h-screen overflow-y-auto p-5
+  }
  
-@layer components{
-    .wrap{
-        @apply px-10
+  /* dashboard add form  */
+    .dFormWrap{
+       @apply w-full h-screen flex items-center justify-center bg-red-400
     }
-    .flex-b{
-        @apply flex  items-center justify-between
-    }
-    .item {
-        @apply ml-6 text-lg font-semibold
-    } 
-    .addBanner{
-       @apply  w-2/4 p-2 text-slate-200 cursor-pointer hover:text-slate-300
-    }
-    .icons{
-        @apply ml-3 text-2xl
-    }
-    .button{
-        @apply py-2 px-3 bg-red-500 font-semibold rounded-sm
-    }
+  /* dashboard add form  */
+
+  /*  admin ddasbboard */
 }
 
-@layer base{
- 
-    .inset-center {
-        position: absolute;
-        top: 50%; 
-        transform: translate(-50%, -50%);
-      }
-      .formGroup{
+@layer base {
+
+  .inset-center {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* .formGroup{
         width: 48%;
-      }
-      .input{
-        width: 100%;
-        padding: 10px 15px ;
-        border: 1px solid gainsboro;
-      }
-      .ul li{
-        margin-top: 10px;
-      }
-      .heading{
-        font-size: 32px;
-        font-weight: 500;
-      }
-}
+      } */
+  .input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid gainsboro;
+  }
 
- 
+  .ul li {
+    margin-top: 10px;
+  }
+
+  .heading {
+    font-size: 32px;
+    font-weight: 500;
+  }
+
+  .scroll-none::-webkit-scrollbar {
+    display: none;
+  }
+
+}

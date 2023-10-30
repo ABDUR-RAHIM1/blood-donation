@@ -5,11 +5,10 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
-import Banner from './Banner';
 function Header() {
     return (
         <>
-            <Banner />
+
             <header className='bg-gray-100 wrap'>
                 <Navbar expand="lg">
                     <Link to='/' className='text-3xl'>

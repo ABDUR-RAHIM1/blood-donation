@@ -1,11 +1,11 @@
 import React from 'react'
 
 function Inputs(props) {
-    const { name, type, placeholder,lable, handleChange } = props
+    const { name, type, placeholder,lable, handleChange , width } = props
     return (
-        <div className='formGroup'>
+        <div>
             <input
-                className='input mt-3 outline-0'
+                className={`${width} input mt-3 outline-0`}
                 type={type}
                 name={name}
                 placeholder={placeholder}

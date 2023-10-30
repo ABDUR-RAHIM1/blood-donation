@@ -8,11 +8,18 @@ import Up from '../utils/Up'
 import Volantiars from './Volantiars'
 import Blogs from '../Blogs/Blogs'
 import Testimonial from './Testimonial'
+import {motion} from 'framer-motion'
 
 function Home() { 
  
   return (
-    <div> 
+    <motion.div
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      transition={{
+        duration :'1'
+      }}
+    > 
      
         <Slider/>
         <AddBanner/>
@@ -22,7 +29,7 @@ function Home() {
         <Blogs/>
         <Testimonial/>
         <Up/>
-    </div>
+    </motion.div>
   )
 }
 

@@ -19,13 +19,13 @@ function Register() {
                     REQUEST APPOINTMENT
                 </h1>
             </div>
-            <div className={`${path === '/donar-register' ? 'mt-0' : ' mt-20'} flex-b`}>
+            <div className={`${path === '/donar-register' ? 'mt-0' : ' mt-20'} flex-b `}>
                 <Inputs
                     type="text"
                     name="name"
                     placeholder="Enter Name"
                     handleChange={handleChange}
-                    lable="Enter Your Good Name"
+                    lable="Enter Your Good Name" 
                 />
                 <Inputs
                     type="email"

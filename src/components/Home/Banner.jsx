@@ -6,9 +6,9 @@ function Banner() {
         <h2 className='text-xl text-white'>welcome to our blood doantion center</h2>
         {/*  social icons  */}
         <div className='flex-b' >
-            <BsFacebook title="faccebook"  className="icons bg-white p-1 hover:cursor-pointer"/>
-            <BsTwitter  title="twitter" className="icons bg-white p-1 hover:cursor-pointer"/>
-            <BsLinkedin  title="linkedin" className="icons bg-white p-1 hover:cursor-pointer"/> 
+            <BsFacebook title="faccebook"  className="icons"/>
+            <BsTwitter  title="twitter" className="icons"/>
+            <BsLinkedin  title="linkedin" className="icons"/> 
         </div>
     </section>
   )
