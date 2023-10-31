@@ -6,7 +6,7 @@ function SidebarItems(props) {
   const handle = (e) => {
        setBtnText(e.target.innerText)
   }
-  console.log(btnText)
+ 
   return ( 
       <button onClick={handle} className='sidebarBtn'>
         {props.item}

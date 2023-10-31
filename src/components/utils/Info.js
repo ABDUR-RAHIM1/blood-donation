@@ -1,5 +1,6 @@
 
-export const userRegister = {
+export const Info = {
+  //  doanr register 
   name: '',
   email: '',
   phone: '',
@@ -15,6 +16,15 @@ export const userRegister = {
   frequencyDonationn: '',
   emergencyContact: '',
   relationshipContact: '',
-  message: ''
+  message: '',
+
+  // add blog
+  title: '',
+  text: '',
+  image: '',
+
+  //  edited true / false
+  isEdit : false,
 
 }
+ 

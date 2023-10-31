@@ -1,17 +1,16 @@
 import React, { useContext, useState } from 'react'
 import Inputs from './Inputs'
-import TextArea from './TextArea'
-import { userRegister } from './RegisterInfo'
+import TextArea from './TextArea' 
 import { useLocation } from 'react-router-dom'
 import { GlobalState } from '../../State/State'
 
 function Register() {
     const path = useLocation().pathname; 
-   const {register , setRegister} = useContext(GlobalState)
+   const {info , setInfo} = useContext(GlobalState)
     const handleChange = (e) => {
-        setRegister({ ...register, [e.target.name]: e.target.value })
+        setInfo({ ...info, [e.target.name]: e.target.value })
     }
-    console.log(register)
+    console.log(info)
     return (
         <form action="">
             <div className=" bg-red-500 py-4 text-center absolute top-0 left-0 w-full">

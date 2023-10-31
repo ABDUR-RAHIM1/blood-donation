@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function PageSidebar(props) {
-    console.log(props)
     const { image, link, home, join } = props.pageSidebar
     return (
         <div>

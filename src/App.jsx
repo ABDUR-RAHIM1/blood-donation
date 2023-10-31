@@ -11,6 +11,7 @@ import Banner from './components/Home/Banner'
 import BlogDetails from './components/BlogDetails/BlogDetails'
 import Footer from './components/Footer/footer'
 import AdminDashboard from './components/Admin/Dashboard/AdminDashboard'
+import AddBLog from './components/Admin/Admin/AddBLog'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/blogs" element={<Blogs />} />
+        <Route path="/add-blog" element={<AddBLog />} />
         <Route path="/blog-details" element={<BlogDetails />} />
         <Route path="/donar-auth" element={<DonarLogin />} />
         <Route path="/donar-register" element={<DonarPrivetRoute>
