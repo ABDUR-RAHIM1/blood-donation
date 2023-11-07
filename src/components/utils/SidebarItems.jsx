@@ -1,16 +1,16 @@
 import React, { useContext } from 'react'
 import { GlobalState } from '../../State/State'
+import { Link } from 'react-router-dom'
 
 function SidebarItems(props) {
-  const { btnText, setBtnText } = useContext(GlobalState)
-  const handle = (e) => {
-       setBtnText(e.target.innerText)
-  }
- 
-  return ( 
-      <button onClick={handle} className='sidebarBtn'>
-        {props.item}
-      </button> 
+ const {item , link} = props.item;
+
+  return (
+    <Link to={link}>
+      <button className='sidebarBtn'>
+        {item}
+      </button>
+    </Link>
   )
 }
 

@@ -1,47 +1,42 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
 function Header() {
+
     return (
-        <>
+        <Navbar expand="lg" className="bg-body-tertiary wrap">
+            <Navbar.Brand href="#home">
+                <span className='text-5xl text-red-500'>𝓡</span>𝓸𝓴𝓽𝓸𝓓𝓲𝓫𝓸
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="ms-auto flex items-center justify-end">
+                    <Link to='/' className='item'>home</Link>
+                    <Link to='/donars' className='item'>donar list</Link>
+                    <Link to='/about' className='item'>about</Link>
+                    <Link to='/blogs' className='item'>blogs</Link>
+                    <div className='md:ml-3'>
+                    <Dropdown>
+                        <Dropdown.Toggle variant='danger' className='button' id="dropdown-basic">
+                            <span className='item ml-0'>Login</span>
+                        </Dropdown.Toggle>
 
-            <header className='bg-gray-100 wrap'>
-                <Navbar expand="lg">
-                    <Link to='/' className='text-3xl'>
-                        <span className='text-5xl text-red-500'>𝓡</span>𝓸𝓴𝓽𝓸𝓓𝓲𝓫𝓸
-                    </Link>
-
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="ms-auto my-2 my-lg-0"
-                            navbarScroll
-                        >
-                            <Link to='/' className='item'>Home</Link>
-                            <Link to='/about' className='item'>About</Link>
-                            <Link to='/blogs' className='item'>Blogs</Link>
-                            <Link to='/login' className='item'>login</Link>
-                        </Nav>
-                        <Form className="d-none">
-                            <Form.Control
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                            <Button variant="outline-success">Search</Button>
-                        </Form>
-                    </Navbar.Collapse>
-                </Navbar>
-
-            </header>
-
-
-        </>
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="#/action-1">
+                                 <Link>User Login</Link>
+                            </Dropdown.Item>
+                            <Dropdown.Item href="#/action-1">
+                                 <Link>User Login</Link>
+                            </Dropdown.Item> 
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    </div>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
     );
 }
 

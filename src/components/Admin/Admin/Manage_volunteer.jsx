@@ -1,8 +1,9 @@
 import React from 'react'
+import AdminDashboard from '../Dashboard/AdminDashboard'
 
 function Manage_volunteer() {
   return (
-    <div>Manage_volunteer</div>
+    <AdminDashboard>Manage_volunteer</AdminDashboard>
   )
 }
 

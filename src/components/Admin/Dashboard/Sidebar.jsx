@@ -2,21 +2,23 @@ import React from 'react'
 import SidebarItems from '../../utils/SidebarItems'
 
 function Sidebar() {
+  
   const items = [
-      'home','add blog','get blog','add volunteer ','manage volunteer', 'get Request', 'add Slider', 'add logo'
+    { item: 'dashboard', link: '/admin-dashboard' },
+    { item: 'add blog', link: '/admin-add-blog' },
+    { item: 'get blog', link: '/admin-get-blog' },
+    { item: 'add volunteer', link: '/admin-add-volunteer' },
+    { item: 'manage volunteer', link: '/admin-manage-volunteer' },
+    { item: 'get request', link: '/admin-get-request' },
+    { item: 'add slider', link: '/admin-add-slider' }, 
+    { item: 'Manage Content', link: '/admin-manage-content' },
   ]
   return (
     <div className='h-full scroll-none overflow-y-auto'>
-         {
-          items.map((item , index) => <SidebarItems key={index} item={item} />)
-         }
-
-    {/* <SidebarItems item='home' />
-    <SidebarItems item='add blog' />
-    <SidebarItems item='get blog' />
-    <SidebarItems item='add volunteer' /> */}
-
-         <div style={{ height: '10000px' }}></div>
+      {
+        items.map((item, index) => <SidebarItems key={index} item={item} />)
+      }
+      <div style={{ height: '10000px' }}></div>
     </div>
   )
 }

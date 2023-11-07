@@ -25,13 +25,13 @@ function Blog({ blog }) {
                 <Link to='/blog-details' state={blog}>
                     <h1 title='go to details' className="text-lg font-bold text-center uppercase underline">{blog.title}</h1>
                 </Link>
-                <p onClick={handleShow}>{(blog.text).slice(0, 50) + ' . . .'}</p>
+                <p className='text-white' onClick={handleShow}>{(blog.text).slice(0, 50) + ' . . .'}</p>
             </div>
 
             {/*  admin button => edit and delete */}
 
             {show && <div className="adminBtn flex-b">
-                <Link to='/add-blog' state={blog} onClick={() => handleEdit(blog.id, blog)}>
+                <Link to='/admin-add-blog' state={blog} onClick={() => handleEdit(blog.id, blog)}>
                     <button className='button'>Edit</button>
                 </Link>
                 <button className='button'>Delete</button>

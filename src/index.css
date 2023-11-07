@@ -12,7 +12,7 @@
   }
 
   .item {
-    @apply ml-6 text-lg font-semibold
+    @apply ml-6 text-lg font-semibold uppercase
   }
 
   .menu {
@@ -32,7 +32,7 @@
   }
 
   .button {
-    @apply py-2 px-3 bg-red-500 font-semibold rounded-sm
+    @apply py-2 px-3 bg-red-500 font-semibold rounded-sm hover:bg-red-600 duration-100
   }
 
   /*  register , login  type text */
@@ -41,6 +41,30 @@
   }
 
   /* blog details page  */
+
+  /* donar*/
+  .donarBtn {
+    @apply font-semibold text-white uppercase w-full py-3 text-center text-sm
+  }
+
+  .donarCard {
+    @apply w-full sm:w-48 md:w-31 my-4 rounded-md shadow-md shadow-fuchsia-300
+  }
+
+  .genarelInfo {
+    @apply my-3 px-2
+  }
+
+  .genarelInfo p {
+    @apply my-2 capitalize
+  }
+
+  .genarelInfo span {
+    @apply font-semibold text-red-400 hover:text-red-600
+  }
+
+  /*  donar*/
+
   .details {
     @apply w-9/12 py-10 border-r border-solid border-slate-300 pr-3
   }
@@ -82,18 +106,33 @@
   .main {
     @apply flex-1 h-screen overflow-y-auto p-5
   }
- 
+
   /* dashboard add form  */
-    .dFormWrap{
-       @apply w-full md:w-3/4 m-auto mt-10 bg-slate-600 py-10 px-6 shadow-md 
-    }
-    .title{
-       @apply text-2xl font-semibold md:text-4xl my-3 md:font-bold text-center uppercase text-white
-    }
+
+  .dash_board_items {
+    @apply w-full sm:w-48 md:w-31 py-5 px-3 my-10 shadow-md shadow-slate-400 border-red-50 cursor-pointer
+  }
+
+  .dFormWrap {
+    @apply w-full md:w-3/4 m-auto mt-10 bg-slate-600 py-10 px-6 shadow-md
+  }
+
+  .title {
+    @apply text-2xl font-semibold md:text-4xl my-3 md:font-bold text-center uppercase text-white
+  }
+
   /* dashboard add form  */
-  
-  .adminBtn{
+
+  .adminBtn {
     @apply w-full bg-slate-400 absolute top-0 right-0
+  }
+
+  /* manageContent => add logo */
+  .logos{
+     @apply flex items-center justify-between w-full overflow-x-scroll gap-2
+  }
+  .manageHeading{
+    @apply font-semibold text-white capitalize w-full py-3 text-center text-xl shadow-md
   }
 
   /*  admin ddasbboard */
@@ -129,4 +168,18 @@
     display: none;
   }
 
+}
+
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   scroll-behavior: smooth;
+}
+a{
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: none;
+  color: black;
 }

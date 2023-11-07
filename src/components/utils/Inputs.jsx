@@ -13,7 +13,7 @@ function Inputs(props) {
                 onChange={handleChange}
             />
             <br />
-            <small>{lable}</small>
+            <small className='text-red-500'>{lable}</small>
         </div>
     )
 }

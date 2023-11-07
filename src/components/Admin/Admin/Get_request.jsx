@@ -1,8 +1,9 @@
 import React from 'react'
+import AdminDashboard from '../Dashboard/AdminDashboard'
 
 function Get_request() {
   return (
-    <div>Get_request</div>
+    <AdminDashboard>Get_request</AdminDashboard>
   )
 }
 

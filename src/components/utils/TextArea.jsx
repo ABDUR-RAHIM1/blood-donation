@@ -6,12 +6,12 @@ function TextArea(props) {
         <div>
             <textarea name={name}
             value={value}
-                className='w-full h-24 mt-3 outline-0 p-3'
+                className='w-full h-32 mt-3 outline-0 p-3'
                 placeholder={placeholder}
                 onChange={handleChange}
             ></textarea>
             <br />
-            <small>{lable}</small>
+            <small className='text-red-500'>{lable}</small>
         </div>
     )
 }
