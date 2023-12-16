@@ -37,7 +37,7 @@
 
   /*  register , login  type text */
   .loginText {
-    @apply text-red-300 font-semibold text-center block cursor-pointer italic underline
+    @apply text-gray-100 font-semibold text-center block cursor-pointer italic underline
   }
 
   /* blog details page  */
@@ -45,6 +45,10 @@
   /* donar*/
   .donarBtn {
     @apply font-semibold text-white uppercase w-full py-3 text-center text-sm
+  }
+
+  .donarLoginFiled {
+    @apply bg-gray-50 border mt-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
   }
 
   .donarCard {
@@ -64,6 +68,19 @@
   }
 
   /*  donar*/
+
+
+  /* profile start */
+ 
+    .donarProfileLeSidebar{
+       @apply w-72 px-4 py-10 bg-gray-100
+    }
+    .profielCard{
+      @apply bg-gray-200 text-center py-5 rounded-md shadow-sm shadow-slate-300
+    }
+  /* profile  end */
+
+
 
   .details {
     @apply w-9/12 py-10 border-r border-solid border-slate-300 pr-3
@@ -128,10 +145,11 @@
   }
 
   /* manageContent => add logo */
-  .logos{
-     @apply flex items-center justify-between w-full overflow-x-scroll gap-2
+  .logos {
+    @apply flex items-center justify-between w-full overflow-x-scroll gap-2
   }
-  .manageHeading{
+
+  .manageHeading {
     @apply font-semibold text-white capitalize w-full py-3 text-center text-xl shadow-md
   }
 
@@ -146,9 +164,7 @@
     transform: translate(-50%, -50%);
   }
 
-  /* .formGroup{
-        width: 48%;
-      } */
+
   .input {
     width: 100%;
     padding: 10px 15px;
@@ -168,18 +184,27 @@
     display: none;
   }
 
+ 
 }
 
-*{
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-   scroll-behavior: smooth;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
-a{
+
+a {
   text-decoration: none;
 }
-a:hover{
+
+label {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+a:hover {
   text-decoration: none;
   color: black;
 }

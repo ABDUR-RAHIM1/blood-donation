@@ -1,14 +1,14 @@
 import React from 'react'
 import img from "../../images/blood-bg.jpg"
-import img2 from '../../images/bg.png'
-import Register from '../utils/Register'
+import img2 from '../../images/bg.png' 
+import AppoinmentForm from '../Forms/AppoinmentForm'
 function Appoinment() {
 
     return (
-        <section className='text overflow-hiddens'>
+        <section className='text overflow-hidden'>
             <img className='h-450 w-full' src={img} alt="" />
             <div className='mt-5 wrap flex-wrap flex-b items-start'>
-                <div className="text w-full mb-20 md:w-2/5">
+                <div className="text w-full mb-20 md:w-3/5">
                     <h3 className='text-lg relative'>
                         জেনে রাখা ভালো
                         <span className='line absolute left-0 -bottom-2 w-20 h-1 bg-red-500'></span>
@@ -28,8 +28,8 @@ function Appoinment() {
                     </ul>
                 </div>
                 <div className='w-full md:flex-1 relative md:ml-5  md:-translate-y-56'>
-                    <div className=" bg-gray-200  p-4">
-                        <Register />
+                    <div className=" bg-gray-100  p-4">
+                        <AppoinmentForm />
                     </div>
                     <img className='w-full h-48' src={img2} alt="" />
                 </div>

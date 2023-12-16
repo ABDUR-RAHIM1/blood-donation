@@ -1,12 +1,11 @@
-import React from 'react'
-import Register from '../utils/Register'
+import React from 'react' 
 import img from "../../images/blood-bg.jpg"
 import img2 from '../../images/bg.png'
+import DonarRegisterForm from '../Forms/DonarRegisterForm'
+
 function DonarRegister() {
   return (
     <section>
-
-
       <img className='h-450 w-full' src={img} alt="" />
 
 
@@ -31,7 +30,7 @@ function DonarRegister() {
         </div>
         <div className='w-full md:flex-1 relative md:ml-5  md:-translate-y-56'>
 
-          <div className=" bg-gray-200  p-4">
+          <div className=" bg-gray-100  p-4">
             {/*  info */}
             <div className='mt-20'>
               <p className='text-sm'>
@@ -39,8 +38,8 @@ function DonarRegister() {
 
               </p>
             </div>
-            {/*  info */}
-            <Register />
+            {/*  info end here*/}
+          <DonarRegisterForm />
           </div>
         </div>
       </div>

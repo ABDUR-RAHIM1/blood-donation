@@ -1,42 +1,82 @@
 import React from 'react';
+import { useContext } from 'react';
+import { useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { GlobalState } from '../../State/State';
+import demoImg from '../../images/demo.jpg'
 function Header() {
+    const { isDonarLogin, setIsDonarLogin } = useContext(GlobalState)
+    useEffect(() => {
+        const isDonarLoginInfo = JSON.parse(localStorage.getItem('donarLoginInfo'));
+        if (isDonarLoginInfo) {
+            setIsDonarLogin(isDonarLoginInfo)
+        }
+    }, [setIsDonarLogin]);
 
+    console.log(isDonarLogin)
     return (
-        <Navbar expand="lg" className="bg-body-tertiary wrap">
-            <Navbar.Brand href="#home">
-                <span className='text-5xl text-red-500'>𝓡</span>𝓸𝓴𝓽𝓸𝓓𝓲𝓫𝓸
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ms-auto flex items-center justify-end">
-                    <Link to='/' className='item'>home</Link>
-                    <Link to='/donars' className='item'>donar list</Link>
-                    <Link to='/about' className='item'>about</Link>
-                    <Link to='/blogs' className='item'>blogs</Link>
-                    <div className='md:ml-3'>
-                    <Dropdown>
-                        <Dropdown.Toggle variant='danger' className='button' id="dropdown-basic">
-                            <span className='item ml-0'>Login</span>
-                        </Dropdown.Toggle>
+        <header className='px-4 md:px-0 bg-gray-100'>
+            {['md'].map((expand) => (
+                <Navbar key={expand} expand={expand} className="bg-gray-100">
+                    <Container fluid>
+                        <Navbar.Brand as={Link} to='/'>ROKTOJODDHA</Navbar.Brand>
+                        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+                        <Navbar.Offcanvas
+                            id={`offcanvasNavbar-expand-${expand}`}
+                            aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+                            placement="end"
+                        >
+                            <Offcanvas.Header closeButton>
+                                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                                    ROKTOJODDHA
+                                </Offcanvas.Title>
+                            </Offcanvas.Header>
+                            <Offcanvas.Body>
+                                <Nav className="justify-content-end flex-grow-1 pe-3">
+                                    <Nav.Link href="#action1">Home</Nav.Link>
+                                    <Nav.Link href="#action2">Link</Nav.Link>
 
-                        <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">
-                                 <Link>User Login</Link>
-                            </Dropdown.Item>
-                            <Dropdown.Item href="#/action-1">
-                                 <Link>User Login</Link>
-                            </Dropdown.Item> 
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    </div>
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
+                                    {/* donar / users profiles  start*/}
+
+                                    {/* donar / users profiles end */}
+
+                                    {
+                                        isDonarLogin.name
+                                            ? <Link to='/profile'>
+                                                <img className='w-10 h-10 rounded-full ml-3 cursor-pointer' src={demoImg} alt="" />
+                                            </Link>
+                                            : <NavDropdown
+                                                title="Login"
+                                                id={`offcanvasNavbarDropdown-expand-${expand}`}
+                                            >
+
+                                                <NavDropdown.Item href="#action4">
+                                                    Donar Log-in
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Divider />
+                                                <NavDropdown.Item href="#action5">
+                                                    User Log-in
+                                                </NavDropdown.Item>
+                                            </NavDropdown>
+
+
+                                    }
+
+
+                                </Nav>
+
+                            </Offcanvas.Body>
+                        </Navbar.Offcanvas>
+                    </Container>
+                </Navbar>
+            ))}
+        </header>
     );
 }
 

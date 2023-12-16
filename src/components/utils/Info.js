@@ -28,3 +28,4 @@ export const Info = {
 
 }
  
+export const authInfos = {  name: '', gender :"",  email:"", password :''}

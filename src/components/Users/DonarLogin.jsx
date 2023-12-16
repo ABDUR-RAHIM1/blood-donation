@@ -1,31 +1,83 @@
 import React, { useContext, useState } from 'react'
 import { GlobalState } from '../../State/State'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Inputs from '../utils/Inputs'
-import {motion} from 'framer-motion'
-
+import { motion } from 'framer-motion'
+import Loading from '../utils/Loading'
+import Notification from '../utils/Notification'
+import { useEffect } from 'react'
 function DonarLogin() {
-  const {register, setRegister} = useContext(GlobalState)
+  const navigate = useNavigate()
+  const { handleDonarRegister, isLoading, setIsLoading, setMessage, setDonarLogin } = useContext(GlobalState)
   const [isRegister, setIsRegister] = useState(false)
-  
+  const [authInfo, setAuthInfo] = useState({})
+
+  //  navigate to donar regsieter page when donar already login 
+  useEffect(() => {
+    const isDonarLoginInfo = JSON.parse(localStorage.getItem('donarLoginInfo'));
+    if (isDonarLoginInfo) {
+      setDonarLogin(isDonarLoginInfo)
+      navigate('/donar-register')
+    }
+  }, []);
+
+  //   donar login changer
   const handleChange = (e) => {
-    const value = e.target.value;
-    setRegister({...register ,[e.target.name]:value })
+    const { name, value } = e.target;
+    setAuthInfo({ ...authInfo, [name]: value })
   }
-  console.log(register)
+
+  //  doanr login submit handler
+  const handleLoginDonar = (e) => {
+    e.preventDefault();
+    setIsLoading(true)
+    fetch('http://localhost:8000/api/donar/login', {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(authInfo)
+    }).then(res => res.json())
+      .then(data => {
+        setIsLoading(false)
+        setMessage(data.message)
+        console.log(data.login)
+        if (data.login === true) {
+
+          localStorage.setItem('donarLoginInfo', JSON.stringify(data.loginInfo))
+          setTimeout(() => {
+            navigate('/donar-register')
+          }, 2000);
+        } else {
+          navigate('/donar-auth')
+        }
+
+      })
+  }
+
+
   return (
     <motion.div
-      initial={{opacity:0}}
-      animate={{opacity:1}}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{
-        duration :'1'
+        duration: '1'
       }}
-    className='bg-slate-700 w-full h-screen pt-10'>
-      <form className='form-w bg-slate-600 p-6'>
-    {  isRegister &&  <div>
+      className='bg-slate-700 w-full h-screen pt-10'>
+
+      <form onSubmit={
+
+        isRegister
+          ? (e) => handleDonarRegister(e, authInfo)
+          : (e) => handleLoginDonar(e, authInfo)
+
+      } className='form-w bg-slate-600 p-6'>
+        {isRegister && <div>
           <Inputs
             type='text'
             name='name'
+            value={authInfo.name}
+            required={true}
             placeholder='Enter Your Name'
             lable='Enter Your Good Name'
             handleChange={handleChange}
@@ -33,6 +85,8 @@ function DonarLogin() {
           <Inputs
             type='text'
             name='gender'
+            value={authInfo.gender}
+            required={true}
             placeholder='Gender'
             lable='Your Gender'
             handleChange={handleChange}
@@ -41,6 +95,8 @@ function DonarLogin() {
         <Inputs
           type='email'
           name='email'
+          value={authInfo.email}
+          required={true}
           placeholder='Enter Your Email'
           lable='Enter Your Email'
           handleChange={handleChange}
@@ -48,17 +104,23 @@ function DonarLogin() {
         <Inputs
           type='password'
           name='password'
+          value={authInfo.password}
+          required={true}
           placeholder='********'
           lable='Enter Your Password'
           handleChange={handleChange}
         />
 
-        <button className='button bg-slate-700 text-white my-4'>Log-in</button> <br />
+        <button className='button mr-2 bg-slate-700 text-white my-4'> {isRegister ? 'Register' : 'Log-in'} </button>
+        {
+          isLoading ? <Loading size='sm' /> : ''
+        }
         <span onClick={() => setIsRegister(!isRegister)} className='loginText'>
           {
-            isRegister ? 'Go for Log-in' : `Don't have any account ?`
+            isRegister ? 'Log-in here' : `Don’t have an account yet ? Sign up `
           }
         </span>
+        <Notification />
       </form>
     </motion.div>
   )
@@ -66,7 +128,3 @@ function DonarLogin() {
 
 export default DonarLogin
 
-export const DonarPrivetRoute = ({ children }) => {
-  const { isDonarLogin } = useContext(GlobalState)
-  return isDonarLogin ? children : <Navigate to='/donar-auth' />
-}
