@@ -6,14 +6,14 @@ function AddBanner() {
 
     return (
         <section className='flex-b flex-wrap items-start wrap  -translate-y-12'>
-            <a className="addBanner bg-slate-900">
+            <Link to='/user-auth' className="addBanner bg-slate-900">
                 <h1 className='heading'>Register Now</h1>
                 <p className='my-3'>রক্ত গ্রহণের আগে, আপনার বা আপনার অনুমোদিত প্রতিনিধিকে অবহিত সম্মতি প্রদান করা উচিত।</p>
-            </a> 
-                <Link to='/donar-register' className="addBanner bg-red-500">
-                    <h1 className='heading'>Donation Now</h1>
-                    <p className='my-3'>রক্ত গ্রহণের আগে, আপনার বা আপনার অনুমোদিত প্রতিনিধিকে অবহিত সম্মতি প্রদান করা উচিত।</p>
-                </Link> 
+            </Link>
+            <Link to='/donar-auth' className="addBanner bg-red-500">
+                <h1 className='heading'>Donation Now</h1>
+                <p className='my-3'>রক্ত গ্রহণের আগে, আপনার বা আপনার অনুমোদিত প্রতিনিধিকে অবহিত সম্মতি প্রদান করা উচিত।</p>
+            </Link>
         </section>
     )
 }

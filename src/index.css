@@ -32,7 +32,11 @@
   }
 
   .button {
-    @apply py-2 px-3 bg-red-500 font-semibold rounded-sm hover:bg-red-600 duration-100
+    @apply py-2 px-3  font-semibold rounded-sm duration-100
+  }
+
+  .formHeading{
+    @apply text-2xl text-slate-100 text-center my-3
   }
 
   /*  register , login  type text */

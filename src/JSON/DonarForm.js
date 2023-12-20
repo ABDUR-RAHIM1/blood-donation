@@ -62,27 +62,32 @@ export const DonarformFields = [
     {
         name: 'emergencyContact',
         label: 'Emergency Contact',
-        type: 'text',
+        type: 'tel',
         placeholder: 'Enter emergency contact number',
         required: true,
     },
     {
         name: 'relationshipContact',
         label: 'Relationship with Emergency Contact',
-        type: 'text',
+        type: 'tel',
         placeholder: 'Enter relationship with emergency contact',
         required: true,
     },
     {
         name: 'beforeDonation',
-        label: 'Before Donation Confirmation',
+        label: 'How much do you donate?',
         type: 'text',
         required: true,
         placeholder: "YES / NO"
     },
     {
+        name: 'profilePic',
+        label: 'Upload Your Image',
+        type: 'file', 
+    },
+    {
         name: 'message',
-        label: 'Message',
+        label: 'any prerequisite?',
         type: 'textarea',
         placeholder: 'Enter your message (optional)',
     },

@@ -6,7 +6,6 @@ import Header from './components/Home/Header'
 import Blogs from './components/Blogs/Blogs'
 import Error from './components/Error/Error'
 import AdminLogin, { ProtectedRoute } from './components/Admin/AdminLogin/AdminLogin'
-// import DonarLogin, { DonarPrivetRoute } from './components/Users/DonarLogin'
 import Banner from './components/Home/Banner'
 import BlogDetails from './components/BlogDetails/BlogDetails'
 import Footer from './components/Footer/footer'
@@ -23,6 +22,7 @@ import Manage_content from './components/Admin/Admin/ManageContent/Manage_conten
 import DonarLogin from './components/Users/DonarLogin'
 import DonarProtected from './ProtectedRoute/DonarProtected'
 import DonarProfile from './Profiles/DonarProfile'
+import UsersLogin from './components/Users/UsersLogin'
 
 function App() {
   return (
@@ -36,10 +36,11 @@ function App() {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog-details" element={<BlogDetails />} />
         <Route path="/donar-auth" element={<DonarLogin />} />
-        <Route path="/donar-register" element={<DonarProtected >
-           {<DonarRegister />}
+        <Route path="/user-auth" element={<UsersLogin />} />
+        <Route path='/donar-register' element={<DonarRegister />} />
+        <Route path="/profile" element={<DonarProtected >
+          <DonarProfile />
         </DonarProtected>} />
-        <Route path='/profile' element={<DonarProfile/>} /> 
         <Route path="/admin" element={<ProtectedRoute>
           <AdminDashboard />
         </ProtectedRoute>} />
