@@ -13,7 +13,7 @@ function UserLogin() {
   const [isRegister, setIsRegister] = useState(false)
   const [isLogin, setIsLogin] = useState(Boolean)
   const [authInfo, setAuthInfo] = useState({ role: '' })
-console.log(isLogin)
+ 
   //  navigate to donar regsieter page when donar already login 
   useEffect(() => {
     const isDonarLoginInfo = JSON.parse(localStorage.getItem('donarLoginInfo'));

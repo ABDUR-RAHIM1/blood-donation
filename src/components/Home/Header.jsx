@@ -19,7 +19,6 @@ function Header() {
         }
     }, [setIsDonarLogin]);
 
-    console.log(isDonarLogin)
     return (
         <header className='px-4 md:px-0 bg-gray-100'>
             {['md'].map((expand) => (
@@ -39,12 +38,11 @@ function Header() {
                             </Offcanvas.Header>
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                                    <Nav.Link href="#action1">Home</Nav.Link>
-                                    <Nav.Link href="#action2">Link</Nav.Link>
-
-                                    {/* donar / users profiles  start*/}
-
-                                    {/* donar / users profiles end */}
+                                    <Nav.Link as={Link} to='/home'>Home</Nav.Link> 
+                                    <Nav.Link as={Link} to='/donars'>Donar List</Nav.Link> 
+                                    <Nav.Link as={Link} to='/about'>About</Nav.Link> 
+                                    <Nav.Link as={Link} to='/blogs'>BLogs</Nav.Link> 
+ 
 
                                     {
                                         isDonarLogin.name

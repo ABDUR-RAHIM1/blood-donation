@@ -9,10 +9,7 @@ function DonarProtected({ children }) {
     useEffect(() => {
       const isDonarLoginInfo = JSON.parse(localStorage.getItem('donarLoginInfo'));
       setIsDonarLogin(isDonarLoginInfo);
-      console.log(isDonarLoginInfo)
     }, []); 
-  
-    console.log(isDonarLogin);
   
     return isDonarLogin ? children : <Navigate to="/donar-auth" />;
 }

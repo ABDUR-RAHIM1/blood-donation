@@ -48,7 +48,7 @@ function Footer() {
         <div className="w-full md:w-auto">
           <p>Subscribe us for more update and news</p>
           <div className='flex'>
-            <input type="text" placeholder='Enter Your Email' />
+            <input name='email' type="text" placeholder='Enter Your Email' />
             <button className='button'>Subscribe</button>
           </div>
         </div>

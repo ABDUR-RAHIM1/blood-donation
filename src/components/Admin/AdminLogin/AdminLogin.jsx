@@ -19,8 +19,8 @@ function AdminLogin() {
     const handleLogin = (e) => {
         e.preventDefault()
 
-    }
-    console.log(register)
+    } 
+    
     return (
         <div className='bg-slate-600 w-full h-screen pt-10'>
             <div className='w-2/4 p-7 m-auto bg-slate-500'>

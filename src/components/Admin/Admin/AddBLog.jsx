@@ -10,8 +10,7 @@ function AddBLog() {
 
    const handleChange = (e) => {
       setInfo({ ...info, [e.target.name]: e.target.value })
-   }
-   console.log(info)
+   } 
    return (
       <AdminDashboard>
          <motion.div

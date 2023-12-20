@@ -25,23 +25,9 @@ function Change_colors() {
         setColor({ ...color, [e.target.name]: e.target.value })
     }
 
-    console.log(color)
+
     return (
-        // <div className='dFormWrap'>
-        //     <div className='mb-10'>
-        //         <h1 className="manageHeading">Change Navbar background Color</h1>
-        //         <div className='w-2/4 m-auto'>
-        //             <input onChange={handleColorChange} name='navColor' type="color" className='form-control mt-3 h-16' />
-        //         </div>
-        //     </div>
-        //     <div className='mb-10'>
-        //         {/*  banner / btn / etc red background color  */}
-        //         <h1 className="manageHeading">Change Default bacakground Color</h1>
-        //         <div className='w-2/4 m-auto'>
-        //             <input onChange={handleColorChange} name='defColor' type="color" color='red' className='form-control mt-3 h-16' />
-        //         </div>
-        //     </div>
-        // </div>
+      
 
         <div className='dFormWrap'>
             {

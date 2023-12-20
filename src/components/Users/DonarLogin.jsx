@@ -32,7 +32,6 @@ function DonarLogin() {
 
   }
 
-  console.log(authInfo)
 
   //  donar login submit handler
   const handleLoginDonar = (e) => {
