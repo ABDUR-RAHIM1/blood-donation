@@ -12,7 +12,7 @@ function TextArea(props) {
                 onChange={handleChange}
             ></textarea>
             <br />
-            <small className='text-green-500'>{lable}</small>
+            <small className='text-green-800'>{lable}</small>
         </div>
     )
 }

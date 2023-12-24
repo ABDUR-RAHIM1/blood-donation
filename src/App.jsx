@@ -24,6 +24,7 @@ import DonarProtected from './ProtectedRoute/DonarProtected'
 import DonarProfile from './Profiles/DonarProfile'
 import UsersLogin from './components/Users/UsersLogin'
 import DonarDetails from './components/Donars/DonarDetails'
+import AddBlog from './components/utils/AddBlog'
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/donars" element={<Donars />} />
         <Route path="/donars-details" element={<DonarDetails />} />
         <Route path="/blogs" element={<Blogs />} />
+        <Route path="/add-blog" element={<AddBlog />} />
         <Route path="/blog-details" element={<BlogDetails />} />
         <Route path="/donar-auth" element={<DonarLogin />} />
         <Route path="/user-auth" element={<UsersLogin />} />

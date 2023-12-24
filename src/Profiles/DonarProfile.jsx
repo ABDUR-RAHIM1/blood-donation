@@ -71,6 +71,12 @@ function DonarProfile() {
             Register Your Event
           </button>
         </Link>
+
+        <Link to="/add-blog">
+          <button className='button w-full my-2 bg-gray-300'>
+            Add Blog
+          </button>
+        </Link>
       </div>
 
 

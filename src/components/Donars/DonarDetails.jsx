@@ -54,63 +54,63 @@ function DonarTable({ data }) {
     const { email, dob, weight, gender, beforeDonation, bloodGroup, contactNumber, emergencyContact, relationshipContact, donationDate, donationTime, message } = data;
 
     return (
-        <table className='table border table-striped hover resposive overflow-auto'>
+        <table className='table table-striped table-bordered table-hover table-responsive overflow-auto'>
             <thead>
                 <tr>
-                    <th>Key</th>
-                    <th>Value</th>
+                    <th style={{width: "30%",}} scope="col" className="px-6 py-3">Key</th>
+                    <th style={{width: "70%",}} scope="col">Value</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Blood Group : </td>
-                    <td>{bloodGroup}</td>
+                    <td scope="col">Blood Group : </td>
+                    <td scope="col">{bloodGroup}</td>
                 </tr>
                 <tr>
-                    <td>Email :</td>
-                    <td>{email}</td>
+                    <td scope="col">Email :</td>
+                    <td scope="col" style={{textTransform:"lowercase"}}>  {email}</td>
                 </tr>
                 <tr>
-                    <td>Date of Birth : </td>
-                    <td>{dob}</td>
+                    <td scope="col">Date of Birth : </td>
+                    <td scope="col">{dob}</td>
                 </tr>
                 <tr>
-                    <td>Weight :</td>
-                    <td>{weight+ " (KG)"}</td>
+                    <td scope="col">Weight :</td>
+                    <td scope="col">{weight+ " (KG)"}</td>
                 </tr>
                 <tr>
-                    <td>Gender : </td>
-                    <td>{gender}</td>
+                    <td scope="col">Gender : </td>
+                    <td scope="col">{gender}</td>
                 </tr>
 
 
                 <tr>
-                    <td>Contact Number : </td>
-                    <td>{"+888 " + contactNumber}</td>
+                    <td scope="col">Contact Number : </td>
+                    <td scope="col">{"+888 " + contactNumber}</td>
                 </tr>
                 <tr>
-                    <td>Emergency Contact : </td>
-                    <td>{"+888 " + emergencyContact}</td>
+                    <td scope="col">Emergency Contact : </td>
+                    <td scope="col">{"+888 " + emergencyContact}</td>
                 </tr>
                 <tr>
-                    <td>Relationship Contact : </td>
-                    <td>{"+888 " + relationshipContact || N/A}</td>
+                    <td scope="col">Relationship Contact : </td>
+                    <td scope="col">{"+888 " + relationshipContact || N/A}</td>
+                </tr>
+                <tr >
+                    <td scope="col">Before Donation : </td>
+                    <td scope="col">{beforeDonation + " (Times)"}</td>
+                </tr>
+                <tr scope="row">
+                    <td scope="col">Last Donate : </td>
+                    <td scope="col">{donationDate}</td>
                 </tr>
                 <tr>
-                    <td>Before Donation : </td>
-                    <td>{beforeDonation + " (Times)"}</td>
+                    <td scope="col">preferred time : </td>
+                    <td scope="col">{donationTime} A/PM </td>
                 </tr>
                 <tr>
-                    <td>Last Donate : </td>
-                    <td>{donationDate}</td>
-                </tr>
-                <tr>
-                    <td>preferred time : </td>
-                    <td>{donationTime} A/PM </td>
-                </tr>
-                <tr>
-                    <td>pre requisite : </td>
-                    <td>{message}</td>
+                    <td  style={{ verticalAlign: 'middle' }} scope="col">pre requisite : </td>
+                    <td  style={{ verticalAlign: 'middle' }} scope="col">{message}</td>
                 </tr>
             </tbody>
         </table>

@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Inputs from '../utils/Inputs'
-import TextArea from '../utils/TextArea' 
+import TextArea from '../utils/TextArea'
 import { GlobalState } from '../../State/State'
 import uploadFile from '../utils/UploadFile'
 import Notification from '../utils/Notification'
 import Loading from '../utils/Loading'
 
-function DonarRegisterForm() {
-    const { isLoading, isDonarLogin, handleDonarCreateProfiles } = useContext(GlobalState);
+function DonarRegisterForm(props) {
+    const { state } = props;
+    console.log(state)
+    const { isLoading, isDonarLogin, handleDonarCreateProfiles, handleUpdateRegister } = useContext(GlobalState);
     const [imgLoading, setImgIsLoading] = useState(false)
     const [register, setRegister] = useState({
         profilePic: ''
@@ -15,8 +17,11 @@ function DonarRegisterForm() {
 
     useEffect(() => {
         setRegister({ ...register, name: isDonarLogin.name, email: isDonarLogin.email })
+        if (state) {
+            setRegister(state)
+        }
     }, [isDonarLogin]);
-
+    console.log(register)
     const handleChange = (e) => {
         const { name, value } = e.target;
         setRegister({ ...register, [name]: value })
@@ -27,13 +32,26 @@ function DonarRegisterForm() {
         const image = e.target.files[0];
         await uploadFile(image, setRegister, setImgIsLoading);
     };
- 
+
+
+    let required;
+    if (state) {
+        required = true
+    } else {
+        required = false
+    }
 
     return (
-        <form onSubmit={(e) => handleDonarCreateProfiles(e, register)} >
+        <form onSubmit={
+            state ? (e) => handleUpdateRegister(e, state._id, register)
+                :
+                (e) => handleDonarCreateProfiles(e, register)
+        } >
             <div className=" bg-red-500 py-4 text-center absolute top-0 left-0 w-full">
                 <h1 className='text-white text-xl '>
-                    রেজিস্টার ফর্মটি  পূরণ করুন
+                    {
+                        state ? "আপডেট করুন " : " রেজিস্টার ফর্মটি  পূরণ করুন"
+                    }
                 </h1>
             </div>
 
@@ -41,7 +59,7 @@ function DonarRegisterForm() {
                 type='number'
                 name='contactNumber'
                 value={register.contactNumber}
-                required={true}
+                required={required}
                 placeholder='Enter your contact number'
                 lable='Contact Number'
                 handleChange={handleChange}
@@ -50,7 +68,7 @@ function DonarRegisterForm() {
                 type='number'
                 name='emergencyContact'
                 value={register.emergencyContact}
-                required={true}
+                required={required}
                 placeholder='Emergency Contact'
                 lable='Enter emergency contact number'
                 handleChange={handleChange}
@@ -69,7 +87,7 @@ function DonarRegisterForm() {
                 type='date'
                 name='dob'
                 value={register.dob}
-                required={true}
+                required={required}
                 placeholder='Date Of Birth'
                 lable='Date of Birth'
                 handleChange={handleChange}
@@ -79,7 +97,7 @@ function DonarRegisterForm() {
                 type='date'
                 name='donationDate'
                 value={register.donationDate}
-                required={true}
+                required={required}
                 placeholder='Doantion Date'
                 lable='Last Doantion Date'
                 handleChange={handleChange}
@@ -89,20 +107,21 @@ function DonarRegisterForm() {
                 type='time'
                 name='donationTime'
                 value={register.donationTime}
-                required={true}
+                required={required}
                 placeholder='04-10 pm'
                 lable='Donation Time (04-10 pm)'
                 handleChange={handleChange}
             />
 
-            <select required onChange={handleChange} name="gender" className='form-control my-4 fw-semi-bold'>
+            <select required={required} value={register.gender} onChange={handleChange} name="gender" className='form-control mt-4 fw-semi-bold'>
                 <option value="">Select Your Gender</option>
                 <option value="male">Male</option>
                 <option value="female">female</option>
                 <option value="others">others</option>
             </select>
+            <small className='mb-3 text-green-800'>Gender</small>
 
-            <select required onChange={handleChange} name="bloodGroup" className='form-control my-4 fw-semi-bold'>
+            <select required={required} value={register.bloodGroup} onChange={handleChange} name="bloodGroup" className='form-control mt-4 fw-semi-bold'>
                 <option value="">Select Your BLood Group</option>
                 <option value="A+">A+</option>
                 <option value="B+">B+</option>
@@ -113,12 +132,12 @@ function DonarRegisterForm() {
                 <option value="AB-">AB-</option>
                 <option value="O-">O-</option>
             </select>
-
+            <small className='mb-3 text-green-800'>Blood Group</small>
             <Inputs
                 type='number'
                 name='weight'
                 value={register.weight}
-                required={true}
+                required={required}
                 placeholder='Weight (kg)'
                 lable='Enter your weight in kilograms'
                 handleChange={handleChange}
@@ -127,6 +146,7 @@ function DonarRegisterForm() {
             <Inputs
                 type='number'
                 name='beforeDonation'
+                required={required}
                 value={register.beforeDonation}
                 placeholder='(5) times'
                 lable='How much do you donate?'
@@ -144,20 +164,22 @@ function DonarRegisterForm() {
                 imgLoading ?
                     <label className='mb-4 mt-2 lowercase text-red-500' htmlFor="file">Uploading Your Image</label>
                     :
-                    <label className='mb-4 mt-2 lowercase text-green-500' htmlFor="file">Upload Your Profile Picture</label>
+                    <label className='mb-4 mt-2 lowercase text-green-800' htmlFor="file">Upload Your Profile Picture</label>
             }
 
             <TextArea
                 type='textarea'
                 name='message'
                 value={register.message}
-                required={true}
+                required={required}
                 placeholder='Enter your message (optional)'
                 lable='any prerequisite?'
                 handleChange={handleChange}
             />
 
-            <button disabled={isLoading} className='button bg-slate-300 text-slate-600 text-center my-4 hover:bg-slate-500 hover:text-white'>Submit Your Form</button>
+            <button disabled={isLoading} className='button bg-slate-300 text-slate-600 text-center my-4 hover:bg-slate-500 hover:text-white'>
+                 {event ? "Update Now" : "Add Now"}
+            </button>
             {isLoading && <Loading size='sm' />}
 
             <Notification />

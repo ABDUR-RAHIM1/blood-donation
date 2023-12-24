@@ -2,8 +2,13 @@ import React from 'react'
 import img from "../../images/blood-bg.jpg"
 import img2 from '../../images/bg.png'
 import DonarRegisterForm from '../Forms/DonarRegisterForm'
+import { useLocation } from 'react-router-dom';
 
 function DonarRegister() {
+
+  const state = useLocation().state;
+  
+
   return (
     <section>
       <img className='h-450 w-full' src={img} alt="" />
@@ -39,7 +44,7 @@ function DonarRegister() {
               </p>
             </div>
             {/*  info end here*/}
-          <DonarRegisterForm />
+          <DonarRegisterForm state={state}/>
           </div>
         </div>
       </div>

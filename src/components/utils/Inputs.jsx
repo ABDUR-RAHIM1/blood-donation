@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 function Inputs(props) {
-    const { id,name, type, value,disabled, autocomplete ,required,  placeholder,lable, handleChange } = props
+    const { id, name, type, value, disabled, autocomplete, required, placeholder, lable, handleChange } = props;
+
     return (
         <div>
             <input
-                className={`w-full input mt-3 outline-0`}
+                className={`w-full input mt-3 focus:outline-none`}
                 type={type}
                 name={name}
                 id={id}
@@ -17,9 +18,9 @@ function Inputs(props) {
                 onChange={handleChange}
             />
             <br />
-            <small className='text-green-500'>{lable}</small>
+            <small className='text-green-800'>{lable}</small>
         </div>
-    )
+    );
 }
 
-export default Inputs
+export default Inputs;

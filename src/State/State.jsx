@@ -8,6 +8,7 @@ export const MyState = ({ children }) => {
   const API = 'http://localhost:8000/api'
   const donartoken = JSON.parse(localStorage.getItem("donar_token"));
 
+  //  reuseble state all are components
   const [isAdminLogin, setIsAdminLogin] = useState(true);
   const [isDonarLogin, setIsDonarLogin] = useState({});
   const [arrowClick, setArrowClick] = useState(false);
@@ -15,9 +16,10 @@ export const MyState = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDelete, setIsDelete] = useState(false)
 
-  //  get Donars state
+  //  state with data from backend
   const [allDonars, setAllDonars] = useState([])
-
+  const [blogs, setBlogs] = useState([])
+  const [oneBlog, setOneBlog] = useState([])
 
   //  donar account sign up / register
   const handleDonarRegister = (e, authInfo) => {
@@ -77,6 +79,23 @@ export const MyState = ({ children }) => {
 
   }
 
+  const handleUpdateRegister = (e, id, info) => {
+    e.preventDefault()
+    setIsLoading(true)
+    fetch(`${API}/donar-register/update/${id}`, {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(info)
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setMessage(data.message)
+        setIsLoading(false)
+      })
+  }
+
   const handleDeleteRegister = (id) => {
     setIsLoading(true)
     console.log("delete", id)
@@ -113,6 +132,90 @@ export const MyState = ({ children }) => {
   }
 
 
+  //  blog  hadnler start here 
+
+  const handleAddBlog = (e, blogInfo) => {
+    e.preventDefault()
+    setIsLoading(true)
+    fetch(`${API}/blogs/blogs`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${donartoken}`
+      },
+      body: JSON.stringify(blogInfo)
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setMessage(data.message)
+        setIsLoading(false)
+      })
+  }
+
+
+  const handleGetBlogs = () => {
+    setIsLoading(true)
+    fetch(`${API}/blogs/blogs/`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setBlogs(data.blogs)
+        setIsLoading(false)
+      })
+  }
+
+  const getOneBlog = () => {
+    console.log('get one blog')
+    fetch(`${API}/blogs/blogs-one`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${donartoken}`
+      }
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setIsLoading(false);
+        setOneBlog(data.blogs);
+      })
+  }
+
+
+  const handleEditBlog = (e, id, blogInfo) => {
+    e.preventDefault();
+    console.log("update", id)
+    setIsLoading(true)
+    fetch(`${API}/blogs/blogs/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(blogInfo)
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setIsLoading(false)
+        setMessage(data.message)
+      })
+  }
+
+  const handleDeleteBlog = (id) => {
+    console.log("delete", id)
+    fetch(`${API}/blogs/blogs/${id}`, {
+      method: "DELETE",
+    }).then(res => res.json())
+      .then(data => {
+        setMessage(data.message)
+        setIsDelete(!isDelete)
+      })
+  }
+
+
+  //  blog  hadnler end here 
+
+
+
+
+
   if (message) {
     setTimeout(() => {
       setMessage('')
@@ -124,9 +227,10 @@ export const MyState = ({ children }) => {
     isAdminLogin, setIsAdminLogin,
     isDonarLogin, setIsDonarLogin,
     arrowClick, setArrowClick,
-    message, setMessage, isLoading, setIsLoading,
+    message, setMessage, isLoading, setIsLoading, isDelete,
     handleDonarRegister, handleDonarAccountPassword,
-    handleDonarCreateProfiles, handleDeleteRegister,
+    handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister,
+    handleAddBlog, handleGetBlogs , blogs, getOneBlog, oneBlog, handleEditBlog, handleDeleteBlog,
     getAllDonarsItems, allDonars,
 
   };

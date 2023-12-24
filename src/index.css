@@ -216,3 +216,13 @@ a:hover {
   text-decoration: none;
   color: black;
 }
+td{
+  text-align: left;
+  text-transform: capitalize;
+}
+th{
+  text-transform: uppercase;
+}
+p, small{
+  word-wrap: break-word;
+}

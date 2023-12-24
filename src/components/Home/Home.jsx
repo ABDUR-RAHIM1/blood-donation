@@ -26,7 +26,7 @@ function Home() {
         <DonationProccess/>
         <Appoinment/>
         <Volantiars/>
-        <Blogs/>
+        {/* <Blogs/> */}
         <Testimonial/>
         <Up/>
     </motion.div>
