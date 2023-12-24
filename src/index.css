@@ -82,6 +82,10 @@
     .profielCard{
       @apply bg-gray-200 text-center py-5 rounded-md shadow-sm shadow-slate-300
     }
+    .donarProfileMain{
+      @apply flex-1
+    }
+
   /* profile  end */
 
 

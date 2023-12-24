@@ -7,20 +7,22 @@ import Loading from '../utils/Loading'
 import Notification from '../utils/Notification'
 import { useEffect } from 'react'
 import ResetPassword from '../utils/ResetPassword'
+import uploadFile from '../utils/UploadFile'
 function DonarLogin() {
 
   const navigate = useNavigate()
   const { handleDonarRegister, isLoading, setIsLoading, setMessage, setIsDonarLogin } = useContext(GlobalState)
   const [isRegister, setIsRegister] = useState(false)
   const [isReset, setIsReset] = useState(false)
-  const [authInfo, setAuthInfo] = useState({ role: '' })
+  const [authInfo, setAuthInfo] = useState({ profilePic: "" })
+  const [imgLoading, setImgLoading] = useState(false)
 
   //  navigate to donar regsieter page when donar already login 
   useEffect(() => {
     const isDonarLoginInfo = JSON.parse(localStorage.getItem('donarLoginInfo'));
     if (isDonarLoginInfo) {
       setIsDonarLogin(isDonarLoginInfo)
-      navigate('/profile')
+      navigate('/donar-profile')
     }
   }, []);
 
@@ -28,7 +30,13 @@ function DonarLogin() {
   //   donar login changer
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAuthInfo({ ...authInfo, [name]: value, role: 'donar' })
+    setAuthInfo({ ...authInfo, [name]: value })
+
+  }
+
+  const handleFileChange = async (e) => {
+    const image = e.target.files[0];
+    await uploadFile(image, setAuthInfo, setImgLoading);
 
   }
 
@@ -47,23 +55,20 @@ function DonarLogin() {
       .then(data => {
         setIsLoading(false)
         setMessage(data.message)
-        if (data.login === true) {
+        console.log(data)
 
-          localStorage.setItem('donarLoginInfo', JSON.stringify(data.loginInfo))
+        if (data.login) {
+          localStorage.setItem("donar_token", JSON.stringify(data.token))
           setTimeout(() => {
-            navigate('/profile')
-          }, 2000);
-        } else {
-          navigate('/donar-auth')
+            navigate("/donar-profile")
+          }, 1500);
         }
 
       })
   }
 
 
-// if (isReset) {
-//    return  <ResetPassword /> 
-// }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -128,6 +133,21 @@ function DonarLogin() {
           handleChange={handleChange}
         />
 
+        {isRegister &&
+          <>
+            <input onChange={handleFileChange}  value={authInfo.profilePic} id='file' type="file" name='profilePic' className='form-control mt-3' />
+            {
+              imgLoading ? <small className='mb-3 text-red-400'>Uploading Image</small>
+                :
+                <small className='mb-3 text-green-400'>Upload Your Profile Photo</small>
+            }
+
+            <br />
+          </>
+        }
+
+
+
         <button className='button mr-2 bg-slate-700 text-white my-4'> {isRegister ? 'Register' : 'Log-in'} </button>
         {
           isLoading ? <Loading size='sm' /> : ''
@@ -144,7 +164,7 @@ function DonarLogin() {
         <Notification />
       </form>
       {
-        isReset && <ResetPassword/>
+        isReset && <ResetPassword />
       }
     </motion.div>
   )

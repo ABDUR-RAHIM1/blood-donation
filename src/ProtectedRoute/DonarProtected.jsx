@@ -4,14 +4,11 @@ import { useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 
 function DonarProtected({ children }) {
-    const [isDonarLogin, setIsDonarLogin] = useState({});
+    const [isDonarLogin, setIsDonarLogin] = useState(null);
 
-    useEffect(() => {
-      const isDonarLoginInfo = JSON.parse(localStorage.getItem('donarLoginInfo'));
-      setIsDonarLogin(isDonarLoginInfo);
-    }, []); 
+      const isDonarToken = JSON.parse(localStorage.getItem('donar_token'));
   
-    return isDonarLogin ? children : <Navigate to="/donar-auth" />;
+    return isDonarToken ? children : <Navigate to="/donar-auth" />;
 }
 
 export default DonarProtected

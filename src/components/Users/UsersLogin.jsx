@@ -19,7 +19,7 @@ function UserLogin() {
     const isDonarLoginInfo = JSON.parse(localStorage.getItem('donarLoginInfo'));
     if (isDonarLoginInfo) {
       setIsDonarLogin(isDonarLoginInfo)
-      navigate('/profile')
+      navigate('/user-profile')
     }
   }, []);
 
@@ -52,10 +52,10 @@ function UserLogin() {
 
           localStorage.setItem('donarLoginInfo', JSON.stringify(data.loginInfo))
           setTimeout(() => {
-            navigate('/profile')
+            navigate('/user-profile')
           }, 2000);
         } else {
-          navigate('/donar-auth')
+          navigate('/user-auth')
         }
 
       })
@@ -116,6 +116,8 @@ function UserLogin() {
           lable='Enter Your Password'
           handleChange={handleChange}
         />
+
+     
 
         <button className='button mr-2 bg-slate-700 text-white my-4'> {isRegister ? 'Register' : 'Log-in'} </button>
         {

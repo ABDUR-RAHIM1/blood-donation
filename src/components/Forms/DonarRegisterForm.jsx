@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Inputs from '../utils/Inputs'
-import TextArea from '../utils/TextArea'
-import { DonarformFields } from '../../JSON/DonarForm'
+import TextArea from '../utils/TextArea' 
 import { GlobalState } from '../../State/State'
 import uploadFile from '../utils/UploadFile'
 import Notification from '../utils/Notification'
@@ -11,8 +10,6 @@ function DonarRegisterForm() {
     const { isLoading, isDonarLogin, handleDonarCreateProfiles } = useContext(GlobalState);
     const [imgLoading, setImgIsLoading] = useState(false)
     const [register, setRegister] = useState({
-        name: isDonarLogin.name,
-        email: isDonarLogin.email,
         profilePic: ''
     })
 
@@ -39,31 +36,6 @@ function DonarRegisterForm() {
                     রেজিস্টার ফর্মটি  পূরণ করুন
                 </h1>
             </div>
-
-
-            <Inputs
-                type='text'
-                name='name'
-                autocomplete="on"
-                value={isDonarLogin.name}
-                disabled={isDonarLogin}
-                required={true}
-                placeholder='Enter Your Name'
-                lable='Enter Your Good Name'
-                handleChange={handleChange}
-            />
-            <Inputs
-                type='email'
-                name='email'
-                id='email'
-                autocomplete="on"
-                value={isDonarLogin.email}
-                disabled={isDonarLogin}
-                required={true}
-                placeholder='Enter Your email'
-                lable='Enter Your Email'
-                handleChange={handleChange}
-            />
 
             <Inputs
                 type='number'
@@ -151,9 +123,6 @@ function DonarRegisterForm() {
                 lable='Enter your weight in kilograms'
                 handleChange={handleChange}
             />
-
-
-
 
             <Inputs
                 type='number'

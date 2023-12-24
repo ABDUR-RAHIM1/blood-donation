@@ -6,16 +6,17 @@ export const GlobalState = createContext();
 export const MyState = ({ children }) => {
 
   const API = 'http://localhost:8000/api'
+  const donartoken = JSON.parse(localStorage.getItem("donar_token"));
 
   const [isAdminLogin, setIsAdminLogin] = useState(true);
   const [isDonarLogin, setIsDonarLogin] = useState({});
   const [arrowClick, setArrowClick] = useState(false);
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false);
+  const [isDelete, setIsDelete] = useState(false)
 
   //  get Donars state
   const [allDonars, setAllDonars] = useState([])
-  const [donarProfilePic, setDonarProfilePic] = useState([])
 
 
   //  donar account sign up / register
@@ -25,7 +26,8 @@ export const MyState = ({ children }) => {
     fetch(`${API}/donar/register`, {
       method: "POST",
       headers: {
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
+
       },
       body: JSON.stringify(authInfo)
     })
@@ -53,7 +55,7 @@ export const MyState = ({ children }) => {
         setIsLoading(false)
       })
   }
-  // donar account reset password handler end here 
+  // donar auth account reset password handler end here 
 
 
   //  donar register handler start
@@ -63,7 +65,8 @@ export const MyState = ({ children }) => {
     fetch(`${API}/donar-register/register`, {
       method: "POST",
       headers: {
-        "Content-type": "application/json"
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${donartoken}`
       },
       body: JSON.stringify(registerInfo)
     }).then(res => res.json())
@@ -74,10 +77,29 @@ export const MyState = ({ children }) => {
 
   }
 
+  const handleDeleteRegister = (id) => {
+    setIsLoading(true)
+    console.log("delete", id)
+    fetch(`${API}/donar-register/delete/${id}`, {
+      method: "DELETE",
+
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setIsLoading(false)
+        setIsDelete(!isDelete)
+        setMessage(data.message)
+      })
+  }
+
   //  donar register handler end
 
-  //   get all donars start 
 
+
+
+
+
+  //   get all donars start 
   const getAllDonarsItems = () => {
     setIsLoading(true)
     fetch(`${API}/donar-register/donars`)
@@ -90,43 +112,6 @@ export const MyState = ({ children }) => {
       })
   }
 
-  //   get all donars end here 
-
-  //  uplaod profile  picture handler start
-  const handleDonarProfileUplaod = (e, profileImg) => {
-    e.preventDefault();
-    setIsLoading(true)
-    const id = "donarProfile"
-    fetch(`${API}/donar/profile/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(profileImg)
-    }).then(res => res.json())
-      .then(data => {
-        setMessage(data.message);
-        setIsLoading(false)
-      })
-
-  }
-
-  //  get doanr profile photo 
-  const getDonarProfilePhoto = () => {
-    setIsLoading(true)
-    fetch(`${API}/donar/profile`)
-      .then(res => res.json())
-      .then(data => {
-        setDonarProfilePic(data.profilePicture);
-        setIsLoading(false)
-      })
-  }
-
-
-  //  uplaod profile  picture handler end
-
-
-
 
   if (message) {
     setTimeout(() => {
@@ -135,14 +120,15 @@ export const MyState = ({ children }) => {
   }
 
   const value = {
-    API,
+    API, donartoken,
     isAdminLogin, setIsAdminLogin,
     isDonarLogin, setIsDonarLogin,
     arrowClick, setArrowClick,
     message, setMessage, isLoading, setIsLoading,
-    handleDonarRegister, handleDonarAccountPassword, handleDonarCreateProfiles,
+    handleDonarRegister, handleDonarAccountPassword,
+    handleDonarCreateProfiles, handleDeleteRegister,
     getAllDonarsItems, allDonars,
-    handleDonarProfileUplaod, getDonarProfilePhoto, donarProfilePic,
+
   };
 
   return (

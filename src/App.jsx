@@ -40,7 +40,7 @@ function App() {
         <Route path="/donar-auth" element={<DonarLogin />} />
         <Route path="/user-auth" element={<UsersLogin />} />
         <Route path='/donar-register' element={<DonarRegister />} />
-        <Route path="/profile" element={<DonarProtected >
+        <Route path="/donar-profile" element={<DonarProtected >
           <DonarProfile />
         </DonarProtected>} />
         <Route path="/admin" element={<ProtectedRoute>

@@ -5,8 +5,8 @@ import { motion } from 'framer-motion'
 import demoImg from '../../images/demo.jpg'
 function DonarDetails() {
     const state = useLocation().state;
-   
-    const { profilePic, name } = state.donar;
+   console.log(state)
+    const { profilePic, name } = state;
 
     const pageSidebarData = {
         image: profilePic || demoImg,
@@ -30,7 +30,7 @@ function DonarDetails() {
 
                 {/*  this table component under this page */}
                 <DonarTable
-                    data={state.donar}
+                    data={state}
                 />
 
                 <Link to='/donars'>
