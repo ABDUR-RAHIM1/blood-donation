@@ -10,7 +10,6 @@ export const MyState = ({ children }) => {
 
   //  reuseble state all are components
   const [isAdminLogin, setIsAdminLogin] = useState(true);
-  const [isDonarLogin, setIsDonarLogin] = useState({});
   const [arrowClick, setArrowClick] = useState(false);
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +20,8 @@ export const MyState = ({ children }) => {
   const [blogs, setBlogs] = useState([])
   const [oneBlog, setOneBlog] = useState([])
 
-  //  donar account sign up / register
+  //111  donar / user account sign up / register //////////////////////////////////
+
   const handleDonarRegister = (e, authInfo) => {
     e.preventDefault();
     setIsLoading(true)
@@ -41,7 +41,30 @@ export const MyState = ({ children }) => {
       .catch(err => console.log(err))
   }
 
-  // donar account reset password handler start 
+  // doanr login 
+  const handleLoginDonar = (e, authInfo) => {
+    e.preventDefault();
+    setIsLoading(true)
+    fetch('http://localhost:8000/api/donar/login', {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(authInfo)
+    }).then(res => res.json())
+      .then(data => {
+        setIsLoading(false)
+        setMessage(data.message) 
+        if (data.login) {
+          localStorage.setItem("donar_token", JSON.stringify(data.token))
+        }
+
+      })
+  }
+
+
+
+  // donar reset password 
   const handleDonarAccountPassword = (e, authInfo) => {
     e.preventDefault();
     setIsLoading(true)
@@ -57,10 +80,62 @@ export const MyState = ({ children }) => {
         setIsLoading(false)
       })
   }
-  // donar auth account reset password handler end here 
 
 
-  //  donar register handler start
+  // user register
+  const handleUserRegister = (e, authInfo) => {
+    setIsLoading(true)
+    e.preventDefault();
+    fetch(`${API}/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(authInfo)
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setMessage(data.message)
+        setIsLoading(false)
+      })
+  }
+
+  //  login user
+  const handleUserLogin = (e, authInfo) => {
+    setIsLoading(true)
+    e.preventDefault();
+    console.log(authInfo)
+    fetch(`${API}/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(authInfo)
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setMessage(data.message)
+        setIsLoading(false)
+        if (data.login) {
+          const token = data.token;
+          localStorage.setItem('token', JSON.stringify(token))
+        }
+      })
+  }
+
+
+
+  const handleUserResetPassword = (e, authInfo) => {
+    e.preventDefault();
+    console.log("user reste password")
+  }
+
+  //1111 donar/ user auth account reset password handler end here ///////////////////
+
+
+
+
+  // 222  donar register handler start
   const handleDonarCreateProfiles = (e, registerInfo) => {
     e.preventDefault();
     setIsLoading(true)
@@ -111,7 +186,7 @@ export const MyState = ({ children }) => {
       })
   }
 
-  //  donar register handler end
+  // 222  donar register handler end
 
 
 
@@ -225,12 +300,12 @@ export const MyState = ({ children }) => {
   const value = {
     API, donartoken,
     isAdminLogin, setIsAdminLogin,
-    isDonarLogin, setIsDonarLogin,
     arrowClick, setArrowClick,
     message, setMessage, isLoading, setIsLoading, isDelete,
-    handleDonarRegister, handleDonarAccountPassword,
+    handleDonarRegister,handleLoginDonar,  handleDonarAccountPassword, handleUserRegister, handleUserLogin, handleUserResetPassword,
+
     handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister,
-    handleAddBlog, handleGetBlogs , blogs, getOneBlog, oneBlog, handleEditBlog, handleDeleteBlog,
+    handleAddBlog, handleGetBlogs, blogs, getOneBlog, oneBlog, handleEditBlog, handleDeleteBlog,
     getAllDonarsItems, allDonars,
 
   };

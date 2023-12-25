@@ -50,7 +50,7 @@ function Profile_main() {
                 <div className="flex-b flex-wrap">
                     {
                         oneBlog && oneBlog.map(blog => (
-                            <BlogOne blog={blog} />
+                            <BlogOne key={blog._id} blog={blog} />
                         ))
                     }
                 </div>

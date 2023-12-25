@@ -35,7 +35,7 @@ function BlogOne(props) {
             </div>
             <img className='w-4/5 m-auto h-20 mb-2' src={profilePic ? profilePic : demoImg} alt="" />
             <small>{postAt}</small>
-            <h1 className='text-2xl my-2 underline'>{title}</h1>
+            <h1 className='text-1xl font-semibold my-2 underline'>{title.slice(0,20) + ". . ."}</h1>
             <p>{desc && desc.slice(0, 30) + " . . ."}</p>
             <Link to="/blog-details" state={props.blog}>
                 <button className='w-full bg-gray-300 mt-3 py-1 hover:bg-gray-200'>Details</button>

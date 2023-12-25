@@ -1,74 +1,45 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { GlobalState } from '../../State/State'
 import { useNavigate } from 'react-router-dom'
 import Inputs from '../utils/Inputs'
 import { motion } from 'framer-motion'
 import Loading from '../utils/Loading'
 import Notification from '../utils/Notification'
-import { useEffect } from 'react'
 import ResetPassword from '../utils/ResetPassword'
 import uploadFile from '../utils/UploadFile'
 function DonarLogin() {
 
   const navigate = useNavigate()
-  const { handleDonarRegister, isLoading, setIsLoading, setMessage, setIsDonarLogin } = useContext(GlobalState)
+  const { handleDonarRegister, handleLoginDonar , isLoading, setIsLoading, setMessage, setIsDonarLogin } = useContext(GlobalState)
   const [isRegister, setIsRegister] = useState(false)
   const [isReset, setIsReset] = useState(false)
-  const [authInfo, setAuthInfo] = useState({ profilePic: "" })
+  const [register, setRegister] = useState({ profilePic: "" })
   const [imgLoading, setImgLoading] = useState(false)
 
-  //  navigate to donar regsieter page when donar already login 
-  useEffect(() => {
-    const isDonarLoginInfo = JSON.parse(localStorage.getItem('donarLoginInfo'));
-    if (isDonarLoginInfo) {
-      setIsDonarLogin(isDonarLoginInfo)
-      navigate('/donar-profile')
-    }
-  }, []);
+ 
 
 
   //   donar login changer
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAuthInfo({ ...authInfo, [name]: value })
+    setRegister({ ...register, [name]: value })
 
   }
 
   const handleFileChange = async (e) => {
     const image = e.target.files[0];
-    await uploadFile(image, setAuthInfo, setImgLoading);
+    await uploadFile(image, setRegister, setImgLoading);
 
   }
 
-
-  //  donar login submit handler
-  const handleLoginDonar = (e) => {
-    e.preventDefault();
-    setIsLoading(true)
-    fetch('http://localhost:8000/api/donar/login', {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(authInfo)
-    }).then(res => res.json())
-      .then(data => {
-        setIsLoading(false)
-        setMessage(data.message)
-        console.log(data)
-
-        if (data.login) {
-          localStorage.setItem("donar_token", JSON.stringify(data.token))
-          setTimeout(() => {
-            navigate("/donar-profile")
-          }, 1500);
-        }
-
-      })
-  }
-
-
-
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log(token)
+    if (token) {
+      navigate("/donar-profile")
+    }
+  }, [])
+ 
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -81,8 +52,8 @@ function DonarLogin() {
       <form onSubmit={
 
         isRegister
-          ? (e) => handleDonarRegister(e, authInfo)
-          : (e) => handleLoginDonar(e, authInfo)
+          ? (e) => handleDonarRegister(e, register)
+          : (e) => handleLoginDonar(e, register)
 
       } className='form-w bg-slate-600 p-6'>
 
@@ -98,7 +69,7 @@ function DonarLogin() {
             <Inputs
               type='text'
               name='name'
-              value={authInfo.name}
+              value={register.name}
               required={true}
               placeholder='Enter Your Name'
               lable='Enter Your Good Name'
@@ -107,7 +78,7 @@ function DonarLogin() {
             <Inputs
               type='text'
               name='gender'
-              value={authInfo.gender}
+              value={register.gender}
               required={true}
               placeholder='Gender'
               lable='Your Gender'
@@ -117,7 +88,7 @@ function DonarLogin() {
         <Inputs
           type='email'
           name='email'
-          value={authInfo.email}
+          value={register.email}
           required={true}
           placeholder='Enter Your Email'
           lable='Enter Your Email'
@@ -126,7 +97,7 @@ function DonarLogin() {
         <Inputs
           type='password'
           name='password'
-          value={authInfo.password}
+          value={register.password}
           required={true}
           placeholder='********'
           lable='Enter Your Password'
@@ -135,7 +106,7 @@ function DonarLogin() {
 
         {isRegister &&
           <>
-            <input onChange={handleFileChange}  value={authInfo.profilePic} id='file' type="file" name='profilePic' className='form-control mt-3' />
+            <input onChange={handleFileChange}  id='file' type="file" name='profilePic' className='form-control mt-3' />
             {
               imgLoading ? <small className='mb-3 text-red-400'>Uploading Image</small>
                 :

@@ -5,9 +5,7 @@ import { FaCircle } from 'react-icons/fa'
 import demoImg from '../images/demo.jpg';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useState } from 'react';
-import Loading from '../components/utils/Loading';
-import Notification from '../components/utils/Notification';
+import { useState } from 'react'; 
 import Profile_main from './Profile_main';
 
 

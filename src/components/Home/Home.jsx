@@ -9,6 +9,7 @@ import Volantiars from './Volantiars'
 import Blogs from '../Blogs/Blogs'
 import Testimonial from './Testimonial'
 import {motion} from 'framer-motion'
+import LetestBlog from './LetestBlog'
 
 function Home() { 
  
@@ -26,7 +27,7 @@ function Home() {
         <DonationProccess/>
         <Appoinment/>
         <Volantiars/>
-        {/* <Blogs/> */}
+        <LetestBlog/>
         <Testimonial/>
         <Up/>
     </motion.div>
