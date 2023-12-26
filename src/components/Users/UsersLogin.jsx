@@ -33,9 +33,8 @@ function UserLogin() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token)
     if (token) {
-      navigate("/donar-profile")
+      navigate("/user-profile")
     }
   }, [])
 

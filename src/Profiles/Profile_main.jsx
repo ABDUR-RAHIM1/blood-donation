@@ -7,31 +7,14 @@ import Event from './Event'
 import BlogOne from '../components/Blogs/BlogOne'
 import Notification from '../components/utils/Notification'
 
-function Profile_main() {
-    const { donartoken, API, setIsLoading, getOneBlog, oneBlog, isDelete, message } = useContext(GlobalState)
-    const [regsiterEvent, setRegsiterEvent] = useState([])
-    //  get login donars Account
+function Profile_main(props) {
+    const {regsiterEvent} = props;
+    console.log(regsiterEvent)
+    const {getOneBlog, oneBlog, isDelete, message } = useContext(GlobalState)
+
     useEffect(() => {
-        setIsLoading(true)
-        fetch(`${API}/donar-register/donars-one`, {
-            method: "GET",
-            headers: {
-                'Content-type': "application/json",
-                'Authorization': `Bearer ${donartoken}`
-            },
-        }).then(res => res.json())
-            .then(data => {
-
-                setRegsiterEvent(data.donarInfo)
-                setIsLoading(false)
-            });
-
         //  get one blog => who is login 
-
         getOneBlog()
-
-
-
     }, [isDelete])
 
     return (

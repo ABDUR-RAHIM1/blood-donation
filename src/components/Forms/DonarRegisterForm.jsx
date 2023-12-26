@@ -15,13 +15,8 @@ function DonarRegisterForm(props) {
         profilePic: ''
     })
 
-    useEffect(() => {
-        setRegister({ ...register, name: isDonarLogin.name, email: isDonarLogin.email })
-        if (state) {
-            setRegister(state)
-        }
-    }, [isDonarLogin]);
-    console.log(register)
+
+   
     const handleChange = (e) => {
         const { name, value } = e.target;
         setRegister({ ...register, [name]: value })

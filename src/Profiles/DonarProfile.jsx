@@ -5,18 +5,18 @@ import { FaCircle } from 'react-icons/fa'
 import demoImg from '../images/demo.jpg';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useState } from 'react'; 
+import { useState } from 'react';
 import Profile_main from './Profile_main';
 
 
 function DonarProfile() {
   const naviagte = useNavigate()
-  const { API, setIsLoading } = useContext(GlobalState)
-  const [info, setInfo] = useState({})
+  const { API, setIsLoading, getLoginDonar, getLoginDonarAccount , regsiterEvent, loginInfo } = useContext(GlobalState)
+  const [info, setInfo] = useState({})    // get one donar data from backend
 
 
   const handleLogOutDonar = () => {
-    localStorage.removeItem('donar_token');
+    localStorage.removeItem('token');
     localStorage.removeItem('profilePic');
     setTimeout(() => {
       naviagte("donar-auth")
@@ -24,27 +24,10 @@ function DonarProfile() {
 
   }
 
+  // get login members data
   useEffect(() => {
-    setIsLoading(true)
-    const token = JSON.parse(localStorage.getItem("donar_token"));
-    console.log(token)
-    fetch(`${API}/donar/donars-one`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        setInfo(data)
-        setIsLoading(false)
-
-        if (data) {
-          localStorage.setItem("profilePic", JSON.stringify(data.profilePic))
-        }
-
-      })
+    getLoginDonarAccount()
+    getLoginDonar()
   }, []);
 
 
@@ -55,10 +38,10 @@ function DonarProfile() {
         <h2 className='text-3xl text-center my-2 uppercase flex items-center justify-center'>Your Profile <FaCircle className="text-green-500 text-sm ml-2" /> </h2>
 
         <div className="profielCard">
-          <img className='w-56 m-auto h-48 ' src={info ? info.profilePic : demoImg} alt={info.name} />
+          <img className='w-56 m-auto h-48 ' src={loginInfo ? loginInfo.profilePic : demoImg} alt={loginInfo.name} />
           <div className='my-4'>
-            <h4>Name :{info.name}</h4>
-            <p className='py-2'>Email :{info.email}</p>
+            <h4>Name :{loginInfo.name}</h4>
+            <p className='py-2'>Email :{loginInfo.email}</p>
             <button onClick={handleLogOutDonar} className='button bg-gray-300'>Log-out</button>
 
           </div>
@@ -81,7 +64,9 @@ function DonarProfile() {
       <div className="donarProfileMain md:px-0 px-3">
 
 
-        <Profile_main />
+        <Profile_main
+          regsiterEvent={regsiterEvent}
+        />
 
       </div>
     </div>

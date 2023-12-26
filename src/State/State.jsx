@@ -6,7 +6,7 @@ export const GlobalState = createContext();
 export const MyState = ({ children }) => {
 
   const API = 'http://localhost:8000/api'
-  const donartoken = JSON.parse(localStorage.getItem("donar_token"));
+  const token = JSON.parse(localStorage.getItem("token"));
 
   //  reuseble state all are components
   const [isAdminLogin, setIsAdminLogin] = useState(true);
@@ -14,9 +14,11 @@ export const MyState = ({ children }) => {
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false);
   const [isDelete, setIsDelete] = useState(false)
-
+  const [role , setRole] = useState("")
   //  state with data from backend
   const [allDonars, setAllDonars] = useState([])
+  const [loginInfo, setLoginInfo] = useState({})  // get one user data from backend
+  const [regsiterEvent, setRegsiterEvent] = useState([])
   const [blogs, setBlogs] = useState([])
   const [oneBlog, setOneBlog] = useState([])
 
@@ -41,7 +43,7 @@ export const MyState = ({ children }) => {
       .catch(err => console.log(err))
   }
 
-  // doanr login 
+  // donar login 
   const handleLoginDonar = (e, authInfo) => {
     e.preventDefault();
     setIsLoading(true)
@@ -54,9 +56,9 @@ export const MyState = ({ children }) => {
     }).then(res => res.json())
       .then(data => {
         setIsLoading(false)
-        setMessage(data.message) 
+        setMessage(data.message)
         if (data.login) {
-          localStorage.setItem("donar_token", JSON.stringify(data.token))
+          localStorage.setItem("token", JSON.stringify(data.token))
         }
 
       })
@@ -123,7 +125,54 @@ export const MyState = ({ children }) => {
       })
   }
 
+  // get login users data
+  const getLoginUser = () => { 
+    setIsLoading(true)
+    const token = JSON.parse(localStorage.getItem("token"));
+    console.log(token)
+    fetch(`${API}/users/users-one`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        setLoginInfo(data)
+        setIsLoading(false)
+        console.log(data)
+        setRole(data.role)
+        if (data) {
+          localStorage.setItem("profilePic", JSON.stringify(data.profilePic))
+        }
 
+      })
+  }
+
+  // get login donar info
+const getLoginDonar = ()=>{
+  setIsLoading(true)
+  const token = JSON.parse(localStorage.getItem("token"));
+  fetch(`${API}/donar/donars-one`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      setLoginInfo(data)
+      setRole(data.role)
+      setIsLoading(false)
+
+      if (data) {
+        localStorage.setItem("profilePic", JSON.stringify(data.profilePic))
+      }
+
+    })
+}
 
   const handleUserResetPassword = (e, authInfo) => {
     e.preventDefault();
@@ -143,7 +192,7 @@ export const MyState = ({ children }) => {
       method: "POST",
       headers: {
         "Content-type": "application/json",
-        "Authorization": `Bearer ${donartoken}`
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify(registerInfo)
     }).then(res => res.json())
@@ -186,6 +235,25 @@ export const MyState = ({ children }) => {
       })
   }
 
+
+     // get login donars regsieter Account
+  const getLoginDonarAccount = ()=>{
+     console.log("get doanr acc");
+     setIsLoading(true)
+     fetch(`${API}/donar-register/donars-one`, {
+         method: "GET",
+         headers: {
+             'Content-type': "application/json",
+             'Authorization': `Bearer ${token}`
+         },
+     }).then(res => res.json())
+         .then(data => {
+
+             setRegsiterEvent(data.donarInfo)
+             setIsLoading(false)
+         });
+  }
+
   // 222  donar register handler end
 
 
@@ -216,7 +284,7 @@ export const MyState = ({ children }) => {
       method: "POST",
       headers: {
         "Content-type": "application/json",
-        "Authorization": `Bearer ${donartoken}`
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify(blogInfo)
     }).then(res => res.json())
@@ -244,7 +312,7 @@ export const MyState = ({ children }) => {
     fetch(`${API}/blogs/blogs-one`, {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${donartoken}`
+        "Authorization": `Bearer ${token}`
       }
     }).then(res => res.json())
       .then(data => {
@@ -298,13 +366,13 @@ export const MyState = ({ children }) => {
   }
 
   const value = {
-    API, donartoken,
+    API, token, role , setRole ,
     isAdminLogin, setIsAdminLogin,
     arrowClick, setArrowClick,
     message, setMessage, isLoading, setIsLoading, isDelete,
-    handleDonarRegister,handleLoginDonar,  handleDonarAccountPassword, handleUserRegister, handleUserLogin, handleUserResetPassword,
-
-    handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister,
+    handleDonarRegister, handleLoginDonar, handleDonarAccountPassword, handleUserRegister, handleUserLogin, handleUserResetPassword,
+    getLoginUser, loginInfo , getLoginDonar , 
+    handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister, getLoginDonarAccount , regsiterEvent,
     handleAddBlog, handleGetBlogs, blogs, getOneBlog, oneBlog, handleEditBlog, handleDeleteBlog,
     getAllDonarsItems, allDonars,
 

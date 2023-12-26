@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';  
+import React, { useContext, useEffect } from 'react';  
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,15 +7,21 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom'; 
 import demoImg from '../../images/demo.jpg'
 import { useState } from 'react';
+import { GlobalState } from '../../State/State';
  
 
 function Header() { 
-
+   const {role , setRole}  = useContext(GlobalState)
+   console.log(role)
     const [pImg , setPImg] = useState('')
 
-    useEffect(() => {
-        const profilePic = JSON.parse(localStorage.getItem("profilePic"));
-        setPImg(profilePic)
+    useEffect(() => {  
+        const isProfilePic = localStorage.getItem("profilePic");
+        if (isProfilePic) {
+           const pic =  JSON.parse(isProfilePic)
+           setPImg(pic)
+        }
+        setRole("user")
     }, [pImg]);
 
   
@@ -46,7 +52,7 @@ function Header() {
 
                                     {
                                          pImg
-                                            ? <Link to='/donar-profile'>
+                                            ? <Link to={`/${role}-profile`}>
                                                 <img className='w-10 h-10 rounded-full ml-3 cursor-pointer' src={pImg ? pImg : demoImg} alt="" />
                                             </Link>
                                             : <NavDropdown
