@@ -7,7 +7,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { GlobalState } from '../State/State';
 
 
-function Event({ event }) {
+function DonarEvent({ event }) {
     const { _id, profilePic, name, bloodGroup, gender } = event;
     const { handleDeleteRegister } = useContext(GlobalState);
 
@@ -20,7 +20,7 @@ function Event({ event }) {
             transition={{
                 duration: '1'
             }}
-            className='donarCard relative'>
+            className='userEvents relative'>
             <div className='w-full bg-slate-400  absolute top-0 left-0 flex-b'>
                 <Link to="/donar-register" state={event}>
                     <FaEdit className=" text-white text-3xl bg-green-600  p-1 cursor-pointer" />
@@ -29,7 +29,7 @@ function Event({ event }) {
 
             </div>
 
-            <div className={`${gender === 'male' ? 'bg-red-400' : 'bg-blue-400'}`}>
+            <div className="bg-gray-200">
                 <img className='w-3/5 m-auto h-52' src={profilePic || demoImg} alt="" />
             </div>
             <div className='genarelInfo'>
@@ -40,11 +40,11 @@ function Event({ event }) {
             </div>
             <Link to='/donars-details' state={event}>
                 <button
-                    className={`donarBtn duration-200 ${gender === 'male' ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'}`}
+                    className="button eventBtn"
                 > See Details</button>
             </Link>
         </motion.div >
     )
 }
 
-export default Event
+export default DonarEvent

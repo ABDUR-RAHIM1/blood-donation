@@ -1,16 +1,16 @@
 import React from 'react'
-import { useContext } from 'react'
-import { useState } from 'react'
+import { useContext } from 'react' 
 import { useEffect } from 'react'
 import { GlobalState } from '../State/State'
-import Event from './Event'
+import DonarEvent from './DonarEvent'
 import BlogOne from '../components/Blogs/BlogOne'
-import Notification from '../components/utils/Notification'
+import Notification from '../components/utils/Notification' 
+import UserEvent from './UserEvent'
 
 function Profile_main(props) {
-    const {regsiterEvent} = props;
-    console.log(regsiterEvent)
-    const {getOneBlog, oneBlog, isDelete, message } = useContext(GlobalState)
+    const { regsiterEvent, userRegsiterEvent } = props;
+    console.log(userRegsiterEvent)
+    const { getOneBlog, oneBlog, isDelete, message } = useContext(GlobalState)
 
     useEffect(() => {
         //  get one blog => who is login 
@@ -19,18 +19,36 @@ function Profile_main(props) {
 
     return (
         <div className="h-screen overflow-y-auto scroll-none">
-            <div className="event ">
+               <h1 className='text-center text-3xl font-semibold my-8'>Your Events</h1>
+            {/*  donar regsieter event */}
+            {regsiterEvent &&
+                <div className="eventWrapper">
+                    {
+                        regsiterEvent && regsiterEvent.map(re => (
+                            <DonarEvent key={re._id} event={re} />
+                        ))
+                    }
+                </div>
+            }
+          {/*  user regiseter event */}
+          {
+            userRegsiterEvent &&
+
+            <div className='eventWrapper'>
                 {
-                    regsiterEvent && regsiterEvent.map(re => (
-                        <Event key={re._id} event={re} />
+                    userRegsiterEvent && userRegsiterEvent.map(userEvent => (
+                         <UserEvent key={userEvent._id} userEvent={userEvent} /> 
                     ))
                 }
             </div>
+          }
 
-            <div className="blogsArea">
+
+
+            <div className="my-20">
                 <h3 className="text-center my-4 uppercase text-3xl ">Your Blogs</h3>
                 {message && <Notification />}
-                <div className="flex-b flex-wrap">
+                <div className="flex-b justify-start gap-3 flex-wrap">
                     {
                         oneBlog && oneBlog.map(blog => (
                             <BlogOne key={blog._id} blog={blog} />

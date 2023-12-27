@@ -11,23 +11,23 @@ import Profile_main from './Profile_main';
 
 function DonarProfile() {
   const naviagte = useNavigate()
-  const { API, setIsLoading, getLoginDonar, getLoginDonarAccount , regsiterEvent, loginInfo } = useContext(GlobalState)
+  const { API, setIsLoading, getLoginDonar, getLoginDonarAccount, regsiterEvent, loginInfo } = useContext(GlobalState)
   const [info, setInfo] = useState({})    // get one donar data from backend
 
 
   const handleLogOutDonar = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('profilePic');
+    localStorage.removeItem('photo_role');
     setTimeout(() => {
-      naviagte("donar-auth")
+      naviagte("/donar-auth")
     }, 1500);
 
   }
 
   // get login members data
   useEffect(() => {
-    getLoginDonarAccount()
     getLoginDonar()
+    getLoginDonarAccount()
   }, []);
 
 

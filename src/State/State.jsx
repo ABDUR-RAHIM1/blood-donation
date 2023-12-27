@@ -14,7 +14,7 @@ export const MyState = ({ children }) => {
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false);
   const [isDelete, setIsDelete] = useState(false)
-  const [role , setRole] = useState("")
+
   //  state with data from backend
   const [allDonars, setAllDonars] = useState([])
   const [loginInfo, setLoginInfo] = useState({})  // get one user data from backend
@@ -126,7 +126,7 @@ export const MyState = ({ children }) => {
   }
 
   // get login users data
-  const getLoginUser = () => { 
+  const getLoginUser = () => {
     setIsLoading(true)
     const token = JSON.parse(localStorage.getItem("token"));
     console.log(token)
@@ -142,37 +142,37 @@ export const MyState = ({ children }) => {
         setLoginInfo(data)
         setIsLoading(false)
         console.log(data)
-        setRole(data.role)
         if (data) {
-          localStorage.setItem("profilePic", JSON.stringify(data.profilePic))
+          const photo_role = { profilePic: data.profilePic, role: data.role };
+          localStorage.setItem("photo_role", JSON.stringify(photo_role))
         }
 
       })
   }
 
   // get login donar info
-const getLoginDonar = ()=>{
-  setIsLoading(true)
-  const token = JSON.parse(localStorage.getItem("token"));
-  fetch(`${API}/donar/donars-one`, {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json",
-      "Authorization": `Bearer ${token}`
-    }
-  })
-    .then(res => res.json())
-    .then(data => {
-      setLoginInfo(data)
-      setRole(data.role)
-      setIsLoading(false)
-
-      if (data) {
-        localStorage.setItem("profilePic", JSON.stringify(data.profilePic))
+  const getLoginDonar = () => {
+    setIsLoading(true)
+    const token = JSON.parse(localStorage.getItem("token"));
+    fetch(`${API}/donar/donars-one`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${token}`
       }
-
     })
-}
+      .then(res => res.json())
+      .then(data => {
+        setLoginInfo(data)
+        setIsLoading(false)
+
+        if (data) {
+          const photo_role = { profilePic: data.profilePic, role: data.role };
+          localStorage.setItem("photo_role", JSON.stringify(photo_role))
+        }
+
+      })
+  }
 
   const handleUserResetPassword = (e, authInfo) => {
     e.preventDefault();
@@ -236,27 +236,88 @@ const getLoginDonar = ()=>{
   }
 
 
-     // get login donars regsieter Account
-  const getLoginDonarAccount = ()=>{
-     console.log("get doanr acc");
-     setIsLoading(true)
-     fetch(`${API}/donar-register/donars-one`, {
-         method: "GET",
-         headers: {
-             'Content-type': "application/json",
-             'Authorization': `Bearer ${token}`
-         },
-     }).then(res => res.json())
-         .then(data => {
+  // get login donars regsieter event
+  const getLoginDonarAccount = () => {
+    console.log("get doanr acc");
+    setIsLoading(true)
+    fetch(`${API}/donar-register/donars-one`, {
+      method: "GET",
+      headers: {
+        'Content-type': "application/json",
+        'Authorization': `Bearer ${token}`
+      },
+    }).then(res => res.json())
+      .then(data => {
 
-             setRegsiterEvent(data.donarInfo)
-             setIsLoading(false)
-         });
+        setRegsiterEvent(data.donarInfo)
+        setIsLoading(false)
+      });
   }
+
 
   // 222  donar register handler end
 
+  // 333 user register handler start here 
 
+  const getLoginUserAccount = () => {
+    setIsLoading(true)
+    console.log('get user event');
+    fetch(`${API}/users-register/users-one`, {
+      method: "GET",
+      headers: {
+        "Content-type": "applcation/json",
+        'Authorization': `Bearer ${token}`
+      }
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setIsLoading(false)
+        setRegsiterEvent(data.userInfo)
+      })
+  }
+
+
+  // register 
+  const handleAppoinment = (e, register) => {
+    console.log('user regisetr', register)
+    e.preventDefault();
+    if (!token) {
+      alert("Please login and apply")
+    }
+    fetch(`${API}/users-register/register`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(register)
+    }).then(res => res.json())
+      .then(data => {
+        setIsLoading(false)
+        setMessage(data.message)
+        console.log(data)
+      })
+  }
+
+  // update 
+  const handleAppoinmentUpdate = (e, id, info) => {
+    e.preventDefault();
+    setIsLoading(true)
+    fetch(`${API}/users-register/update/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(info)
+    }).then(res => res.json())
+      .then(data => {
+        setIsLoading(false)
+        setMessage(data.message)
+      })
+  }
+
+
+  // 333 user register handler end here 
 
 
 
@@ -366,13 +427,14 @@ const getLoginDonar = ()=>{
   }
 
   const value = {
-    API, token, role , setRole ,
+    API, token,
     isAdminLogin, setIsAdminLogin,
     arrowClick, setArrowClick,
     message, setMessage, isLoading, setIsLoading, isDelete,
     handleDonarRegister, handleLoginDonar, handleDonarAccountPassword, handleUserRegister, handleUserLogin, handleUserResetPassword,
-    getLoginUser, loginInfo , getLoginDonar , 
-    handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister, getLoginDonarAccount , regsiterEvent,
+    getLoginUser, loginInfo, getLoginDonar,
+    handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister, getLoginDonarAccount, getLoginUserAccount, regsiterEvent,
+    handleAppoinment, handleAppoinmentUpdate,
     handleAddBlog, handleGetBlogs, blogs, getOneBlog, oneBlog, handleEditBlog, handleDeleteBlog,
     getAllDonarsItems, allDonars,
 

@@ -85,6 +85,15 @@
     .donarProfileMain{
       @apply flex-1
     }
+    .eventWrapper{
+      @apply flex-b flex-wrap justify-start gap-5
+    }
+    .userEvents{
+      @apply w-31 bg-gray-100 shadow-sm
+    }
+    .eventBtn{
+      @apply w-full text-center bg-gray-200 text-black hover:bg-slate-200
+    }
 
   /* profile  end */
 

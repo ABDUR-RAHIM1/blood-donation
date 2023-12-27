@@ -4,19 +4,19 @@ import { GlobalState } from '../State/State'
 import { FaCircle } from 'react-icons/fa'
 import demoImg from '../images/demo.jpg';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react'; 
+import { useEffect } from 'react';
 import Profile_main from './Profile_main';
 
 
 function UserProfile() {
   const naviagte = useNavigate()
-  const { getLoginUser, loginInfo } = useContext(GlobalState)
- 
+  const { getLoginUser, getLoginUserAccount, regsiterEvent, loginInfo } = useContext(GlobalState)
+
 
 
   const handleLogOutDonar = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('profilePic');
+    localStorage.removeItem('photo_role');
     setTimeout(() => {
       naviagte("/user-auth")
     }, 1500);
@@ -25,7 +25,8 @@ function UserProfile() {
 
   // get login users  data
   useEffect(() => {
-      getLoginUser()
+    getLoginUser()
+    getLoginUserAccount()
   }, []);
 
 
@@ -45,7 +46,7 @@ function UserProfile() {
           </div>
 
         </div>
-        <Link to="/donar-register">
+        <Link to="/">
           <button className='button w-full my-2 bg-gray-300'>
             Register Your Event
           </button>
@@ -62,7 +63,9 @@ function UserProfile() {
       <div className="donarProfileMain md:px-0 px-3">
 
 
-        <Profile_main />
+        <Profile_main
+          userRegsiterEvent={regsiterEvent}
+        />
 
       </div>
     </div>

@@ -5,22 +5,21 @@ import { GlobalState } from '../../State/State'
 import uploadFile from '../utils/UploadFile'
 import Notification from '../utils/Notification'
 import Loading from '../utils/Loading'
+import { useLocation } from 'react-router-dom'
 
-function DonarRegisterForm(props) {
-    const { state } = props;
-    console.log(state)
-    const { isLoading, isDonarLogin, handleDonarCreateProfiles, handleUpdateRegister } = useContext(GlobalState);
+function DonarRegisterForm() {
+    const state = useLocation().state; 
+    
+    const { isLoading, handleDonarCreateProfiles, handleUpdateRegister } = useContext(GlobalState);
     const [imgLoading, setImgIsLoading] = useState(false)
     const [register, setRegister] = useState({
         profilePic: ''
     })
 
 
-   
     const handleChange = (e) => {
         const { name, value } = e.target;
         setRegister({ ...register, [name]: value })
-
     }
 
     const handleFileChange = async (e) => {
@@ -31,10 +30,16 @@ function DonarRegisterForm(props) {
 
     let required;
     if (state) {
-        required = true
+        required = false;
     } else {
-        required = false
+        required = true
     }
+
+    useEffect(() => {
+        if (state) {
+            setRegister(state)
+        }
+    }, [])
 
     return (
         <form onSubmit={
@@ -173,7 +178,7 @@ function DonarRegisterForm(props) {
             />
 
             <button disabled={isLoading} className='button bg-slate-300 text-slate-600 text-center my-4 hover:bg-slate-500 hover:text-white'>
-                 {event ? "Update Now" : "Add Now"}
+                {event ? "Update Now" : "Add Now"}
             </button>
             {isLoading && <Loading size='sm' />}
 

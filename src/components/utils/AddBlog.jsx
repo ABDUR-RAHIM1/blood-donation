@@ -10,7 +10,6 @@ import { useLocation } from 'react-router-dom';
 function AddBlog() {
 
   const state = useLocation().state;
-  console.log(state)
   const { handleAddBlog, handleEditBlog, isLoading, message } = useContext(GlobalState)
   const [blog, setBlog] = useState({});
   const [imgLoading, setImgIsLoading] = useState(false)

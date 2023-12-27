@@ -26,6 +26,7 @@ import UsersLogin from './components/Users/UsersLogin'
 import DonarDetails from './components/Donars/DonarDetails'
 import AddBlog from './components/utils/AddBlog'
 import UserProfile from './Profiles/UserProfile'
+import Appoinment from './components/Home/Appoinment'
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/donar-auth" element={<DonarLogin />} />
         <Route path="/user-auth" element={<UsersLogin />} />
         <Route path='/donar-register' element={<DonarRegister />} />
+        <Route path='/appoinment' element={<Appoinment />} />
         <Route path="/user-profile" element={<UserProfile/>} />
         <Route path="/donar-profile" element={<DonarProtected >
           <DonarProfile />

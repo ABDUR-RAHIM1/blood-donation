@@ -11,20 +11,19 @@ import { GlobalState } from '../../State/State';
  
 
 function Header() { 
-   const {role , setRole}  = useContext(GlobalState)
-   console.log(role)
-    const [pImg , setPImg] = useState('')
-
+    const {token} = useContext(GlobalState)
+  const [photoRole , setPhotoRole] = useState({});
     useEffect(() => {  
-        const isProfilePic = localStorage.getItem("profilePic");
-        if (isProfilePic) {
-           const pic =  JSON.parse(isProfilePic)
-           setPImg(pic)
+        const isPhoto_role = localStorage.getItem("photo_role");
+        if (isPhoto_role) {
+           const photoRole =  JSON.parse(isPhoto_role)
+       
+        setPhotoRole({...photoRole ,profilePic :photoRole.profilePic , role : photoRole.role   })
         }
-        setRole("user")
-    }, [pImg]);
+      
+    }, [setPhotoRole]);
 
-  
+  console.log(photoRole.role)
     return (
         <header className='px-4 md:px-0 bg-gray-100'>
             {['md'].map((expand) => (
@@ -48,12 +47,12 @@ function Header() {
                                     <Nav.Link as={Link} to='/donars'>Donar List</Nav.Link> 
                                     <Nav.Link as={Link} to='/about'>About</Nav.Link> 
                                     <Nav.Link as={Link} to='/blogs'>BLogs</Nav.Link> 
- 
+
 
                                     {
-                                         pImg
-                                            ? <Link to={`/${role}-profile`}>
-                                                <img className='w-10 h-10 rounded-full ml-3 cursor-pointer' src={pImg ? pImg : demoImg} alt="" />
+                                     token &&    photoRole.profilePic
+                                            ? <Link to={`/${photoRole.role}-profile`}>
+                                                <img className='w-10 h-10 rounded-full ml-3 cursor-pointer' src={photoRole ? photoRole.profilePic : demoImg} alt="" />
                                             </Link>
                                             : <NavDropdown
                                                 title="Login"
@@ -64,13 +63,13 @@ function Header() {
                                                     Donar Log-in
                                                 </NavDropdown.Item>
                                                 <NavDropdown.Divider />
-                                                <NavDropdown.Item href="#action5">
+                                                <NavDropdown.Item as={Link} to='/user-auth'>
                                                     User Log-in
                                                 </NavDropdown.Item>
                                             </NavDropdown>
 
 
-                                    }
+                                    } 
 
 
                                 </Nav>

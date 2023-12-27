@@ -31,7 +31,6 @@ function Appoinment() {
                     <div className=" bg-gray-100  p-4">
                         <AppoinmentForm />
                     </div>
-                    <img className='w-full h-48' src={img2} alt="" />
                 </div>
             </div>
         </section>
