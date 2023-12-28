@@ -11,9 +11,7 @@ import Profile_main from './Profile_main';
 
 function DonarProfile() {
   const naviagte = useNavigate()
-  const { API, setIsLoading, getLoginDonar, getLoginDonarAccount, regsiterEvent, loginInfo } = useContext(GlobalState)
-  const [info, setInfo] = useState({})    // get one donar data from backend
-
+  const { getLoginDonar, getLoginDonarAccount, regsiterEvent, loginInfo, isDelete } = useContext(GlobalState)
 
   const handleLogOutDonar = () => {
     localStorage.removeItem('token');
@@ -28,7 +26,7 @@ function DonarProfile() {
   useEffect(() => {
     getLoginDonar()
     getLoginDonarAccount()
-  }, []);
+  }, [isDelete]);
 
 
 

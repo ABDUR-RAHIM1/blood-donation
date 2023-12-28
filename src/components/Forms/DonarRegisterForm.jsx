@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom'
 function DonarRegisterForm() {
     const state = useLocation().state; 
     
-    const { isLoading, handleDonarCreateProfiles, handleUpdateRegister } = useContext(GlobalState);
+    const { isLoading, message, handleDonarCreateProfiles, handleUpdateRegister } = useContext(GlobalState);
     const [imgLoading, setImgIsLoading] = useState(false)
     const [register, setRegister] = useState({
         profilePic: ''
@@ -178,11 +178,11 @@ function DonarRegisterForm() {
             />
 
             <button disabled={isLoading} className='button bg-slate-300 text-slate-600 text-center my-4 hover:bg-slate-500 hover:text-white'>
-                {event ? "Update Now" : "Add Now"}
+                {state ? "Update Now" : "Add Now"}
             </button>
             {isLoading && <Loading size='sm' />}
 
-            <Notification />
+         { message &&   <Notification />}
 
 
         </form >

@@ -7,9 +7,10 @@ import Inputs from './Inputs';
 import Loading from './Loading';
 import Notification from './Notification';
 
-function ResetPassword() {
+function ResetPassword(props) {
+    const {role} = props;
     const [show, setShow] = useState(true);
-    const {handleDonarAccountPassword , isLoading, setMessage, setIsDonarLogin } = useContext(GlobalState)
+    const {handleDonarAccountPassword, handleUserResetPassword , isLoading, setMessage, setIsDonarLogin } = useContext(GlobalState)
     const [authInfo, setAuthInfo] = useState({name:"" , email:"", gender :"" , password :"" })
     const handleClose = () => setShow(false);
 
@@ -20,7 +21,7 @@ function ResetPassword() {
 
   }
 
-
+console.log(props)
 
     return (
         <>
@@ -33,7 +34,11 @@ function ResetPassword() {
                 <Modal.Body >
 
 
-                    <form onSubmit={(e)=>handleDonarAccountPassword(e, authInfo)} className='w-full bg-slate-600 p-6'>
+                    <form onSubmit={(e)=>
+                      role === 'donar'
+                       ? handleDonarAccountPassword(e, authInfo) 
+                      : handleUserResetPassword(e, authInfo)
+                    } className='w-full bg-slate-600 p-6'>
    
 
                                 <Inputs

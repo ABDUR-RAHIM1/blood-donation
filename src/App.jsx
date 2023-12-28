@@ -27,6 +27,7 @@ import DonarDetails from './components/Donars/DonarDetails'
 import AddBlog from './components/utils/AddBlog'
 import UserProfile from './Profiles/UserProfile'
 import Appoinment from './components/Home/Appoinment'
+import UsersDetails from './components/Donars/UsersDetals'
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/donars" element={<Donars />} />
         <Route path="/donars-details" element={<DonarDetails />} />
+        <Route path="/users-details" element={<UsersDetails />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/add-blog" element={<AddBlog />} />
         <Route path="/blog-details" element={<BlogDetails />} />

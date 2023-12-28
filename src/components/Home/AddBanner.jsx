@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import DonarRegister from '../DonarRegister/DonarRegister'
+import React, { useState } from 'react' 
 import { Link } from 'react-router-dom'
 
 function AddBanner() {
-
+ 
     return (
         <section className='flex-b flex-wrap items-start wrap  -translate-y-12'>
             <Link to='/user-auth' className="addBanner bg-slate-900">

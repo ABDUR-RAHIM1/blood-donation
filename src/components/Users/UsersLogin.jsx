@@ -11,7 +11,7 @@ import { useEffect } from 'react'
 
 function UserLogin() {
   const navigate = useNavigate()
-  const { handleUserRegister, handleUserLogin, isLoading } = useContext(GlobalState)
+  const { handleUserRegister, handleUserLogin,message, isLoading } = useContext(GlobalState)
   const [isRegister, setIsRegister] = useState(false)
   const [isReset, setIsReset] = useState(false)
   const [register, setRegister] = useState({ profilePic: "" })
@@ -130,10 +130,10 @@ function UserLogin() {
         <p onClick={() => setIsReset(!isReset)} className='font-italic my-4 cursor-pointer text-center button bg-slate-200 text-red-800'>forgat password</p>
 
 
-        <Notification />
+       { message && <Notification />}
       </form>
       {
-        isReset && <ResetPassword />
+        isReset && <ResetPassword role='user' />
       }
     </motion.div>
   )

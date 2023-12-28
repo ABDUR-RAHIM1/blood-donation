@@ -10,7 +10,7 @@ import Profile_main from './Profile_main';
 
 function UserProfile() {
   const naviagte = useNavigate()
-  const { getLoginUser, getLoginUserAccount, regsiterEvent, loginInfo } = useContext(GlobalState)
+  const { getLoginUser, getLoginUserAccount, regsiterEvent, loginInfo, isDelete } = useContext(GlobalState)
 
 
 
@@ -27,7 +27,7 @@ function UserProfile() {
   useEffect(() => {
     getLoginUser()
     getLoginUserAccount()
-  }, []);
+  }, [isDelete]);
 
 
 
@@ -46,7 +46,7 @@ function UserProfile() {
           </div>
 
         </div>
-        <Link to="/">
+        <Link to="/appoinment">
           <button className='button w-full my-2 bg-gray-300'>
             Register Your Event
           </button>

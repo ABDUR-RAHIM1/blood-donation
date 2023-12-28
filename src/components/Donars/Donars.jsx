@@ -1,5 +1,4 @@
-import React from 'react'
-import { donars } from '../../Data/Donars'
+import React from 'react' 
 import Donar from './Donar'
 import { useEffect } from 'react'
 import { useContext } from 'react'
@@ -25,7 +24,7 @@ function Donars() {
                         <Donar key={dr._id} donar={dr} />
                     ))
                 ) : (
-                    <h1 className='text-red-500 text-3xl text-center my-4'>There is no donor</h1>
+                    <h1 className='text-red-500 text-3xl text-center my-4'>There is no donor ! 😔</h1>
                 )}
             </div>
         </>

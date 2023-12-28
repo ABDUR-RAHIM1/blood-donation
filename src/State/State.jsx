@@ -175,8 +175,20 @@ export const MyState = ({ children }) => {
   }
 
   const handleUserResetPassword = (e, authInfo) => {
+    setIsLoading(true)
     e.preventDefault();
-    console.log("user reste password")
+    fetch(`${API}/users/reset/`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(authInfo)
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setMessage(data.message)
+        setIsLoading(false)
+      })
   }
 
   //1111 donar/ user auth account reset password handler end here ///////////////////
@@ -238,7 +250,6 @@ export const MyState = ({ children }) => {
 
   // get login donars regsieter event
   const getLoginDonarAccount = () => {
-    console.log("get doanr acc");
     setIsLoading(true)
     fetch(`${API}/donar-register/donars-one`, {
       method: "GET",
@@ -316,6 +327,20 @@ export const MyState = ({ children }) => {
       })
   }
 
+  const handleDeleteUserRegister = (id) => {
+    setIsLoading(true)
+    console.log("delete", id)
+    fetch(`${API}/users-register/delete/${id}`, {
+      method: "DELETE",
+
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setIsLoading(false)
+        setIsDelete(!isDelete)
+        setMessage(data.message)
+      })
+  }
 
   // 333 user register handler end here 
 
@@ -336,7 +361,7 @@ export const MyState = ({ children }) => {
   }
 
 
-  //  blog  hadnler start here 
+  //  blog  handler start here 
 
   const handleAddBlog = (e, blogInfo) => {
     e.preventDefault()
@@ -434,7 +459,7 @@ export const MyState = ({ children }) => {
     handleDonarRegister, handleLoginDonar, handleDonarAccountPassword, handleUserRegister, handleUserLogin, handleUserResetPassword,
     getLoginUser, loginInfo, getLoginDonar,
     handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister, getLoginDonarAccount, getLoginUserAccount, regsiterEvent,
-    handleAppoinment, handleAppoinmentUpdate,
+    handleAppoinment, handleAppoinmentUpdate, handleDeleteUserRegister , 
     handleAddBlog, handleGetBlogs, blogs, getOneBlog, oneBlog, handleEditBlog, handleDeleteBlog,
     getAllDonarsItems, allDonars,
 

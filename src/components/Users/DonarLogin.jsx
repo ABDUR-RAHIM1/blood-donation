@@ -10,13 +10,13 @@ import uploadFile from '../utils/UploadFile'
 function DonarLogin() {
 
   const navigate = useNavigate()
-  const { handleDonarRegister, handleLoginDonar , isLoading, setIsLoading, setMessage, setIsDonarLogin } = useContext(GlobalState)
+  const { handleDonarRegister, handleLoginDonar, isLoading, message } = useContext(GlobalState)
   const [isRegister, setIsRegister] = useState(false)
   const [isReset, setIsReset] = useState(false)
   const [register, setRegister] = useState({ profilePic: "" })
   const [imgLoading, setImgLoading] = useState(false)
 
- 
+
 
 
   //   donar login changer
@@ -39,7 +39,7 @@ function DonarLogin() {
       navigate("/donar-profile")
     }
   }, [])
- 
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -106,7 +106,7 @@ function DonarLogin() {
 
         {isRegister &&
           <>
-            <input onChange={handleFileChange}  id='file' type="file" name='profilePic' className='form-control mt-3' />
+            <input onChange={handleFileChange} id='file' type="file" name='profilePic' className='form-control mt-3' />
             {
               imgLoading ? <small className='mb-3 text-red-400'>Uploading Image</small>
                 :
@@ -132,10 +132,10 @@ function DonarLogin() {
         <p onClick={() => setIsReset(!isReset)} className='font-italic my-4 cursor-pointer text-center button bg-slate-200 text-red-800'>forgat password</p>
 
 
-        <Notification />
+        { message && <Notification />}
       </form>
       {
-        isReset && <ResetPassword />
+        isReset && <ResetPassword role="donar" />
       }
     </motion.div>
   )
