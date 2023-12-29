@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from 'react'
-import BlogsData from '../../Data/Blogs'
+import React, { useContext, useEffect } from 'react' 
 import Blog from './Blog'
 import { Link } from 'react-router-dom'
 import {motion} from 'framer-motion';

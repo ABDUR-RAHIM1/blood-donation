@@ -9,18 +9,67 @@ export const MyState = ({ children }) => {
   const token = JSON.parse(localStorage.getItem("token"));
 
   //  reuseble state all are components
-  const [isAdminLogin, setIsAdminLogin] = useState(true);
+  const [isAdminLogin, setIsAdminLogin] = useState(false);
   const [arrowClick, setArrowClick] = useState(false);
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false);
   const [isDelete, setIsDelete] = useState(false)
 
   //  state with data from backend
+  const [donarsAcc, setDonarsAcc] = useState([])
+  const [usersAcc, setUsersAcc] = useState([])
+  const [usersAllResgister, setUsersAllResgister] = useState([])
   const [allDonars, setAllDonars] = useState([])
   const [loginInfo, setLoginInfo] = useState({})  // get one user data from backend
   const [regsiterEvent, setRegsiterEvent] = useState([])
   const [blogs, setBlogs] = useState([])
   const [oneBlog, setOneBlog] = useState([])
+
+  // 0000 admin start
+
+  const handleRegisterAdmin = (e, info) => {
+    e.preventDefault();
+    setIsLoading(true)
+    fetch(`${API}/admin/register`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(info)
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setIsLoading(false)
+        setMessage(data.message)
+      })
+  }
+
+  const handleAdminLogin = (e, info) => {
+    e.preventDefault();
+    setIsLoading(true)
+    fetch(`${API}/admin/login`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(info)
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setIsLoading(false)
+        setMessage(data.message)
+        if (data.login) {
+          localStorage.setItem("token", JSON.stringify(data.token))
+        }
+      })
+  }
+
+
+
+  // 000  admin end
+
+
+
 
   //111  donar / user account sign up / register //////////////////////////////////
 
@@ -151,6 +200,17 @@ export const MyState = ({ children }) => {
   }
 
   // get login donar info
+
+  const getDonarAccount = () => {
+    setIsLoading(true)
+    fetch(`${API}/donar/donars`)
+      .then(res => res.json())
+      .then(data => {
+        setIsLoading(false)
+        setDonarsAcc(data)
+      })
+  }
+
   const getLoginDonar = () => {
     setIsLoading(true)
     const token = JSON.parse(localStorage.getItem("token"));
@@ -269,6 +329,27 @@ export const MyState = ({ children }) => {
   // 222  donar register handler end
 
   // 333 user register handler start here 
+
+
+  const getUserAccount = () => {
+    setIsLoading(true)
+    fetch(`${API}/users/users`)
+      .then(res => res.json())
+      .then(data => {
+        setIsLoading(false)
+        setUsersAcc(data)
+      })
+  }
+
+const getUserAllRegister = ()=>{
+  setIsLoading(true)
+  fetch(`${API}/users-register/users`)
+    .then(res => res.json())
+    .then(data => {
+      setIsLoading(false)
+      setUsersAllResgister(data.users)
+    })
+}
 
   const getLoginUserAccount = () => {
     setIsLoading(true)
@@ -456,10 +537,12 @@ export const MyState = ({ children }) => {
     isAdminLogin, setIsAdminLogin,
     arrowClick, setArrowClick,
     message, setMessage, isLoading, setIsLoading, isDelete,
+    handleRegisterAdmin, handleAdminLogin,
+    getDonarAccount, donarsAcc, getUserAccount, usersAcc, getUserAllRegister ,usersAllResgister,
     handleDonarRegister, handleLoginDonar, handleDonarAccountPassword, handleUserRegister, handleUserLogin, handleUserResetPassword,
     getLoginUser, loginInfo, getLoginDonar,
     handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister, getLoginDonarAccount, getLoginUserAccount, regsiterEvent,
-    handleAppoinment, handleAppoinmentUpdate, handleDeleteUserRegister , 
+    handleAppoinment, handleAppoinmentUpdate, handleDeleteUserRegister,
     handleAddBlog, handleGetBlogs, blogs, getOneBlog, oneBlog, handleEditBlog, handleDeleteBlog,
     getAllDonarsItems, allDonars,
 

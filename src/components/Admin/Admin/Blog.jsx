@@ -1,43 +1,44 @@
 import React, { useState } from 'react'
 import { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { GlobalState } from '../../../State/State'
+import demoImg from '../../../images/demo1.png'
+import { FaRegEdit } from 'react-icons/fa'
+import { MdDelete } from 'react-icons/md'
 
-function Blog({ blog }) { 
+function Blog(props) {
+    const { _id, title, desc, profilePic } = props.blog;
     const [show, setShow] = useState(false)
-    const {setInfo } = useContext(GlobalState)
+    const {handleDeleteBlog } = useContext(GlobalState)
     const handleShow = () => {
         setTimeout(() => {
             setShow(!show)
         }, 1000);
     }
-
-    const handleEdit = (id, blog) =>{
-       const newInfo  = blog 
-       newInfo.isEdit = true
-       setInfo(newInfo)
-    }
+ 
+    //  admin blog 
 
     return (
         <div className='w-48 md:w-23 border border-dotted my-3 cursor-pointer relative'>
-            <img className='w-full h-24' src={blog.image} alt="" />
+            <img className='w-full h-32' src={profilePic || demoImg} alt="" />
             <div className='p-2'>
-                <Link to='/blog-details' state={blog}>
-                    <h1 title='go to details' className="text-lg font-bold text-center uppercase underline">{blog.title}</h1>
+                <Link to='/blog-details' state={props.blog}>
+                    <h1 title='go to details' className="text-lg font-bold text-center uppercase underline">{title}</h1>
                 </Link>
-                <p className='text-white' onClick={handleShow}>{(blog.text).slice(0, 50) + ' . . .'}</p>
+                <p className='text-white' onClick={handleShow}>{(desc).slice(0, 50) + ' . . .'}</p>
             </div>
 
-            {/*  admin button => edit and delete */}
+            {/*  admin button => edit and delete start */}
 
-            {show && <div className="adminBtn flex-b">
-                <Link to='/admin-add-blog' state={blog} onClick={() => handleEdit(blog.id, blog)}>
-                    <button className='button'>Edit</button>
+            {show && <div className="adminBtn px-3 py-2 flex-b">
+                <Link to='/admin-add-blog' state={props.blog}>
+
+                    <FaRegEdit className="text-2xl cursor-pointer text-green-400" />
                 </Link>
-                <button className='button'>Delete</button>
+                <MdDelete onClick={() => handleDeleteBlog(_id)} className="text-2xl cursor-pointer text-red-600" />
             </div>}
 
-            {/*  admin button => edit and delete */}
+            {/*  admin button => edit and delete end  */}
 
         </div>
     )

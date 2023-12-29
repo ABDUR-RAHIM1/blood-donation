@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import demoImg from "../../images/demo.jpg";
 
 function Blog(props) {
-    const { name, email, postAt, title, profilePic, desc } = props.blog;
+    const { name, email,role , postAt, title, profilePic, desc } = props.blog;
     const isEvenNumber = props.index % 2 === 0;
 
     return (
@@ -21,7 +21,7 @@ function Blog(props) {
                     {`${props.index < 9 ? '0' + (props.index + 1) : props.index + 1}`}
                 </h2>
                 <div className='mt-2 bg-gray-50 py-2 px-1'>
-                    <small className='uppercase underline'>Author : {name}</small> <br />
+                    <small className='uppercase underline'>Author : {name} <span className='text-green-800'> ({role}) </span> </small> <br />
                     <small>email : {email}</small> <br />
                     <small>Post on : {postAt}</small>
                 </div>

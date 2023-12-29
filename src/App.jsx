@@ -5,12 +5,11 @@ import DonarRegister from './components/DonarRegister/DonarRegister'
 import Header from './components/Home/Header'
 import Blogs from './components/Blogs/Blogs'
 import Error from './components/Error/Error'
-import AdminLogin, { ProtectedRoute } from './components/Admin/AdminLogin/AdminLogin'
+import AdminLogin from './components/Admin/AdminLogin/AdminLogin'
 import Banner from './components/Home/Banner'
 import BlogDetails from './components/BlogDetails/BlogDetails'
 import Footer from './components/Footer/footer'
 import AdminDashboard from './components/Admin/Dashboard/AdminDashboard'
-import AddBLog from './components/Admin/Admin/AddBLog'
 import GetBlogs from './components/Admin/Admin/GetBlogs'
 import Add_Volunteer from './components/Admin/Admin/Add_Volunteer'
 import Manage_volunteer from './components/Admin/Admin/Manage_volunteer'
@@ -28,6 +27,8 @@ import AddBlog from './components/utils/AddBlog'
 import UserProfile from './Profiles/UserProfile'
 import Appoinment from './components/Home/Appoinment'
 import UsersDetails from './components/Donars/UsersDetals'
+import AdminProtected from './ProtectedRoute/AdminProtected'
+import AddBLog from './components/Admin/Admin/AddBLog'
 
 function App() {
   return (
@@ -47,13 +48,15 @@ function App() {
         <Route path="/user-auth" element={<UsersLogin />} />
         <Route path='/donar-register' element={<DonarRegister />} />
         <Route path='/appoinment' element={<Appoinment />} />
-        <Route path="/user-profile" element={<UserProfile/>} />
+        <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/donar-profile" element={<DonarProtected >
           <DonarProfile />
         </DonarProtected>} />
-        <Route path="/admin" element={<ProtectedRoute>
+
+        {/*  admin routes */}
+        <Route path="/admin" element={<AdminProtected>
           <AdminDashboard />
-        </ProtectedRoute>} />
+        </AdminProtected>} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin-dashboard" element={<Dashboard />} />
         <Route path="/admin-add-blog" element={<AddBLog />} />

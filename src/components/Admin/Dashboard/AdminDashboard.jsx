@@ -6,9 +6,6 @@ import { motion } from 'framer-motion'
 function AdminDashboard({children}) { 
   const { arrowClick, setArrowClick } = useContext(GlobalState)
 
-   
-
- 
   return (
     <motion.div
       className='flex-b items-start'>

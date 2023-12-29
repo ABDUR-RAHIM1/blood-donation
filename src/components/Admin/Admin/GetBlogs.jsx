@@ -1,13 +1,22 @@
-import React from 'react'
-import BlogsData from '../../../Data/Blogs'
+import React from 'react' 
 import Blog from './Blog'
 import AdminDashboard from '../Dashboard/AdminDashboard'
 import { motion } from 'framer-motion'
+import { useContext } from 'react'
+import { GlobalState } from '../../../State/State'
+import { useEffect } from 'react'
 function GetBlogs() {
+   const {getOneBlog, oneBlog ,isDelete } = useContext(GlobalState);
+
+   useEffect(()=>{
+     getOneBlog()
+   } , [isDelete]);
+   
+   
 
   return (
     <AdminDashboard>
-      <div className="title">Manage All Blogs</div>
+      <div className="title">Manage Your Blogs</div>
       <hr />
       <motion.div
         initial={{ opacity: 0 }}
@@ -17,8 +26,8 @@ function GetBlogs() {
         }}
         className='flex-b flex-wrap my-10' >
         {
-          BlogsData && BlogsData.map(bl => (
-            <Blog key={bl.id}
+          oneBlog && oneBlog.map(bl => (
+            <Blog key={bl._id}
               blog={bl}
             />
           ))
