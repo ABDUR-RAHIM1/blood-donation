@@ -1,5 +1,5 @@
 
-import React, { useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
@@ -9,16 +9,21 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { GlobalState } from '../../State/State';
 
 
 function Slider() {
-
+    const { handleGetSlider, sliders, } = useContext(GlobalState)
     const progressCircle = useRef(null);
     const progressContent = useRef(null);
     const onAutoplayTimeLeft = (s, time, progress) => {
         progressCircle.current.style.setProperty('--progress', 1 - progress);
         progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
     };
+
+    useEffect(() => {
+        handleGetSlider()
+    }, [])
 
     return (
         <>
@@ -37,21 +42,14 @@ function Slider() {
                 onAutoplayTimeLeft={onAutoplayTimeLeft}
                 className="mySwiper"
             >
-                <SwiperSlide>
-                    <img className='w-full h-72' src="https://img.freepik.com/free-photo/butterfly-blossom_23-2150636449.jpg?ga=GA1.2.1449515847.1696692634" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img className='w-full h-72' src="https://img.freepik.com/free-photo/front-view-people-celebrating-christmas_23-2150977060.jpg?ga=GA1.2.1449515847.1696692634" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img className='w-full h-72' src="https://img.freepik.com/free-photo/futuristic-christmas-celebration-concept_23-2150979825.jpg?ga=GA1.2.1449515847.1696692634" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://img.freepik.com/free-photo/medium-shot-people-celebrating-christmas_23-2150977244.jpg?ga=GA1.2.1449515847.1696692634" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://img.freepik.com/free-photo/medium-shot-people-celebrating-christmas_23-2150977252.jpg?ga=GA1.2.1449515847.1696692634" alt="" />
-                </SwiperSlide>
+                {
+                    sliders && sliders.map(sl => (
+                        <SwiperSlide key={sl._id}>
+                             <img src={sl.profilePic} alt="" />
+                        </SwiperSlide>
+                    ))
+                }
+
                 <div className="autoplay-progress" slot="container-end">
                     <svg viewBox="0 0 48 48" ref={progressCircle}>
                         <circle cx="24" cy="24" r="20"></circle>

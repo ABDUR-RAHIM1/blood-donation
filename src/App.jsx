@@ -11,8 +11,7 @@ import BlogDetails from './components/BlogDetails/BlogDetails'
 import Footer from './components/Footer/footer' 
 import GetBlogs from './components/Admin/Admin/GetBlogs'
 import Add_Volunteer from './components/Admin/Admin/Add_Volunteer'
-import Manage_volunteer from './components/Admin/Admin/Manage_volunteer'
-import Get_request from './components/Admin/Admin/Get_request'
+import Manage_volunteer from './components/Admin/Admin/Manage_volunteer' 
 import Add_slider from './components/Admin/Admin/Add_slider'
 import Donars from './components/Donars/Donars'
 import Dashboard from './components/Admin/Admin/Dashboard/Dashboard'
@@ -64,8 +63,7 @@ function App() {
           <Route path="/admin-add-blog" element={<AddBLog />} />
           <Route path="/admin-get-blog" element={<GetBlogs />} />
           <Route path="/admin-add-volunteer" element={<Add_Volunteer />} />
-          <Route path="/admin-manage-volunteer" element={<Manage_volunteer />} />
-          <Route path="/admin-get-request" element={<Get_request />} />
+          <Route path="/admin-manage-volunteer" element={<Manage_volunteer />} /> 
           <Route path="/admin-add-slider" element={<Add_slider />} />
           <Route path="/admin-manage-content" element={<Manage_content />} />
 

@@ -27,6 +27,7 @@ export const MyState = ({ children }) => {
   const [blogs, setBlogs] = useState([])
   const [oneBlog, setOneBlog] = useState([])
   const [volunteer, setVolunteer] = useState([])
+  const [sliders, setSlider] = useState([])
 
   // 0000 admin start
 
@@ -542,12 +543,12 @@ export const MyState = ({ children }) => {
 
 
   const handleGetOneVolunteer = () => {
-    fetch(`${API}/volunteer/volunteer-one`,{
-       method : "GET",
-       headers : {
-         "Content-type" :"application/json",
-         "Authorization" : `Bearer ${ADMIN_TOKEN}`
-       }
+    fetch(`${API}/volunteer/volunteer-one`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${ADMIN_TOKEN}`
+      }
     })
       .then(res => res.json())
       .then(data => {
@@ -603,7 +604,44 @@ export const MyState = ({ children }) => {
 
   //  volunteeer end here
 
+  // slider  start   
+  const handleGetSlider = () => {
+    setIsLoading(true)
+    fetch(`${API}/slider/sliders`)
+      .then(res => res.json())
+      .then(data => {
+        setSlider(data)
+        setIsLoading(false)
+      })
+  }
 
+  const handleAddSlider = (e, info) => {
+    e.preventDefault();
+    setIsLoading(true)
+    fetch(`${API}/slider/add`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(info)
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setIsLoading(false)
+      })
+  }
+
+  const handleSliderDelete = (id) => {
+    fetch(`${API}/slider/delete/`, {
+      method: "DELETE"
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setMessage(data.message)
+        setIsDelete(!isDelete)
+      })
+  }
+  // slider  emd here 
 
   if (message) {
     setTimeout(() => {
@@ -624,7 +662,9 @@ export const MyState = ({ children }) => {
     handleAppoinment, handleAppoinmentUpdate, handleDeleteUserRegister,
     handleAddBlog, handleGetBlogs, blogs, getOneBlog, oneBlog, handleEditBlog, handleDeleteBlog,
     getAllDonarsItems, allDonars,
-    handleAddVolunteer, handleGetVolunteer, handleGetOneVolunteer , volunteer, handleUpdateVolunteer, handleDeleteVolunteer,
+    handleAddVolunteer, handleGetVolunteer, handleGetOneVolunteer, volunteer, handleUpdateVolunteer, handleDeleteVolunteer,
+
+    handleGetSlider, sliders, handleAddSlider , handleSliderDelete
   };
 
   return (

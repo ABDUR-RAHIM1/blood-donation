@@ -177,7 +177,7 @@ body {
 
   /* manageContent => add logo */
   .logos {
-    @apply flex items-center justify-between w-full overflow-x-scroll gap-2
+    @apply flex items-center justify-start w-full overflow-x-scroll gap-2
   }
 
   .manageHeading {

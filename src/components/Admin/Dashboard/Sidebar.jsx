@@ -8,8 +8,7 @@ function Sidebar() {
     { item: 'add blog', link: '/admin-add-blog' },
     { item: 'get blog', link: '/admin-get-blog' },
     { item: 'add volunteer', link: '/admin-add-volunteer' },
-    { item: 'manage volunteer', link: '/admin-manage-volunteer' },
-    { item: 'get request', link: '/admin-get-request' },
+    { item: 'manage volunteer', link: '/admin-manage-volunteer' }, 
     { item: 'add slider', link: '/admin-add-slider' }, 
     { item: 'Manage Content', link: '/admin-manage-content' },
   ]
