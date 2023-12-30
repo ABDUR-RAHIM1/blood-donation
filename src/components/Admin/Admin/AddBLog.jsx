@@ -15,7 +15,7 @@ import { useEffect } from 'react'
 //  admin add blog component
 function AddBLog() {
    const state = useLocation().state;
-   const { handleAddBlog, handleEditBlog, isLoading, message } = useContext(GlobalState)
+   const { handleAddBlogAdmin, handleEditBlog, isLoading, message } = useContext(GlobalState)
    const [blog, setBlog] = useState({ ProfilePic: "" })
    const [imgLoading, setImgIsLoading] = useState(false)
    const handleChange = (e) => {
@@ -33,8 +33,7 @@ function AddBLog() {
          setBlog(state)
       }
    }, [])
-
-   console.log(state)
+ 
    return (
       <AdminDashboard>
          <motion.div
@@ -48,7 +47,7 @@ function AddBLog() {
                onSubmit={state ?
                   (e) => handleEditBlog(e, state._id, blog)
                   :
-                  (e) => handleAddBlog(e, blog)
+                  (e) => handleAddBlogAdmin(e, blog)
 
                }
                className='w-2/5 m-auto bg-black p-4 shadow-md shadow-green-600'>

@@ -4,7 +4,7 @@ import SidebarItems from '../../utils/SidebarItems'
 function Sidebar() {
   
   const items = [
-    { item: 'dashboard', link: '/admin-dashboard' },
+    { item: 'dashboard', link: '/admin' },
     { item: 'add blog', link: '/admin-add-blog' },
     { item: 'get blog', link: '/admin-get-blog' },
     { item: 'add volunteer', link: '/admin-add-volunteer' },

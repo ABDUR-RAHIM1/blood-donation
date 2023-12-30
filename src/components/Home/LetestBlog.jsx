@@ -4,7 +4,7 @@ import { GlobalState } from '../../State/State'
 function LetestBlog() {
     const navigate = useNavigate()
     const { handleGetBlogs, blogs } = useContext(GlobalState)
-    console.log(blogs)
+     
     useEffect(() => {
         const fetchData = async () => {
             await handleGetBlogs();
@@ -15,9 +15,9 @@ function LetestBlog() {
 
 
     return (
-        <div className='wrap my-5'>
-            <h2 className='text-center my-10 text-3xl uppercase italic'>Letest Blog</h2>
-            <div className='flex-b flex-wrap'>
+        <div className='wrap my-32'>
+            <Heading text="LETEST BLOG" />
+            <div className='flex-b mt-10 flex-wrap'>
                 {blogs && blogs.slice(0, 6).map(lb => (
                     <HomeBlog key={lb._id} blog={lb} />
                 ))
@@ -36,6 +36,7 @@ export default LetestBlog
 //  home blog compoennt
 import demoImg from "../../images/demo.jpg";
 import { Link, useNavigate } from "react-router-dom";
+import Heading from '../utils/Heading'
 
 export function HomeBlog(props) {
     const { name, email, postAt, title, profilePic, desc } = props.blog;

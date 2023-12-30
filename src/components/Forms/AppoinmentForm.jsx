@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 function AppoinmentForm() {
   const navigate = useNavigate()
   const state = useLocation().state;
-  console.log(state)
+
   const { token, handleAppoinment, handleAppoinmentUpdate, message } = useContext(GlobalState);
   const [isImgLoading, setImgIsLoading] = useState(false)
   const [register, setRegister] = useState({ profilePic: "" });

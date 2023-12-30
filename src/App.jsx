@@ -8,8 +8,7 @@ import Error from './components/Error/Error'
 import AdminLogin from './components/Admin/AdminLogin/AdminLogin'
 import Banner from './components/Home/Banner'
 import BlogDetails from './components/BlogDetails/BlogDetails'
-import Footer from './components/Footer/footer'
-import AdminDashboard from './components/Admin/Dashboard/AdminDashboard'
+import Footer from './components/Footer/footer' 
 import GetBlogs from './components/Admin/Admin/GetBlogs'
 import Add_Volunteer from './components/Admin/Admin/Add_Volunteer'
 import Manage_volunteer from './components/Admin/Admin/Manage_volunteer'
@@ -29,6 +28,7 @@ import Appoinment from './components/Home/Appoinment'
 import UsersDetails from './components/Donars/UsersDetals'
 import AdminProtected from './ProtectedRoute/AdminProtected'
 import AddBLog from './components/Admin/Admin/AddBLog'
+import Users from './components/Donars/Users'
 
 function App() {
   return (
@@ -39,33 +39,38 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/donars" element={<Donars />} />
+        <Route path="/users" element={<Users />} />
         <Route path="/donars-details" element={<DonarDetails />} />
         <Route path="/users-details" element={<UsersDetails />} />
         <Route path="/blogs" element={<Blogs />} />
-        <Route path="/add-blog" element={<AddBlog />} />
         <Route path="/blog-details" element={<BlogDetails />} />
         <Route path="/donar-auth" element={<DonarLogin />} />
         <Route path="/user-auth" element={<UsersLogin />} />
-        <Route path='/donar-register' element={<DonarRegister />} />
-        <Route path='/appoinment' element={<Appoinment />} />
-        <Route path="/user-profile" element={<UserProfile />} />
-        <Route path="/donar-profile" element={<DonarProtected >
-          <DonarProfile />
-        </DonarProtected>} />
+
+
+        <Route element={<DonarProtected />}>
+          <Route path='/donar-profile' element={<DonarProfile />} />
+          <Route path='/donar-register' element={<DonarRegister />} />
+          <Route path="/add-blog" element={<AddBlog />} />
+          <Route path='/appoinment' element={<Appoinment />} />
+          <Route path="/user-profile" element={<UserProfile />} />
+        </Route>
 
         {/*  admin routes */}
-        <Route path="/admin" element={<AdminProtected>
-          <AdminDashboard />
-        </AdminProtected>} />
+
         <Route path="/admin-login" element={<AdminLogin />} />
-        <Route path="/admin-dashboard" element={<Dashboard />} />
-        <Route path="/admin-add-blog" element={<AddBLog />} />
-        <Route path="/admin-get-blog" element={<GetBlogs />} />
-        <Route path="/admin-add-volunteer" element={<Add_Volunteer />} />
-        <Route path="/admin-manage-volunteer" element={<Manage_volunteer />} />
-        <Route path="/admin-get-request" element={<Get_request />} />
-        <Route path="/admin-add-slider" element={<Add_slider />} />
-        <Route path="/admin-manage-content" element={<Manage_content />} />
+        <Route element={<AdminProtected />}>
+          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin-add-blog" element={<AddBLog />} />
+          <Route path="/admin-get-blog" element={<GetBlogs />} />
+          <Route path="/admin-add-volunteer" element={<Add_Volunteer />} />
+          <Route path="/admin-manage-volunteer" element={<Manage_volunteer />} />
+          <Route path="/admin-get-request" element={<Get_request />} />
+          <Route path="/admin-add-slider" element={<Add_slider />} />
+          <Route path="/admin-manage-content" element={<Manage_content />} />
+
+        </Route>
+
         <Route path="/*" element={<Error />} />
       </Routes>
       <Footer />

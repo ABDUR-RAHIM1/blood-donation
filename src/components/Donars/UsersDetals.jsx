@@ -6,7 +6,7 @@ import demoImg from '../../images/demo.jpg'
 
 function UsersDetails() {
     const state = useLocation().state;
-    console.log(state)
+ 
     const { profilePic, name } = state;
 
     const pageSidebarData = {

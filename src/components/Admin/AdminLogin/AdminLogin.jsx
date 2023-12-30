@@ -31,7 +31,7 @@ function AdminLogin() {
     }
 
     useEffect(() => {
-        const isAdminToken = JSON.parse(localStorage.getItem('token'));
+        const isAdminToken = JSON.parse(localStorage.getItem('ADMIN_TOKEN'));
         if (isAdminToken) {
             setTimeout(() => {
                 navigate("/admin")

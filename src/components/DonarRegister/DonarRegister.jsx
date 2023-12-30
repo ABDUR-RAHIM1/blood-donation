@@ -1,6 +1,5 @@
 import React from 'react' 
-import img from "../../images/blood-bg.jpg"
-import img2 from '../../images/bg.png'
+import img from "../../images/bg.jpg" 
 import DonarRegisterForm from '../Forms/DonarRegisterForm'
 import { useLocation } from 'react-router-dom';
 
@@ -30,8 +29,7 @@ function DonarRegister() {
             <li className='list-disc'> পরিশেষে, রক্তদানের পর পর্যাপ্ত ঘুমানোর চেষ্টা করুন।</li>
 
           </ul>
-
-          <img className='w-full h-48' src={img2} alt="" />
+ 
         </div>
         <div className='w-full md:flex-1 relative md:ml-5  md:-translate-y-56'>
 

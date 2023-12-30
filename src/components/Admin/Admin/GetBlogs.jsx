@@ -1,4 +1,4 @@
-import React from 'react' 
+import React from 'react'
 import Blog from './Blog'
 import AdminDashboard from '../Dashboard/AdminDashboard'
 import { motion } from 'framer-motion'
@@ -6,13 +6,13 @@ import { useContext } from 'react'
 import { GlobalState } from '../../../State/State'
 import { useEffect } from 'react'
 function GetBlogs() {
-   const {getOneBlog, oneBlog ,isDelete } = useContext(GlobalState);
+  const { getOneBlogAdmin, oneBlog, isDelete } = useContext(GlobalState);
 
-   useEffect(()=>{
-     getOneBlog()
-   } , [isDelete]);
-   
-   
+  useEffect(() => {
+    getOneBlogAdmin()
+  }, [isDelete]);
+
+
 
   return (
     <AdminDashboard>

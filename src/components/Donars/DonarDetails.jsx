@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import demoImg from '../../images/demo.jpg'
 function DonarDetails() {
     const state = useLocation().state;
-   console.log(state)
+  
     const { profilePic, name } = state;
 
     const pageSidebarData = {

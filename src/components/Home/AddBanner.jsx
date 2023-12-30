@@ -1,15 +1,35 @@
 import React, { useState } from 'react' 
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import { GlobalState } from '../../State/State';
+import { useContext } from 'react';
 
 function AddBanner() {
+    const { token } = useContext(GlobalState)
+    const [photoRole, setPhotoRole] = useState({});
+    useEffect(() => {
+        const isPhoto_role = localStorage.getItem("photo_role");
+        if (isPhoto_role) {
+            const photoRole = JSON.parse(isPhoto_role)
+
+            setPhotoRole({ ...photoRole, profilePic: photoRole.profilePic, role: photoRole.role })
+        }
+
+    }, [setPhotoRole]);
+ 
+
+    let whoLogin;
+    if (token && photoRole) {
+         whoLogin = photoRole.role+"-profile"
+    }
  
     return (
-        <section className='flex-b flex-wrap items-start wrap  -translate-y-12'>
-            <Link to='/user-auth' className="addBanner bg-slate-900">
+        <section className='flex-b flex-wrap items-start my-10'>
+            <Link to={`${whoLogin || "/user-auth"}`} className="addBanner bg-slate-900">
                 <h1 className='heading'>Register Now</h1>
                 <p className='my-3'>রক্ত গ্রহণের আগে, আপনার বা আপনার অনুমোদিত প্রতিনিধিকে অবহিত সম্মতি প্রদান করা উচিত।</p>
             </Link>
-            <Link to='/donar-auth' className="addBanner bg-red-500">
+            <Link to={`${whoLogin || '/donar-auth'}`} className="addBanner bg-red-500">
                 <h1 className='heading'>Donation Now</h1>
                 <p className='my-3'>রক্ত গ্রহণের আগে, আপনার বা আপনার অনুমোদিত প্রতিনিধিকে অবহিত সম্মতি প্রদান করা উচিত।</p>
             </Link>

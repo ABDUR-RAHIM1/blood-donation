@@ -7,6 +7,8 @@ export const MyState = ({ children }) => {
 
   const API = 'http://localhost:8000/api'
   const token = JSON.parse(localStorage.getItem("token"));
+  const ADMIN_TOKEN = JSON.parse(localStorage.getItem("ADMIN_TOKEN"));
+
 
   //  reuseble state all are components
   const [isAdminLogin, setIsAdminLogin] = useState(false);
@@ -24,6 +26,7 @@ export const MyState = ({ children }) => {
   const [regsiterEvent, setRegsiterEvent] = useState([])
   const [blogs, setBlogs] = useState([])
   const [oneBlog, setOneBlog] = useState([])
+  const [volunteer, setVolunteer] = useState([])
 
   // 0000 admin start
 
@@ -38,7 +41,6 @@ export const MyState = ({ children }) => {
       body: JSON.stringify(info)
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
         setIsLoading(false)
         setMessage(data.message)
       })
@@ -55,11 +57,10 @@ export const MyState = ({ children }) => {
       body: JSON.stringify(info)
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
         setIsLoading(false)
         setMessage(data.message)
         if (data.login) {
-          localStorage.setItem("token", JSON.stringify(data.token))
+          localStorage.setItem("ADMIN_TOKEN", JSON.stringify(data.token))
         }
       })
   }
@@ -89,7 +90,7 @@ export const MyState = ({ children }) => {
         setIsLoading(false)
         setMessage(data.message)
       })
-      .catch(err => console.log(err))
+      .catch(err => setMessage(err.message))
   }
 
   // donar login 
@@ -145,7 +146,6 @@ export const MyState = ({ children }) => {
       body: JSON.stringify(authInfo)
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
         setMessage(data.message)
         setIsLoading(false)
       })
@@ -155,7 +155,6 @@ export const MyState = ({ children }) => {
   const handleUserLogin = (e, authInfo) => {
     setIsLoading(true)
     e.preventDefault();
-    console.log(authInfo)
     fetch(`${API}/users/login`, {
       method: "POST",
       headers: {
@@ -164,7 +163,6 @@ export const MyState = ({ children }) => {
       body: JSON.stringify(authInfo)
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
         setMessage(data.message)
         setIsLoading(false)
         if (data.login) {
@@ -178,7 +176,6 @@ export const MyState = ({ children }) => {
   const getLoginUser = () => {
     setIsLoading(true)
     const token = JSON.parse(localStorage.getItem("token"));
-    console.log(token)
     fetch(`${API}/users/users-one`, {
       method: "GET",
       headers: {
@@ -190,7 +187,6 @@ export const MyState = ({ children }) => {
       .then(data => {
         setLoginInfo(data)
         setIsLoading(false)
-        console.log(data)
         if (data) {
           const photo_role = { profilePic: data.profilePic, role: data.role };
           localStorage.setItem("photo_role", JSON.stringify(photo_role))
@@ -245,7 +241,6 @@ export const MyState = ({ children }) => {
       body: JSON.stringify(authInfo)
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
         setMessage(data.message)
         setIsLoading(false)
       })
@@ -286,7 +281,6 @@ export const MyState = ({ children }) => {
       body: JSON.stringify(info)
     }).then(res => res.json())
       .then(data => {
-        console.log(data);
         setMessage(data.message)
         setIsLoading(false)
       })
@@ -294,13 +288,11 @@ export const MyState = ({ children }) => {
 
   const handleDeleteRegister = (id) => {
     setIsLoading(true)
-    console.log("delete", id)
     fetch(`${API}/donar-register/delete/${id}`, {
       method: "DELETE",
 
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
         setIsLoading(false)
         setIsDelete(!isDelete)
         setMessage(data.message)
@@ -341,19 +333,18 @@ export const MyState = ({ children }) => {
       })
   }
 
-const getUserAllRegister = ()=>{
-  setIsLoading(true)
-  fetch(`${API}/users-register/users`)
-    .then(res => res.json())
-    .then(data => {
-      setIsLoading(false)
-      setUsersAllResgister(data.users)
-    })
-}
+  const getUserAllRegister = () => {
+    setIsLoading(true)
+    fetch(`${API}/users-register/users`)
+      .then(res => res.json())
+      .then(data => {
+        setIsLoading(false)
+        setUsersAllResgister(data.users)
+      })
+  }
 
   const getLoginUserAccount = () => {
     setIsLoading(true)
-    console.log('get user event');
     fetch(`${API}/users-register/users-one`, {
       method: "GET",
       headers: {
@@ -362,7 +353,6 @@ const getUserAllRegister = ()=>{
       }
     }).then(res => res.json())
       .then(data => {
-        console.log(data);
         setIsLoading(false)
         setRegsiterEvent(data.userInfo)
       })
@@ -371,7 +361,6 @@ const getUserAllRegister = ()=>{
 
   // register 
   const handleAppoinment = (e, register) => {
-    console.log('user regisetr', register)
     e.preventDefault();
     if (!token) {
       alert("Please login and apply")
@@ -387,7 +376,6 @@ const getUserAllRegister = ()=>{
       .then(data => {
         setIsLoading(false)
         setMessage(data.message)
-        console.log(data)
       })
   }
 
@@ -410,13 +398,11 @@ const getUserAllRegister = ()=>{
 
   const handleDeleteUserRegister = (id) => {
     setIsLoading(true)
-    console.log("delete", id)
     fetch(`${API}/users-register/delete/${id}`, {
       method: "DELETE",
 
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
         setIsLoading(false)
         setIsDelete(!isDelete)
         setMessage(data.message)
@@ -456,26 +442,39 @@ const getUserAllRegister = ()=>{
       body: JSON.stringify(blogInfo)
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
         setMessage(data.message)
         setIsLoading(false)
       })
   }
-
+  //  add blog admin
+  const handleAddBlogAdmin = (e, blogInfo) => {
+    e.preventDefault()
+    setIsLoading(true)
+    fetch(`${API}/blogs/blogs`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${ADMIN_TOKEN}`
+      },
+      body: JSON.stringify(blogInfo)
+    }).then(res => res.json())
+      .then(data => {
+        setMessage(data.message)
+        setIsLoading(false)
+      })
+  }
 
   const handleGetBlogs = () => {
     setIsLoading(true)
     fetch(`${API}/blogs/blogs/`)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         setBlogs(data.blogs)
         setIsLoading(false)
       })
   }
 
   const getOneBlog = () => {
-    console.log('get one blog')
     fetch(`${API}/blogs/blogs-one`, {
       method: "GET",
       headers: {
@@ -483,7 +482,18 @@ const getUserAllRegister = ()=>{
       }
     }).then(res => res.json())
       .then(data => {
-        console.log(data);
+        setIsLoading(false);
+        setOneBlog(data.blogs);
+      })
+  }
+  const getOneBlogAdmin = () => {
+    fetch(`${API}/blogs/blogs-one`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${ADMIN_TOKEN}`
+      }
+    }).then(res => res.json())
+      .then(data => {
         setIsLoading(false);
         setOneBlog(data.blogs);
       })
@@ -492,7 +502,6 @@ const getUserAllRegister = ()=>{
 
   const handleEditBlog = (e, id, blogInfo) => {
     e.preventDefault();
-    console.log("update", id)
     setIsLoading(true)
     fetch(`${API}/blogs/blogs/${id}`, {
       method: "PUT",
@@ -502,14 +511,12 @@ const getUserAllRegister = ()=>{
       body: JSON.stringify(blogInfo)
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
         setIsLoading(false)
         setMessage(data.message)
       })
   }
 
   const handleDeleteBlog = (id) => {
-    console.log("delete", id)
     fetch(`${API}/blogs/blogs/${id}`, {
       method: "DELETE",
     }).then(res => res.json())
@@ -522,7 +529,79 @@ const getUserAllRegister = ()=>{
 
   //  blog  hadnler end here 
 
+  //  volunteeer start
 
+  const handleGetVolunteer = () => {
+    fetch(`${API}/volunteer/volunteer`)
+      .then(res => res.json())
+      .then(data => {
+        setVolunteer(data.volunteer);
+        setIsLoading(false)
+      })
+  }
+
+
+  const handleGetOneVolunteer = () => {
+    fetch(`${API}/volunteer/volunteer-one`,{
+       method : "GET",
+       headers : {
+         "Content-type" :"application/json",
+         "Authorization" : `Bearer ${ADMIN_TOKEN}`
+       }
+    })
+      .then(res => res.json())
+      .then(data => {
+        setVolunteer(data);
+        setIsLoading(false)
+      })
+  }
+
+
+  const handleAddVolunteer = (e, info) => {
+    e.preventDefault();
+    setIsLoading(true);
+    fetch(`${API}/volunteer/volunteer-add`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${ADMIN_TOKEN}`
+      },
+      body: JSON.stringify(info)
+    })
+      .then(res => res.json())
+      .then(data => {
+        setIsLoading(false);
+        setMessage(data.message)
+      })
+  }
+
+  const handleUpdateVolunteer = (e, id, info) => {
+    e.preventDefault();
+    setIsLoading(true)
+    fetch(`${API}/volunteer/update/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(info)
+    }).then(res => res.json())
+      .then(data => {
+        setIsLoading(false)
+      })
+  }
+
+
+  const handleDeleteVolunteer = (id) => {
+    fetch(`${API}/volunteer/delete/${id}`, {
+      method: "DELETE",
+    }).then(res => res.json())
+      .then(data => {
+        setIsDelete(!isDelete)
+        setMessage(data.message)
+      })
+  }
+
+  //  volunteeer end here
 
 
 
@@ -533,19 +612,19 @@ const getUserAllRegister = ()=>{
   }
 
   const value = {
-    API, token,
+    API, token, ADMIN_TOKEN,
     isAdminLogin, setIsAdminLogin,
     arrowClick, setArrowClick,
     message, setMessage, isLoading, setIsLoading, isDelete,
-    handleRegisterAdmin, handleAdminLogin,
-    getDonarAccount, donarsAcc, getUserAccount, usersAcc, getUserAllRegister ,usersAllResgister,
+    handleRegisterAdmin, handleAdminLogin, handleAddBlogAdmin, getOneBlogAdmin,
+    getDonarAccount, donarsAcc, getUserAccount, usersAcc, getUserAllRegister, usersAllResgister,
     handleDonarRegister, handleLoginDonar, handleDonarAccountPassword, handleUserRegister, handleUserLogin, handleUserResetPassword,
     getLoginUser, loginInfo, getLoginDonar,
     handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister, getLoginDonarAccount, getLoginUserAccount, regsiterEvent,
     handleAppoinment, handleAppoinmentUpdate, handleDeleteUserRegister,
     handleAddBlog, handleGetBlogs, blogs, getOneBlog, oneBlog, handleEditBlog, handleDeleteBlog,
     getAllDonarsItems, allDonars,
-
+    handleAddVolunteer, handleGetVolunteer, handleGetOneVolunteer , volunteer, handleUpdateVolunteer, handleDeleteVolunteer,
   };
 
   return (

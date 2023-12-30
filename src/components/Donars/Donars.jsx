@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useContext } from 'react'
 import { GlobalState } from '../../State/State'
 import LoadingSpinner from '../utils/Spinner'
+import Heading from '../utils/Heading'
 
 function Donars() {
     const { getAllDonarsItems, allDonars, isLoading } = useContext(GlobalState)
@@ -16,8 +17,8 @@ function Donars() {
     }
     return (
 
-        <>
-            <h1 className="heading text-center mt-5 uppercase">Donar List</h1>
+        <div className='my-10'>
+            <Heading text="Donar List" /> 
             <div className='wrap py-10 flex-b flex-wrap items-start'>
                 {allDonars && allDonars.length > 0 ? (
                     allDonars.map(dr => (
@@ -27,7 +28,7 @@ function Donars() {
                     <h1 className='text-red-500 text-3xl text-center my-4'>There is no donor ! 😔</h1>
                 )}
             </div>
-        </>
+        </div>
 
     )
 }

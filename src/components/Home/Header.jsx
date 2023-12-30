@@ -53,7 +53,7 @@ function Header() {
                                             দাতা
                                         </NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item as={Link} to='/user-auth'>
+                                        <NavDropdown.Item as={Link} to='/users'>
                                             গ্রহীতা
                                         </NavDropdown.Item>
                                     </NavDropdown>
@@ -62,9 +62,9 @@ function Header() {
 
 
                                     {
-                                        token && photoRole.profilePic
+                                        token && photoRole
                                             ? <Link to={`/${photoRole.role}-profile`}>
-                                                <img className='w-10 h-10 rounded-full ml-3 cursor-pointer' src={photoRole ? photoRole.profilePic : demoImg} alt="" />
+                                                <img className='w-10 h-10 rounded-full ml-3 cursor-pointer' src={ photoRole.profilePic ? photoRole.profilePic : demoImg} alt="" />
                                             </Link>
                                             : <NavDropdown
                                                 title="লগইন "

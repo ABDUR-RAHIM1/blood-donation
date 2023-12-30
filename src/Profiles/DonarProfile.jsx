@@ -4,8 +4,7 @@ import { GlobalState } from '../State/State'
 import { FaCircle } from 'react-icons/fa'
 import demoImg from '../images/demo.jpg';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect } from 'react';  
 import Profile_main from './Profile_main';
 
 
@@ -36,7 +35,7 @@ function DonarProfile() {
         <h2 className='text-3xl text-center my-2 uppercase flex items-center justify-center'>Your Profile <FaCircle className="text-green-500 text-sm ml-2" /> </h2>
 
         <div className="profielCard">
-          <img className='w-56 m-auto h-48 ' src={loginInfo ? loginInfo.profilePic : demoImg} alt={loginInfo.name} />
+          <img className='w-56 m-auto h-48 ' src={ loginInfo.profilePic ? loginInfo.profilePic : demoImg} alt={loginInfo.name} />
           <div className='my-4'>
             <h4>Name :{loginInfo.name}</h4>
             <p className='py-2'>Email :{loginInfo.email}</p>

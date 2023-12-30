@@ -2,7 +2,7 @@ import React from 'react'
 
 function ProcessCard(props) {
     const { id, title, text, img } = props.data
-    console.log(id)
+    
     return (
         <section className='w-full my-3 md:my-0 md:w-23 h-450 bg-gray-100 rounded-sm shadow-sm duration-200 hover:bg-red-500 hover:text-white'>
             <div className='h-56 relative overflow-hidden'>

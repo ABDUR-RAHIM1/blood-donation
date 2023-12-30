@@ -1,6 +1,5 @@
 import React from 'react'
-import img from "../../images/blood-bg.jpg"
-import img2 from '../../images/bg.png' 
+import img from "../../images/bg.jpg" 
 import AppoinmentForm from '../Forms/AppoinmentForm'
 function Appoinment() {
 

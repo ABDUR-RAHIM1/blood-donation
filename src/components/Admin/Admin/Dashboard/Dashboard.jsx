@@ -10,19 +10,18 @@ import { GlobalState } from '../../../../State/State'
 import { useEffect } from 'react'
 import Total_admin from './Total_admin'
 function Dashboard() {
-  const {getAllDonarsItems , allDonars, getDonarAccount, donarsAcc,handleGetBlogs, blogs, usersAcc ,getUserAccount , handleAppoinment , getUserAllRegister , usersAllResgister} = useContext(GlobalState);
+  const { getAllDonarsItems , allDonars, getDonarAccount, donarsAcc,handleGetBlogs, blogs, usersAcc ,getUserAccount , handleAppoinment , getUserAllRegister , usersAllResgister} = useContext(GlobalState);
 
     const donarBlog =  blogs.filter(bl => bl.role === 'donar');
     const userBlog =  blogs.filter(bl => bl.role === 'user');
     const adminBlog =  blogs.filter(bl => bl.role === 'admin');
- 
-    console.log(usersAllResgister)
+  
 
 
   useEffect(() => {
     getAllDonarsItems()
     getDonarAccount()
-    handleGetBlogs()
+    handleGetBlogs() 
     getUserAccount()
     getUserAllRegister()
   }, [])

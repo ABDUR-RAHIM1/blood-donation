@@ -1,15 +1,13 @@
-import React  from 'react'
-import Header from './Header'
-import Slider from './Slider'
+import React  from 'react'  
 import AddBanner from './AddBanner'
 import DonationProccess from './DonationProccess'
 import Appoinment from './Appoinment' 
 import Up from '../utils/Up'
-import Volantiars from './Volantiars'
-import Blogs from '../Blogs/Blogs'
+import Volantiars from './Volantiars' 
 import Testimonial from './Testimonial'
 import {motion} from 'framer-motion'
-import LetestBlog from './LetestBlog'
+import LetestBlog from './LetestBlog' 
+import Slider from '../utils/Slider'
 
 function Home() { 
  
@@ -21,9 +19,9 @@ function Home() {
         duration :'1'
       }}
     > 
-     
+        
         <Slider/>
-        <AddBanner/>
+        <AddBanner/> 
         <DonationProccess/>
         <Appoinment/>
         <Volantiars/>
