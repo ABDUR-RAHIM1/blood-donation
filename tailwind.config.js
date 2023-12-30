@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       width: {
+        "12" :"12%",
         '23': '23%',  
         '31' : '31%',
         '48' :'48%',

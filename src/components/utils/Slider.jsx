@@ -26,7 +26,7 @@ function Slider() {
     }, [])
 
     return (
-        <>
+        <div className='wrap bg-red-500'>
             <Swiper
                 spaceBetween={30}
                 centeredSlides={true}
@@ -43,7 +43,8 @@ function Slider() {
                 className="mySwiper"
             >
                 {
-                    sliders && sliders.map(sl => (
+                    sliders &&
+                    sliders.slice().reverse().map(sl => (
                         <SwiperSlide key={sl._id}>
                              <img src={sl.profilePic} alt="" />
                         </SwiperSlide>
@@ -57,7 +58,7 @@ function Slider() {
                     <span ref={progressContent}></span>
                 </div>
             </Swiper>
-        </>
+        </div>
     )
 }
 

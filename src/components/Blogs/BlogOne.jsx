@@ -8,8 +8,8 @@ import { useContext } from 'react';
 import { GlobalState } from '../../State/State';
 
 function BlogOne(props) {
-    const { handleDeleteBlog ,isDelete } = useContext(GlobalState)
-    const { _id , title, desc, profilePic, postAt } = props.blog;
+    const { handleDeleteBlog , times } = useContext(GlobalState)
+    const { _id, title, desc, profilePic, postAt } = props.blog;
     const [isClick, setIsClick] = useState(false);
 
 
@@ -34,8 +34,8 @@ function BlogOne(props) {
                 </div>
             </div>
             <img className='w-4/5 m-auto h-20 mb-2' src={profilePic ? profilePic : demoImg} alt="" />
-            <small>{postAt}</small>
-            <h1 className='text-1xl font-semibold my-2 underline'>{title.slice(0,20) + ". . ."}</h1>
+            <small>{times(postAt)}</small>
+            <h1 className='text-1xl font-semibold my-2 underline'>{title.slice(0, 20) + ". . ."}</h1>
             <p>{desc && desc.slice(0, 30) + " . . ."}</p>
             <Link to="/blog-details" state={props.blog}>
                 <button className='w-full bg-gray-300 mt-3 py-1 hover:bg-gray-200'>Details</button>

@@ -3,10 +3,11 @@ import { Link, useLocation } from 'react-router-dom'
 import PageSidebar from '../PageSidebar/PageSidebar';
 import { motion } from 'framer-motion'
 import demoImg from '../../images/demo.jpg'
+import { useContext } from 'react';
+import { GlobalState } from '../../State/State';
 
 function UsersDetails() {
     const state = useLocation().state;
- 
     const { profilePic, name } = state;
 
     const pageSidebarData = {
@@ -53,7 +54,7 @@ export default UsersDetails
 
 function UserTable({ data }) {
     const { name, email, bloodGroup, contactNumber, howMuch, whereNeed, needTime, problem, createAt, message } = data;
-
+    const { times } = useContext(GlobalState)
     return (
         <table className='table table-striped table-bordered table-hover table-responsive overflow-auto'>
             <thead>
@@ -101,7 +102,7 @@ function UserTable({ data }) {
                 </tr>
                 <tr >
                     <td scope="col"> পোস্ট  হয়েছে : </td>
-                    <td scope="col">{createAt}</td>
+                    <td scope="col">{times(createAt)}</td>
                 </tr>
                 <tr>
                     <td style={{ verticalAlign: 'middle' }} scope="col">মেসেজ : </td>

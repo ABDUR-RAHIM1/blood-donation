@@ -3,10 +3,13 @@ import { Link, useLocation } from 'react-router-dom'
 import PageSidebar from '../PageSidebar/PageSidebar';
 import { motion } from 'framer-motion'
 import demoImg from '../../images/demo.jpg'
+import { useContext } from 'react';
+import { GlobalState } from '../../State/State';
 
 function BlogDetails() {
     //  blog data pass using useLocation state
     const state = useLocation().state; 
+    const {times} = useContext(GlobalState)
     const pageSidebarData = {
         image: state.profilePic,
         link: '/blogs',
@@ -29,7 +32,7 @@ function BlogDetails() {
                 <div className='bg-gray-200 py-2 px-1'>
                     <small>Auhtor : {state.name}</small> <br />
                     <small>Email : {state.email}</small> <br />
-                    <small>Date : {state.postAt}</small>
+                    <small>Date : {times(state.postAt)}</small>
                 </div>
                 <p>{state.desc}</p>
                 <Link to='/blogs'>

@@ -8,17 +8,19 @@ import { useContext } from 'react'
 import { GlobalState } from '../../../../State/State'
 
 function Manage_content() {
-    const {handleGetSlider, sliders, handleAddSlider , isLoading} = useContext(GlobalState)
-    useEffect(()=>{
-        handleGetSlider()
-    } , [])
-    console.log(sliders)
+    const { handleGetSlider, sliders, handleAddSlider, handleAddLogo,
+        handleGetLogo, logo, isLoading, isDelete } = useContext(GlobalState)
+    useEffect(() => {
+        handleGetSlider();
+        handleGetLogo();
+    }, [isDelete])
+
     return (
         <AdminDashboard>
 
             <div>
-                <Add_slider handleAddSlider={handleAddSlider} sliders={sliders} isLoading={isLoading}/>
-                <Add_logo />
+                <Add_slider handleAddSlider={handleAddSlider} sliders={sliders}/>
+                <Add_logo handleAddLogo={handleAddLogo} logo={logo} />
                 <Change_colors />
             </div>
 

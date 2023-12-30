@@ -40,14 +40,14 @@ import Heading from '../utils/Heading'
 
 export function HomeBlog(props) {
     const { name, email, postAt, title, profilePic, desc } = props.blog;
-
+    const {times} = useContext(GlobalState)
     return (
         <div className='w-full sm:w-48 md:w-31 my-4 shadow-sm'>
             <img className='w-full h-52 rounded-sm' src={profilePic || demoImg} alt={name} />
             <div className='mt-2 bg-gray-50 py-2 px-1'>
                 <small className='uppercase underline'>Author : {name}</small> <br />
                 <small>email : {email}</small> <br />
-                <small>Post on : {postAt}</small>
+                <small>Post on : {times(postAt)}</small>
             </div>
             <div>
                 <h1 className='text-3xl my-3 font-bold'>{title}</h1>

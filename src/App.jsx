@@ -63,8 +63,7 @@ function App() {
           <Route path="/admin-add-blog" element={<AddBLog />} />
           <Route path="/admin-get-blog" element={<GetBlogs />} />
           <Route path="/admin-add-volunteer" element={<Add_Volunteer />} />
-          <Route path="/admin-manage-volunteer" element={<Manage_volunteer />} /> 
-          <Route path="/admin-add-slider" element={<Add_slider />} />
+          <Route path="/admin-manage-volunteer" element={<Manage_volunteer />} />  
           <Route path="/admin-manage-content" element={<Manage_content />} />
 
         </Route>

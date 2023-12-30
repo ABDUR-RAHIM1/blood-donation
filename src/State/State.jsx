@@ -28,6 +28,7 @@ export const MyState = ({ children }) => {
   const [oneBlog, setOneBlog] = useState([])
   const [volunteer, setVolunteer] = useState([])
   const [sliders, setSlider] = useState([])
+  const [logo, setLogo] = useState([])
 
   // 0000 admin start
 
@@ -632,16 +633,67 @@ export const MyState = ({ children }) => {
   }
 
   const handleSliderDelete = (id) => {
-    fetch(`${API}/slider/delete/`, {
+    fetch(`${API}/slider/delete/${id}`, {
       method: "DELETE"
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
         setMessage(data.message)
         setIsDelete(!isDelete)
       })
   }
-  // slider  emd here 
+  // slider  end here 
+
+  //logo start here
+  const handleGetLogo = () => {
+    setIsLoading(true)
+    fetch(`${API}/logo/logos`)
+      .then(res => res.json())
+      .then(data => {
+        setLogo(data)
+        setIsLoading(false)
+      })
+  }
+
+  const handleAddLogo = (e, info) => {
+    e.preventDefault();
+    setIsLoading(true)
+    fetch(`${API}/logo/add`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(info)
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setIsLoading(false)
+      })
+  }
+
+  const handleLogoDelete = (id) => {
+    fetch(`${API}/logo/delete/${id}`, {
+      method: "DELETE"
+    }).then(res => res.json())
+      .then(data => {
+        setMessage(data.message)
+        setIsDelete(!isDelete)
+      })
+  }
+
+  //logo start end here
+
+
+  // convert time 
+
+  const times = (date) => {
+ 
+    const utcTime = new Date(date);
+    // Convert UTC time to local time
+    const localTime = utcTime.toLocaleString();
+
+   return localTime
+  }
+ console.log( times( "2023-12-30T05:23:13.280Z"))
 
   if (message) {
     setTimeout(() => {
@@ -650,7 +702,7 @@ export const MyState = ({ children }) => {
   }
 
   const value = {
-    API, token, ADMIN_TOKEN,
+    API, token, ADMIN_TOKEN, times ,
     isAdminLogin, setIsAdminLogin,
     arrowClick, setArrowClick,
     message, setMessage, isLoading, setIsLoading, isDelete,
@@ -663,8 +715,8 @@ export const MyState = ({ children }) => {
     handleAddBlog, handleGetBlogs, blogs, getOneBlog, oneBlog, handleEditBlog, handleDeleteBlog,
     getAllDonarsItems, allDonars,
     handleAddVolunteer, handleGetVolunteer, handleGetOneVolunteer, volunteer, handleUpdateVolunteer, handleDeleteVolunteer,
-
-    handleGetSlider, sliders, handleAddSlider , handleSliderDelete
+    handleGetSlider, sliders, handleAddSlider, handleSliderDelete,
+    handleAddLogo, handleGetLogo, logo, handleLogoDelete
   };
 
   return (

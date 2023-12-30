@@ -286,8 +286,7 @@ small {
 .swiper-slide img {
   display: block;
   width: 100%;
-  height: 500px;
-  object-fit: cover;
+  height: 500px; 
 }
 
 .autoplay-progress {

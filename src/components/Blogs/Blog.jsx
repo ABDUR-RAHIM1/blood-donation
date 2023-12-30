@@ -2,11 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import demoImg from "../../images/demo.jpg";
+import { useContext } from 'react';
+import { GlobalState } from '../../State/State';
 
 function Blog(props) {
     const { name, email,role , postAt, title, profilePic, desc } = props.blog;
     const isEvenNumber = props.index % 2 === 0;
-
+    const {times} = useContext(GlobalState)
     return (
         <motion.div
             initial={{ y: 50 }}
@@ -23,7 +25,7 @@ function Blog(props) {
                 <div className='mt-2 bg-gray-50 py-2 px-1'>
                     <small className='uppercase underline'>Author : {name} <span className='text-green-800'> ({role}) </span> </small> <br />
                     <small>email : {email}</small> <br />
-                    <small>Post on : {postAt}</small>
+                    <small>Post on : {times(postAt)}</small>
                 </div>
 
                 <h1 className='text-3xl my-3 font-bold'>{title}</h1>

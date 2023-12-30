@@ -22,9 +22,9 @@ function Blogs() {
       <h1 className='text-center text-3xl font-semibold my-8'>Blogs</h1>
       <div>
         {
-        blogs && blogs.map((bl, index) => (
+        blogs && blogs.slice().reverse().map((bl, index) => (
             <Blog
-              key={bl.id}
+              key={bl._id}
               blog={bl}
               index={index}
             />

@@ -2,9 +2,13 @@ import React from 'react'
 import { useState } from 'react';
 import uploadFile from '../../utils/UploadFile';
 import Loading from '../../utils/Loading';
+import Images from './ManageContent/Images';
+import { useContext } from 'react';
+import { GlobalState } from '../../../State/State';
 
 function Add_slider(props) {
-  const { handleAddSlider, sliders, isLoading } = props;
+  const {handleSliderDelete, isLoading} = useContext(GlobalState)
+  const { handleAddSlider, sliders } = props;
   const [register, setRegister] = useState({});
   const [imgLoading, setImgIsLoading] = useState(false);
 
@@ -29,10 +33,10 @@ function Add_slider(props) {
         </button>
       </form>
 
-      <div className='flex justify-start items-start gap-3 w-full overflow-x-scroll ' >
+      <div className='flex justify-start h-48 bg-black items-start flex-wrap px-2  gap-3 w-full overflow-y-scroll scroll-none' >
         {
           sliders && sliders.map(sl => (
-            <Slider slider={sl} key={sl._id} />
+            <Images handleDelete={handleSliderDelete} element={sl} key={sl._id} />
           ))
         }
       </div>
@@ -43,12 +47,4 @@ function Add_slider(props) {
 
 export default Add_slider
 
-export function Slider(props) {
-  const { profilePic } = props.slider
-  return (
-    <>
-      <img className='  w-32 h-20' src={profilePic} alt={profilePic} /> 
-    </>
-
-  )
-}
+ 

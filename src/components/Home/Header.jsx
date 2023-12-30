@@ -11,7 +11,7 @@ import { GlobalState } from '../../State/State';
 
 
 function Header() {
-    const { token } = useContext(GlobalState)
+    const { token, handleGetLogo, logo } = useContext(GlobalState)
     const [photoRole, setPhotoRole] = useState({});
     useEffect(() => {
         const isPhoto_role = localStorage.getItem("photo_role");
@@ -20,16 +20,20 @@ function Header() {
 
             setPhotoRole({ ...photoRole, profilePic: photoRole.profilePic, role: photoRole.role })
         }
-
+        handleGetLogo()
     }, [setPhotoRole]);
+      
+    const logoItem = logo && logo.slice( -1)[0]
+    console.log(logoItem)
 
- 
     return (
         <header className='px-4 md:px-0 bg-gray-100'>
             {['md'].map((expand) => (
                 <Navbar key={expand} expand={expand} className="bg-gray-100">
                     <Container fluid>
-                        <Navbar.Brand as={Link} to='/'>ROKTOJODDHA</Navbar.Brand>
+                        <Navbar.Brand as={Link} to='/'>
+                             <img className='w-14 h-14 rounded-full' src={logoItem && logoItem.profilePic} alt="" />
+                        </Navbar.Brand>
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                         <Navbar.Offcanvas
                             id={`offcanvasNavbar-expand-${expand}`}
@@ -64,7 +68,7 @@ function Header() {
                                     {
                                         token && photoRole
                                             ? <Link to={`/${photoRole.role}-profile`}>
-                                                <img className='w-10 h-10 rounded-full ml-3 cursor-pointer' src={ photoRole.profilePic ? photoRole.profilePic : demoImg} alt="" />
+                                                <img className='w-10 h-10 rounded-full ml-3 cursor-pointer' src={photoRole.profilePic ? photoRole.profilePic : demoImg} alt="" />
                                             </Link>
                                             : <NavDropdown
                                                 title="লগইন "
