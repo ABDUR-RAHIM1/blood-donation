@@ -14,10 +14,8 @@ import Add_Volunteer from './components/Admin/Admin/Add_Volunteer'
 import Manage_volunteer from './components/Admin/Admin/Manage_volunteer'  
 import Donars from './components/Donars/Donars'
 import Dashboard from './components/Admin/Admin/Dashboard/Dashboard'
-import Manage_content from './components/Admin/Admin/ManageContent/Manage_content'
-import DonarLogin from './components/Users/DonarLogin'
-import DonarProtected from './ProtectedRoute/DonarProtected'
-import DonarProfile from './Profiles/DonarProfile'
+import Manage_content from './components/Admin/Admin/ManageContent/Manage_content' 
+import DonarProtected from './ProtectedRoute/DonarProtected' 
 import UsersLogin from './components/Users/UsersLogin'
 import DonarDetails from './components/Donars/DonarDetails'
 import AddBlog from './components/utils/AddBlog'
@@ -42,17 +40,15 @@ function App() {
         <Route path="/donars-details" element={<DonarDetails />} />
         <Route path="/users-details" element={<UsersDetails />} />
         <Route path="/blogs" element={<Blogs />} />
-        <Route path="/blog-details" element={<BlogDetails />} />
-        <Route path="/donar-auth" element={<DonarLogin />} />
-        <Route path="/user-auth" element={<UsersLogin />} />
+        <Route path="/blog-details" element={<BlogDetails />} /> 
+        <Route path="/auth" element={<UsersLogin />} />
 
 
-        <Route element={<DonarProtected />}>
-          <Route path='/donar-profile' element={<DonarProfile />} />
+        <Route element={<DonarProtected />}> 
           <Route path='/donar-register' element={<DonarRegister />} />
           <Route path="/add-blog" element={<AddBlog />} />
           <Route path='/appoinment' element={<Appoinment />} />
-          <Route path="/user-profile" element={<UserProfile />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Route>
 
         {/*  admin routes */}

@@ -35,7 +35,7 @@ function UserLogin() {
     const token = localStorage.getItem("token");
     if (token) {
       setTimeout(() => {
-        navigate("/user-profile")
+        navigate("/profile")
     }, 1500);
     }
   }, [isLoading])
@@ -110,7 +110,7 @@ function UserLogin() {
 
         {isRegister &&
           <>
-            <input onChange={handleFileChange} id='file' type="file" name='profilePic' className='form-control mt-3' />
+            <input required onChange={handleFileChange} id='file' type="file" name='profilePic' className='form-control mt-3' />
             {
               imgLoading ? <small className='mb-3 text-red-400'>Uploading Image</small>
                 :

@@ -10,18 +10,14 @@ import { GlobalState } from '../../../../State/State'
 import { useEffect } from 'react'
 import Total_admin from './Total_admin'
 function Dashboard() {
-  const { handleGetAllAdmin, admin, getAllDonarsItems , allDonars, getDonarAccount, donarsAcc,handleGetBlogs, blogs, usersAcc ,getUserAccount , handleGetVolunteer, volunteer , getUserAllRegister , usersAllResgister} = useContext(GlobalState);
+  const { handleGetAllAdmin, admin, getAllDonarsItems , allDonars,handleGetBlogs, blogs, usersAcc ,getUserAccount , handleGetVolunteer, volunteer , getUserAllRegister , usersAllResgister} = useContext(GlobalState);
 
-    const donarBlog =  blogs.filter(bl => bl.role === 'donar');
     const userBlog =  blogs.filter(bl => bl.role === 'user');
     const adminBlog =  blogs.filter(bl => bl.role === 'admin');
   
-   
-
   useEffect(() => {
     handleGetAllAdmin()
-    getAllDonarsItems()
-    getDonarAccount()
+    getAllDonarsItems() 
     handleGetBlogs() 
     getUserAccount()
     getUserAllRegister()
@@ -40,10 +36,10 @@ function Dashboard() {
       >
 
          <Total_admin adminBlog={adminBlog} admin={admin}/>
-        <Total_donars allDonars={allDonars} loginDonar={donarsAcc} blog={donarBlog} />
+        <Total_donars allDonars={allDonars} />
         <Total_user allUsers={usersAllResgister} loginUser={usersAcc} blog={userBlog} />
         <Total_volunteers volunteer={volunteer} />
-        <Total_blogs allBLogs={blogs} adminBlog={adminBlog} userBlog={userBlog} donarBlog={donarBlog} />
+        <Total_blogs allBLogs={blogs} adminBlog={adminBlog} userBlog={userBlog} />
 
 
       </motion.div>

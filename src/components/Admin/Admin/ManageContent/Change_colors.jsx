@@ -4,22 +4,49 @@ import { useState } from 'react'
 function Change_colors() {
     const colorInputs = [
         {
-            lable: 'Change Navbar background Color',
+            lable: 'Card background Color',
             type: 'color',
-            name: 'navColor',
+            name: 'cardBg',
         },
         {
-            lable: 'Change Default bacakground Color',
+            lable: 'Card Text Color',
             type: 'color',
-            name: 'defColor',
+            name: 'cardText',
+        },
+        {
+            lable: 'button bacakground Color',
+            type: 'color',
+            name: 'btnBg',
+        },
+        {
+            lable: 'button text Color',
+            type: 'color',
+            name: 'btnText',
+        },
+        {
+            lable: 'form bacakground Color',
+            type: 'color',
+            name: 'formBg',
+        },
+        {
+            lable: 'form label Color',
+            type: 'color',
+            name: 'formText',
+        },
+        {
+            lable: 'Genarel background Color',
+            type: 'color',
+            name: 'genarelBg',
+        },
+        {
+            lable: 'Genarel Text Color',
+            type: 'color',
+            name: 'genareText',
+            value :"#D9534F"
         },
     ]
 
-    const colors = {
-        navColor: '',
-        defColor: ''
-    }
-    const [color, setColor] = useState(colors)
+    const [color, setColor] = useState("")
 
     const handleColorChange = (e) => {
         setColor({ ...color, [e.target.name]: e.target.value })
@@ -27,7 +54,7 @@ function Change_colors() {
 
 
     return (
-      
+
 
         <div className='dFormWrap'>
             {
@@ -45,11 +72,11 @@ export default Change_colors
 
 
 const Colors = (props) => {
-    const { lable, type, name } = props.color
+    const { lable, type, name , value } = props.color
     return (
         <div className='w-2/4 m-auto'>
-            <div className="manageHeading mt-3">{lable}</div>
-            <input onChange={props.handleColorChange} className='form-control mt-3 h-16' type={type} name={name} />
+            <input value={value} onChange={props.handleColorChange} className='form-control mt-3 h-10' type={type} name={name} />
+            <small className="manageHeading">{lable}</small>
         </div>
     )
 }

@@ -23,7 +23,7 @@ function UserEvent({ userEvent }) {
             className='userEvents relative'
         >
             {
-                token && path === "/user-profile" &&
+                token && path === "/profile" &&
                 <div className='w-full bg-slate-400  absolute top-0 left-0 flex-b'>
                     <Link to="/appoinment" state={userEvent}>
                         <FaEdit className=" text-white text-3xl bg-green-600  p-1 cursor-pointer" />

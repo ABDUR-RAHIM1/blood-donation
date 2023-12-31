@@ -8,8 +8,8 @@ import Loading from '../utils/Loading'
 import { useLocation } from 'react-router-dom'
 
 function DonarRegisterForm() {
-    const state = useLocation().state; 
-    
+    const state = useLocation().state;
+
     const { isLoading, message, handleDonarCreateProfiles, handleUpdateRegister } = useContext(GlobalState);
     const [imgLoading, setImgIsLoading] = useState(false)
     const [register, setRegister] = useState({
@@ -54,6 +54,16 @@ function DonarRegisterForm() {
                     }
                 </h1>
             </div>
+
+            <Inputs
+                type='text'
+                name='address'
+                value={register.address}
+                required={required}
+                placeholder='Address'
+                lable='Enter your Address'
+                handleChange={handleChange}
+            />
 
             <Inputs
                 type='number'
@@ -182,7 +192,7 @@ function DonarRegisterForm() {
             </button>
             {isLoading && <Loading size='sm' />}
 
-         { message &&   <Notification />}
+            {message && <Notification />}
 
 
         </form >

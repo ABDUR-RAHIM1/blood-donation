@@ -17,13 +17,13 @@ export const MyState = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDelete, setIsDelete] = useState(false)
 
-  //  state with data from backend
-  const [donarsAcc, setDonarsAcc] = useState([])
+  //  state with data from backend 
   const [usersAcc, setUsersAcc] = useState([])
   const [usersAllResgister, setUsersAllResgister] = useState([])
   const [allDonars, setAllDonars] = useState([])
   const [loginInfo, setLoginInfo] = useState({})  // get one user data from backend
-  const [regsiterEvent, setRegsiterEvent] = useState([])
+  const [registerEventDonar, setRegisterEventDonar] = useState([])
+  const [registerEventUser, setRegisterEventUser] = useState([])
   const [blogs, setBlogs] = useState([])
   const [oneBlog, setOneBlog] = useState([])
   const [admin, setAdmin] = useState([])
@@ -103,64 +103,6 @@ export const MyState = ({ children }) => {
 
   //111  donar / user account sign up / register //////////////////////////////////
 
-  const handleDonarRegister = (e, authInfo) => {
-    e.preventDefault();
-    setIsLoading(true)
-    fetch(`${API}/donar/register`, {
-      method: "POST",
-      headers: {
-        'Content-type': 'application/json',
-
-      },
-      body: JSON.stringify(authInfo)
-    })
-      .then(res => res.json())
-      .then(data => {
-        setIsLoading(false)
-        setMessage(data.message)
-      })
-      .catch(err => setMessage(err.message))
-  }
-
-  // donar login 
-  const handleLoginDonar = (e, authInfo) => {
-    e.preventDefault();
-    setIsLoading(true)
-    fetch('http://localhost:8000/api/donar/login', {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(authInfo)
-    }).then(res => res.json())
-      .then(data => {
-        setIsLoading(false)
-        setMessage(data.message)
-        if (data.login) {
-          localStorage.setItem("token", JSON.stringify(data.token))
-        }
-
-      })
-  }
-
-
-
-  // donar reset password 
-  const handleDonarAccountPassword = (e, authInfo) => {
-    e.preventDefault();
-    setIsLoading(true)
-    fetch(`${API}/donar/reset`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(authInfo)
-    }).then(res => res.json())
-      .then(data => {
-        setMessage(data.message);
-        setIsLoading(false)
-      })
-  }
 
 
   // user register
@@ -227,38 +169,6 @@ export const MyState = ({ children }) => {
 
   // get login donar info start
 
-  const getDonarAccount = () => {
-    setIsLoading(true)
-    fetch(`${API}/donar/donars`)
-      .then(res => res.json())
-      .then(data => {
-        setIsLoading(false)
-        setDonarsAcc(data)
-      })
-  }
-
-  const getLoginDonar = () => {
-    setIsLoading(true)
-    const token = JSON.parse(localStorage.getItem("token"));
-    fetch(`${API}/donar/donars-one`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        setLoginInfo(data)
-        setIsLoading(false)
-
-        if (data) {
-          const photo_role = { profilePic: data.profilePic, role: data.role };
-          localStorage.setItem("photo_role", JSON.stringify(photo_role))
-        }
-
-      })
-  }
 
   const handleUserResetPassword = (e, authInfo) => {
     setIsLoading(true)
@@ -276,8 +186,14 @@ export const MyState = ({ children }) => {
       })
   }
 
-  const handleDeleteUserAccount = (id)=>{
-     console.log(id)
+  const handleDeleteUserAccount = (id) => {
+    fetch(`${API}/users/delete/${id}`, {
+      method: "DELETE"
+    }).then(res => res.json())
+      .then(data => {
+        setMessage(data.message)
+        setIsDelete(!isDelete)
+      })
   }
 
 
@@ -335,7 +251,7 @@ export const MyState = ({ children }) => {
   }
 
 
-  // get login donars regsieter event
+  // get login users regsieter (donar) event
   const getLoginDonarAccount = () => {
     setIsLoading(true)
     fetch(`${API}/donar-register/donars-one`, {
@@ -347,11 +263,10 @@ export const MyState = ({ children }) => {
     }).then(res => res.json())
       .then(data => {
 
-        setRegsiterEvent(data.donarInfo)
+        setRegisterEventDonar(data.donarInfo)
         setIsLoading(false)
       });
   }
-
 
   // 222  donar register handler end
 
@@ -368,9 +283,10 @@ export const MyState = ({ children }) => {
       })
   }
 
-  const getUserAllRegister = () => {
+  const getUserAllRegister = (search) => {
     setIsLoading(true)
-    fetch(`${API}/users-register/users`)
+    console.log(search)
+    fetch(`${API}/users-register/users/?search=${search}`)
       .then(res => res.json())
       .then(data => {
         setIsLoading(false)
@@ -389,7 +305,7 @@ export const MyState = ({ children }) => {
     }).then(res => res.json())
       .then(data => {
         setIsLoading(false)
-        setRegsiterEvent(data.userInfo)
+        setRegisterEventUser(data.userInfo)
       })
   }
 
@@ -450,9 +366,10 @@ export const MyState = ({ children }) => {
 
 
   //   get all donars start 
-  const getAllDonarsItems = () => {
+  const getAllDonarsItems = (search) => {
     setIsLoading(true)
-    fetch(`${API}/donar-register/donars`)
+    console.log("SE", search)
+    fetch(`${API}/donar-register/donars/?search=${search}`)
       .then(res => res.json())
       .then(data => {
         setAllDonars(data.donars);
@@ -660,8 +577,8 @@ export const MyState = ({ children }) => {
       body: JSON.stringify(info)
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
         setIsLoading(false)
+        setMessage(data.message)
       })
   }
 
@@ -688,18 +605,18 @@ export const MyState = ({ children }) => {
   }
 
   const handleAddLogo = (e, info) => {
-    e.preventDefault();
+    e.preventDefault()
     setIsLoading(true)
-    fetch(`${API}/logo/add`, {
-      method: "POST",
+    fetch(`${API}/logo/update/logo`, {
+      method: "PUT",
       headers: {
         "Content-type": "application/json"
       },
       body: JSON.stringify(info)
     }).then(res => res.json())
       .then(data => {
-        console.log(data)
         setIsLoading(false)
+        setMessage(data.message)
       })
   }
 
@@ -726,7 +643,7 @@ export const MyState = ({ children }) => {
 
     return localTime
   }
-   
+
 
   if (message) {
     setTimeout(() => {
@@ -740,11 +657,10 @@ export const MyState = ({ children }) => {
     arrowClick, setArrowClick,
     message, setMessage, isLoading, setIsLoading, isDelete,
     handleGetAllAdmin, admin, handleRegisterAdmin, handleAdminLogin, handleAdminResetPassword, handleAddBlogAdmin, getOneBlogAdmin,
-    getDonarAccount, donarsAcc, getUserAccount, usersAcc, getUserAllRegister, usersAllResgister,
-    handleDeleteUserAccount , 
-    handleDonarRegister, handleLoginDonar, handleDonarAccountPassword, handleUserRegister, handleUserLogin, handleUserResetPassword,
-    getLoginUser, loginInfo, getLoginDonar,
-    handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister, getLoginDonarAccount, getLoginUserAccount, regsiterEvent,
+    getUserAccount, usersAcc, getUserAllRegister, usersAllResgister,
+    handleDeleteUserAccount, handleUserRegister, handleUserLogin, handleUserResetPassword,
+    getLoginUser, loginInfo,
+    handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister, getLoginDonarAccount, getLoginUserAccount, registerEventUser, registerEventDonar,
     handleAppoinment, handleAppoinmentUpdate, handleDeleteUserRegister,
     handleAddBlog, handleGetBlogs, blogs, getOneBlog, oneBlog, handleEditBlog, handleDeleteBlog,
     getAllDonarsItems, allDonars,

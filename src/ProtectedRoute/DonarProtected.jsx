@@ -5,7 +5,7 @@ function DonarProtected() {
 
       const isDonarToken = JSON.parse(localStorage.getItem('token'));
   
-    return isDonarToken ? <Outlet/> : <Navigate to="/donar-auth" />;
+    return isDonarToken ? <Outlet/> : <Navigate to="/auth" />;
 }
 
 export default DonarProtected

@@ -10,7 +10,7 @@ import Profile_main from './Profile_main';
 
 function UserProfile() {
   const naviagte = useNavigate()
-  const { getLoginUser, getLoginUserAccount, regsiterEvent, loginInfo, isDelete } = useContext(GlobalState)
+  const { getLoginUser, loginInfo, isDelete } = useContext(GlobalState)
 
 
 
@@ -18,15 +18,14 @@ function UserProfile() {
     localStorage.removeItem('token');
     localStorage.removeItem('photo_role');
     setTimeout(() => {
-      naviagte("/user-auth")
+      naviagte("/auth")
     }, 1500);
 
   }
 
   // get login users  data
   useEffect(() => {
-    getLoginUser()
-    getLoginUserAccount()
+    getLoginUser() 
   }, [isDelete]);
 
 
@@ -46,12 +45,16 @@ function UserProfile() {
           </div>
 
         </div>
-        <Link to="/appoinment">
+        <Link to="/donar-register">
           <button className='button w-full my-2 bg-gray-300'>
             Register Your Event
           </button>
         </Link>
-
+        <Link to="/appoinment">
+          <button className='button w-full my-2 bg-gray-300'>
+            Register Your Appoinment
+          </button>
+        </Link>
         <Link to="/add-blog">
           <button className='button w-full my-2 bg-gray-300'>
             Add Blog
@@ -63,9 +66,7 @@ function UserProfile() {
       <div className="donarProfileMain md:px-0 px-3">
 
 
-        <Profile_main
-          userRegsiterEvent={regsiterEvent}
-        />
+        <Profile_main />
 
       </div>
     </div>

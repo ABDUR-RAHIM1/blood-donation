@@ -183,7 +183,7 @@ body {
   }
 
   .manageHeading {
-    @apply font-semibold text-white capitalize w-full py-3 text-center text-xl shadow-md
+    @apply  text-white capitalize w-full pt-3 text-center shadow-md
   }
 
   /*  admin ddasbboard */

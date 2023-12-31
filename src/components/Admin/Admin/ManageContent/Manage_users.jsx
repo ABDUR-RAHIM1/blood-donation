@@ -5,47 +5,24 @@ import { GlobalState } from '../../../../State/State'
 import { useEffect } from 'react'
 import Users from './Users'
 import { useState } from 'react'
+import Heading from '../../../utils/Heading'
 
 function Manage_users() {
-    const { getUserAccount, usersAcc, getDonarAccount, donarsAcc , handleDeleteUserAccount } = useContext(GlobalState);
-    const [user, setUser] = useState([])
-    const [donarClick, setDonarClick] = useState(true)
-
-
-    let handleDelete ;
-
+    const { getUserAccount, usersAcc } = useContext(GlobalState);
 
     useEffect(() => {
-        const fetchData = async () => {
-            if (donarClick) {
-                await getDonarAccount();
-                setUser(donarsAcc);
-            } else {
-                await getUserAccount();
-                setUser(usersAcc);
-            }
-        };
-    
-        fetchData();
-    
-    }, [donarClick, getUserAccount, usersAcc, getDonarAccount, donarsAcc]);
-    
- 
+        getUserAccount();
+
+    }, [getUserAccount, usersAcc]);
+
+
     return (
         <AdminDashboard>
-            <div className="text-center">
-                <button onClick={() => setDonarClick(!donarClick)} className='button bg-slate-300 text-black'>
-                    {
-                        donarClick ? "users" : "Donars"
-                    }
-                </button>
-                <p className='text-white'>Click this button and change donars to users</p> 
-
-            </div>
+            <Heading text="manage users" />
             <div className='flex-b flex-wrap my-10 '>
                 {
-                    user && user.map(u => (
-                        <Users handleDelete={handleDeleteUserAccount} key={u._id} user={u} />
+                    usersAcc && usersAcc.map(u => (
+                        <Users  key={u._id} user={u} />
                     ))
                 }
             </div>

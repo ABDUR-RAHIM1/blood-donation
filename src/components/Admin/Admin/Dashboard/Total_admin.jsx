@@ -1,8 +1,8 @@
 import React from 'react'
 
 function Total_admin(props) {
-  const { admin, adminBlog } = props;
-  console.log(admin)
+  const { admin, adminBlog } = props; 
+  
   return (
     <div className='dash_board_items card-one bg-cyan-500 text-white '>
       <h1 className='text-2xl text-center my-2'>Admin Info</h1>

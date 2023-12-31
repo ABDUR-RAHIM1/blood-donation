@@ -11,8 +11,8 @@ function Sidebar() {
     { item: 'get blog', link: '/admin-get-blog' },
     { item: 'add volunteer', link: '/admin-add-volunteer' },
     { item: 'manage volunteer', link: '/admin-manage-volunteer' },
-    { item: 'Manage Content', link: '/admin-manage-content' }, 
     { item: 'Manage users', link: '/admin-manage-users' }, 
+    { item: 'Manage Content', link: '/admin-manage-content' }, 
   ]
 
 

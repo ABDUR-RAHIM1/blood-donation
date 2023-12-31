@@ -7,47 +7,55 @@ import BlogOne from '../components/Blogs/BlogOne'
 import Notification from '../components/utils/Notification'
 import UserEvent from './UserEvent'
 
-function Profile_main(props) {
-    const { regsiterEvent, userRegsiterEvent } = props;
+function Profile_main() {
 
-    const { getOneBlog, oneBlog, isDelete, message } = useContext(GlobalState)
+    const { getLoginUserAccount, getLoginDonarAccount, registerEventUser, registerEventDonar, getOneBlog, oneBlog, isDelete, message } = useContext(GlobalState)
 
     useEffect(() => {
         //  get one blog => who is login 
+        getLoginUserAccount()
+
+        getLoginDonarAccount()
         getOneBlog()
     }, [isDelete])
 
     return (
         <div className="h-screen overflow-y-auto scroll-none">
-            <h1 className='text-center text-3xl font-semibold my-8'>Your Events</h1>
+            <h1 className='text-center text-3xl font-semibold my-8'>Your Events ( Donar )</h1>
             {
-                !regsiterEvent && !userRegsiterEvent ? <h3 className='text-2xl capitalize text-red-500'>
-                    You have no Event ! 🔎
-                </h3> : ""
+                !registerEventDonar &&
+                <h3 className='text-2xl capitalize text-red-500'>
+                    You have no Event (Donar) ! 🔎
+                </h3>
             }
             {/*  donar regsieter event */}
-            {regsiterEvent &&
-                <div className="eventWrapper">
-                    {
-                        regsiterEvent && regsiterEvent.map(re => (
-                            <DonarEvent key={re._id} event={re} />
-                        ))
-                    }
-                </div>
-            }
-            {/*  user regiseter event */}
-            {
-                userRegsiterEvent &&
 
+            <div className="eventWrapper">
+                {
+                    registerEventDonar && registerEventDonar.map(re => (
+                        <DonarEvent key={re._id} event={re} />
+                    ))
+                }
+            </div>
+
+            {/*  user regiseter event */}
+
+            <div>
+                <h1 className='text-center text-3xl font-semibold my-8'>Your Events ( Appoinment )</h1>
+                {
+                    !registerEventUser &&
+                    <h3 className='text-2xl capitalize text-red-500'>
+                        You have no Event (Appoinment) ! 🔎
+                    </h3>
+                }
                 <div className='eventWrapper'>
                     {
-                        userRegsiterEvent && userRegsiterEvent.map(userEvent => (
+                        registerEventUser && registerEventUser.map(userEvent => (
                             <UserEvent key={userEvent._id} userEvent={userEvent} />
                         ))
                     }
                 </div>
-            }
-
+            </div>
 
 
             <div className="my-20">

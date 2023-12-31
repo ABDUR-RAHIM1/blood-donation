@@ -22,16 +22,20 @@ function Header() {
         }
         handleGetLogo()
     }, [setPhotoRole, token]);
-      
-    const logoItem = logo && logo.slice( -1)[0] 
 
+    const logoItem = logo && logo.slice(-1)[0]
+    console.log(logo)
     return (
-        <header className='px-4 md:px-0 bg-gray-100'>
+        <header className='px-4 md:px-0 bg-gray-100 shadow-md shadow-slate-500 sticky top-0 right-0 z-50'>
             {['md'].map((expand) => (
                 <Navbar key={expand} expand={expand} className="bg-gray-100">
                     <Container fluid>
                         <Navbar.Brand as={Link} to='/'>
-                             <img className='w-14 h-14 rounded-full' src={logoItem && logoItem.profilePic} alt="" />
+                            {
+                                logo && logo.map(lg => (
+                                    <img style={{width : lg.logoWidth+"px" , height : lg.logoHeight+"px", borderRadius: lg.radius+"%"}} src={lg.profilePic || demoImg} alt="" />
+                                ))
+                            }
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                         <Navbar.Offcanvas
@@ -66,22 +70,11 @@ function Header() {
 
                                     {
                                         token && photoRole
-                                            ? <Link to={`/${photoRole.role}-profile`}>
+                                            ? <Link to="/profile">
                                                 <img className='w-10 h-10 rounded-full ml-3 cursor-pointer' src={photoRole.profilePic ? photoRole.profilePic : demoImg} alt="" />
                                             </Link>
-                                            : <NavDropdown
-                                                title="লগইন "
-                                                id={`offcanvasNavbarDropdown-expand-${expand}`}
-                                            >
-
-                                                <NavDropdown.Item as={Link} to='/donar-auth'>
-                                                    দাতা
-                                                </NavDropdown.Item>
-                                                <NavDropdown.Divider />
-                                                <NavDropdown.Item as={Link} to='/user-auth'>
-                                                    গ্রহীতা
-                                                </NavDropdown.Item>
-                                            </NavDropdown>
+                                            :
+                                            <Nav.Link as={Link} to='/auth'>লগ-ইন </Nav.Link>
 
 
                                     }

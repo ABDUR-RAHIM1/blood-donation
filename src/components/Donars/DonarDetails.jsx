@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import demoImg from '../../images/demo.jpg'
 function DonarDetails() {
     const state = useLocation().state;
-  
+
     const { profilePic, name } = state;
 
     const pageSidebarData = {
@@ -51,66 +51,70 @@ export default DonarDetails
 
 
 function DonarTable({ data }) {
-    const { email, dob, weight, gender, beforeDonation, bloodGroup, contactNumber, emergencyContact, relationshipContact, donationDate, donationTime, message } = data;
+    const { email, address , dob, weight, gender, beforeDonation, bloodGroup, contactNumber, emergencyContact, relationshipContact, donationDate, donationTime, message } = data;
 
     return (
         <table className='table table-striped table-bordered table-hover table-responsive overflow-auto'>
             <thead>
                 <tr>
-                    <th style={{width: "30%",}} scope="col" className="px-6 py-3">Key</th>
-                    <th style={{width: "70%",}} scope="col">Value</th>
+                    <th style={{ width: "30%", }} scope="col" className="px-6 py-3">Key</th>
+                    <th style={{ width: "70%", }} scope="col">Value</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td scope="col">Blood Group : </td>
+                    <td scope="col">গ্রুপ : </td>
                     <td scope="col">{bloodGroup}</td>
                 </tr>
                 <tr>
-                    <td scope="col">Email :</td>
-                    <td scope="col" style={{textTransform:"lowercase"}}>  {email}</td>
+                    <td scope="col">ইমেইল :</td>
+                    <td scope="col" style={{ textTransform: "lowercase" }}>  {email}</td>
                 </tr>
                 <tr>
-                    <td scope="col">Date of Birth : </td>
+                    <td scope="col">ঠিকানা :</td>
+                    <td scope="col" style={{ textTransform: "lowercase" }}>  {address}</td>
+                </tr>
+                <tr>
+                    <td scope="col">জন্ম তারিখ : </td>
                     <td scope="col">{dob}</td>
                 </tr>
                 <tr>
-                    <td scope="col">Weight :</td>
-                    <td scope="col">{weight+ " (KG)"}</td>
+                    <td scope="col">ওজন :</td>
+                    <td scope="col">{weight + " (KG)"}</td>
                 </tr>
                 <tr>
-                    <td scope="col">Gender : </td>
+                    <td scope="col">লিঙ্গ : </td>
                     <td scope="col">{gender}</td>
                 </tr>
 
 
                 <tr>
-                    <td scope="col">Contact Number : </td>
+                    <td scope="col">যোগাযোগ নাম্বার : </td>
                     <td scope="col">{"+888 " + contactNumber}</td>
                 </tr>
                 <tr>
-                    <td scope="col">Emergency Contact : </td>
+                    <td scope="col">জরুরি  নাম্বার : </td>
                     <td scope="col">{"+888 " + emergencyContact}</td>
                 </tr>
                 <tr>
-                    <td scope="col">Relationship Contact : </td>
-                    <td scope="col">{"+888 " + relationshipContact || N/A}</td>
+                    <td scope="col">পরিচিতজন   : </td>
+                    <td scope="col">{"+888 " + relationshipContact || N / A}</td>
                 </tr>
                 <tr >
-                    <td scope="col">Before Donation : </td>
+                    <td scope="col">কততম দান : </td>
                     <td scope="col">{beforeDonation + " (Times)"}</td>
                 </tr>
                 <tr scope="row">
-                    <td scope="col">Last Donate : </td>
+                    <td scope="col">শেষ ডোনেট: </td>
                     <td scope="col">{donationDate}</td>
                 </tr>
                 <tr>
-                    <td scope="col">preferred time : </td>
-                    <td scope="col">{donationTime} A/PM </td>
+                    <td scope="col">পছন্দের সময়: </td>
+                    <td scope="col">{donationTime} AM/PM </td>
                 </tr>
                 <tr>
-                    <td  style={{ verticalAlign: 'middle' }} scope="col">pre requisite : </td>
-                    <td  style={{ verticalAlign: 'middle' }} scope="col">{message}</td>
+                    <td style={{ verticalAlign: 'middle' }} scope="col">শর্ত : </td>
+                    <td style={{ verticalAlign: 'middle' }} scope="col">{message}</td>
                 </tr>
             </tbody>
         </table>

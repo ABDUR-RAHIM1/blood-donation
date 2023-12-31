@@ -8,9 +8,8 @@ import { MdDelete } from 'react-icons/md';
 
 function Users(props) {
     const [isClick, setIsClick] = useState(false)
-    const { times } = useContext(GlobalState)
-    const {_id , name, email, profilePic, date } = props.user;
-    const {handleDelete} = props;
+    const { times , handleDeleteUserAccount } = useContext(GlobalState)
+    const {_id , name, email, profilePic, date } = props.user; 
 
     return (
         <div style={{fontSize : '12px'}} className='rounded-sm my-3 w-full md:w-31 border border-fuchsia-100 p-2 text-white'>
@@ -23,7 +22,7 @@ function Users(props) {
                 <BsThreeDotsVertical onClick={() => setIsClick(!isClick)} className="text-2xl bg-blue-500 my-2 cursor-pointer" />
                 {isClick &&
                     <div className=' cursor-pointer'>
-                    <MdDelete onClick={()=>handleDelete(_id)} className="text-3xl text-red-600" />
+                    <MdDelete onClick={()=>handleDeleteUserAccount(_id)} className="text-3xl text-red-600" />
                     </div>}
             </div>
         </div>
