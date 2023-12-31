@@ -34,9 +34,11 @@ function UserLogin() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      navigate("/user-profile")
+      setTimeout(() => {
+        navigate("/user-profile")
+    }, 1500);
     }
-  }, [])
+  }, [isLoading])
 
   return (
     <motion.div

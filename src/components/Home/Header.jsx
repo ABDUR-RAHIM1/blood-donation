@@ -21,10 +21,9 @@ function Header() {
             setPhotoRole({ ...photoRole, profilePic: photoRole.profilePic, role: photoRole.role })
         }
         handleGetLogo()
-    }, [setPhotoRole]);
+    }, [setPhotoRole, token]);
       
-    const logoItem = logo && logo.slice( -1)[0]
-    console.log(logoItem)
+    const logoItem = logo && logo.slice( -1)[0] 
 
     return (
         <header className='px-4 md:px-0 bg-gray-100'>
@@ -47,7 +46,7 @@ function Header() {
                             </Offcanvas.Header>
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                                    <Nav.Link as={Link} to='/home'>হোম</Nav.Link>
+                                    <Nav.Link as={Link} to='/'>হোম</Nav.Link>
                                     <NavDropdown
                                         title="তালিকা"
                                         id={`offcanvasNavbarDropdown-expand-${expand}`}

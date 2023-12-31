@@ -9,7 +9,7 @@ import { GlobalState } from '../../../../State/State'
 
 function Manage_content() {
     const { handleGetSlider, sliders, handleAddSlider, handleAddLogo,
-        handleGetLogo, logo, isLoading, isDelete } = useContext(GlobalState)
+        handleGetLogo, logo , isDelete } = useContext(GlobalState)
     useEffect(() => {
         handleGetSlider();
         handleGetLogo();

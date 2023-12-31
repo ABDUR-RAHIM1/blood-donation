@@ -9,10 +9,11 @@ import Notification from '../../utils/Notification'
 import Loading from '../../utils/Loading'
 import uploadFile from '../../utils/UploadFile'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 function AdminLogin() {
     const navigate = useNavigate()
+    const path = useLocation()
     const { handleRegisterAdmin, handleAdminLogin, isLoading, message } = useContext(GlobalState)
     const [register, setRegister] = useState({ profilePic: "" })
     const [isRegister, setIsRegister] = useState(false)
@@ -117,11 +118,12 @@ function AdminLogin() {
                 {
                     isLoading ? <Loading size='sm' /> : ''
                 }
-                <span onClick={() => setIsRegister(!isRegister)} className='loginText'>
-                    {
-                        isRegister ? 'Log-in here' : `Don’t have an account yet ? Sign up `
-                    }
-                </span>
+                {path === "/admin-login" &&
+                    <span onClick={() => setIsRegister(!isRegister)} className='loginText'>
+                        {
+                            isRegister ? 'Log-in here' : `Don’t have an account yet ? Sign up `
+                        }
+                    </span>}
 
                 <p onClick={() => setIsReset(!isReset)} className='font-italic my-4 cursor-pointer text-center button bg-slate-200 text-red-800'>forgat password</p>
 
@@ -129,7 +131,7 @@ function AdminLogin() {
                 {message && <Notification />}
             </form>
             {
-                isReset && <ResetPassword role='user' />
+                isReset && <ResetPassword role='admin' />
             }
 
         </motion.div >

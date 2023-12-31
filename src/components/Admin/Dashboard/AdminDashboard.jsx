@@ -13,9 +13,8 @@ function AdminDashboard({children}) {
         <img onClick={() => setArrowClick(!arrowClick)} className='arrow' src={arrow} alt="roktojoddha" />
         <Sidebar />
       </div>
-      <div className="main scroll-none bg-slate-500">
-        {children}
-        <div style={{ height: '10000px' }}></div>
+      <div className="main scroll-none bg-slate-500 pb-32">
+        {children} 
       </div>
     </motion.div>
   )

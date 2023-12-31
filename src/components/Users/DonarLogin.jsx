@@ -35,9 +35,11 @@ function DonarLogin() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      navigate("/donar-profile")
+      setTimeout(() => {
+        navigate("/donar-profile")
+      }, 1500);
     }
-  }, [])
+  }, [isLoading])
 
   return (
     <motion.div
@@ -131,7 +133,7 @@ function DonarLogin() {
         <p onClick={() => setIsReset(!isReset)} className='font-italic my-4 cursor-pointer text-center button bg-slate-200 text-red-800'>forgat password</p>
 
 
-        { message && <Notification />}
+        {message && <Notification />}
       </form>
       {
         isReset && <ResetPassword role="donar" />

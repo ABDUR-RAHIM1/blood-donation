@@ -26,11 +26,23 @@ export const MyState = ({ children }) => {
   const [regsiterEvent, setRegsiterEvent] = useState([])
   const [blogs, setBlogs] = useState([])
   const [oneBlog, setOneBlog] = useState([])
+  const [admin, setAdmin] = useState([])
   const [volunteer, setVolunteer] = useState([])
   const [sliders, setSlider] = useState([])
   const [logo, setLogo] = useState([])
 
   // 0000 admin start
+
+  const handleGetAllAdmin = () => {
+    setIsLoading(true)
+    fetch(`${API}/admin/admins`)
+      .then(res => res.json())
+      .then(data => {
+        setIsLoading(false)
+        setAdmin(data)
+        console.log(data)
+      })
+  }
 
   const handleRegisterAdmin = (e, info) => {
     e.preventDefault();
@@ -67,6 +79,21 @@ export const MyState = ({ children }) => {
       })
   }
 
+  const handleAdminResetPassword = (e, authInfo) => {
+    e.preventDefault();
+    setIsLoading(true)
+    fetch(`${API}/admin/reset/`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(authInfo)
+    }).then(res => res.json())
+      .then(data => {
+        setMessage(data.message);
+        setIsLoading(false)
+      })
+  }
 
 
   // 000  admin end
@@ -197,7 +224,8 @@ export const MyState = ({ children }) => {
       })
   }
 
-  // get login donar info
+
+  // get login donar info start
 
   const getDonarAccount = () => {
     setIsLoading(true)
@@ -247,6 +275,11 @@ export const MyState = ({ children }) => {
         setIsLoading(false)
       })
   }
+
+  const handleDeleteUserAccount = (id)=>{
+     console.log(id)
+  }
+
 
   //1111 donar/ user auth account reset password handler end here ///////////////////
 
@@ -686,14 +719,14 @@ export const MyState = ({ children }) => {
   // convert time 
 
   const times = (date) => {
- 
+
     const utcTime = new Date(date);
     // Convert UTC time to local time
     const localTime = utcTime.toLocaleString();
 
-   return localTime
+    return localTime
   }
- console.log( times( "2023-12-30T05:23:13.280Z"))
+   
 
   if (message) {
     setTimeout(() => {
@@ -702,12 +735,13 @@ export const MyState = ({ children }) => {
   }
 
   const value = {
-    API, token, ADMIN_TOKEN, times ,
+    API, token, ADMIN_TOKEN, times,
     isAdminLogin, setIsAdminLogin,
     arrowClick, setArrowClick,
     message, setMessage, isLoading, setIsLoading, isDelete,
-    handleRegisterAdmin, handleAdminLogin, handleAddBlogAdmin, getOneBlogAdmin,
+    handleGetAllAdmin, admin, handleRegisterAdmin, handleAdminLogin, handleAdminResetPassword, handleAddBlogAdmin, getOneBlogAdmin,
     getDonarAccount, donarsAcc, getUserAccount, usersAcc, getUserAllRegister, usersAllResgister,
+    handleDeleteUserAccount , 
     handleDonarRegister, handleLoginDonar, handleDonarAccountPassword, handleUserRegister, handleUserLogin, handleUserResetPassword,
     getLoginUser, loginInfo, getLoginDonar,
     handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister, getLoginDonarAccount, getLoginUserAccount, regsiterEvent,

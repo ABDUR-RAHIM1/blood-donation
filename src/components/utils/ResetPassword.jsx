@@ -10,7 +10,7 @@ import Notification from './Notification';
 function ResetPassword(props) {
     const {role} = props;
     const [show, setShow] = useState(true);
-    const {handleDonarAccountPassword, handleUserResetPassword , isLoading, setMessage, setIsDonarLogin } = useContext(GlobalState)
+    const { handleAdminResetPassword , handleDonarAccountPassword, handleUserResetPassword , isLoading, message } = useContext(GlobalState)
     const [authInfo, setAuthInfo] = useState({name:"" , email:"", gender :"" , password :"" })
     const handleClose = () => setShow(false);
 
@@ -20,8 +20,8 @@ function ResetPassword(props) {
     setAuthInfo({ ...authInfo, [name]: value, role: 'donar' })
 
   }
-
-console.log(props)
+ 
+  console.log(role)
 
     return (
         <>
@@ -37,7 +37,9 @@ console.log(props)
                     <form onSubmit={(e)=>
                       role === 'donar'
                        ? handleDonarAccountPassword(e, authInfo) 
-                      : handleUserResetPassword(e, authInfo)
+                      : role ==="admin" ? handleAdminResetPassword(e, authInfo) :
+                       handleUserResetPassword(e, authInfo)
+                      
                     } className='w-full bg-slate-600 p-6'>
    
 
@@ -86,7 +88,7 @@ console.log(props)
                      
 
 
-                        <Notification />
+                      {message &&    <Notification />}
                     </form>
 
 
