@@ -5,17 +5,13 @@ function Appoinment() {
 
     return (
         <section className='text overflow-hidden'>
-            <img className='h-450 w-full' src={img} alt="" />
-            <div className='mt-5 wrap flex-wrap flex-b items-start'>
-                <div className="text w-full mb-20 md:w-3/5">
-                    <h3 className='text-lg relative'>
-                        জেনে রাখা ভালো
-                        <span className='line absolute left-0 -bottom-2 w-20 h-1 bg-red-500'></span>
-                    </h3>
-                    <h1 className='text-3xl my-4'>
+            <img className='h-400 w-full' src={img} alt="" />
+            <div className=' md:mt-5 wrap flex-wrap flex-b items-start'>
+                <div className="text w-full mb-10 md:mb-0 md:w-3/5">
+                    <h1 className='text-2xl sm:text-3xl my-4'>
                         সহায়ক তথ্য
                     </h1>
-                    <ul className="ul">
+                    <ul className="ul px-5 sm:px-2">
                         <li className='list-disc'>রক্ত সঞ্চালনের প্রয়োজনীয়তার বিষয়ে আপনার স্বাস্থ্যসেবা প্রদানকারীর সুপারিশ অনুসরণ করুন।</li>
                         <li className='list-disc'>রক্ত গ্রহণের আগে, আপনার বা আপনার অনুমোদিত প্রতিনিধিকে অবহিত সম্মতি প্রদান করা উচিত।</li>
                         <li className='list-disc'> ট্রান্সফিউজ করা রক্ত আপনার রক্তের গ্রুপের সাথে সামঞ্জস্যপূর্ণ কিনা তা নিশ্চিত করুন। </li>
@@ -26,8 +22,8 @@ function Appoinment() {
 
                     </ul>
                 </div>
-                <div className='w-full md:flex-1 relative md:ml-5  md:-translate-y-56'>
-                    <div className=" bg-gray-100  p-4">
+                <div className='w-full md:flex-1 px-2  md:px-0 relative md:ml-5  md:-translate-y-56'>
+                    <div className="bg-gray-100  p-4">
                         <AppoinmentForm />
                     </div>
                 </div>

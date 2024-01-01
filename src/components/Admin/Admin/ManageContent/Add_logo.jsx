@@ -20,8 +20,8 @@ function Add_logo(props) {
   const handleFileChange = async (e) => {
     const image = e.target.files[0];
     await uploadFile(image, setRegister, setImgIsLoading);
-  };
-  console.log(register)
+  }; 
+  
   return (
     <motion.div
       initial={{ opacity: 0 }}

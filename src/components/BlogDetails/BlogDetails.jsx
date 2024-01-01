@@ -25,11 +25,11 @@ function BlogDetails() {
                 duration: '1'
             }}
 
-            className='wrap flex-b items-start'>
+            className='wrap flex-b flex-wrap items-start'>
             <div className="details">
                 <img className=' m-auto w-7/12' src={state ? state.profilePic : demoImg} alt="" />
-                <h1 className='heading text-center my-4'>{state.title}</h1>
-                <div className='bg-gray-200 py-2 px-1'>
+                <h1 className='heading text-2xl text-center my-4'>{state.title}</h1>
+                <div className='bg-gray-200 mb-2 py-2 px-1'>
                     <small>Auhtor : {state.name}</small> <br />
                     <small>Email : {state.email}</small> <br />
                     <small>Date : {times(state.postAt)}</small>

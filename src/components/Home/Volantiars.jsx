@@ -18,10 +18,10 @@ function Volantiars() {
         <div>
             <div className="text-lg my-10">
                 <Heading text="স্বেচ্ছাসেবকগণ" />
-                <h1 className='text-lg mt-10 font-bold text-center'>স্বেচ্ছাসেবকগণ  যারা তাদের সময় এবং প্রতিভা আমাদের মিশন পূরণ করতে সাহায্য করে.</h1>
+                <p className='text-lg mt-10 text-center'>স্বেচ্ছাসেবকগণ  যারা তাদের সময় এবং প্রতিভা আমাদের মিশন পূরণ করতে সাহায্য করে.</p>
 
                 {/*  voluteers card */}
-                <div className='wrap  mt-4 flex-b flex-wrap'>
+                <div className='wrap sm:w-2/4 sm:m-auto md:w-full mt-4 flex-b flex-wrap'>
                     {
                         volunteers && volunteers.slice(0, 3).map(vt => (
                             <VolaanteersCard

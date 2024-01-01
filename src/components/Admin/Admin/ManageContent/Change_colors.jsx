@@ -1,5 +1,8 @@
 import React from 'react'
+import { useContext } from 'react'
 import { useState } from 'react'
+import { GlobalState } from '../../../../State/State'
+import { useEffect } from 'react'
 
 function Change_colors() {
     const colorInputs = [
@@ -41,29 +44,36 @@ function Change_colors() {
         {
             lable: 'Genarel Text Color',
             type: 'color',
-            name: 'genareText',
-            value :"#D9534F"
+            name: 'genarelText', 
         },
     ]
 
-    const [color, setColor] = useState("")
+    const { handleUpdateColorPalate ,handleGetColors,  colorPalate } = useContext(GlobalState)
+
+    const [color, setColor] = useState({})
 
     const handleColorChange = (e) => {
         setColor({ ...color, [e.target.name]: e.target.value })
     }
 
-
+    useEffect(()=>{
+        handleGetColors()
+    } , []) 
+    
     return (
 
 
         <div className='dFormWrap'>
-            {
-                colorInputs.map((cl, index) => <Colors
-                    key={index}
-                    color={cl}
-                    handleColorChange={handleColorChange}
-                />)
-            }
+            <form onSubmit={(e)=> handleUpdateColorPalate(e, color)}>
+                {
+                    colorInputs.map((cl, index) => <Colors
+                        key={index}
+                        color={cl}
+                        handleColorChange={handleColorChange}
+                    />)
+                }
+               <button type='submit' className='button sidebarBtn'>Change Colors</button>
+            </form>
         </div>
     )
 }
@@ -72,10 +82,10 @@ export default Change_colors
 
 
 const Colors = (props) => {
-    const { lable, type, name , value } = props.color
+    const { lable, type, name} = props.color
     return (
         <div className='w-2/4 m-auto'>
-            <input value={value} onChange={props.handleColorChange} className='form-control mt-3 h-10' type={type} name={name} />
+            <input onChange={props.handleColorChange} className='form-control mt-3 h-10' type={type} name={name} />
             <small className="manageHeading">{lable}</small>
         </div>
     )

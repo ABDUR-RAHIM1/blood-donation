@@ -15,8 +15,7 @@ function Donars() {
     const handleChange = (e) => {
         setSearch(e.target.value)
     }
-
-    console.log(search)
+ 
     useEffect(() => {
         getAllDonarsItems(search)
         if (search) {

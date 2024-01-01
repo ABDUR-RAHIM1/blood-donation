@@ -30,6 +30,7 @@ export const MyState = ({ children }) => {
   const [volunteer, setVolunteer] = useState([])
   const [sliders, setSlider] = useState([])
   const [logo, setLogo] = useState([])
+  const [colorPalate, setColorPalate] = useState([])
 
   // 0000 admin start
 
@@ -40,7 +41,6 @@ export const MyState = ({ children }) => {
       .then(data => {
         setIsLoading(false)
         setAdmin(data)
-        console.log(data)
       })
   }
 
@@ -285,7 +285,6 @@ export const MyState = ({ children }) => {
 
   const getUserAllRegister = (search) => {
     setIsLoading(true)
-    console.log(search)
     fetch(`${API}/users-register/users/?search=${search}`)
       .then(res => res.json())
       .then(data => {
@@ -368,7 +367,6 @@ export const MyState = ({ children }) => {
   //   get all donars start 
   const getAllDonarsItems = (search) => {
     setIsLoading(true)
-    console.log("SE", search)
     fetch(`${API}/donar-register/donars/?search=${search}`)
       .then(res => res.json())
       .then(data => {
@@ -635,6 +633,43 @@ export const MyState = ({ children }) => {
 
   // convert time 
 
+  //   color palate start
+  const handleUpdateColorPalate = (e, info) => {
+    e.preventDefault();
+    fetch(`${API}/color/update/colors`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(info)
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data)
+      })
+  }
+
+  const handleGetColors = () => {
+    setIsLoading(true)
+    fetch(`${API}/color/colors`)
+      .then(res => res.json())
+      .then(data => {
+        setColorPalate(data)
+        setIsLoading(false)
+        if (data) {
+            localStorage.setItem("COLORS_PALATE", JSON.stringify(data))
+        }
+        document.documentElement.style.setProperty('--card-bg', data.cardBg);
+        document.documentElement.style.setProperty('--card-text', data.cardText);
+        document.documentElement.style.setProperty('--btn-bg', data.btnBg);
+        document.documentElement.style.setProperty('--btn-text', data.btntext);
+        document.documentElement.style.setProperty('--form-bg', data.formBg);
+        document.documentElement.style.setProperty('--form-text', data.formText);
+        document.documentElement.style.setProperty('--general-bg', data.genarelBg);
+      })
+  }
+
+  //   color palate end here
+
   const times = (date) => {
 
     const utcTime = new Date(date);
@@ -666,7 +701,8 @@ export const MyState = ({ children }) => {
     getAllDonarsItems, allDonars,
     handleAddVolunteer, handleGetVolunteer, handleGetOneVolunteer, volunteer, handleUpdateVolunteer, handleDeleteVolunteer,
     handleGetSlider, sliders, handleAddSlider, handleSliderDelete,
-    handleAddLogo, handleGetLogo, logo, handleLogoDelete
+    handleAddLogo, handleGetLogo, logo, handleLogoDelete,
+    handleUpdateColorPalate, handleGetColors , colorPalate,
   };
 
   return (

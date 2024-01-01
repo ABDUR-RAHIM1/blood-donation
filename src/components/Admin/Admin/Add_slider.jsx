@@ -15,8 +15,8 @@ function Add_slider(props) {
   const handleFileChange = async (e) => {
     const image = e.target.files[0];
     await uploadFile(image, setRegister, setImgIsLoading);
-  };
-  console.log(register)
+  }; 
+  
   return (
     <div className='dFormWrap' >
       <form onSubmit={(e) => {

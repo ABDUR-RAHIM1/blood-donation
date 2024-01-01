@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom'
 
 function SidebarItems(props) {
  const {item , link} = props.item;
- const handleLogiut =()=>{
-   console.log("handleLogiut")
- }
+
   return (
     <Link to={link}>
       <button className='sidebarBtn'>

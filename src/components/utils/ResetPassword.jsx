@@ -20,8 +20,7 @@ function ResetPassword(props) {
     setAuthInfo({ ...authInfo, [name]: value, role: 'donar' })
 
   }
- 
-  console.log(role)
+  
 
     return (
         <>

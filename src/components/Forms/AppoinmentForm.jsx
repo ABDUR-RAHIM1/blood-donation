@@ -41,8 +41,8 @@ function AppoinmentForm() {
 
   return (
     <>
-      <div className='w-full py-3 text-white bg-red-500'>
-        <h2 className='text-2xl text-center text-uppercase'>
+      <div className='w-full  py-2 text-white bg-red-500'>
+        <h2 className='text-lg text-center text-uppercase'>
           {
             state ? "Update Event" : "Apply for Apoinment"
           }
