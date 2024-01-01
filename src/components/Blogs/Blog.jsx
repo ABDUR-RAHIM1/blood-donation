@@ -17,21 +17,21 @@ function Blog(props) {
                 duration: '1',
             }}
             className={`w-full wrap flex justify-between items-center my-4 ${isEvenNumber ? 'flex-row-reverse' : 'flex-row'}`}
-        >
-            <div className='w-70 border border-gray-50'>
-                <h2 className='text-5xl text-slate-500 font-bold italic'>
-                    {`${props.index < 9 ? '0' + (props.index + 1) : props.index + 1}`}
+        >  
+            <div className='w-70 px-1 border border-gray-50'>
+                <h2 className=' text-2xl md:text-5xl text-slate-400 font-bold italic'>
+                  <q>{`${props.index < 9 ? '0' + (props.index + 1) : props.index + 1}`}</q>
                 </h2>
-                <div className='mt-2 bg-gray-50 py-2 px-1'>
+                <div className=' bg-gray-50 py-2 px-1'>
                     <small className='uppercase underline'>Author : {name} <span className='text-green-800'> ({role}) </span> </small> <br />
                     <small>email : {email}</small> <br />
                     <small>Post on : {times(postAt)}</small>
                 </div>
 
-                <h1 className='text-3xl my-3 font-bold'>{title}</h1>
-                <p>{desc && desc.slice(0, 350)}</p>
+                <h1 className='text-2xl my-1 font-semi-bold'>{title}</h1>
+                <p className='text-sm'>{desc && desc.slice(0, 350)}</p>
                 <Link to='/blog-details' state={props.blog}>
-                    <button className='button bg-gray-500 text-white hover:bg-slate-600 my-3 '>Read More</button>
+                    <button className='button bg-green-700 text-white hover:bg-green-800 my-3 '>Read More</button>
                 </Link>
             </div>
             <div className='w-28 bg-black'>

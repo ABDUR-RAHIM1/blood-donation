@@ -2,7 +2,7 @@ import React from 'react'
 import {BsFacebook, BsTwitter, BsLinkedin} from "react-icons/bs"
 function Banner() {
   return (
-    <section className='flex-b py-2 wrap bg-red-500'>
+    <section className='flex-b py-2 hidden md:flex wrap bg-red-500'>
         <h2 className='text-xl text-white'>welcome to our blood doantion center</h2>
         {/*  social icons  */}
         <div className='flex-b' >

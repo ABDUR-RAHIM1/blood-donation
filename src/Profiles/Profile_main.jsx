@@ -21,16 +21,16 @@ function Profile_main() {
 
     return (
         <div className="h-screen overflow-y-auto scroll-none">
-            <h1 className='text-center text-3xl font-semibold my-8'>Your Events ( Donar )</h1>
+            <h1 className='text-center text-xl my-8'>Your Events ( Donar )</h1>
             {
                 !registerEventDonar &&
-                <h3 className='text-2xl capitalize text-red-500'>
+                <h3 className='text-lg capitalize text-red-500'>
                     You have no Event (Donar) ! 🔎
                 </h3>
             }
             {/*  donar regsieter event */}
 
-            <div className="eventWrapper">
+            <div className="eventWrapper items-center justify-center">
                 {
                     registerEventDonar && registerEventDonar.map(re => (
                         <DonarEvent key={re._id} event={re} />
@@ -41,7 +41,7 @@ function Profile_main() {
             {/*  user regiseter event */}
 
             <div>
-                <h1 className='text-center text-3xl font-semibold my-8'>Your Events ( Appoinment )</h1>
+                <h1 className='text-center text-xl my-8'>Your Events ( Appoinment )</h1>
                 {
                     !registerEventUser &&
                     <h3 className='text-2xl capitalize text-red-500'>
@@ -59,14 +59,14 @@ function Profile_main() {
 
 
             <div className="my-20">
-                <h3 className="text-center my-4 uppercase text-3xl ">Your Blogs</h3>
+                <h3 className="text-center my-4 uppercase text-xl ">Your Blogs</h3>
                 {
-                    oneBlog.length === 0 && <h3 className='text-2xl capitalize text-red-500'>
+                    oneBlog.length === 0 && <h3 className='text-xl capitalize text-red-500'>
                         You have no Blog ! 📝
                     </h3>
                 }
                 {message && <Notification />}
-                <div className="flex-b justify-start gap-3 flex-wrap">
+                <div className="flex-b justify-between flex-wrap">
                     {
                         oneBlog && oneBlog.map(blog => (
                             <BlogOne key={blog._id} blog={blog} />

@@ -1,19 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
 import Sidebar from './Sidebar'
-import arrow from '../../../images/arrow.png'
-import { GlobalState } from '../../../State/State'
 import { motion } from 'framer-motion'    
-function AdminDashboard({children}) { 
-  const { arrowClick, setArrowClick } = useContext(GlobalState)
-
+import {FaRegArrowAltCircleLeft} from "react-icons/fa"
+function AdminDashboard({children}) {  
+  const [arrowClick, setArrowClick] = useState(false)
+console.log(arrowClick)
   return (
     <motion.div
       className='flex-b items-start'>
-      <div className={`${arrowClick ? 'w-10' : 'w-72'} sidebar scroll-none relative border-r border-slate-50`}>
-        <img onClick={() => setArrowClick(!arrowClick)} className='arrow' src={arrow} alt="roktojoddha" />
+      <div className={`${arrowClick ? 'w-0  px-0' : 'w-64 md:w-72  px-3'} sidebar scroll-none  border-r border-slate-50`}>
         <Sidebar />
       </div>
-      <div className="main scroll-none bg-slate-500 pb-32">
+      <div className="dahboard_main scroll-none pb-32 relative">
+     
+         <FaRegArrowAltCircleLeft onClick={() => setArrowClick(!arrowClick)} className={`${arrowClick ? "rotate-180" : "rotate-0"} duration-200 arrow`} />
         {children} 
       </div>
     </motion.div>

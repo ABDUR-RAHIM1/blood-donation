@@ -23,9 +23,9 @@ function DonarDetails() {
                 duration: '1'
             }}
 
-            className='wrap flex-b items-start'>
+            className='wrap flex-b flex-wrap items-start'>
             <div className="details">
-                <img className=' m-auto w-7/12 h-450' src={profilePic || demoImg} alt="" />
+                <img className=' m-auto w-10/12 md:w-7/12 h-48 md:h-400' src={profilePic || demoImg} alt="" />
                 <h1 className='heading text-center my-4 italic uppercase'>Name : {name}</h1>
 
                 {/*  this table component under this page */}
@@ -51,7 +51,7 @@ export default DonarDetails
 
 
 function DonarTable({ data }) {
-    const { email, address , dob, weight, gender, beforeDonation, bloodGroup, contactNumber, emergencyContact, relationshipContact, donationDate, donationTime, message } = data;
+    const { email, address, dob, weight, gender, beforeDonation, bloodGroup, contactNumber, emergencyContact, relationshipContact, donationDate, donationTime, message } = data;
 
     return (
         <table className='table table-striped table-bordered table-hover table-responsive overflow-auto'>

@@ -10,6 +10,7 @@ import Loading from '../../utils/Loading'
 import uploadFile from '../../utils/UploadFile'
 import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import loginImg2 from "../../../images/loginBg2.png"
 
 function AdminLogin() {
     const navigate = useNavigate()
@@ -47,93 +48,100 @@ function AdminLogin() {
             transition={{
                 duration: '1'
             }}
-            className='bg-slate-700 w-full h-screen pt-10'>
-            <form onSubmit={(e) =>
-                isRegister ?
-                    handleRegisterAdmin(e, register)
-                    :
-                    handleAdminLogin(e, register)
-            }
-                className='form-w bg-slate-600 p-6'>
-                {isRegister &&
-                    <>
+            className='login_page_bg w-full h-screen pt-10'>
+
+
+            <div className="login_forms">
+
+                <img className=' w-full md:w-48 h-52 md:h-400' src={loginImg2} alt="" />
+                <div className="w-full md:w-48">
+                    <form onSubmit={(e) =>
+                        isRegister ?
+                            handleRegisterAdmin(e, register)
+                            :
+                            handleAdminLogin(e, register)
+                    }
+                        className='form-w bg-gray-100 p-6'>
+                        {isRegister &&
+                            <>
+                                <Inputs
+                                    type='text'
+                                    name='name'
+                                    value={register.name}
+                                    required={true}
+                                    placeholder='Enter Your Name'
+                                    lable='Enter Your Good Name'
+                                    handleChange={handleChange}
+                                />
+                                <Inputs
+                                    type='text'
+                                    name='gender'
+                                    value={register.gender}
+                                    required={true}
+                                    placeholder='Gender'
+                                    lable='Your Gender'
+                                    handleChange={handleChange}
+                                />
+
+                            </>
+
+                        }
+
                         <Inputs
-                            type='text'
-                            name='name'
-                            value={register.name}
+                            type='email'
+                            name='email'
+                            value={register.email}
                             required={true}
-                            placeholder='Enter Your Name'
-                            lable='Enter Your Good Name'
+                            placeholder='Enter Your Email'
+                            lable='Enter Your Email'
                             handleChange={handleChange}
                         />
                         <Inputs
-                            type='text'
-                            name='gender'
-                            value={register.gender}
+                            type='password'
+                            name='password'
+                            value={register.password}
                             required={true}
-                            placeholder='Gender'
-                            lable='Your Gender'
+                            placeholder='********'
+                            lable='Enter Your Password'
                             handleChange={handleChange}
                         />
 
-                    </>
+                        {isRegister &&
+                            <>
+                                <input onChange={handleFileChange} id='file' type="file" name='profilePic' className='form-control mt-3' />
+                                {
+                                    imgLoading ? <small className='mb-3 text-red-400'>Uploading Image</small>
+                                        :
+                                        <small className='mb-3 text-green-400'>Upload Your Profile Photo</small>
+                                }
 
-                }
-
-                <Inputs
-                    type='email'
-                    name='email'
-                    value={register.email}
-                    required={true}
-                    placeholder='Enter Your Email'
-                    lable='Enter Your Email'
-                    handleChange={handleChange}
-                />
-                <Inputs
-                    type='password'
-                    name='password'
-                    value={register.password}
-                    required={true}
-                    placeholder='********'
-                    lable='Enter Your Password'
-                    handleChange={handleChange}
-                />
-
-                {isRegister &&
-                    <>
-                        <input onChange={handleFileChange} id='file' type="file" name='profilePic' className='form-control mt-3' />
-                        {
-                            imgLoading ? <small className='mb-3 text-red-400'>Uploading Image</small>
-                                :
-                                <small className='mb-3 text-green-400'>Upload Your Profile Photo</small>
+                                <br />
+                            </>
                         }
 
-                        <br />
-                    </>
-                }
 
 
+                        <button className='button button_blue my-4'>
+                            {isRegister ? 'Register' : isLoading ? <Loading size='sm' /> : 'Log-in'}
+                        </button>
 
-                <button className='button mr-2 bg-slate-700 text-white my-4'> {isRegister ? 'Register' : 'Log-in'} </button>
-                {
-                    isLoading ? <Loading size='sm' /> : ''
-                }
-                {path === "/admin-login" &&
-                    <span onClick={() => setIsRegister(!isRegister)} className='loginText'>
-                        {
-                            isRegister ? 'Log-in here' : `Don’t have an account yet ? Sign up `
-                        }
-                    </span>}
+                        {path === "/admin-login" &&
+                            <span onClick={() => setIsRegister(!isRegister)} className='loginText'>
+                                {
+                                    isRegister ? 'Log-in here' : `Don’t have an account yet ? Sign up `
+                                }
+                            </span>}
 
-                <p onClick={() => setIsReset(!isReset)} className='font-italic my-4 cursor-pointer text-center button bg-slate-200 text-red-800'>forgat password</p>
+                        <p onClick={() => setIsReset(!isReset)} className='font-italic my-4 cursor-pointer text-center button bg-slate-200 text-red-800'>forgat password</p>
 
 
-                {message && <Notification />}
-            </form>
-            {
-                isReset && <ResetPassword role='admin' />
-            }
-
+                        {message && <Notification />}
+                    </form>
+                    {
+                        isReset && <ResetPassword role='admin' />
+                    }
+                </div>
+            </div>
         </motion.div >
     )
 }

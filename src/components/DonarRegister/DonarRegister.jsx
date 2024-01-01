@@ -10,7 +10,7 @@ function DonarRegister() {
 
   return (
     <section>
-      <img className='h-450 w-full' src={img} alt="" />
+      <img className='h-400 w-full' src={img} alt="" />
 
 
       <div className='my-5 wrap flex-wrap flex-b items-start'>

@@ -64,7 +64,7 @@ function Footer() {
 
       {/*  copyright */}
       <div className='bg-slate-900 py-3  text-white'>
-        <p className='text-center'>Copyright@DreamCraft Softwere</p>
+        <p className='text-center'>Copyright@ AR It Solutions</p>
       </div>
       {/*  copyright */}
     </>

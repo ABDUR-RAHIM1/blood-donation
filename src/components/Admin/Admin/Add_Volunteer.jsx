@@ -12,8 +12,8 @@ import Notification from '../../utils/Notification'
 function Add_Volunteer() {
 
   const state = useLocation().state;
-  
-  const { handleAddVolunteer,handleUpdateVolunteer, isLoading , message } = useContext(GlobalState);
+
+  const { handleAddVolunteer, handleUpdateVolunteer, isLoading, message } = useContext(GlobalState);
 
   const [register, setRegister] = useState({ profilePic: "" })
   const [isImgLoading, setImgIsLoading] = useState(false)
@@ -40,17 +40,17 @@ function Add_Volunteer() {
         transition={{
           duration: '2'
         }}
-        className='dFormWrap'>
+        className='add_form'>
         <div className="title">
-           {
+          {
             state ? "Update Volunteer" : "Add Volunteer"
-           }
+          }
         </div>
         <form onSubmit={(e) => {
-           state ? 
-           handleUpdateVolunteer(e, state._id , register)
-           :
-          handleAddVolunteer(e, register)
+          state ?
+            handleUpdateVolunteer(e, state._id, register)
+            :
+            handleAddVolunteer(e, register)
         }}>
           <Inputs
             type='text'
@@ -103,7 +103,7 @@ function Add_Volunteer() {
               <small className='text-red-600 mb-4'>Uplaoding Photo</small>
               : <small className='text-green-700 mb-4'>Uplaod Volunteer Photo</small>
           }
-          <button disabled={isImgLoading} className='sidebarBtn'>
+          <button disabled={isImgLoading} className='button button_blue my-3'>
             {
               isLoading ? <Loading size="sm" /> : state ? "Update volunteer" : "Add volunteer"
             }

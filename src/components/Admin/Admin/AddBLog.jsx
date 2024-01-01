@@ -50,8 +50,8 @@ function AddBLog() {
                   (e) => handleAddBlogAdmin(e, blog)
 
                }
-               className='w-2/5 m-auto bg-black p-4 shadow-md shadow-green-600'>
-               <h3 className='text-center my-4 text-white text-3xl uppercase'>
+               className='add_form'>
+               <h3 className='text-center my-4 text-slate-800 text-3xl uppercase'>
                   {state ? "Update Blog" : "Add Blog"}
                </h3>
                <Inputs
@@ -75,10 +75,10 @@ function AddBLog() {
                   {imgLoading ? <p className='text-red-600'>Uploading Image</p> : <p>Add Photo</p>}
                </small>
                <br />
-               <button disabled={imgLoading} className='button bg-slate-800 hover:bg-slate-900 text-white my-2'>
-                  {state ? "Update Blog" : "Add Blog"}
+               <button disabled={imgLoading} className='button button_blue my-2'>
+                  {state ? "Update Blog" : isLoading ? <Loading size='sm' /> : "Add Blog"}
                </button>
-               {isLoading && <Loading size='sm' />}
+             
                {
                   message && <Notification />
                }

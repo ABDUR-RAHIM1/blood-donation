@@ -11,7 +11,7 @@ function Appoinment() {
                     <h1 className='text-2xl sm:text-3xl my-4'>
                         সহায়ক তথ্য
                     </h1>
-                    <ul className="ul px-5 sm:px-2">
+                    <ul className="ul px-3 sm:px-2">
                         <li className='list-disc'>রক্ত সঞ্চালনের প্রয়োজনীয়তার বিষয়ে আপনার স্বাস্থ্যসেবা প্রদানকারীর সুপারিশ অনুসরণ করুন।</li>
                         <li className='list-disc'>রক্ত গ্রহণের আগে, আপনার বা আপনার অনুমোদিত প্রতিনিধিকে অবহিত সম্মতি প্রদান করা উচিত।</li>
                         <li className='list-disc'> ট্রান্সফিউজ করা রক্ত আপনার রক্তের গ্রুপের সাথে সামঞ্জস্যপূর্ণ কিনা তা নিশ্চিত করুন। </li>

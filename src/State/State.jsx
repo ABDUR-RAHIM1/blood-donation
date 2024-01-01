@@ -11,8 +11,7 @@ export const MyState = ({ children }) => {
 
 
   //  reuseble state all are components
-  const [isAdminLogin, setIsAdminLogin] = useState(false);
-  const [arrowClick, setArrowClick] = useState(false);
+  const [isAdminLogin, setIsAdminLogin] = useState(false); 
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false);
   const [isDelete, setIsDelete] = useState(false)
@@ -688,8 +687,7 @@ export const MyState = ({ children }) => {
 
   const value = {
     API, token, ADMIN_TOKEN, times,
-    isAdminLogin, setIsAdminLogin,
-    arrowClick, setArrowClick,
+    isAdminLogin, setIsAdminLogin, 
     message, setMessage, isLoading, setIsLoading, isDelete,
     handleGetAllAdmin, admin, handleRegisterAdmin, handleAdminLogin, handleAdminResetPassword, handleAddBlogAdmin, getOneBlogAdmin,
     getUserAccount, usersAcc, getUserAllRegister, usersAllResgister,

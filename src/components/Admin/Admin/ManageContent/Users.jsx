@@ -12,7 +12,7 @@ function Users(props) {
     const {_id , name, email, profilePic, date } = props.user; 
 
     return (
-        <div style={{fontSize : '12px'}} className='rounded-sm my-3 w-full md:w-31 border border-fuchsia-100 p-2 text-white'>
+        <div style={{fontSize : '12px'}} className='rounded-sm my-3 w-full md:w-31 border border-white p-2 text-slate-700 shadow-md shadow-rose-50'>
             <img className='w-16 h-16 my-2 m-auto' src={profilePic || demoImg} alt="" />
             <h3>  {name}</h3>
             <p> {email}</p>

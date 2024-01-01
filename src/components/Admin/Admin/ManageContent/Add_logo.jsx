@@ -29,7 +29,7 @@ function Add_logo(props) {
       transition={{
         duration: '2'
       }}
-      className='dFormWrap'
+      className='add_form'
     >
       <h1 className="manageHeading">Add logo</h1>
       <form onSubmit={(e) => handleAddLogo(e, register)}>
@@ -64,7 +64,7 @@ function Add_logo(props) {
               <small className='text-white'>Upload a photo</small>
           }
         </small>
-        <button className='sidebarBtn'>
+        <button className='button button_blue'>
           {
             isLoading ? <Loading size='sm' /> : "Change Now"
           }
@@ -72,7 +72,7 @@ function Add_logo(props) {
        
       </form>
 
-      <div className='flex justify-start h-24 bg-black items-center flex-wrap py-1 px-2  gap-3 w-full overflow-y-scroll scroll-none' >
+      <div className='flex justify-start h-24 bg-gray-100 items-center flex-wrap py-1 px-2  gap-3 w-full overflow-y-scroll scroll-none' >
         {
           logo && logo.map(lg => (
             <Logos element={lg} key={lg._id} />

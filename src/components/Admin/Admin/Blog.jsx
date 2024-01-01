@@ -19,7 +19,7 @@ function Blog(props) {
     //  admin blog 
 
     return (
-        <div className='w-48 md:w-23 border border-dotted my-3 cursor-pointer relative'>
+        <div className='w-full sm:w-48 md:w-23 border border-dotted my-3 cursor-pointer relative'>
             <img className='w-full h-32' src={profilePic || demoImg} alt="" />
             <div className='p-2'>
                 <Link to='/blog-details' state={props.blog}>

@@ -26,22 +26,37 @@ body {
     @apply w-10 h-1 bg-red-500 m-2 cursor-pointer
   }
 
+  .add_form {
+    @apply w-10/12 m-auto bg-gray-50 p-4
+  }
+
   .form-w {
-    @apply w-2/4 m-auto
+    /* w-10/12 md:w-2/4 m-auto */
+    @apply w-full
+  }
+
+  .login_forms {
+    @apply w-11/12 m-auto bg-gray-50 flex justify-center items-center gap-2 flex-wrap rounded-lg
+  }
+
+  .button_blue{
+     @apply w-full text-white bg-blue-800 hover:bg-blue-900
   }
 
   .addBanner {
     @apply w-full mb-3 sm:w-2/4 py-2 px-5 text-slate-200 cursor-pointer hover:text-slate-300
   }
-.proccesCard{
-   @apply w-full sm:w-48 md:w-23  my-3 md:my-0 h-auto sm:h-400 md:h-auto bg-gray-100 rounded-sm shadow-sm duration-200 hover:bg-red-500 hover:text-white
-}
+
+  .proccesCard {
+    @apply w-full sm:w-48 md:w-23 my-3 md:my-0 h-auto sm:h-400 md:h-auto bg-gray-100 rounded-sm shadow-sm duration-200 hover:bg-red-500 hover:text-white
+  }
+
   .icons {
     @apply text-3xl bg-red-800 p-1 hover:cursor-pointer text-white hover:bg-red-500 hover:text-black
   }
 
   .button {
-    @apply py-2 px-3 text-lg rounded-sm duration-100
+    @apply py-2 px-3 text-sm rounded-sm duration-100
   }
 
   .formHeading {
@@ -50,7 +65,7 @@ body {
 
   /*  register , login  type text */
   .loginText {
-    @apply text-gray-100 font-semibold text-center block cursor-pointer italic underline
+    @apply text-gray-500 text-lg text-center block cursor-pointer italic underline
   }
 
   /* blog details page  */
@@ -77,7 +92,7 @@ body {
   }
 
   .genarelInfo span {
-    @apply font-semibold text-red-400 hover:text-red-600
+    @apply font-semibold text-slate-700 hover:text-slate-800
   }
 
   /*  donar*/
@@ -86,7 +101,7 @@ body {
   /* profile start */
 
   .donarProfileLeSidebar {
-    @apply w-72 px-4 py-10 bg-gray-100
+    @apply py-10 bg-gray-100
   }
 
   .profielCard {
@@ -98,10 +113,10 @@ body {
   }
 
   .eventWrapper {
-    @apply flex-b flex-wrap justify-start gap-5
+    @apply flex-b flex-wrap justify-between
   }
 
-  .userEvents {
+  .events {
     @apply w-full sm:w-48 md:w-31 bg-gray-100 my-5 shadow-sm
   }
 
@@ -140,19 +155,19 @@ body {
 
   /*  admin ddasbboard */
   .sidebar {
-    @apply bg-slate-600 h-screen px-3 py-10 duration-300
+    @apply bg-gray-100 h-screen px-3 py-10 duration-300 shadow-md shadow-gray-300
   }
 
   .sidebarBtn {
-    @apply w-full px-3 py-2 text-center rounded-sm text-white bg-slate-500 cursor-pointer my-3 uppercase hover:bg-slate-400 duration-150
+    @apply w-full py-2 text-center rounded-sm text-black bg-gray-200 cursor-pointer my-3 uppercase hover:bg-indigo-700 hover:text-white hover:scale-125 duration-150
   }
 
   .arrow {
-    @apply w-10 absolute top-0 -right-7 cursor-pointer
+    @apply text-3xl text-black sticky top-0 left-0 cursor-pointer z-50
   }
 
-  .main {
-    @apply flex-1 h-screen overflow-y-auto p-5
+  .dahboard_main {
+    @apply flex-1 bg-gray-200 h-screen overflow-y-auto p-5
   }
 
   /* dashboard add form  */
@@ -164,13 +179,10 @@ body {
   .dash_card {
     @apply text-sm leading-7 uppercase
   }
-
-  .dFormWrap {
-    @apply w-full md:w-3/4 m-auto mt-10 bg-slate-600 py-10 px-6 shadow-md
-  }
+ 
 
   .title {
-    @apply text-2xl font-semibold md:text-4xl my-3 md:font-bold text-center uppercase text-white
+    @apply text-2xl font-semibold md:text-4xl my-3 md:font-bold text-center uppercase text-slate-900
   }
 
   /* dashboard add form  */
@@ -219,6 +231,18 @@ body {
     display: none;
   }
 
+  .login_page_bg {
+    width: 100%;
+    height: 100vh;
+    padding: 50px 0px;
+    background: url("./images/loginBg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
 }
 
@@ -257,14 +281,17 @@ p,
 small {
   word-wrap: break-word;
 }
-p{
+
+p {
   font-size: 15px;
   line-height: 1.5rem;
 }
-li{
+
+li {
   font-size: 15px;
   line-height: 1.5rem;
 }
+
 .dropdown-menu[data-bs-popper] {
   top: 100%;
   left: -78px;
@@ -372,18 +399,26 @@ li{
 /* responsive start here */
 
 @media screen and (max-width : 768px) {
-  .wrap{
-     padding: 0px 15px;
+  .wrap {
+    padding: 0px 15px;
   }
-  .swiper-slide img { 
+
+  .swiper-slide img {
     height: 400px;
   }
+
   .heading {
     font-size: 22px;
     font-weight: 500;
   }
-  p{
+
+  p {
     font-size: 15px;
     font-weight: 400;
+  }
+
+  .login_page_bg {
+    width: 100%;
+    height: auto;
   }
 }

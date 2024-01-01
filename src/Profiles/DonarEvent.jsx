@@ -5,12 +5,14 @@ import demoImg from '../images/demo.jpg'
 import { FaEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 import { GlobalState } from '../State/State';
+import { MdOutlineEditNote } from 'react-icons/md';
+import { useState } from 'react';
 
 
 function DonarEvent({ event }) {
     const { _id, profilePic, name, bloodGroup, gender } = event;
     const { handleDeleteRegister } = useContext(GlobalState);
-
+    const [isClick, setIsClick] = useState(false)
 
 
     return (
@@ -20,13 +22,18 @@ function DonarEvent({ event }) {
             transition={{
                 duration: '1'
             }}
-            className='userEvents relative'>
-            <div className='w-full bg-slate-400  absolute top-0 left-0 flex-b'>
-                <Link to="/donar-register" state={event}>
-                    <FaEdit className=" text-white text-3xl bg-green-600  p-1 cursor-pointer" />
-                </Link>
-                <AiFillDelete onClick={() => handleDeleteRegister(_id)} className=" text-white text-3xl bg-red-600  p-1 cursor-pointer" />
+            className='events relative'>
+            <div className='w-full  px-2 absolute top-0 left-0 flex-b'>
+                <MdOutlineEditNote onClick={() => setIsClick(!isClick)} className="text-3xl cursor-pointer" />
 
+                {isClick && <div className='flex items-end gap-3  bg-slate-400'>
+                    <Link to="/donar-register" state={event}>
+                        <FaEdit className=" text-white text-3xl bg-green-600  p-1 cursor-pointer" />
+                    </Link>
+                    <AiFillDelete onClick={() => handleDeleteRegister(_id)} className=" text-white text-3xl bg-red-600  p-1 cursor-pointer" />
+
+                </div>
+                }
             </div>
 
             <div className="bg-gray-200">

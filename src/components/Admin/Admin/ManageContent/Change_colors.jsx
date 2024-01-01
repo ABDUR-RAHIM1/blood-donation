@@ -44,11 +44,11 @@ function Change_colors() {
         {
             lable: 'Genarel Text Color',
             type: 'color',
-            name: 'genarelText', 
+            name: 'genarelText',
         },
     ]
 
-    const { handleUpdateColorPalate ,handleGetColors,  colorPalate } = useContext(GlobalState)
+    const { handleUpdateColorPalate, handleGetColors, colorPalate } = useContext(GlobalState)
 
     const [color, setColor] = useState({})
 
@@ -56,15 +56,15 @@ function Change_colors() {
         setColor({ ...color, [e.target.name]: e.target.value })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         handleGetColors()
-    } , []) 
-    
+    }, [])
+
     return (
 
 
-        <div className='dFormWrap'>
-            <form onSubmit={(e)=> handleUpdateColorPalate(e, color)}>
+        <div className='add_form'>
+            <form onSubmit={(e) => handleUpdateColorPalate(e, color)}>
                 {
                     colorInputs.map((cl, index) => <Colors
                         key={index}
@@ -72,7 +72,7 @@ function Change_colors() {
                         handleColorChange={handleColorChange}
                     />)
                 }
-               <button type='submit' className='button sidebarBtn'>Change Colors</button>
+                <button type='submit' className='button button_blue my-4'>Change Colors</button>
             </form>
         </div>
     )
@@ -82,11 +82,11 @@ export default Change_colors
 
 
 const Colors = (props) => {
-    const { lable, type, name} = props.color
+    const { lable, type, name } = props.color
     return (
         <div className='w-2/4 m-auto'>
             <input onChange={props.handleColorChange} className='form-control mt-3 h-10' type={type} name={name} />
-            <small className="manageHeading">{lable}</small>
+            <small>{lable}</small>
         </div>
     )
 }
