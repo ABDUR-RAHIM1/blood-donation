@@ -67,9 +67,9 @@ function AddBlog() {
         </small>
         <br />
         <button disabled={imgLoading} className='button bg-slate-800 hover:bg-slate-900 text-white my-2'>
-          {state ? "Update Blog" : "Add Blog"}
+          {  isLoading ? <Loading size='sm' /> : state ? "Update Blog" : "Add Blog"}
         </button>
-        {isLoading && <Loading size='sm' />}
+        { }
         {
           message && <Notification />
         }

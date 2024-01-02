@@ -268,13 +268,20 @@ a:hover {
   color: black;
 }
 
-td {
+td{
   text-align: left;
+  vertical-align: middle;
   text-transform: capitalize;
 }
+tr{
+  vertical-align: middle;
 
+}
 th {
   text-transform: uppercase;
+  font-weight: normal;
+  vertical-align: middle;
+  font-size: 14px;
 }
 
 p,
