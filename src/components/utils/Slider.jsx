@@ -1,19 +1,15 @@
 
-import React, { useContext, useEffect, useRef, useState } from 'react';
-// Import Swiper React components
+import React, { useContext, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
-// import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { GlobalState } from '../../State/State';
-
+import heroImg from "../../images/hero.jpg";
 
 function Slider() {
-    const { handleGetSlider, sliders, } = useContext(GlobalState)
+    const { handleGetSlider, sliders, isLoading } = useContext(GlobalState)
     const progressCircle = useRef(null);
     const progressContent = useRef(null);
     const onAutoplayTimeLeft = (s, time, progress) => {
@@ -24,6 +20,9 @@ function Slider() {
     useEffect(() => {
         handleGetSlider()
     }, [])
+
+
+    console.log(isLoading)
 
     return (
         <div className='wrap bg-red-500'>
@@ -43,12 +42,17 @@ function Slider() {
                 className="mySwiper"
             >
                 {
-                    sliders &&
-                    sliders.slice().reverse().map(sl => (
-                        <SwiperSlide key={sl._id}>
-                             <img src={sl.profilePic} alt="" />
-                        </SwiperSlide>
-                    ))
+                    sliders.length === 0 ?
+                        (
+                            <img className='w-full h-400' src={heroImg} alt="" />
+                        ) :
+                        (
+                            sliders.slice().reverse().map(sl => (
+                                <SwiperSlide key={sl._id}>
+                                    <img src={sl.profilePic} alt="" />
+                                </SwiperSlide>
+                            ))
+                        )
                 }
 
                 <div className="autoplay-progress" slot="container-end">

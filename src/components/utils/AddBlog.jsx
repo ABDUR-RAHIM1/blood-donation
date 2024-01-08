@@ -33,7 +33,7 @@ function AddBlog() {
   }, [])
 
   return (
-    <div className='w-full bg-slate-400 py-20'>
+    <div className='login_page_bg w-full py-20 px-4'>
       <form
         onSubmit={state ?
           (e) => handleEditBlog(e, state._id, blog)
@@ -41,8 +41,8 @@ function AddBlog() {
           (e) => handleAddBlog(e, blog)
 
         }
-        className='w-2/5 m-auto bg-black p-4 shadow-md shadow-green-600'>
-        <h3 className='text-center my-4 text-white text-3xl uppercase'>
+        className='w-full md:w-2/5 m-auto bg-gray-100 p-4 '>
+        <h3 className='text-center my-4 text-slate-700 text-3xl uppercase'>
           {state ? "Update Blog" : "Add Blog"}
         </h3>
         <Inputs

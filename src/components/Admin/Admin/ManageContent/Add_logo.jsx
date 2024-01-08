@@ -5,9 +5,10 @@ import { useContext } from 'react';
 import { GlobalState } from '../../../../State/State';
 import Loading from '../../../utils/Loading'; 
 import Inputs from '../../../utils/Inputs'; 
+import Notification from '../../../utils/Notification';
 
 function Add_logo(props) {
-  const {isLoading } = useContext(GlobalState)
+  const {isLoading , message } = useContext(GlobalState)
   const { handleAddLogo, logo } = props;
   const [imgLoading, setImgIsLoading] = useState(false)
   const [register, setRegister] = useState({})
@@ -36,6 +37,7 @@ function Add_logo(props) {
         <Inputs
           type="number"
           name="logoWidth"
+          required={true}
           value={register.logoWidth}
           placeholder="Logo Width"
           lable="set logo Width"
@@ -44,6 +46,7 @@ function Add_logo(props) {
         <Inputs
           type="number"
           name="logoHeight"
+          required={true}
           value={register.logoHeight}
           placeholder="Logo height"
           lable="set logo Height"
@@ -52,6 +55,7 @@ function Add_logo(props) {
          <Inputs
           type="number"
           name="radius"
+          required={true}
           value={register.radius}
           placeholder="Border radius"
           lable="Set Border radius"
@@ -69,7 +73,9 @@ function Add_logo(props) {
             isLoading ? <Loading size='sm' /> : "Change Now"
           }
         </button>
-       
+       {
+        message && <Notification /> 
+       }
       </form>
 
       <div className='flex justify-start h-24 bg-gray-100 items-center flex-wrap py-1 px-2  gap-3 w-full overflow-y-scroll scroll-none' >

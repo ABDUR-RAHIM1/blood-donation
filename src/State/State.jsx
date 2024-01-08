@@ -5,7 +5,8 @@ export const GlobalState = createContext();
 // wrap this function name on app component
 export const MyState = ({ children }) => {
 
-  const API = 'http://localhost:8000/api'
+  // const API = 'http://localhost:8000/api'
+  const API = 'https://blood-donation-rzj3.onrender.com/api'
   const token = JSON.parse(localStorage.getItem("token"));
   const ADMIN_TOKEN = JSON.parse(localStorage.getItem("ADMIN_TOKEN"));
 

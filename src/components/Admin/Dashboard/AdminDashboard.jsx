@@ -8,7 +8,7 @@ console.log(arrowClick)
   return (
     <motion.div
       className='flex-b items-start'>
-      <div className={`${arrowClick ? 'w-0  px-0' : 'w-64 md:w-72  px-3'} sidebar scroll-none  border-r border-slate-50`}>
+      <div className={`${arrowClick ? 'w-0  px-0' : 'w-32 sm:w-56 md:w-72 px-3'} sidebar scroll-none  border-r border-slate-50`}>
         <Sidebar />
       </div>
       <div className="dahboard_main scroll-none pb-32 relative">

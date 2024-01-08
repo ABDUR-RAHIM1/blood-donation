@@ -129,9 +129,9 @@ function UserLogin() {
 
 
             <button className='button button_blue my-4'>
-              {isRegister ? 'Register' : isLoading ? <Loading size='sm' /> : 'Log-in'}
+              { isLoading ? <Loading size='sm' /> : isRegister ? 'Register' : 'Log-in'}
             </button>
-         
+
 
 
             <p onClick={() => setIsReset(!isReset)} className='font-italic my-4 cursor-pointer text-center button bg-slate-200 text-red-800'>forgat password</p>

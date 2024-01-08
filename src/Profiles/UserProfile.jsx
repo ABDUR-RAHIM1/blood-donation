@@ -34,7 +34,7 @@ function UserProfile() {
 
   return (
     <div className='flex items-start justify-start'>
-      <div className={` ${arrowClick ? "w-0 px-0" : "w-64 md:w-72 px-4"} duration-300 overflow-hidden  donarProfileLeSidebar`}>
+      <div className={` ${arrowClick ? 'w-0  px-0' : 'w-32 sm:w-56 md:w-72 px-3'} duration-300 overflow-hidden  donarProfileLeSidebar`}>
         <h2 className='text-xl text-center my-2 uppercase flex items-center justify-center'>Your Profile <FaCircle className="text-green-500 text-sm ml-2" /> </h2>
       
     
@@ -44,7 +44,7 @@ function UserProfile() {
           <div className='my-4 px-1'>
             <h4 className='text-sm'>{loginInfo.name}</h4>
             <p className='py-2 text-sm'>{loginInfo.email}</p>
-            <button onClick={handleLogOutDonar} className='button mt-3 bg-gray-300'>Log-out</button>
+            <button onClick={handleLogOutDonar} className='button mt-3 bg-red-600 text-white'>Log-out</button>
 
           </div>
 

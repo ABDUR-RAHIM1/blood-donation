@@ -17,6 +17,7 @@ function BlogDetails() {
         join: '/donar-register'
 
     } 
+    console.log(state)
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -27,7 +28,7 @@ function BlogDetails() {
 
             className='wrap flex-b flex-wrap items-start'>
             <div className="details">
-                <img className=' m-auto w-7/12 h-48 md:h-400' src={state ? state.profilePic : demoImg} alt="" />
+                <img className=' m-auto w-7/12 h-48 md:h-400' src={ state.profilePic  ? state.profilePic : demoImg} alt="" />
                 <h1 className='heading text-2xl text-center my-4'>{state.title}</h1>
                 <div className='bg-gray-200 mb-2 py-2 px-1'>
                     <small>Author : {state.name}</small> <br />

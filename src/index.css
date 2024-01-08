@@ -13,7 +13,7 @@ body {
   .wrap {
     @apply px-10
   }
-
+ 
   .flex-b {
     @apply flex items-center justify-between
   }
@@ -27,7 +27,7 @@ body {
   }
 
   .add_form {
-    @apply w-10/12 m-auto bg-gray-50 p-4
+    @apply w-full md:w-10/12 m-auto bg-gray-50 p-4
   }
 
   .form-w {
@@ -154,12 +154,13 @@ body {
   /*  footer */
 
   /*  admin ddasbboard */
+ 
   .sidebar {
-    @apply bg-gray-100 h-screen px-3 py-10 duration-300 shadow-md shadow-gray-300
+    @apply bg-gray-100 h-screen  py-10 duration-300 shadow-md shadow-gray-300
   }
 
   .sidebarBtn {
-    @apply w-full py-2 text-center rounded-sm text-black bg-gray-200 cursor-pointer my-3 uppercase hover:bg-indigo-700 hover:text-white hover:scale-125 duration-150
+    @apply  w-full py-2 text-center rounded-sm text-black bg-gray-200 cursor-pointer my-3 uppercase hover:bg-indigo-700 hover:text-white hover:scale-125 duration-150
   }
 
   .arrow {
@@ -204,7 +205,7 @@ body {
 }
 
 @layer base {
-
+ 
   .inset-center {
     position: absolute;
     top: 50%;
@@ -292,6 +293,7 @@ small {
 p {
   font-size: 15px;
   line-height: 1.5rem;
+  white-space: pre-line;
 }
 
 li {
@@ -427,5 +429,8 @@ li {
   .login_page_bg {
     width: 100%;
     height: auto;
+  }
+  .sidebarBtn{
+     font-size: 12px;
   }
 }

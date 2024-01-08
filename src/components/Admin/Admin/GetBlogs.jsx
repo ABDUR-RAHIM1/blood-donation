@@ -1,18 +1,21 @@
-import React from 'react'
-import Blog from './Blog'
-import AdminDashboard from '../Dashboard/AdminDashboard'
-import { motion } from 'framer-motion'
-import { useContext } from 'react'
-import { GlobalState } from '../../../State/State'
-import { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react';
+import Blog from './Blog';
+import AdminDashboard from '../Dashboard/AdminDashboard';
+import { motion } from 'framer-motion';
+import { GlobalState } from '../../../State/State';
+import LoadingSpinner from '../../utils/Spinner';
+
 function GetBlogs() {
-  const { getOneBlogAdmin, oneBlog, isDelete } = useContext(GlobalState);
+  const { getOneBlogAdmin, oneBlog, isLoading , isDelete } = useContext(GlobalState);
 
   useEffect(() => {
-    getOneBlogAdmin()
+    getOneBlogAdmin();
   }, [isDelete]);
 
 
+  if (isLoading) {
+     return <LoadingSpinner />
+  }
 
   return (
     <AdminDashboard>
@@ -22,20 +25,31 @@ function GetBlogs() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{
-          duration: '2'
+          duration: '2',
         }}
-        className='flex-b flex-wrap my-10' >
-        {
-          oneBlog && oneBlog.map(bl => (
-            <Blog key={bl._id}
-              blog={bl}
-            />
-          ))
-        }
+      >
+        <table className='table'>
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>role</th>
+              <th>title</th>
+              <th>date</th>
+              <th>Edit / delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {oneBlog &&
+              oneBlog.slice().reverse().map((bl) => (
+                <tr className='p-3' key={bl._id}>
+                  <Blog blog={bl} />
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </motion.div>
-
     </AdminDashboard>
-  )
+  );
 }
 
-export default GetBlogs
+export default GetBlogs;

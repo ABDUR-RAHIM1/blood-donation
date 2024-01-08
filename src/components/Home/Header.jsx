@@ -11,7 +11,7 @@ import { GlobalState } from '../../State/State';
 
 
 function Header() {
-    const { token, handleGetLogo, logo } = useContext(GlobalState)
+    const { token, handleGetLogo, logo, isLoading } = useContext(GlobalState)
     const [photoRole, setPhotoRole] = useState({});
     useEffect(() => {
         const isPhoto_role = localStorage.getItem("photo_role");
@@ -21,14 +21,12 @@ function Header() {
             setPhotoRole({ ...photoRole, profilePic: photoRole.profilePic, role: photoRole.role })
         }
         handleGetLogo()
-    }, [setPhotoRole, token]);
-
-    const logoItem = logo && logo.slice(-1)[0]
-    console.log(logo)
+    }, [setPhotoRole, token,  ]);
+  
     return (
         <header className='px-4 md:px-0 bg-gray-100 shadow-md shadow-slate-500 sticky top-0 right-0 z-50'>
             {['md'].map((expand) => (
-                <Navbar key={expand} expand={expand} className="bg-gray-100">
+                <Navbar key={expand} expand={expand} >
                     <Container fluid>
                         <Navbar.Brand as={Link} to='/'>
                             {
@@ -43,10 +41,10 @@ function Header() {
                             aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
                             placement="end"
                         >
-                            <Offcanvas.Header closeButton>
+                            <Offcanvas.Header closeButton className='bg-blue-500 text-white'>
                                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                                     ROKTOJODDHA
-                                </Offcanvas.Title>
+                                </Offcanvas.Title> 
                             </Offcanvas.Header>
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 pe-3">

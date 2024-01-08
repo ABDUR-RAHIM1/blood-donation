@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import { GlobalState } from '../../State/State'
+import React, { useContext } from 'react' 
 import { Link } from 'react-router-dom'
 
 function SidebarItems(props) {

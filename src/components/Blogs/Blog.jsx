@@ -6,13 +6,13 @@ import { useContext } from 'react';
 import { GlobalState } from '../../State/State';
 
 function Blog(props) {
-    const { name, email,role , postAt, title, profilePic, desc } = props.blog;
+    const { name,role , postAt, title, profilePic, desc } = props.blog;
     const isEvenNumber = props.index % 2 === 0;
     const {times} = useContext(GlobalState)
     return (
         <motion.div
-            initial={{ y: 50 }}
-            whileInView={{ y: 0 }}
+            initial={{opacity : 0}}
+            whileInView={{ opacity: 1 }}
             transition={{
                 duration: '1',
             }}
@@ -24,12 +24,11 @@ function Blog(props) {
                 </h2>
                 <div className=' bg-gray-50 py-2 px-1'>
                     <small className='uppercase underline'>Author : {name} <span className='text-green-800'> ({role}) </span> </small> <br />
-                    <small>email : {email}</small> <br />
                     <small>Post on : {times(postAt)}</small>
                 </div>
 
-                <h1 className='text-2xl my-1 font-semi-bold'>{title}</h1>
-                <p className='text-sm'>{desc && desc.slice(0, 350)}</p>
+                <h1 className='text-lg md:text-2xl my-1 font-semi-bold'>{title && title.slice(0, 40)+ ". . ."}</h1>
+                <p className='text-sm'>{desc && desc.slice(0, 200)}</p>
                 <Link to='/blog-details' state={props.blog}>
                     <button className='button bg-green-700 text-white hover:bg-green-800 my-3 '>Read More</button>
                 </Link>

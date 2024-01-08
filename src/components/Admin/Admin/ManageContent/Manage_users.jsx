@@ -19,13 +19,27 @@ function Manage_users() {
     return (
         <AdminDashboard>
             <Heading text="manage users" />
-            <div className='flex-b flex-wrap my-10 '>
-                {
-                    usersAcc && usersAcc.map(u => (
-                        <Users  key={u._id} user={u} />
-                    ))
-                }
-            </div>
+            <table className='table my-6'>
+                <thead>
+                    <tr>
+                        <th>Photo</th>
+                        <th>name</th>
+                        <th>email</th>
+                        <th>date</th>
+                        <th>delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        usersAcc && usersAcc.slice().reverse().map(u => (
+                            <tr key={u._id}>
+                                <Users user={u} />
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+
         </AdminDashboard>
     )
 }

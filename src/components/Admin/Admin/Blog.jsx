@@ -21,46 +21,31 @@ function Blog(props) {
     //  admin blog 
 
     return (
-        <div className='w-full cursor-pointer'>
+        <>
 
-            <table className='table overflow-x-auto'>
-                <thead>
-                    <tr>
-                        <th>Photo</th>
-                        <th>role</th>
-                        <th>title</th>
-                        <th>date</th>
-                        <th>Edit / delete</th>
-                    </tr>
-                </thead>
-                <tbody style={{ verticalAlign: "middle" }}>
-                    <tr className='bg-white'>
-                        <td>
-                            <Link to='/blog-details' state={props.blog}>
-                                <img className=' shadow-md w-16 h-12' src={profilePic || demoImg} alt="" />
-                            </Link>
-                        </td>
-                        <td>{role}</td>
-                        <td>
-                            <Link to='/blog-details' state={props.blog}>
-                                <h1 className='underline text-lg' title='go to details'>{title && title.slice(0, 10) + " . ."}</h1>
-                            </Link>
-                        </td>
-                        <td>
-                            {times(postAt)}
-                        </td>
-                        <td className='flex flex-col gap-2 justify-center items-center'>
-                            <Link to='/admin-add-blog' state={props.blog}>
+            <td>
+                <Link to='/blog-details' state={props.blog}>
+                    <img className=' shadow-md w-16 h-12' src={profilePic || demoImg} alt="" />
+                </Link>
+            </td>
+            <td>{role}</td>
+            <td>
+                <Link to='/blog-details' state={props.blog}>
+                    <h1 className='underline text-lg' title='go to details'>{title && title.slice(0, 10) + " . ."}</h1>
+                </Link>
+            </td>
+            <td>
+                {times(postAt)}
+            </td>
+            <td className='flex flex-col gap-2 justify-center items-center'>
+                <Link to='/admin-add-blog' state={props.blog}>
 
-                                <FaRegEdit className="text-2xl cursor-pointer text-green-400" />
-                            </Link>
-                            <MdDelete onClick={() => handleDeleteBlog(_id)} className="text-2xl cursor-pointer text-red-600" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                    <FaRegEdit className="text-2xl cursor-pointer text-green-400" />
+                </Link>
+                <MdDelete onClick={() => handleDeleteBlog(_id)} className="text-2xl cursor-pointer text-red-600" />
+            </td>
+        </>
 
-        </div>
     )
 }
 
