@@ -20,9 +20,7 @@ function Slider() {
     useEffect(() => {
         handleGetSlider()
     }, [])
-
-
-    console.log(isLoading)
+ 
 
     return (
         <div className='wrap bg-red-500'>

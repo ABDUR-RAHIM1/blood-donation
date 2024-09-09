@@ -11,9 +11,9 @@ body {
 
 @layer components {
   .wrap {
-    @apply px-10
+    @apply px-5 md:px-10
   }
- 
+
   .flex-b {
     @apply flex items-center justify-between
   }
@@ -39,8 +39,8 @@ body {
     @apply w-11/12 m-auto bg-gray-50 flex justify-center items-center gap-2 flex-wrap rounded-lg
   }
 
-  .button_blue{
-     @apply w-full text-white bg-blue-800 hover:bg-blue-900
+  .button_blue {
+    @apply w-full text-white bg-blue-800 hover:bg-blue-900
   }
 
   .addBanner {
@@ -154,13 +154,13 @@ body {
   /*  footer */
 
   /*  admin ddasbboard */
- 
+
   .sidebar {
-    @apply bg-gray-100 h-screen  py-10 duration-300 shadow-md shadow-gray-300
+    @apply bg-gray-100 h-screen py-10 duration-300 shadow-md shadow-gray-300
   }
 
   .sidebarBtn {
-    @apply  w-full py-2 text-center rounded-sm text-black bg-gray-200 cursor-pointer my-3 uppercase hover:bg-indigo-700 hover:text-white hover:scale-125 duration-150
+    @apply w-full py-2 text-center rounded-sm text-black bg-gray-200 cursor-pointer my-3 uppercase hover:bg-indigo-700 hover:text-white hover:scale-125 duration-150
   }
 
   .arrow {
@@ -180,7 +180,7 @@ body {
   .dash_card {
     @apply text-sm leading-7 uppercase
   }
- 
+
 
   .title {
     @apply text-2xl font-semibold md:text-4xl my-3 md:font-bold text-center uppercase text-slate-900
@@ -205,7 +205,7 @@ body {
 }
 
 @layer base {
- 
+
   .inset-center {
     position: absolute;
     top: 50%;
@@ -269,15 +269,17 @@ a:hover {
   color: black;
 }
 
-td{
+td {
   text-align: left;
   vertical-align: middle;
   text-transform: capitalize;
 }
-tr{
+
+tr {
   vertical-align: middle;
 
 }
+
 th {
   text-transform: uppercase;
   font-weight: normal;
@@ -430,7 +432,8 @@ li {
     width: 100%;
     height: auto;
   }
-  .sidebarBtn{
-     font-size: 12px;
+
+  .sidebarBtn {
+    font-size: 12px;
   }
 }
