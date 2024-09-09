@@ -5,20 +5,14 @@ import 'react-slideshow-image/dist/styles.css'
 import SliderCard from './SliderCard';
 
 export default function Slider() {
-    const { handleGetSlider, sliders, isLoading} = useContext(GlobalState)
+    const { handleGetSlider, sliders, isLoading } = useContext(GlobalState)
     const [showBanner, setShowBanner] = useState(true);
-
-    // const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         handleGetSlider()
-
-        // Set a timer to hide the banner after 5 seconds
         const timer = setTimeout(() => {
-            isLoading !== true && setShowBanner(false);
+            isLoading == true ? setShowBanner(true) : setShowBanner(false);
         }, 5000);
-
-        // Clean up the timer on component unmount
         return () => clearTimeout(timer);
     }, [])
 

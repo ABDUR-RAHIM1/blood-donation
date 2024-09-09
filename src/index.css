@@ -48,7 +48,7 @@ body {
   }
 
   .proccesCard {
-    @apply w-full sm:w-48 md:w-23 my-3 md:my-0 h-auto sm:h-400 md:h-auto bg-gray-100 rounded-sm shadow-sm duration-200 hover:bg-red-500 hover:text-white
+    @apply w-full sm:w-48 md:w-31 my-5 h-auto sm:h-400 md:h-auto bg-gray-100 rounded-sm shadow-sm duration-200 hover:bg-red-500 hover:text-white
   }
 
   .icons {
@@ -205,6 +205,8 @@ body {
 }
 
 @layer base {
+
+  
 
   .inset-center {
     position: absolute;

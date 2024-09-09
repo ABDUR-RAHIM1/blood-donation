@@ -8,6 +8,7 @@ import Testimonial from './Testimonial'
 import { motion } from 'framer-motion'
 import LetestBlog from './LetestBlog'
 import Slider from './Slider'
+import BecomeDonate from './BecomeDonate'
 // import Slider from '../utils/Slider'
 
 function Home() {
@@ -19,11 +20,12 @@ function Home() {
       transition={{
         duration: '1'
       }}
-    >
+    className=' bg-gray-100'
+   >
 
-      {/* <Slider/> */}
       <Slider />
       <AddBanner />
+      <BecomeDonate />
       <DonationProccess />
       <Appoinment />
       <Volantiars />
