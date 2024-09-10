@@ -1,10 +1,10 @@
 import React from 'react'
 
 function TextArea(props) {
-    const { name, required, value, placeholder, lable, handleChange } = props
+    const { name, required, value, placeholder, label, handleChange } = props
     return (
         <div className=' my-5'>
-            <label htmlFor={name}>{lable}</label>
+            <label htmlFor={name}>{label}</label>
             <textarea name={name}
                 value={value}
                 required={required}

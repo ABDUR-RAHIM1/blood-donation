@@ -3,31 +3,37 @@ import Inputs from '../utils/Inputs'
 import { useContext, useState } from 'react'
 import { GlobalState } from '../../State/State'
 import TextArea from '../utils/TextArea';
-import uploadFile from '../utils/UploadFile';
 import Notification from '../utils/Notification';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import SelectField from '../utils/SelectField';
 import FileField from '../utils/FileField';
+import useFileUploader from '../hooks/useFileUploader';
+import { appoinmentInitialState } from '../../Data/formData/appoinmentForm';
 
 function AppoinmentForm() {
   const navigate = useNavigate()
   const state = useLocation().state;
 
   const { token, handleAppoinment, handleAppoinmentUpdate, message } = useContext(GlobalState);
-  const [isImgLoading, setImgIsLoading] = useState(false)
-  const [register, setRegister] = useState({ profilePic: "" });
 
-  const handleChange = (e) => {
+  const [formData, setFormData] = useState(appoinmentInitialState);
+  const { fileLoading, uploadFile } = useFileUploader()
+
+
+
+  const handleChange = async (e) => {
     const { name, value } = e.target;
-    setRegister({ ...register, [name]: value })
-  }
+    if (name === "profilePic") {
+      const image = e.target.files[0];
+      await uploadFile(image, setFormData);
+      console.log("proiflePic")
+    } else {
 
-  const handleFileChange = async (e) => {
-    const image = e.target.files[0];
-    await uploadFile(image, setRegister, setImgIsLoading);
-    console.log(image)
-  };
+      setFormData({ ...formData, [name]: value })
+    }
+  }
+  console.log(formData)
 
 
   const handleClick = () => {
@@ -40,6 +46,7 @@ function AppoinmentForm() {
       setRegister(state)
     }
   }, []);
+
 
 
   return (
@@ -60,16 +67,16 @@ function AppoinmentForm() {
         <Inputs
           type="number"
           name="contactNumber"
-          value={register.contactNumber}
+          value={formData.contactNumber}
           required={true}
           placeholder="Contact number"
           handleChange={handleChange}
-          lable="Enter Contact Number"
+          label="Enter Contact Number"
         />
         <SelectField
           label="Blood Group"
           name="bloodGroup"
-          value={register.bloodGroup}
+          value={formData.bloodGroup}
           required={true}
           handleChange={handleChange}
           options={["A+", "B+", "AB+", "O+", "A-", "B-", "AB-", "O-"]}
@@ -78,60 +85,55 @@ function AppoinmentForm() {
         <Inputs
           type="text"
           name="problem"
-          value={register.problem}
+          value={formData.problem}
           required={true}
           placeholder="Problem ? "
           handleChange={handleChange}
-          lable="Problems of patient"
+          label="Problems of patient"
         />
         <Inputs
           type="number"
           name="howMuch"
-          value={register.howMuch}
+          value={formData.howMuch}
           required={true}
           placeholder="how many ? "
           handleChange={handleChange}
-          lable="how many bags"
+          label="how many bags"
         />
         <Inputs
           type="time"
           name="needTime"
-          value={register.needTime}
+          value={formData.needTime}
           required={true}
           placeholder="When need"
           handleChange={handleChange}
-          lable="what time will it take"
+          label="what time will it take"
         />
         <Inputs
           type="text"
           name="whereNeed"
-          value={register.whereNeed}
+          value={formData.whereNeed}
           required={true}
           placeholder="Place name"
           handleChange={handleChange}
-          lable="Where is the need?"
+          label="Where is the need?"
         />
-        <input onChange={handleFileChange} type="file" name='profilePic' className='input bg-gray-100' />
-        {
-          isImgLoading ?
-            <small className='mb-4 text-red-500'>Uplaoding Images . . .</small>
-            :
-            <small className='mb-4'>Uplaod Photo</small>
-        }
-        {/* <FileField
+
+
+        <FileField
           name="profilePic"
-          lable={"Upload Photo"}
+          label={fileLoading ? "Uploading . . ." : "Upload Photo"}
           required={false}
-          handleFileChange={handleFileChange}
-        /> */}
+          handleChange={handleChange}
+        />
         <TextArea
           type="text"
           name="message"
-          value={register.message}
+          value={formData.message}
           required={true}
           placeholder="Message"
           handleChange={handleChange}
-          lable="Details About Of patient"
+          label="  About Of patient Condition"
         />
 
         <button onClick={handleClick} className=' w-full py-4 px-7 rounded-sm text-xl font-medium bg-red-500 text-white my-3 hover:bg-red-600 '>

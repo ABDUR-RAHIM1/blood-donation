@@ -1,9 +1,16 @@
 import React from 'react'
 
 import img from "../../images/appoinmentBg.jpeg"
+import { motion } from 'framer-motion'
 export default function AppoinmentBg() {
+
     return (
-        <div className=' w-full relative'>
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className=' w-full relative'>
             <img className='h-screen w-full' src={img} alt="" />
             <div className=' w-full h-full px-5 md:px-10 bg-black bg-opacity-10 absolute top-0 left-0 flex items-center justify-center flex-col'>
                 <h3 className=' text-2xl font-medium uppercase my-5 text-white'>blood owner</h3>
@@ -11,6 +18,6 @@ export default function AppoinmentBg() {
                     We Are Blood Donor Group
                 </h1>
             </div>
-        </div>
+        </motion.div>
     )
 }

@@ -5,7 +5,7 @@ export default function SliderCard() {
 
     return (
 
-        <div className='bg-black bg-opacity-20 p-6 z-[-1]'>
+        <div className='bg-black bg-opacity-80 p-6 z-[-1]'>
             <h2 className=' text-3xl text-red-500 tracking-wide font-bold capitalize'>Donate Blood  , Save Life !</h2>
 
             <h1 className=' text-3xl md:text-8xl tracking-wide font-bold my-10 italic capitalize text-white'>

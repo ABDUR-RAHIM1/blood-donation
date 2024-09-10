@@ -1,12 +1,18 @@
 import React from 'react'
 import { MdArrowCircleRight } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 function AddBanner() {
 
     return (
-        <section className='flex items-center justify-between flex-wrap bg-gray-100 py-20'>
-            <div className=' w-full md:w-[50%] text-white bg-red-500 py-10 px-5 flex items-center justify-between'>
+        <section className='flex items-center justify-between flex-wrap bg-gray-100 py-20 overflow-hidden'>
+            <motion.div
+                initial={{ scale: 1.2 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className=' w-full md:w-[50%] text-white bg-red-500 py-10 px-5 flex items-center justify-between'>
                 <div>
                     <div className=' flex items-center justify-between my-4'>
                         <Link to={"/donar-register"} className=' text-4xl hover:text-gray-400  font-medium underline '>Donate Now</Link>
@@ -19,8 +25,13 @@ function AddBanner() {
 
                 </div>
 
-            </div>
-            <div className=' w-full md:w-[50%] text-white bg-black py-10 px-5 flex items-center justify-between'>
+            </motion.div>
+            <motion.div
+                initial={{ scale: 1.2 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 0.70 }}
+                viewport={{ once: true }}
+                className=' w-full md:w-[50%] text-white bg-black py-10 px-5 flex items-center justify-between'>
                 <div>
                     <div className=' flex items-center justify-between my-4'>
                         <Link to={"/appoinment"} className=' text-4xl hover:text-gray-400  font-medium underline '>Register Now</Link>
@@ -32,7 +43,7 @@ function AddBanner() {
                     <p className=' text-2xl text-gray-300'>desires to obtain pain of itself, because it is pain,</p>
 
                 </div>
-            </div>
+            </motion.div>
         </section>
     )
 }

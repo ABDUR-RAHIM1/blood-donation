@@ -52,7 +52,7 @@ body {
   }
 
   .proccesCard {
-    @apply p-2 w-full sm:w-48 md:w-31 my-5 h-auto sm:h-400 md:h-auto bg-gray-100 rounded-sm shadow-sm duration-200 hover:bg-red-500 hover:text-white
+    @apply p-2 w-full sm:w-[48%] md:w-[31%] my-5 h-auto sm:h-[400px] md:h-auto bg-gray-100 rounded-sm shadow-sm duration-200 hover:bg-red-500 hover:text-white
   }
 
   .icons {
@@ -84,7 +84,7 @@ body {
   }
 
   .donarCard {
-    @apply w-full sm:w-48 md:w-23 my-4 rounded-md shadow-md shadow-fuchsia-300
+    @apply w-full sm:w-[48%] md:w-[23%] my-4 rounded-md shadow-md shadow-fuchsia-300
   }
 
   .genarelInfo {
@@ -121,7 +121,7 @@ body {
   }
 
   .events {
-    @apply w-full sm:w-48 md:w-31 bg-gray-100 my-5 shadow-sm
+    @apply w-full sm:w-[48%] md:w-[31%] bg-gray-100 my-5 shadow-sm
   }
 
   .eventBtn {
@@ -178,7 +178,7 @@ body {
   /* dashboard add form  */
 
   .dash_board_items {
-    @apply w-full sm:w-48 md:w-31 py-5 px-2 my-10 shadow-md rounded-md border-red-300 cursor-pointer
+    @apply w-full sm:w-[48%] md:w-[31%] py-5 px-2 my-10 shadow-md rounded-md border-red-300 cursor-pointer
   }
 
   .dash_card {
@@ -406,36 +406,3 @@ li {
 }
 
 /*  dasboard card css end */
-
-
-
-/* responsive start here */
-
-@media screen and (max-width : 768px) {
-  .wrap {
-    padding: 0px 15px;
-  }
-
-  .swiper-slide img {
-    height: 400px;
-  }
-
-  .heading {
-    font-size: 22px;
-    font-weight: 500;
-  }
-
-  p {
-    font-size: 15px;
-    font-weight: 400;
-  }
-
-  .login_page_bg {
-    width: 100%;
-    height: auto;
-  }
-
-  .sidebarBtn {
-    font-size: 12px;
-  }
-}

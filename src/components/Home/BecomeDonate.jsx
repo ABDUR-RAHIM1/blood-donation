@@ -2,6 +2,7 @@ import React from 'react'
 import img1 from "../../images/blog/r1.jpg"
 import img2 from "../../images/blog/r2.jpg"
 import img3 from "../../images/blog/r3.jpg"
+import { motion } from 'framer-motion'
 
 export default function BecomeDonate() {
 
@@ -25,11 +26,17 @@ export default function BecomeDonate() {
 
 
     return (
-        <section className=' my-20 px-2'>
-            <div className=' flex justify-center gap-3 flex-wrap'>
+        <div className=' my-10 md:my-20 px-4 md:px-10 '>
+            <div className=' flex justify-center gap-2 md:gap-10 flex-wrap'>
                 {
                     donationInformation.map((d, i) => (
-                        <div className='group w-full md:w-[49%] bg-white rounded-sm my-5 px-3 py-3'>
+                        <motion.div
+                            initial={{ scale: 0.8 }}
+                            whileInView={{ scale: 1 }}
+                            transition={{ duration: .5 }}
+                            viewport={{ once: true }}
+                            key={i}
+                            className='group w-full md:w-[48%] bg-white rounded-sm my-2 md:my-5 px-3 py-3'>
                             <div className='w-full h-[400px] overflow-hidden'>
                                 <img src={d.photo} className='w-full h-full group-hover:scale-125 duration-300' alt="" />
                             </div>
@@ -45,11 +52,11 @@ export default function BecomeDonate() {
                             <button className='text-xl font-bold py-4 px-5 bg-slate-950 group-hover:bg-red-500 text-white w-full my-6 transition-colors duration-300'>
                                 Read More
                             </button>
-                        </div>
+                        </motion.div>
 
                     ))
                 }
             </div>
-        </section>
+        </div>
     )
 }

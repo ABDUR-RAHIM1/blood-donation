@@ -1,10 +1,16 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 
 function ProcessCard(props) {
     const { step, description, photo } = props.data
     const { index } = props
     return (
-        <section className='proccesCard'>
+        <motion.section
+            initial={{ y: 100, scale: 0.9 }}
+            whileInView={{ y: 0, scale: 1 }}
+            transition={{ duration: .5 }}
+            // viewport={{ once: true }}
+            className='proccesCard'>
             <div className='h-56 relative overflow-hidden'>
 
                 <img className='w-full h-full duration-300 hover:scale-125' src={photo} alt="roktodibo" />
@@ -15,7 +21,7 @@ function ProcessCard(props) {
                 <h2 className='text-center font-semibold text-lg sm:text-xl mb-3 text-slate-600'>{step}</h2>
                 <p>{description}</p>
             </div>
-        </section>
+        </motion.section>
     )
 }
 

@@ -21,7 +21,7 @@ function Home() {
       transition={{
         duration: '1'
       }}
-    className=' bg-gray-100'
+    className=' bg-gray-100 w-full overflow-hidden'
    >
 
       <Slider />

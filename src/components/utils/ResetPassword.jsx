@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
+// import Modal from 'react-bootstrap/Modal';
 import { GlobalState } from '../../State/State';
 import Inputs from './Inputs';
 import Loading from './Loading';
@@ -26,7 +26,7 @@ function ResetPassword(props) {
         <>
 
 
-            <Modal show={show} onHide={handleClose}>
+            {/* <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Reset Your Password</Modal.Title>
                 </Modal.Header>
@@ -98,7 +98,11 @@ function ResetPassword(props) {
                 <Modal.Footer>
                     <button onClick={handleClose} className='button bg-red-600 text-white hover:bg-red-700'>Go Back</button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
+
+            <div>
+                Modal will be Modify
+            </div>
         </>
     );
 }

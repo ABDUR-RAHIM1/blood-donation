@@ -3,29 +3,40 @@ import AppoinmentBg from './AppoinmentBg'
 import { MdBloodtype } from "react-icons/md"
 import AppoinmentForm from '../Forms/AppoinmentForm';
 import { helpfulInfo } from '../../Data/HelpfullInfo';
+import { motion } from 'framer-motion';
+
 export default function Appoinment() {
-   
+
     return (
         <section>
             <AppoinmentBg />
-            <div className=' px-5 md:px-10 -translate-y-[200px] flex justify-between flex-wrap'>
-                <div className=' w-full md:w-[48%] bg-white text-black py-10 px-5'>
+            <motion.div
+                initial={{ x: 20, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className=' px-4 md:px-10 -translate-y-[200px] flex justify-between flex-wrap overflow-hidden'>
+                <div className=' w-full md:w-[48%] bg-white text-black py-10 px-3'>
                     <h1 className=' text-3xl md:text-4xl font-bold my-4'> Helpful Information  </h1>
-                    <div className=' my-5'>
+                    <div className=' my-5 overflow-hidden'>
                         {helpfulInfo.map((item, index) => (
-                            <p key={index} className='text-[15px] my-3 flex items-center gap-3'>
+                            <motion.p
+                                initial={{ x: 20, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 0.5 }}
+                                viewport={{ once: true }}
+                                key={index} className='text-[15px] my-3 flex items-center gap-3'>
                                 <span className=' text-3xl text-red-500'><MdBloodtype /></span>  {item}
-                            </p>
+                            </motion.p>
                         ))}
                     </div>
                 </div>
-                <div className=' w-full md:w-[48%] bg-white text-black py-10 px-5'>
+                <div className=' w-full md:w-[48%] bg-white text-black py-10 px-3 md:px-5'>
                     <h1 className=' text-3xl md:text-4xl font-bold my-4'>Request Appointment Here</h1>
                     <div className='my-5'>
                         <AppoinmentForm />
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     )
 }

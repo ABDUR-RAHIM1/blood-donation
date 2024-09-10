@@ -1,5 +1,4 @@
 import React from 'react'
-import Spinner from 'react-bootstrap/Spinner'
 import { motion } from 'framer-motion';
 
 function LoadingSpinner() {
@@ -12,7 +11,7 @@ function LoadingSpinner() {
         duration: "1"
       }}
       className='w-full h-screen flex items-center justify-center bg-slate-50'>
-      <Spinner animation="border" size='md' />
+      Spinner
     </motion.div>
   )
 }

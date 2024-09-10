@@ -33,8 +33,8 @@ export default function Nav(props) {
                 <Link to={"/"} className=' text-2xl md:text-5xl font-bold text-white' >Roktojoddha</Link>
                 <div>
                     {
-                        logo && logo.map(lg => (
-                            <img className=' w-[70px] h-[70px] rounded-full' src={lg.profilePic || demoImg} alt="" />
+                        logo && logo.map((lg, index) => (
+                            <img key={index} className=' w-[70px] h-[70px] rounded-full' src={lg.profilePic || demoImg} alt="" />
                         ))
                     }
                 </div>
@@ -43,7 +43,7 @@ export default function Nav(props) {
             <div className='w-full h-full my-10 flex flex-col items-center gap-5 text-3xl font-medium text-white'>
                 {
                     navItems.map((n, i) => (
-                        <Link to={n.path}>
+                        <Link to={n.path} key={i}>
                             {n.name}
                         </Link>
                     ))
