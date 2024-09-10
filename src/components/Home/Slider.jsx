@@ -10,12 +10,14 @@ export default function Slider() {
 
     useEffect(() => {
         handleGetSlider()
+    }, [])
+
+    useEffect(() => {
         const timer = setTimeout(() => {
             isLoading == true ? setShowBanner(true) : setShowBanner(false);
         }, 5000);
         return () => clearTimeout(timer);
-    }, [])
-
+    }, [isLoading])
 
 
     return (

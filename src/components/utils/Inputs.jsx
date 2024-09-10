@@ -4,9 +4,10 @@ function Inputs(props) {
     const { id, name, type, value, disabled, autocomplete, required, placeholder, lable, handleChange } = props;
 
     return (
-        <div>
+        <div className=' my-4'>
+            <label htmlFor={name}>{lable}</label>
             <input
-                className={`w-full input mt-3 focus:outline-none`}
+                className={`w-full input bg-gray-100 focus:outline-red-500 focus:bg-gray-200 focus:border-red-500`}
                 type={type}
                 name={name}
                 id={id}
@@ -17,8 +18,6 @@ function Inputs(props) {
                 placeholder={placeholder}
                 onChange={handleChange}
             />
-            <br />
-            <small className='text-green-800'>{lable}</small>
         </div>
     );
 }

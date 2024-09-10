@@ -7,6 +7,8 @@ import uploadFile from '../utils/UploadFile';
 import Notification from '../utils/Notification';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import SelectField from '../utils/SelectField';
+import FileField from '../utils/FileField';
 
 function AppoinmentForm() {
   const navigate = useNavigate()
@@ -24,6 +26,7 @@ function AppoinmentForm() {
   const handleFileChange = async (e) => {
     const image = e.target.files[0];
     await uploadFile(image, setRegister, setImgIsLoading);
+    console.log(image)
   };
 
 
@@ -41,13 +44,11 @@ function AppoinmentForm() {
 
   return (
     <>
-      <div className='w-full  py-2 text-white bg-red-500'>
-        <h2 className='text-lg text-center text-uppercase'>
-          {
-            state ? "Update Event" : "Apply for Apoinment"
-          }
+      {
+        state && <h2 className='w-full  py-2 text-white text-lg text-center bg-red-500 text-uppercase'>
+          Update Event
         </h2>
-      </div>
+      }
       <form onSubmit={(e) =>
         state ?
           handleAppoinmentUpdate(e, state._id, register)
@@ -65,18 +66,15 @@ function AppoinmentForm() {
           handleChange={handleChange}
           lable="Enter Contact Number"
         />
-        <select required={true} value={register.bloodGroup} onChange={handleChange} name="bloodGroup" className='form-control mt-4 fw-semi-bold'>
-          <option value="">Select Your Blood Group</option>
-          <option value="A+">A+</option>
-          <option value="B+">B+</option>
-          <option value="AB+">AB+</option>
-          <option value="O+">O+</option>
-          <option value="A-">A-</option>
-          <option value="B-">B-</option>
-          <option value="AB-">AB-</option>
-          <option value="O-">O-</option>
-        </select>
-        <small className='mb-3 text-green-800'>Blood Group</small>
+        <SelectField
+          label="Blood Group"
+          name="bloodGroup"
+          value={register.bloodGroup}
+          required={true}
+          handleChange={handleChange}
+          options={["A+", "B+", "AB+", "O+", "A-", "B-", "AB-", "O-"]}
+        />
+
         <Inputs
           type="text"
           name="problem"
@@ -113,13 +111,19 @@ function AppoinmentForm() {
           handleChange={handleChange}
           lable="Where is the need?"
         />
-        <input onChange={handleFileChange} type="file" name='profilePic' className='form-control mt-4' />
+        <input onChange={handleFileChange} type="file" name='profilePic' className='input bg-gray-100' />
         {
           isImgLoading ?
             <small className='mb-4 text-red-500'>Uplaoding Images . . .</small>
             :
             <small className='mb-4'>Uplaod Photo</small>
         }
+        {/* <FileField
+          name="profilePic"
+          lable={"Upload Photo"}
+          required={false}
+          handleFileChange={handleFileChange}
+        /> */}
         <TextArea
           type="text"
           name="message"
@@ -127,12 +131,12 @@ function AppoinmentForm() {
           required={true}
           placeholder="Message"
           handleChange={handleChange}
-          lable="Write Details About it"
+          lable="Details About Of patient"
         />
 
-        <button onClick={handleClick} className='button bg-red-900 text-white my-3 hover:bg-red-950 '>
+        <button onClick={handleClick} className=' w-full py-4 px-7 rounded-sm text-xl font-medium bg-red-500 text-white my-3 hover:bg-red-600 '>
           {
-            state ? "Update Now" : "Apply For Donation"
+            state ? "Update Now" : "Submit Now"
           }
         </button>
         {message && <Notification />}

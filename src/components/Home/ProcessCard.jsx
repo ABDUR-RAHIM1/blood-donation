@@ -1,12 +1,12 @@
 import React from 'react'
 
 function ProcessCard(props) {
-    const {   step, description, photo } = props.data
+    const { step, description, photo } = props.data
     const { index } = props
     return (
         <section className='proccesCard'>
             <div className='h-56 relative overflow-hidden'>
-                <hr />
+
                 <img className='w-full h-full duration-300 hover:scale-125' src={photo} alt="roktodibo" />
                 <p className='absolute left-0 bottom-0 text-4xl font-bold bg-red-500 px-3 py-2 text-wshite'>{index + 1}</p>
             </div>

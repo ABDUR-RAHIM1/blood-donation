@@ -9,6 +9,7 @@ import { motion } from 'framer-motion'
 import LetestBlog from './LetestBlog'
 import Slider from './Slider'
 import BecomeDonate from './BecomeDonate'
+import Welcome from './Welcome'
 // import Slider from '../utils/Slider'
 
 function Home() {
@@ -27,6 +28,7 @@ function Home() {
       <AddBanner />
       <BecomeDonate />
       <DonationProccess />
+      <Welcome />
       <Appoinment />
       <Volantiars />
       <LetestBlog />

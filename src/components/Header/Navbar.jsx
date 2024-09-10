@@ -11,7 +11,7 @@ export default function Navbar() {
     }
 
     return (
-        <div className='flex items-center justify-between h-[100px] sticky top-0 bg-white z-[11]'>
+        <div className='flex items-center justify-between h-[100px] sticky top-0 bg-white z-[111] border-b'>
             <div className='pl-5 md:pl-10 w-[48%] bg-red-600 h-full flex items-center justify-start'>
                 <Link to={"/"} className=' text-2xl md:text-5xl font-bold text-white' >Roktojoddha</Link>
             </div>
