@@ -75,29 +75,13 @@ body {
   /* blog details page  */
 
   /* donar*/
-  .donarBtn {
-    @apply font-semibold text-white uppercase w-full py-3 text-center text-sm
-  }
+
 
   .donarLoginFiled {
     @apply bg-gray-50 border mt-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
   }
 
-  .donarCard {
-    @apply w-full sm:w-[48%] md:w-[23%] my-4 rounded-md shadow-md shadow-fuchsia-300
-  }
-
-  .genarelInfo {
-    @apply my-3 px-2
-  }
-
-  .genarelInfo p {
-    @apply my-2 capitalize
-  }
-
-  .genarelInfo span {
-    @apply font-semibold text-slate-700 hover:text-slate-800
-  }
+ 
 
   /*  donar*/
 
@@ -131,10 +115,6 @@ body {
   /* profile  end */
 
 
-
-  .details {
-    @apply w-full sm:w-9/12 py-10 sm:border-r border-solid border-slate-300 pr-3
-  }
 
   .page-sidebar {
     @apply flex-1 ml-3 py-10

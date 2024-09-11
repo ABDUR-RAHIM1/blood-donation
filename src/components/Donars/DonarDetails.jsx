@@ -1,48 +1,42 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import PageSidebar from '../PageSidebar/PageSidebar';
 import { motion } from 'framer-motion'
 import demoImg from '../../images/demo.jpg'
+import Banner from '../utils/Banner';
 function DonarDetails() {
-    const state = useLocation().state;
+    const { state, pathname } = useLocation();
 
     const { profilePic, name } = state;
 
-    const pageSidebarData = {
-        image: profilePic || demoImg,
-        link: '/donars',
-        home: '/',
-        join: '/donar-register'
 
-    }
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-                duration: '1'
-            }}
+        <>
+            <Banner path={pathname} />
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                    duration: '1'
+                }}
 
-            className='wrap flex-b flex-wrap items-start'>
-            <div className="details">
-                <img className=' m-auto w-10/12 md:w-7/12 h-48 md:h-400' src={profilePic || demoImg} alt="" />
-                <h1 className='heading text-center my-4 italic uppercase'>Name : {name}</h1>
+                className=' px-5 md:px-10 py-10 md:py-20 bg-gray-200'>
+                <div className="w-full ">
+                    <div className=' w-full  overflow-hidden'>
+                        <img className='w-full m-auto  h-auto max-h-[80vh] rounded-sm' src={profilePic || demoImg} alt="roktojoddha" />
+                    </div>
+                    <h1 className='heading text-center text-red-500 font-bold my-10 italic uppercase'>Name : {name}</h1>
 
-                {/*  this table component under this page */}
-                <DonarTable
-                    data={state}
-                />
+                    {/*  this table component under this page */}
+                    <DonarTable
+                        data={state}
+                    />
 
-                <Link to='/donars'>
-                    <button className='button my-5 bg-slate-600 text-white'>Back</button>
-                </Link>
-            </div>
-            <div className="page-sidebar">
-                <PageSidebar
-                    pageSidebar={pageSidebarData}
-                />
-            </div>
-        </motion.div>
+                    <Link to='/donars'>
+                        <button className='py-5 md:py-7 px-10 md:px-16 bg-red-500 hover:bg-black duration-200 font-bold my-10 text-white'>Back</button>
+                    </Link>
+                </div>
+            </motion.div>
+        </>
     )
 }
 
@@ -54,70 +48,73 @@ function DonarTable({ data }) {
     const { email, address, dob, weight, gender, beforeDonation, bloodGroup, contactNumber, emergencyContact, relationshipContact, donationDate, donationTime, message } = data;
 
     return (
-        <table className='table table-striped table-bordered table-hover table-responsive overflow-auto'>
-            <thead>
+        <table className=" bg-white px-5 min-w-full table-auto border-collapse overflow-auto my-6">
+            <thead className="bg-gray-100  " >
                 <tr>
-                    <th style={{ width: "30%", }} scope="col" className="px-6 py-3">Key</th>
-                    <th style={{ width: "70%", }} scope="col">Value</th>
+                    <th className="px-6 py-3 text-left font-bold border-b">Key</th>
+                    <th className="px-6 py-3 text-left font-bold border-b">Value</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td scope="col">গ্রুপ : </td>
-                    <td scope="col">{bloodGroup}</td>
+            <tbody className="bg-white">
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Blood Group:</td>
+                    <td className="px-6 py-4">{bloodGroup}</td>
                 </tr>
-                <tr>
-                    <td scope="col">ইমেইল :</td>
-                    <td scope="col" style={{ textTransform: "lowercase" }}>  {email}</td>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Email:</td>
+                    <td className="px-6 py-4 lowercase">{email}</td>
                 </tr>
-                <tr>
-                    <td scope="col">ঠিকানা :</td>
-                    <td scope="col" style={{ textTransform: "lowercase" }}>  {address}</td>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Address:</td>
+                    <td className="px-6 py-4 lowercase">{address}</td>
                 </tr>
-                <tr>
-                    <td scope="col">জন্ম তারিখ : </td>
-                    <td scope="col">{dob}</td>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Date of Birth:</td>
+                    <td className="px-6 py-4">{dob}</td>
                 </tr>
-                <tr>
-                    <td scope="col">ওজন :</td>
-                    <td scope="col">{weight + " (KG)"}</td>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Weight:</td>
+                    <td className="px-6 py-4">{weight} (KG)</td>
                 </tr>
-                <tr>
-                    <td scope="col">লিঙ্গ : </td>
-                    <td scope="col">{gender}</td>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Gender:</td>
+                    <td className="px-6 py-4">{gender}</td>
                 </tr>
-
-
-                <tr>
-                    <td scope="col">যোগাযোগ নাম্বার : </td>
-                    <td scope="col">{"+888 " + contactNumber}</td>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Contact Number:</td>
+                    <td className="px-6 py-4">+888 {contactNumber}</td>
                 </tr>
-                <tr>
-                    <td scope="col">জরুরি  নাম্বার : </td>
-                    <td scope="col">{"+888 " + emergencyContact}</td>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Emergency Contact:</td>
+                    <td className="px-6 py-4">+888 {emergencyContact}</td>
                 </tr>
-                <tr>
-                    <td scope="col">পরিচিতজন   : </td>
-                    <td scope="col">{"+888 " + relationshipContact || N / A}</td>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Relationship Contact:</td>
+                    <td className="px-6 py-4">{relationshipContact ? "+888 " + relationshipContact : "N/A"}</td>
                 </tr>
-                <tr >
-                    <td scope="col">কততম দান : </td>
-                    <td scope="col">{beforeDonation + " (Times)"}</td>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Previous Donations:</td>
+                    <td className="px-6 py-4">{beforeDonation} (Times)</td>
                 </tr>
-                <tr scope="row">
-                    <td scope="col">শেষ ডোনেট: </td>
-                    <td scope="col">{donationDate}</td>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Last Donation Date:</td>
+                    <td className="px-6 py-4">{donationDate}</td>
                 </tr>
-                <tr>
-                    <td scope="col">পছন্দের সময়: </td>
-                    <td scope="col">{donationTime} AM/PM </td>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Preferred Time:</td>
+                    <td className="px-6 py-4">{donationTime} AM/PM</td>
                 </tr>
-                <tr>
-                    <td style={{ verticalAlign: 'middle' }} scope="col">শর্ত : </td>
-                    <td style={{ verticalAlign: 'middle' }} scope="col">{message}</td>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Conditions:</td>
+                    <td className="px-6 py-4">{
+                        message && message.split(".").map((m, i) => (
+                            <p key={i} className=' my-3'>{m}</p>
+                        ))
+                    }</td>
                 </tr>
             </tbody>
         </table>
-    )
+    );
+
 }
 

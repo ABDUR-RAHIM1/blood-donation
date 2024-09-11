@@ -1,28 +1,29 @@
-import React, { useContext, useEffect } from 'react' 
+import React, { useContext, useEffect } from 'react'
 import Blog from './Blog'
 import { Link } from 'react-router-dom'
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import { GlobalState } from '../../State/State';
 import LoadingSpinner from '../utils/Spinner';
+import Banner from '../utils/Banner';
 function Blogs() {
-  const {handleGetBlogs , blogs , isLoading , }  = useContext(GlobalState)
+  const { handleGetBlogs, blogs, isLoading, } = useContext(GlobalState)
 
-  useEffect(()=>{
-      handleGetBlogs()
-  } , [])
-  if(isLoading) return <LoadingSpinner size="md"/>
+  useEffect(() => {
+    handleGetBlogs()
+  }, [])
+  if (isLoading) return <LoadingSpinner size="md" />
   return (
     <motion.div
-      initial={{opacity:0}}
-      animate={{opacity:1}}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{
-        duration : '2'
+        duration: '2'
       }}
-    className='mt-5'>
-      <h1 className='text-center text-3xl font-semibold my-8'>Blogs</h1>
+    >
+      <Banner path={"Blogs"} />
       <div>
         {
-        blogs && blogs.slice().reverse().map((bl, index) => (
+          blogs && blogs.slice().reverse().map((bl, index) => (
             <Blog
               key={bl._id}
               blog={bl}
@@ -31,7 +32,7 @@ function Blogs() {
           ))
         }
       </div>
-     
+
     </motion.div>
   )
 }

@@ -10,7 +10,6 @@ import LetestBlog from './LetestBlog'
 import Slider from './Slider'
 import BecomeDonate from './BecomeDonate'
 import Welcome from './Welcome'
-// import Slider from '../utils/Slider'
 
 function Home() {
 
@@ -21,8 +20,8 @@ function Home() {
       transition={{
         duration: '1'
       }}
-    className=' bg-gray-100 w-full overflow-hidden'
-   >
+      className=' bg-gray-100 w-full overflow-hidden'
+    >
 
       <Slider />
       <AddBanner />

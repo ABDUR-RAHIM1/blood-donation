@@ -22,7 +22,7 @@ function UserEvent({ userEvent }) {
             transition={{
                 duration: '1'
             }} userEvent
-            className='events w-full sm:w-48 md:w-31 relative'
+            className='group w-full md:w-[31%] bg-white shadow-md shadow-gray-300 rounded-md  p-3'
         >
             {
                 token && path === "/profile" &&
@@ -41,18 +41,29 @@ function UserEvent({ userEvent }) {
 
             }
 
-            <div className="bg-gray-200">
-                <img className='w-3/5 m-auto h-52' src={profilePic || demoImg} alt="" />
+            <div className="w-full h-[60vh] overflow-hidden" >
+                <img className='w-full h-full group-hover:scale-110 group-hover:opacity-80   duration-300' src={profilePic || demoImg} alt="" />
             </div>
-            <div className='genarelInfo'>
-                <h1> <span>Name :</span> {name}</h1>
-                <p> <span>bloodGroup :</span> {bloodGroup} </p>
-                <p> <span>Problem :</span> {problem} </p>
+            <table className="my-6 w-full border-collapse">
+                <tbody className="space-y-4">
+                    <tr className="border-b border-b-gray-100">
+                        <td className="p-2 font-bold">Name:</td>
+                        <td className="p-2">{name}</td>
+                    </tr>
+                    <tr className="border-b border-b-gray-100">
+                        <td className="p-2 font-bold">Blood Group:</td>
+                        <td className="p-2">{bloodGroup}</td>
+                    </tr>
+                    <tr className="border-b border-b-gray-100">
+                        <td className="p-2 font-bold">Problem:</td>
+                        <td className="p-2">{problem}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-            </div>
-            <Link to='/users-details' state={userEvent}>
+            <Link to='/users-details' state={userEvent} >
                 <button
-                    className={`button eventBtn`}
+                    className="group-hover:bg-red-500 duration-300 py-4 px-6 bg-black text-white text-center rounded-sm my-5 w-full"
                 > See Details</button>
             </Link>
 

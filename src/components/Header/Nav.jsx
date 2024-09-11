@@ -27,7 +27,7 @@ export default function Nav(props) {
     }, [setPhotoRole, token,]);
 
     return (
-        <div className={` ${show ? " scale-x-1" : " scale-x-0"} origin-left w-[48%] bg-red-500 duration-200 h-screen  z-[20] fixed top-0 left-0 px-10 py-10`}>
+        <div className={` ${show ? " scale-x-1" : " scale-x-0"} origin-left w-[48%] bg-red-500 duration-200 h-screen  z-[20] fixed top-0 left-0 px-10 py-10 overflow-y-auto`}>
 
             <div className=' w-full h-[100px] flex items-center justify-between'>
                 <Link to={"/"} className=' text-2xl md:text-5xl font-bold text-white' >Roktojoddha</Link>
@@ -40,7 +40,7 @@ export default function Nav(props) {
                 </div>
             </div>
 
-            <div className='w-full h-full my-10 flex flex-col items-center gap-5 text-3xl font-medium text-white'>
+            <div className='w-full h-full my-10 flex flex-col items-center gap-10 text-3xl font-medium text-white'>
                 {
                     navItems.map((n, i) => (
                         <Link to={n.path} key={i}>
