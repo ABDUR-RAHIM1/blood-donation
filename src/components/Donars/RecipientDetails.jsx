@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { GlobalState } from '../../State/State';
 import Banner from '../utils/Banner';
 
-function UsersDetails() {
+function RecipientDetails() {
     const { state, pathname } = useLocation();
     const { profilePic, name } = state;
 
@@ -29,7 +29,7 @@ function UsersDetails() {
                     <h1 className='heading text-center text-red-500 font-bold my-10 italic uppercase'>Name : {name}</h1>
 
                     {/*  this table component under this page */}
-                    <UserTable
+                    <RecipientTable
                         data={state}
                     />
 
@@ -43,11 +43,11 @@ function UsersDetails() {
     )
 }
 
-export default UsersDetails
+export default RecipientDetails
 
 
 
-function UserTable({ data }) {
+function RecipientTable({ data }) {
     const { name, email, bloodGroup, contactNumber, howMuch, whereNeed, needTime, problem, createAt, message } = data;
     const { times } = useContext(GlobalState);
 
@@ -61,12 +61,12 @@ function UserTable({ data }) {
             </thead>
             <tbody className="bg-white">
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Name:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">Refference:</td>
                     <td className="px-6 py-4">{name}</td>
                 </tr>
                 <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Email:</td>
-                    <td className="px-6 py-4 lowercase">{email}</td>
+                    <td className="px-6 py-4 lowercase">{email} {`(Refference)`} </td>
                 </tr>
                 <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Blood Group:</td>

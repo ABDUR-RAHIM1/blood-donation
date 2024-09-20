@@ -1,28 +1,26 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { GlobalState } from '../../State/State'
 
 function LetestBlog() {
     const navigate = useNavigate()
-    const { handleGetBlogs, blogs } = useContext(GlobalState)
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await handleGetBlogs();
-        };
-
-        fetchData();
-    }, []);
-
-
+    const API = `/blogs/blogs`;
+    const { isLoading, error, data } = useFetch(API);
+ 
     return (
         <div className=' my-20 md:my-32'>
             <div className=' text-center my-10'>
                 <h2 className=' text-2xl my-3 text-red-500'>Get the Latest News and Stories</h2>
                 <h1 className=' text-3xl md:text-5xl font-bold'>Letest BLog</h1>
             </div>
+            <div className='py-10 flex items-center justify-center flex-col'>
+                {
+                    isLoading ? <h2 className=' text-2xl text-center my-4 text-red-500'>Loading . . . </h2> : error ? <ErrorMessage message={error} /> : ""
+                }
+            </div>
             <div className='px-5 md:px-10'>
                 <div className='flex-b mt-10 flex-wrap'>
-                    {blogs && blogs.slice(0, 4).map((lb, index) => (
+                    {data && data.slice(0, 4).map((lb, index) => (
                         <HomeBlog key={lb._id} blog={lb} index={index} />
                     ))
 
@@ -42,6 +40,9 @@ export default LetestBlog
 import demoImg from "../../images/demo1.png";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
+import useFetch from '../../hooks/usefetch';
+import LoadingSpinner from '../utils/Spinner';
+import ErrorMessage from '../utils/ErrorMessage';
 
 export function HomeBlog(props) {
     const { postAt, title, profilePic, desc } = props.blog;

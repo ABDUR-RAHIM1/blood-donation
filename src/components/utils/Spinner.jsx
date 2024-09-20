@@ -4,15 +4,18 @@ import { motion } from 'framer-motion';
 function LoadingSpinner() {
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{
-        duration: "1"
-      }}
-      className='w-full h-screen flex items-center justify-center bg-slate-50'>
-      Spinner
-    </motion.div>
+    <div className='w-full h-screen  flex items-center justify-center flex-col gap-4'>
+      <h1 className='text-6xl text-red-500 font-bold'>ROKTOJODDHA</h1>
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{
+          duration: 1.5,
+          ease: "linear",
+          repeat: Infinity,
+        }}
+        className='w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full'
+      />
+    </div>
   )
 }
 

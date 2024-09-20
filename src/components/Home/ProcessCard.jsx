@@ -6,10 +6,10 @@ function ProcessCard(props) {
     const { index } = props
     return (
         <motion.section
-            initial={{ y: 100, scale: 0.9 }}
-            whileInView={{ y: 0, scale: 1 }}
-            transition={{ duration: .5 }}
-            // viewport={{ once: true }}
+            initial={{ y: 100, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
             className='proccesCard'>
             <div className='h-56 relative overflow-hidden'>
 

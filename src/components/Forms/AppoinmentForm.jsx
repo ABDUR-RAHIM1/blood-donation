@@ -8,14 +8,15 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import SelectField from '../utils/SelectField';
 import FileField from '../utils/FileField';
-import useFileUploader from '../hooks/useFileUploader';
 import { appoinmentInitialState } from '../../Data/formData/appoinmentForm';
+import useFileUploader from '../../hooks/useFileUploader';
+import Loading from '../utils/Loading';
 
 function AppoinmentForm() {
-  const navigate = useNavigate()
-  const state = useLocation().state;
 
-  const { token, handleAppoinment, handleAppoinmentUpdate, message } = useContext(GlobalState);
+  const state = useLocation().state;
+  const navigate = useNavigate()
+  const { token, postHandler, posting, editHandler, updating, message } = useContext(GlobalState);
 
   const [formData, setFormData] = useState(appoinmentInitialState);
   const { fileLoading, uploadFile } = useFileUploader()
@@ -27,43 +28,88 @@ function AppoinmentForm() {
     if (name === "profilePic") {
       const image = e.target.files[0];
       await uploadFile(image, setFormData);
-      console.log("proiflePic")
     } else {
 
       setFormData({ ...formData, [name]: value })
     }
   }
-  console.log(formData)
 
 
-  const handleClick = () => {
-    if (!token) {
-      navigate("/user-auth")
-    }
-  }
   useEffect(() => {
     if (state) {
-      setRegister(state)
+      setFormData(state)
     }
-  }, []);
+  }, [state]);
 
 
+  const handleCreateAppoinment = (e) => {
+    e.preventDefault();
+
+    if (!token) {
+      const res = window.confirm("Please Login First")
+      if (res) {
+        navigate("/auth")
+      }
+
+      return
+
+    }
+
+    const POST_API = "/users-register/register"
+    postHandler(POST_API, formData);
+
+  }
+
+  const handleUpdateAppoinment = (e) => {
+
+    e.preventDefault();
+    const UPDATE_API = `/users-register/update/${state._id}`
+    editHandler(UPDATE_API, formData);
+
+  }
+
+  console.log(formData)
 
   return (
     <>
-      {
-        state && <h2 className='w-full  py-2 text-white text-lg text-center bg-red-500 text-uppercase'>
-          Update Event
-        </h2>
-      }
-      <form onSubmit={(e) =>
-        state ?
-          handleAppoinmentUpdate(e, state._id, register)
-          :
-          handleAppoinment(e, register)
 
-      }>
+      <form
+        onSubmit={
+          state ?
+            handleUpdateAppoinment
+            : handleCreateAppoinment
+        }
 
+      >
+
+        <h1 className=' text-3xl md:text-4xl font-bold my-8'>
+          {
+            state ? "Update The Appointment" : "Request Appointment Here"
+          }
+        </h1>
+        {/* Patient Name */}
+        <Inputs
+          type="text"
+          name="patientName"
+          value={formData.patientName}
+          required={true}
+          placeholder="Patient's Name"
+          handleChange={handleChange}
+          label="Enter Patient's Name"
+        />
+
+        {/* Patient Age */}
+        <Inputs
+          type="number"
+          name="patientAge"
+          value={formData.patientAge}
+          required={true}
+          placeholder="Patient's Age"
+          handleChange={handleChange}
+          label="Enter Patient's Age"
+        />
+
+        {/* Contact Number */}
         <Inputs
           type="number"
           name="contactNumber"
@@ -73,59 +119,115 @@ function AppoinmentForm() {
           handleChange={handleChange}
           label="Enter Contact Number"
         />
+
+        {/* Blood Group */}
         <SelectField
           label="Blood Group"
           name="bloodGroup"
           value={formData.bloodGroup}
           required={true}
           handleChange={handleChange}
+          defaultOption={"Select Blood Group"}
           options={["A+", "B+", "AB+", "O+", "A-", "B-", "AB-", "O-"]}
         />
 
+        {/* Problem Description */}
         <Inputs
           type="text"
           name="problem"
           value={formData.problem}
           required={true}
-          placeholder="Problem ? "
+          placeholder="What is the problem?"
           handleChange={handleChange}
-          label="Problems of patient"
+          label="Describe the Patient's Problem"
         />
+
+        {/* How Many Bags of Blood */}
         <Inputs
           type="number"
           name="howMuch"
           value={formData.howMuch}
           required={true}
-          placeholder="how many ? "
+          placeholder="Number of Bags"
           handleChange={handleChange}
-          label="how many bags"
+          label="How Many Bags of Blood?"
         />
+        {/* Preferred Donation Date */}
+        <Inputs
+          type="date"
+          name="preferredDate"
+          value={formData.preferredDate}
+          required={true}
+          placeholder="Preferred Donation Date"
+          handleChange={handleChange}
+          label="When is the Preferred Donation Date?"
+        />
+
+        {/* Need Time */}
         <Inputs
           type="time"
           name="needTime"
           value={formData.needTime}
           required={true}
-          placeholder="When need"
+          placeholder="When Needed"
           handleChange={handleChange}
-          label="what time will it take"
+          label="What Time is the Blood Needed?"
         />
+
+        {/* Where is the Blood Needed */}
         <Inputs
           type="text"
-          name="whereNeed"
-          value={formData.whereNeed}
+          name="location"
+          value={formData.location}
           required={true}
-          placeholder="Place name"
+          placeholder="Location Name"
           handleChange={handleChange}
-          label="Where is the need?"
+          label="Where is the Blood Needed?"
         />
 
 
+
+        {/* Hospital/Medical Center */}
+        <Inputs
+          type="text"
+          name="hospital"
+          value={formData.hospital}
+          required={true}
+          placeholder="Hospital Name"
+          handleChange={handleChange}
+          label="Hospital/Medical Center Name"
+        />
+
+        {/* Urgency Level */}
+        <SelectField
+          label="Urgency Level"
+          name="urgency"
+          value={formData.urgency}
+          required={true}
+          handleChange={handleChange}
+          options={["Normal", "Urgent", "Critical"]}
+        />
+
+        {/* Doctor's Contact Information */}
+        <Inputs
+          type="text"
+          name="doctorContact"
+          value={formData.doctorContact}
+          required={false}
+          placeholder="Doctor's Contact Info"
+          handleChange={handleChange}
+          label="Doctor’s Contact Information (Optional)"
+        />
+
+        {/* Upload Patient Photo */}
         <FileField
           name="profilePic"
-          label={fileLoading ? "Uploading . . ." : "Upload Photo"}
+          label={fileLoading ? "Uploading . . ." : "Upload Patient Photo"}
           required={false}
           handleChange={handleChange}
         />
+
+        {/* Additional Message */}
         <TextArea
           type="text"
           name="message"
@@ -133,16 +235,19 @@ function AppoinmentForm() {
           required={true}
           placeholder="Message"
           handleChange={handleChange}
-          label="  About Of patient Condition"
+          label="Additional Information about the Patient's Condition"
         />
 
-        <button onClick={handleClick} className=' w-full py-4 px-7 rounded-sm text-xl font-medium bg-red-500 text-white my-3 hover:bg-red-600 '>
-          {
-            state ? "Update Now" : "Submit Now"
-          }
+        {/* Submit Button */}
+        <button disabled={fileLoading} className="w-full py-4 px-7 rounded-sm text-xl font-medium primaryBg2 hover:secondaryBg">
+          {posting || updating ? <Loading /> : state ? "Update Now" : "Submit Now"}
         </button>
+
+        {/* Notification for any messages */}
         {message && <Notification />}
+
       </form>
+
 
 
     </>

@@ -28,7 +28,7 @@ export default function useFileUploader() {
             const imgUrl = data.secure_url;
 
             // Update the parent state with the image URL
-            setRegister((prevState) => ({ ...prevState, profilePic: imgUrl }));
+            setRegister((prevState) => ({ ...prevState, photo: imgUrl }));
         } catch (error) {
             console.error('Error during file upload:', error.message);
         } finally {

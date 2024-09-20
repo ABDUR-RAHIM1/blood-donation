@@ -2,31 +2,34 @@ import React, { useContext, useEffect, useState } from 'react'
 import Inputs from '../utils/Inputs'
 import TextArea from '../utils/TextArea'
 import { GlobalState } from '../../State/State'
-import uploadFile from '../utils/UploadFile'
-import Notification from '../utils/Notification'
 import Loading from '../utils/Loading'
 import { useLocation } from 'react-router-dom'
+import SelectField from '../utils/SelectField'
+import FileField from '../utils/FileField'
+import useFileUploader from '../../hooks/useFileUploader'
+import { initialRegisterFormState } from '../../Data/formData/registerForm'
 
 function DonarRegisterForm() {
     const state = useLocation().state;
 
-    const { isLoading, message, handleDonarCreateProfiles, handleUpdateRegister } = useContext(GlobalState);
-    const [imgLoading, setImgIsLoading] = useState(false)
-    const [register, setRegister] = useState({
-        profilePic: ''
-    })
+    const { postHandler, positng, editHandler, updating } = useContext(GlobalState);
+
+    const { fileLoading, uploadFile } = useFileUploader();
+
+    const [formData, setFormData] = useState(initialRegisterFormState);
 
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         const { name, value } = e.target;
-        setRegister({ ...register, [name]: value })
+        if (name === "photo") {
+            const image = e.target.files[0];
+            await uploadFile(image, setFormData);
+            console.log("photo")
+        } else {
+
+            setFormData({ ...formData, [name]: value })
+        }
     }
-
-    const handleFileChange = async (e) => {
-        const image = e.target.files[0];
-        await uploadFile(image, setRegister, setImgIsLoading);
-    };
-
 
     let required;
     if (state) {
@@ -37,165 +40,259 @@ function DonarRegisterForm() {
 
     useEffect(() => {
         if (state) {
-            setRegister(state)
+            setFormData(state)
         }
-    }, [])
+    }, [state])
+
+    const handleAddRegister = (e) => {
+        e.preventDefault();
+
+        const POST_API = '/donar-register/register'
+        postHandler(POST_API, formData)
+
+    }
+    const handleUpdateRegister = (e) => {
+        e.preventDefault();
+        const UPDATE_API = `/donar-register/update/${state._id}`
+        editHandler(UPDATE_API, formData)
+    }
 
     return (
-        <form onSubmit={
-            state ? (e) => handleUpdateRegister(e, state._id, register)
-                :
-                (e) => handleDonarCreateProfiles(e, register)
-        } >
-            <div className=" bg-red-500 py-4 text-center absolute top-0 left-0 w-full">
-                <h1 className='text-white text-xl '>
-                    {
-                        state ? "আপডেট করুন " : " রেজিস্টার ফর্মটি  পূরণ করুন"
-                    }
-                </h1>
-            </div>
+        <form onSubmit={state ?
+            handleUpdateRegister
+            : handleAddRegister
+        }
+        >
 
+            <h1 className=' text-3xl md:text-4xl font-bold my-8'>
+                {
+                    state ? "Update Information" : "Register as a Donar"
+                }
+            </h1>
+            {/* Full Name */}
+            <Inputs
+                type='text'
+                name='name'
+                value={formData.name}
+                required={required}
+                placeholder='Full Name'
+                label='Enter your Full Name'
+                handleChange={handleChange}
+            />
+
+            {/* Email */}
+            <Inputs
+                type='email'
+                name='email'
+                value={formData.email}
+                required={required}
+                placeholder='Email Address'
+                label='Enter your Email Address'
+                handleChange={handleChange}
+            />
+
+            {/* Address */}
             <Inputs
                 type='text'
                 name='address'
-                value={register.address}
+                value={formData.address}
                 required={required}
                 placeholder='Address'
-                lable='Enter your Address'
+                label='Enter your Address'
                 handleChange={handleChange}
             />
 
+            {/* Contact Number */}
             <Inputs
                 type='number'
                 name='contactNumber'
-                value={register.contactNumber}
+                value={formData.contactNumber}
                 required={required}
                 placeholder='Enter your contact number'
-                lable='Contact Number'
+                label='Contact Number'
                 handleChange={handleChange}
             />
+
+            {/* Emergency Contact */}
             <Inputs
                 type='number'
                 name='emergencyContact'
-                value={register.emergencyContact}
+                value={formData.emergencyContact}
                 required={required}
                 placeholder='Emergency Contact'
-                lable='Enter emergency contact number'
+                label='Enter emergency contact number'
                 handleChange={handleChange}
             />
 
+            {/* Relationship Contact */}
             <Inputs
                 type='number'
                 name='relationshipContact'
-                value={register.relationshipContact}
+                value={formData.relationshipContact}
                 placeholder='Relationship Emergency Contact'
-                lable='Relationship Emergency Contact'
+                label='Relationship Emergency Contact'
                 handleChange={handleChange}
             />
 
+            {/* Date of Birth */}
             <Inputs
                 type='date'
                 name='dob'
-                value={register.dob}
+                value={formData.dob}
                 required={required}
                 placeholder='Date Of Birth'
-                lable='Date of Birth'
+                label='Date of Birth'
                 handleChange={handleChange}
             />
 
+            {/* Donation Date */}
             <Inputs
                 type='date'
                 name='donationDate'
-                value={register.donationDate}
+                value={formData.donationDate}
                 required={required}
-                placeholder='Doantion Date'
-                lable='Last Doantion Date'
+                placeholder='Donation Date'
+                label='Last Donation Date'
                 handleChange={handleChange}
             />
 
+            {/* Donation Time */}
             <Inputs
                 type='time'
                 name='donationTime'
-                value={register.donationTime}
+                value={formData.donationTime}
                 required={required}
                 placeholder='04-10 pm'
-                lable='Donation Time (04-10 pm)'
+                label='Donation Time (04-10 pm)'
                 handleChange={handleChange}
             />
 
-            <select required={required} value={register.gender} onChange={handleChange} name="gender" className='form-control mt-4 fw-semi-bold'>
-                <option value="">Select Your Gender</option>
-                <option value="male">Male</option>
-                <option value="female">female</option>
-                <option value="others">others</option>
-            </select>
-            <small className='mb-3 text-green-800'>Gender</small>
+            {/* Gender */}
+            <SelectField
+                label="Gender"
+                name="gender"
+                value={formData.gender}
+                required={true}
+                handleChange={handleChange}
+                options={["Male", "Female", "Others"]}
+            />
 
-            <select required={required} value={register.bloodGroup} onChange={handleChange} name="bloodGroup" className='form-control mt-4 fw-semi-bold'>
-                <option value="">Select Your BLood Group</option>
-                <option value="A+">A+</option>
-                <option value="B+">B+</option>
-                <option value="AB+">AB+</option>
-                <option value="O+">O+</option>
-                <option value="A-">A-</option>
-                <option value="B-">B-</option>
-                <option value="AB-">AB-</option>
-                <option value="O-">O-</option>
-            </select>
-            <small className='mb-3 text-green-800'>Blood Group</small>
+            {/* Blood Group */}
+            <SelectField
+                label="Blood Group"
+                name="bloodGroup"
+                value={formData.bloodGroup}
+                required={true}
+                handleChange={handleChange}
+                defaultOption={"Select Your Blood Group"}
+                options={["A+", "B+", "AB+", "O+", "A-", "B-", "AB-", "O-"]}
+            />
+
+            {/* Weight */}
             <Inputs
                 type='number'
                 name='weight'
-                value={register.weight}
+                value={formData.weight}
                 required={required}
                 placeholder='Weight (kg)'
-                lable='Enter your weight in kilograms'
+                label='Enter your weight in kilograms'
                 handleChange={handleChange}
             />
 
+            {/* Before Donation Count */}
             <Inputs
                 type='number'
                 name='beforeDonation'
                 required={required}
-                value={register.beforeDonation}
+                value={formData.beforeDonation}
                 placeholder='(5) times'
-                lable='How much do you donate?'
+                label='How many times have you donated?'
+                handleChange={handleChange}
+            />
+
+            {/* Donation Location */}
+            <Inputs
+                type='text'
+                name='donationLocation'
+                value={formData.donationLocation}
+                required={required}
+                placeholder='Donation Location'
+                label='Enter your Donation Location'
+                handleChange={handleChange}
+            />
+
+            {/* Medical Conditions */}
+            <Inputs
+                type='text'
+                name='medicalCondition'
+                value={formData.medicalCondition}
+                required={false}
+                placeholder='Medical Conditions'
+                label='Enter any Medical Conditions (optional)'
+                handleChange={handleChange}
+            />
+
+            {/* Allergies */}
+            <Inputs
+                type='text'
+                name='allergies'
+                value={formData.allergies}
+                required={false}
+                placeholder='Allergies'
+                label='Enter any Allergies (optional)'
+                handleChange={handleChange}
+            />
+
+            {/* Last Donation Location */}
+            <Inputs
+                type='text'
+                name='lastDonationLocation'
+                value={formData.lastDonationLocation}
+                required={false}
+                placeholder='Last Donation Location'
+                label='Enter your Last Donation Location'
+                handleChange={handleChange}
+            />
+
+            {/* Preferred Donation Time */}
+            <Inputs
+                type='time'
+                name='preferredDonationTime'
+                value={formData.preferredDonationTime}
+                required={false}
+                placeholder='Preferred Donation Time'
+                label='Preferred Donation Time'
                 handleChange={handleChange}
             />
 
 
+            {/* Profile Picture */}
+            <FileField
+                name="photo"
+                label={fileLoading ? "Uploading . . ." : "Upload Photo"}
+                required={false}
+                handleChange={handleChange}
+            />
 
-            <input onChange={handleFileChange}
-                type="file"
-                id='file'
-                className='form-control mt-4'
-                name='profilePic' />
-            {
-                imgLoading ?
-                    <label className='mb-4 mt-2 lowercase text-red-500' htmlFor="file">Uploading Your Image</label>
-                    :
-                    <label className='mb-4 mt-2 lowercase text-green-800' htmlFor="file">Upload Your Profile Picture</label>
-            }
-
+            {/* Message */}
             <TextArea
                 type='textarea'
                 name='message'
-                value={register.message}
+                value={formData.message}
                 required={required}
                 placeholder='Enter your message (optional)'
-                lable='any prerequisite?'
+                label='Any prerequisites?'
                 handleChange={handleChange}
             />
 
-            <button disabled={isLoading} className='button bg-slate-300 text-slate-600 text-center my-4 hover:bg-slate-500 hover:text-white'>
-                {state ? "Update Now" : "Add Now"}
+            {/* Submit Button */}
+            <button disabled={fileLoading} className='w-full py-4 px-7 rounded-sm text-xl font-medium primaryBg hover:secondaryBg my-3 '>
+                {positng || updating ? <Loading /> : state ? "Update Now" : "Submit Now"}
             </button>
-            {isLoading && <Loading size='sm' />}
-
-            {message && <Notification />}
 
 
-        </form >
+        </form>
+
     )
 }
 

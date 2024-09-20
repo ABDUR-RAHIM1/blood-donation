@@ -1,18 +1,17 @@
 
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
+import { toast } from "react-toastify";
 export const GlobalState = createContext();
 
 // wrap this function name on app component
 export const MyState = ({ children }) => {
 
-  // const API = 'http://localhost:8000/api'
-  const API = 'https://blood-donation-rzj3.onrender.com/api'
-  const token = JSON.parse(localStorage.getItem("token"));
-  const ADMIN_TOKEN = JSON.parse(localStorage.getItem("ADMIN_TOKEN"));
+  const API = 'http://localhost:8000/api'
+  // const API = 'https://blood-donation-rzj3.onrender.com/api'
 
 
   //  reuseble state all are components
-  const [isAdminLogin, setIsAdminLogin] = useState(false); 
+  const [isAdminLogin, setIsAdminLogin] = useState(false);
   const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false);
   const [isDelete, setIsDelete] = useState(false)
@@ -32,7 +31,24 @@ export const MyState = ({ children }) => {
   const [logo, setLogo] = useState([])
   const [colorPalate, setColorPalate] = useState([])
 
+
+  // const token = JSON.parse(localStorage.getItem("token"));
+  const ADMIN_TOKEN = JSON.parse(localStorage.getItem("ADMIN_TOKEN"));
+
+
+  const [token, setToken] = useState(null);
+
+  // Get token from localStorage when the app loads
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      const parseToken = JSON.parse(storedToken)
+      setToken(parseToken)
+    }
+  }, []);
+
   // 0000 admin start
+
 
   const handleGetAllAdmin = () => {
     setIsLoading(true)
@@ -105,22 +121,6 @@ export const MyState = ({ children }) => {
 
 
 
-  // user register
-  const handleUserRegister = (e, authInfo) => {
-    setIsLoading(true)
-    e.preventDefault();
-    fetch(`${API}/users/register`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(authInfo)
-    }).then(res => res.json())
-      .then(data => {
-        setMessage(data.message)
-        setIsLoading(false)
-      })
-  }
 
   //  login user
   const handleUserLogin = (e, authInfo) => {
@@ -143,28 +143,6 @@ export const MyState = ({ children }) => {
       })
   }
 
-  // get login users data
-  const getLoginUser = () => {
-    setIsLoading(true)
-    const token = JSON.parse(localStorage.getItem("token"));
-    fetch(`${API}/users/users-one`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        setLoginInfo(data)
-        setIsLoading(false)
-        if (data) {
-          const photo_role = { profilePic: data.profilePic, role: data.role };
-          localStorage.setItem("photo_role", JSON.stringify(photo_role))
-        }
-
-      })
-  }
 
 
   // get login donar info start
@@ -186,15 +164,6 @@ export const MyState = ({ children }) => {
       })
   }
 
-  const handleDeleteUserAccount = (id) => {
-    fetch(`${API}/users/delete/${id}`, {
-      method: "DELETE"
-    }).then(res => res.json())
-      .then(data => {
-        setMessage(data.message)
-        setIsDelete(!isDelete)
-      })
-  }
 
 
   //1111 donar/ user auth account reset password handler end here ///////////////////
@@ -202,200 +171,12 @@ export const MyState = ({ children }) => {
 
 
 
-  // 222  donar register handler start
-  const handleDonarCreateProfiles = (e, registerInfo) => {
-    e.preventDefault();
-    setIsLoading(true)
-    fetch(`${API}/donar-register/register`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(registerInfo)
-    }).then(res => res.json())
-      .then(data => {
-        setMessage(data.message);
-        setIsLoading(false)
-      })
-
-  }
-
-  const handleUpdateRegister = (e, id, info) => {
-    e.preventDefault()
-    setIsLoading(true)
-    fetch(`${API}/donar-register/update/${id}`, {
-      method: "PUT",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(info)
-    }).then(res => res.json())
-      .then(data => {
-        setMessage(data.message)
-        setIsLoading(false)
-      })
-  }
-
-  const handleDeleteRegister = (id) => {
-    setIsLoading(true)
-    fetch(`${API}/donar-register/delete/${id}`, {
-      method: "DELETE",
-
-    }).then(res => res.json())
-      .then(data => {
-        setIsLoading(false)
-        setIsDelete(!isDelete)
-        setMessage(data.message)
-      })
-  }
-
-
-  // get login users regsieter (donar) event
-  const getLoginDonarAccount = () => {
-    setIsLoading(true)
-    fetch(`${API}/donar-register/donars-one`, {
-      method: "GET",
-      headers: {
-        'Content-type': "application/json",
-        'Authorization': `Bearer ${token}`
-      },
-    }).then(res => res.json())
-      .then(data => {
-
-        setRegisterEventDonar(data.donarInfo)
-        setIsLoading(false)
-      });
-  }
-
   // 222  donar register handler end
 
-  // 333 user register handler start here 
-
-
-  const getUserAccount = () => {
-    setIsLoading(true)
-    fetch(`${API}/users/users`)
-      .then(res => res.json())
-      .then(data => {
-        setIsLoading(false)
-        setUsersAcc(data)
-      })
-  }
-
-  const getUserAllRegister = (search) => {
-    setIsLoading(true)
-    fetch(`${API}/users-register/users/?search=${search}`)
-      .then(res => res.json())
-      .then(data => {
-        setIsLoading(false)
-        setUsersAllResgister(data.users)
-      })
-  }
-
-  const getLoginUserAccount = () => {
-    setIsLoading(true)
-    fetch(`${API}/users-register/users-one`, {
-      method: "GET",
-      headers: {
-        "Content-type": "applcation/json",
-        'Authorization': `Bearer ${token}`
-      }
-    }).then(res => res.json())
-      .then(data => {
-        setIsLoading(false)
-        setRegisterEventUser(data.userInfo)
-      })
-  }
-
-
-  // register 
-  const handleAppoinment = (e, register) => {
-    e.preventDefault();
-    if (!token) {
-      alert("Please login and apply")
-    }
-    fetch(`${API}/users-register/register`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(register)
-    }).then(res => res.json())
-      .then(data => {
-        setIsLoading(false)
-        setMessage(data.message)
-      })
-  }
-
-  // update 
-  const handleAppoinmentUpdate = (e, id, info) => {
-    e.preventDefault();
-    setIsLoading(true)
-    fetch(`${API}/users-register/update/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(info)
-    }).then(res => res.json())
-      .then(data => {
-        setIsLoading(false)
-        setMessage(data.message)
-      })
-  }
-
-  const handleDeleteUserRegister = (id) => {
-    setIsLoading(true)
-    fetch(`${API}/users-register/delete/${id}`, {
-      method: "DELETE",
-
-    }).then(res => res.json())
-      .then(data => {
-        setIsLoading(false)
-        setIsDelete(!isDelete)
-        setMessage(data.message)
-      })
-  }
-
-  // 333 user register handler end here 
 
 
 
 
-  //   get all donars start 
-  const getAllDonarsItems = (search) => {
-    setIsLoading(true)
-    fetch(`${API}/donar-register/donars/?search=${search}`)
-      .then(res => res.json())
-      .then(data => {
-        setAllDonars(data.donars);
-        setIsLoading(false)
-      }).catch(err => {
-        setMessage(err.message)
-      })
-  }
-
-
-  //  blog  handler start here 
-
-  const handleAddBlog = (e, blogInfo) => {
-    e.preventDefault()
-    setIsLoading(true)
-    fetch(`${API}/blogs/blogs`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(blogInfo)
-    }).then(res => res.json())
-      .then(data => {
-        setMessage(data.message)
-        setIsLoading(false)
-      })
-  }
   //  add blog admin
   const handleAddBlogAdmin = (e, blogInfo) => {
     e.preventDefault()
@@ -414,28 +195,7 @@ export const MyState = ({ children }) => {
       })
   }
 
-  const handleGetBlogs = () => {
-    setIsLoading(true)
-    fetch(`${API}/blogs/blogs/`)
-      .then(res => res.json())
-      .then(data => {
-        setBlogs(data.blogs)
-        setIsLoading(false)
-      })
-  }
 
-  const getOneBlog = () => {
-    fetch(`${API}/blogs/blogs-one`, {
-      method: "GET",
-      headers: {
-        "Authorization": `Bearer ${token}`
-      }
-    }).then(res => res.json())
-      .then(data => {
-        setIsLoading(false);
-        setOneBlog(data.blogs);
-      })
-  }
   const getOneBlogAdmin = () => {
     fetch(`${API}/blogs/blogs-one`, {
       method: "GET",
@@ -450,34 +210,118 @@ export const MyState = ({ children }) => {
   }
 
 
-  const handleEditBlog = (e, id, blogInfo) => {
-    e.preventDefault();
-    setIsLoading(true)
-    fetch(`${API}/blogs/blogs/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(blogInfo)
-    }).then(res => res.json())
-      .then(data => {
-        setIsLoading(false)
-        setMessage(data.message)
-      })
+
+  const [posting, setPosting] = useState(false)
+  const [updating, setUpdating] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+
+  const postHandler = async (API_KEY, formData) => {
+
+    setPosting(true)
+    try {
+
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      }
+
+
+      const response = await fetch(API + API_KEY, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(formData)
+      });
+
+
+      const result = await response.json();
+      setUpdating(false);
+      result.ok ? toast.success(result.message) : toast.error(result.message)
+
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message)
+    } finally {
+      setPosting(false)
+    }
   }
 
-  const handleDeleteBlog = (id) => {
-    fetch(`${API}/blogs/blogs/${id}`, {
-      method: "DELETE",
-    }).then(res => res.json())
-      .then(data => {
-        setMessage(data.message)
-        setIsDelete(!isDelete)
-      })
+  const editHandler = async (API_KEY, formData) => {
+    setUpdating(true)
+
+    try {
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      }
+
+
+      const response = await fetch(API + API_KEY, {
+        method: "PUT",
+        headers: headers,
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      setUpdating(false);
+      toast.success("Update successful!");
+
+    } catch (error) {
+
+      console.log(error)
+      toast.error(error.message)
+      setUpdating(false)
+
+    } finally {
+
+      setUpdating(false)
+
+    }
   }
 
+  const deleteHandler = async (API_KEY) => {
+    setDeleting(true)
+    try {
+      const headers = {
+        "Content-Type": "application/json",
+      };
 
-  //  blog  hadnler end here 
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      }
+
+
+      const response = await fetch(API + API_KEY, {
+        method: "DELETE",
+        headers: headers,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      setDeleting(false);
+      result.ok ? toast.success(result.message) : toast.error(result, message)
+
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message)
+
+    } finally {
+      setDeleting(false)
+    }
+  }
+
 
   //  volunteeer start
 
@@ -631,8 +475,6 @@ export const MyState = ({ children }) => {
   //logo start end here
 
 
-  // convert time 
-
   //   color palate start
   const handleUpdateColorPalate = (e, info) => {
     e.preventDefault();
@@ -656,7 +498,7 @@ export const MyState = ({ children }) => {
         setColorPalate(data)
         setIsLoading(false)
         if (data) {
-            localStorage.setItem("COLORS_PALATE", JSON.stringify(data))
+          localStorage.setItem("COLORS_PALATE", JSON.stringify(data))
         }
         document.documentElement.style.setProperty('--card-bg', data.cardBg);
         document.documentElement.style.setProperty('--card-text', data.cardText);
@@ -688,20 +530,27 @@ export const MyState = ({ children }) => {
 
   const value = {
     API, token, ADMIN_TOKEN, times,
-    isAdminLogin, setIsAdminLogin, 
+    isAdminLogin, setIsAdminLogin,
     message, setMessage, isLoading, setIsLoading, isDelete,
     handleGetAllAdmin, admin, handleRegisterAdmin, handleAdminLogin, handleAdminResetPassword, handleAddBlogAdmin, getOneBlogAdmin,
-    getUserAccount, usersAcc, getUserAllRegister, usersAllResgister,
-    handleDeleteUserAccount, handleUserRegister, handleUserLogin, handleUserResetPassword,
-    getLoginUser, loginInfo,
-    handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister, getLoginDonarAccount, getLoginUserAccount, registerEventUser, registerEventDonar,
-    handleAppoinment, handleAppoinmentUpdate, handleDeleteUserRegister,
-    handleAddBlog, handleGetBlogs, blogs, getOneBlog, oneBlog, handleEditBlog, handleDeleteBlog,
-    getAllDonarsItems, allDonars,
+    //  usersAcc, getUserAllRegister, usersAllResgister,
+    // handleDeleteUserAccount, handleUserRegister,
+    handleUserLogin, handleUserResetPassword,
+    // getLoginUser, loginInfo,
+    // handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister, getLoginDonarAccount, getLoginUserAccount, registerEventUser, registerEventDonar,
+    // handleAppoinment, handleAppoinmentUpdate, handleDeleteUserRegister,
+    // handleAddBlog, handleGetBlogs, blogs, getOneBlog, oneBlog, handleDeleteBlog,
+    // getAllDonarsItems, allDonars,
     handleAddVolunteer, handleGetVolunteer, handleGetOneVolunteer, volunteer, handleUpdateVolunteer, handleDeleteVolunteer,
     handleGetSlider, sliders, handleAddSlider, handleSliderDelete,
     handleAddLogo, handleGetLogo, logo, handleLogoDelete,
-    handleUpdateColorPalate, handleGetColors , colorPalate,
+    handleUpdateColorPalate, handleGetColors, colorPalate,
+
+
+
+    // new 
+    postHandler, posting, editHandler, updating, deleteHandler, deleting,
+
   };
 
   return (

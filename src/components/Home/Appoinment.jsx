@@ -14,7 +14,8 @@ export default function Appoinment() {
                 initial={{ x: 20, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className=' px-4 md:px-10 -translate-y-[200px] flex justify-between flex-wrap overflow-hidden'>
+                className=' px-4 md:px-10 -translate-y-[500px] z-[2000] flex justify-between flex-wrap overflow-hidden'>
+
                 <div className=' w-full md:w-[48%] bg-white text-black py-10 px-3'>
                     <h1 className=' text-3xl md:text-4xl font-bold my-4'> Helpful Information  </h1>
                     <div className=' my-5 overflow-hidden'>
@@ -30,6 +31,7 @@ export default function Appoinment() {
                         ))}
                     </div>
                 </div>
+
                 <div className=' w-full md:w-[48%] bg-white text-black py-10 px-3 md:px-5'>
                     <h1 className=' text-3xl md:text-4xl font-bold my-4'>Request Appointment Here</h1>
                     <div className='my-5'>

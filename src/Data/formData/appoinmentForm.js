@@ -1,10 +1,16 @@
 export const appoinmentInitialState = {
+    patientName: '',
+    patientAge: '',
     contactNumber: '',
     bloodGroup: '',
     problem: '',
     howMuch: '',
+    preferredDate: '',
     needTime: '',
-    whereNeed: '',
-    profilePic: '',
+    location: '',
+    hospital: '',
+    urgency: 'Normal',
+    doctorContact: '',
+    photo: '',
     message: ''
 };

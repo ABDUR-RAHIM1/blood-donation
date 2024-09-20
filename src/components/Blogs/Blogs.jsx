@@ -1,17 +1,21 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import Blog from './Blog'
-import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion';
-import { GlobalState } from '../../State/State';
 import LoadingSpinner from '../utils/Spinner';
 import Banner from '../utils/Banner';
-function Blogs() {
-  const { handleGetBlogs, blogs, isLoading, } = useContext(GlobalState)
+import useFetch from '../../hooks/usefetch';
+import ErrorMessage from '../utils/ErrorMessage';
 
-  useEffect(() => {
-    handleGetBlogs()
-  }, [])
-  if (isLoading) return <LoadingSpinner size="md" />
+
+function Blogs() {
+
+  const API = `/blogs/blogs`;
+  const { isLoading, error, data } = useFetch(API);
+
+  if (isLoading) return <LoadingSpinner />
+
+
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -22,15 +26,25 @@ function Blogs() {
     >
       <Banner path={"Blogs"} />
       <div>
+
         {
-          blogs && blogs.slice().reverse().map((bl, index) => (
-            <Blog
-              key={bl._id}
-              blog={bl}
-              index={index}
-            />
-          ))
+          error ? (
+            <ErrorMessage message={error} />
+          ) : (
+
+            data && data.length > 0 ? data.slice().reverse().map((bl, index) => (
+              <Blog
+                key={bl._id}
+                blog={bl}
+                index={index}
+              />
+            ))
+              : <ErrorMessage message={"no Blogs Found"} />
+
+          )
         }
+
+
       </div>
 
     </motion.div>

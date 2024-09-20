@@ -1,16 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { GlobalState } from '../../State/State'
+import React, {  useEffect, useState } from 'react' 
 import { Fade } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 import SliderCard from './SliderCard';
+import useFetch from '../../hooks/usefetch';
 
 export default function Slider() {
-    const { handleGetSlider, sliders, isLoading } = useContext(GlobalState)
+
     const [showBanner, setShowBanner] = useState(true);
 
-    useEffect(() => {
-        handleGetSlider()
-    }, [])
+
+    const API = `/slider/sliders`;
+    const { isLoading, data } = useFetch(API);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -26,13 +26,10 @@ export default function Slider() {
                 isLoading ?
                     <div className='w-full h-[85vh] bg-black flex items-center justify-between'>
                         <SliderCard />
-                        <div className=' flex-1 px-5'>
-                            <h2 className=' text-3xl text-red-500 font-bold '>RoktoJoddha  . . . </h2>
-                        </div>
                     </div>
                     :
                     <Fade >
-                        {sliders.map((fadeImage, index) => (
+                        {data && data.map((fadeImage, index) => (
                             <div key={index} className='w-full h-[85vh] z-[-1]'>
                                 <img className='w-full h-full' src={fadeImage.profilePic} />
 

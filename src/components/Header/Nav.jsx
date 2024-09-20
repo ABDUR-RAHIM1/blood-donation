@@ -1,15 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { GlobalState } from '../../State/State';
 import demoImg from "../../images/demo.jpg"
 
 export default function Nav(props) {
     const { show } = props
+    const pathname = useLocation().pathname;
+
+
+
 
     const navItems = [
         { name: "Home", path: "/" },
         { name: "Donors", path: "/donars" },
-        { name: "Recipients", path: "/users" },
+        { name: "Recipients", path: "/recipients" },
         { name: "About Us", path: "/about" },
         { name: "Blogs", path: "/blogs" },
     ];
@@ -26,11 +30,14 @@ export default function Nav(props) {
         handleGetLogo()
     }, [setPhotoRole, token,]);
 
-    return (
-        <div className={` ${show ? " scale-x-1" : " scale-x-0"} origin-left w-[48%] bg-red-500 duration-200 h-screen  z-[20] fixed top-0 left-0 px-10 py-10 overflow-y-auto`}>
 
-            <div className=' w-full h-[100px] flex items-center justify-between'>
-                <Link to={"/"} className=' text-2xl md:text-5xl font-bold text-white' >Roktojoddha</Link>
+
+    return (
+        <div className={` ${show ? " scale-x-1" : " scale-x-0"} origin-left w-[75%] md:w-[48%] primaryBg duration-200 h-screen  z-[20] fixed top-0 left-0 px-10 py-10 overflow-y-auto`}>
+
+            <div className=' w-full h-[100px] flex items-center justify-between flex-col md:flex-row gap-3'>
+                <Link to={"/"} className=' text-2xl md:text-5xl font-bold   border-b md:border-0' >Roktojoddha</Link>
+
                 <div>
                     {
                         logo && logo.map((lg, index) => (
@@ -40,7 +47,7 @@ export default function Nav(props) {
                 </div>
             </div>
 
-            <div className='w-full h-full my-10 flex flex-col items-center gap-10 text-3xl font-medium text-white'>
+            <div className='w-full h-full my-10 flex flex-col items-center gap-6 md:gap-10  text-2xl md:text-3xl font-medium  '>
                 {
                     navItems.map((n, i) => (
                         <Link to={n.path} key={i}>
