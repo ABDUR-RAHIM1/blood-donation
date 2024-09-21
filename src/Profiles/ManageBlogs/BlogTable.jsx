@@ -20,12 +20,12 @@ export default function BlogTable(props) {
     useEffect(() => {
         setBlogs(initialBlogs);
     }, [initialBlogs]);
-
+ 
     const columns = [
         {
             name: "Photo",
             selector: row => <img src={
-                row.profilePic ? row.profilePic : demoImg
+                row.photo ? row.photo : demoImg
             } alt="roktojoddha" className='w-[100px] h-[100px] rounded-md my-3' />
         },
         {
@@ -56,11 +56,18 @@ export default function BlogTable(props) {
 
     ]
     return (
-        <DataTable
-            columns={columns}
-            data={blogs}
-            pagination
-        />
+
+        <>
+            <div className=' my-5 primaryBg2 px-5 '>
+                <h2 className=' text-3xl font-medium  py-4'>Manage Blogs</h2>
+            </div>
+            <DataTable
+                columns={columns}
+                data={blogs}
+                pagination
+            />
+        </>
+
 
         // <p>Data table</p>
     )

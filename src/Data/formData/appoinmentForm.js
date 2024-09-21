@@ -1,4 +1,5 @@
 export const appoinmentInitialState = {
+    donationStatus: '',
     patientName: '',
     patientAge: '',
     contactNumber: '',
@@ -12,5 +13,5 @@ export const appoinmentInitialState = {
     urgency: 'Normal',
     doctorContact: '',
     photo: '',
-    message: ''
+    message: '',
 };

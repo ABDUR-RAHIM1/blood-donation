@@ -1,22 +1,48 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Donar from './Donar'
 import LoadingSpinner from '../utils/Spinner'
 import { useState } from 'react'
 import Banner from '../utils/Banner'
-import useFetch from '../../hooks/usefetch'
 import ErrorMessage from '../utils/ErrorMessage'
+import SelectField from '../utils/SelectField'
+import { API } from '../../API/API'
 
 function Donars() {
 
-    const [search, setSearch] = useState("");
-    const handleChange = (e) => {
+    const [donars, setDonars] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(false)
+    const [search, setSearch] = useState("")
+
+
+
+    useEffect(() => {
+        const getData = async () => {
+            search === "" && setIsLoading(true)
+            const searchValue = encodeURIComponent(search || "")
+
+            const API_KEY = `/donar-register/donars/?search=${searchValue}`;
+            try {
+                const res = await fetch(API + API_KEY)
+                const result = await res.json();
+                setDonars(result)
+            } catch (error) {
+                console.log(error)
+                setError(error.massage)
+            } finally {
+                setIsLoading(false)
+            }
+
+        }
+
+        getData()
+    }, [search])
+
+
+    const handleSearch = (e) => {
         setSearch(e.target.value)
     }
 
-    const API = `/donar-register/donars/?search=${search}`;
-    const { isLoading, error, data } = useFetch(API);
-
-    console.log(data)
 
     if (isLoading) {
         return <LoadingSpinner />
@@ -33,24 +59,20 @@ function Donars() {
                     <ErrorMessage message={error} />
                 ) :
                     (
-                        <div className='py-10 md:py-20 bg-gray-200 overflow-hidden '>
+                        <div className=' px-5 md:px-10 py-10 md:py-20 bg-gray-200 overflow-hidden '>
 
-                            <div className="wrap w-full md:w-[70%] m-auto">
-                                <select required onChange={handleChange} name="bloodGroup" className='w-full py-4 px-5 border rounded-sm'>
-                                    <option value="">Select Your Blood Group</option>
-                                    <option value="A">A+</option>
-                                    <option value="B">B+</option>
-                                    <option value="AB">AB+</option>
-                                    <option value="O">O+</option>
-                                    <option value="A">A-</option>
-                                    <option value="B">B-</option>
-                                    <option value="AB">AB-</option>
-                                    <option value="O">O-</option>
-                                </select>
+                            <div className=' w-full md:w-[48%] m-auto bg-white pt-1 pb-4 px-2 rounded-md'>
+                                <SelectField
+                                    name="bloodGroup"
+                                    label=""
+                                    defaultOption={"Filter On Blood group"}
+                                    options={["A+", "B+", "AB+", "O+", "A-", "B-", "AB-", "O-"]}
+                                    handleChange={handleSearch}
+                                />
                             </div>
                             <div className='py-10  flex justify-center flex-wrap gap-6'>
-                                {data && data.length > 0 ? (
-                                    data.map(dr => (
+                                {donars && donars.length > 0 ? (
+                                    donars.map(dr => (
                                         <Donar key={dr._id} donar={dr} />
                                     ))
                                 ) : (

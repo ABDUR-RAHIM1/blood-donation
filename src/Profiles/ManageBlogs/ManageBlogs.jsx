@@ -5,6 +5,7 @@ import { GlobalState } from '../../State/State'
 import BlogTable from './BlogTable'
 import ProfileLoading from '../Loading/ProfileLoading'
 import { motion } from 'framer-motion'
+import DataNotFound from '../../components/utils/DataNotFound'
 
 export default function ManageBlogs() {
     const { token } = useContext(GlobalState)
@@ -26,12 +27,12 @@ export default function ManageBlogs() {
                 whileInView={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
             >
-                <div className=' my-5 primaryBg2 px-5 '>
-                    <h2 className=' text-3xl font-medium  py-4'>Manage Blogs</h2>
-                </div>
+
+
                 {
-                    data && data.length > 0 && <BlogTable blogs={data} />
+                    data && data.length > 0 ? <BlogTable blogs={data} /> : <DataNotFound />
                 }
+
             </motion.div>
         </ProifleLayout>
     )

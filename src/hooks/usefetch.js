@@ -7,6 +7,7 @@ export default function useFetch(API_KEY, isToken) {
     const [data, setData] = useState(null);
 
 
+
     useEffect(() => {
         const getData = async () => {
             setIsLoading(true);
@@ -29,7 +30,7 @@ export default function useFetch(API_KEY, isToken) {
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }
 
-                const result = await res.json(); 
+                const result = await res.json();
                 setData(result);
                 setError(null);
             } catch (err) {
@@ -42,7 +43,11 @@ export default function useFetch(API_KEY, isToken) {
         if (API) {
             getData();
         }
-    }, [API, isToken ]); // Dependency array
+
+
+
+    }, [API, isToken]);
+
 
     return { isLoading, error, data };
 }

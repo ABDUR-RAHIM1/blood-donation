@@ -73,10 +73,18 @@ export default function RecipientTable(props) {
     ]
 
     return (
-        <DataTable
-            columns={columns}
-            data={data}
-            pagination
-        />
+
+        <>
+            <div className=' my-5 primaryBg2 px-5 '>
+                <h2 className=' text-3xl font-medium  py-4'>Recipient Cards</h2>
+            </div>
+
+            <DataTable
+                columns={columns}
+                data={data}
+                pagination
+            />
+        </>
+
     )
 }

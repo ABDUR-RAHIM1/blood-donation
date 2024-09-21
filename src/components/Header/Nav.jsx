@@ -1,14 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { GlobalState } from '../../State/State';
-import demoImg from "../../images/demo.jpg"
+import { MdOutlineExpandLess } from "react-icons/md"
 
 export default function Nav(props) {
     const { show } = props
-    const pathname = useLocation().pathname;
-
-
-
+    const path = useLocation().pathname;
 
     const navItems = [
         { name: "Home", path: "/" },
@@ -18,17 +15,7 @@ export default function Nav(props) {
         { name: "Blogs", path: "/blogs" },
     ];
 
-    const { token, handleGetLogo, logo } = useContext(GlobalState)
-    const [photoRole, setPhotoRole] = useState({});
-    useEffect(() => {
-        const isPhoto_role = localStorage.getItem("photo_role");
-        if (isPhoto_role) {
-            const photoRole = JSON.parse(isPhoto_role)
-
-            setPhotoRole({ ...photoRole, profilePic: photoRole.profilePic, role: photoRole.role })
-        }
-        handleGetLogo()
-    }, [setPhotoRole, token,]);
+    const { token } = useContext(GlobalState)
 
 
 
@@ -38,35 +25,35 @@ export default function Nav(props) {
             <div className=' w-full h-[100px] flex items-center justify-between flex-col md:flex-row gap-3'>
                 <Link to={"/"} className=' text-2xl md:text-5xl font-bold   border-b md:border-0' >Roktojoddha</Link>
 
-                <div>
-                    {
-                        logo && logo.map((lg, index) => (
-                            <img key={index} className=' w-[70px] h-[70px] rounded-full' src={lg.profilePic || demoImg} alt="" />
-                        ))
-                    }
-                </div>
             </div>
 
-            <div className='w-full h-full my-10 flex flex-col items-center gap-6 md:gap-10  text-2xl md:text-3xl font-medium  '>
+            <div className=' w-full md:w-[75%] m-auto flex flex-col text-2xl md:text-3xl font-bold gap-5 my-5'>
+
                 {
                     navItems.map((n, i) => (
-                        <Link to={n.path} key={i}>
-                            {n.name}
+                        <Link to={n.path} key={i} className={` flex items-center justify-between ${path === n.path ? "scale-110 text-black font-extrabold" : ""}`}>
+                            <span>{n.name}</span>
+                            <span className=' text-4xl text-white rotate-[90deg]'>
+                                <MdOutlineExpandLess />
+                            </span>
                         </Link>
                     ))
                 }
-                {
-                    token && photoRole
-                        ? <Link to="/profile" className=' py-3 px-6 bg-red-800 text-white font-bold rounded-sm hover:shadow-md duration-200'>
-                            Profile
-                        </Link>
-                        :
-                        <Link as={Link} to='/auth' className=' py-3 px-6 bg-red-800 text-white font-bold rounded-sm hover:shadow-md duration-200'>
-                            Log-in
-                        </Link>
+
+                <div className=' my-10 w-full'>
+                    {
+                        token
+                            ? <Link to="/profile" className=' py-3 px-6 bg-red-800 text-white font-bold rounded-sm hover:shadow-md duration-200 text-center'>
+                                Profile
+                            </Link>
+                            :
+                            <Link as={Link} to='/auth' className=' py-3 px-6 bg-red-800 text-white font-bold rounded-sm hover:shadow-md duration-200 text-center'>
+                                Log-in
+                            </Link>
 
 
-                }
+                    }
+                </div>
 
             </div>
 

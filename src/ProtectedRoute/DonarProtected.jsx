@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
-
+import Cookies from "js-cookie"
+import { GlobalState } from '../State/State';
 function DonarProtected() {
 
-  const isDonarToken = JSON.parse(localStorage.getItem('token'));
+  const token = Cookies.get("BLOOD_USER_TOKEN")
 
-  return isDonarToken ? <Outlet /> : <Navigate to="/auth" />;
+  return token ? <Outlet /> : <Navigate to="/auth" />;
 }
 
 export default DonarProtected

@@ -45,14 +45,34 @@ export default DonarDetails
 
 
 function DonarTable({ data }) {
-    const { email, address, dob, weight, gender, beforeDonation, bloodGroup, contactNumber, emergencyContact, relationshipContact, donationDate, donationTime, message } = data;
+    const {
+        email,
+        address,
+        dob,
+        weight,
+        gender,
+        beforeDonation,
+        bloodGroup,
+        contactNumber,
+        emergencyContact,
+        relationshipContact,
+        donationDate,
+        preferredDonationTime,
+        message,
+        allergies,
+        donationLocation,
+        lastDonationLocation,
+        medicalCondition,
+        createdAt,
+        updatedAt
+    } = data;
 
     return (
-        <table className=" bg-white px-5 min-w-full table-auto border-collapse overflow-auto my-6">
-            <thead className="bg-gray-100  " >
+        <table className="bg-white px-5 min-w-full table-auto border-collapse overflow-auto my-6">
+            <thead className="bg-gray-100">
                 <tr>
-                    <th className="px-6 py-3 text-left font-bold border-b">Key</th>
-                    <th className="px-6 py-3 text-left font-bold border-b">Value</th>
+                    <th className="px-6 py-3 text-left font-bold border-b w-[28%]">Key</th>
+                    <th className="px-6 py-3 text-left font-bold border-b w-[68%]">Value</th>
                 </tr>
             </thead>
             <tbody className="bg-white">
@@ -70,11 +90,11 @@ function DonarTable({ data }) {
                 </tr>
                 <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Date of Birth:</td>
-                    <td className="px-6 py-4">{dob}</td>
+                    <td className="px-6 py-4">{new Date(dob).toLocaleDateString()}</td>
                 </tr>
                 <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Weight:</td>
-                    <td className="px-6 py-4">{weight} (KG)</td>
+                    <td className="px-6 py-4">{weight} KG</td>
                 </tr>
                 <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Gender:</td>
@@ -94,23 +114,47 @@ function DonarTable({ data }) {
                 </tr>
                 <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Previous Donations:</td>
-                    <td className="px-6 py-4">{beforeDonation} (Times)</td>
+                    <td className="px-6 py-4">{beforeDonation} Times</td>
                 </tr>
                 <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Last Donation Date:</td>
-                    <td className="px-6 py-4">{donationDate}</td>
+                    <td className="px-6 py-4">{new Date(donationDate).toLocaleDateString()}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Preferred Time:</td>
-                    <td className="px-6 py-4">{donationTime} AM/PM</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">Preferred Donation Time:</td>
+                    <td className="px-6 py-4">{preferredDonationTime} AM/PM</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Donation Location:</td>
+                    <td className="px-6 py-4">{donationLocation}</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Last Donation Location:</td>
+                    <td className="px-6 py-4">{lastDonationLocation}</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Allergies:</td>
+                    <td className="px-6 py-4">{allergies}</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Medical Condition:</td>
+                    <td className="px-6 py-4">{medicalCondition}</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Created At:</td>
+                    <td className="px-6 py-4">{new Date(createdAt).toLocaleString()}</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Updated At:</td>
+                    <td className="px-6 py-4">{new Date(updatedAt).toLocaleString()}</td>
                 </tr>
                 <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Conditions:</td>
-                    <td className="px-6 py-4">{
-                        message && message.split(".").map((m, i) => (
-                            <p key={i} className=' my-3'>{m}</p>
-                        ))
-                    }</td>
+                    <td className="px-6 py-4">
+                        {message && message.split(".").map((m, i) => (
+                            <p key={i} className='my-3'>{m}</p>
+                        ))}
+                    </td>
                 </tr>
             </tbody>
         </table>

@@ -12,13 +12,13 @@ import { initialRegisterFormState } from '../../Data/formData/registerForm'
 function DonarRegisterForm() {
     const state = useLocation().state;
 
-    const { postHandler, positng, editHandler, updating } = useContext(GlobalState);
+    const { postHandler, posting, editHandler, updating } = useContext(GlobalState);
 
     const { fileLoading, uploadFile } = useFileUploader();
 
     const [formData, setFormData] = useState(initialRegisterFormState);
 
-
+    console.log(posting)
     const handleChange = async (e) => {
         const { name, value } = e.target;
         if (name === "photo") {
@@ -69,27 +69,7 @@ function DonarRegisterForm() {
                     state ? "Update Information" : "Register as a Donar"
                 }
             </h1>
-            {/* Full Name */}
-            <Inputs
-                type='text'
-                name='name'
-                value={formData.name}
-                required={required}
-                placeholder='Full Name'
-                label='Enter your Full Name'
-                handleChange={handleChange}
-            />
 
-            {/* Email */}
-            <Inputs
-                type='email'
-                name='email'
-                value={formData.email}
-                required={required}
-                placeholder='Email Address'
-                label='Enter your Email Address'
-                handleChange={handleChange}
-            />
 
             {/* Address */}
             <Inputs
@@ -145,27 +125,6 @@ function DonarRegisterForm() {
                 handleChange={handleChange}
             />
 
-            {/* Donation Date */}
-            <Inputs
-                type='date'
-                name='donationDate'
-                value={formData.donationDate}
-                required={required}
-                placeholder='Donation Date'
-                label='Last Donation Date'
-                handleChange={handleChange}
-            />
-
-            {/* Donation Time */}
-            <Inputs
-                type='time'
-                name='donationTime'
-                value={formData.donationTime}
-                required={required}
-                placeholder='04-10 pm'
-                label='Donation Time (04-10 pm)'
-                handleChange={handleChange}
-            />
 
             {/* Gender */}
             <SelectField
@@ -175,6 +134,18 @@ function DonarRegisterForm() {
                 required={true}
                 handleChange={handleChange}
                 options={["Male", "Female", "Others"]}
+            />
+
+
+            {/* Weight */}
+            <Inputs
+                type='number'
+                name='weight'
+                value={formData.weight}
+                required={required}
+                placeholder='Weight (kg)'
+                label='Enter your weight in kilograms'
+                handleChange={handleChange}
             />
 
             {/* Blood Group */}
@@ -188,16 +159,17 @@ function DonarRegisterForm() {
                 options={["A+", "B+", "AB+", "O+", "A-", "B-", "AB-", "O-"]}
             />
 
-            {/* Weight */}
+            {/* Donation Date */}
             <Inputs
-                type='number'
-                name='weight'
-                value={formData.weight}
+                type='date'
+                name='donationDate'
+                value={formData.donationDate}
                 required={required}
-                placeholder='Weight (kg)'
-                label='Enter your weight in kilograms'
+                placeholder='Donation Date'
+                label='Last Donation Date'
                 handleChange={handleChange}
             />
+
 
             {/* Before Donation Count */}
             <Inputs
@@ -216,7 +188,7 @@ function DonarRegisterForm() {
                 name='donationLocation'
                 value={formData.donationLocation}
                 required={required}
-                placeholder='Donation Location'
+                placeholder='Rangpur , lalmonirhat , aditmary'
                 label='Enter your Donation Location'
                 handleChange={handleChange}
             />
@@ -287,7 +259,7 @@ function DonarRegisterForm() {
 
             {/* Submit Button */}
             <button disabled={fileLoading} className='w-full py-4 px-7 rounded-sm text-xl font-medium primaryBg hover:secondaryBg my-3 '>
-                {positng || updating ? <Loading /> : state ? "Update Now" : "Submit Now"}
+                {posting || updating ? <Loading /> : state ? "Update Now" : "Submit Now"}
             </button>
 
 

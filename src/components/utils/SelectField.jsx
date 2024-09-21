@@ -5,7 +5,7 @@ export default function SelectField(props) {
 
     return (
         <div className="mt-4">
-            {label && <label htmlFor={name}>{label}</label>}
+            {label && <label htmlFor={name} className=' capitalize'>{label}</label>}
             <select
                 name={name}
                 value={value}

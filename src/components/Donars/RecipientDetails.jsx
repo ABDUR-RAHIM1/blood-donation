@@ -8,7 +8,9 @@ import Banner from '../utils/Banner';
 
 function RecipientDetails() {
     const { state, pathname } = useLocation();
-    const { profilePic, name } = state;
+    const { photo } = state;
+
+    console.log(state)
 
     return (
 
@@ -24,9 +26,9 @@ function RecipientDetails() {
                 className=' px-5 md:px-10 py-10 md:py-20 bg-gray-200'>
                 <div className="w-full">
                     <div className=' w-full  overflow-hidden'>
-                        <img className='w-full m-auto  h-auto max-h-[80vh] rounded-sm' src={profilePic || demoImg} alt="roktojoddha" />
+                        <img className='w-full m-auto  h-auto max-h-[80vh] rounded-sm' src={photo || demoImg} alt="roktojoddha" />
                     </div>
-                    <h1 className='heading text-center text-red-500 font-bold my-10 italic uppercase'>Name : {name}</h1>
+
 
                     {/*  this table component under this page */}
                     <RecipientTable
@@ -34,7 +36,7 @@ function RecipientDetails() {
                     />
 
                     <Link to='/donars'>
-                        <button className='py-5 md:py-7 px-10 md:px-16 bg-red-500 hover:bg-black duration-200 font-bold my-10 text-white'>Back</button>
+                        <button className='py-5 md:py-7 px-10 md:px-16 primaryBg2 hover:secondaryBg duration-200 font-bold my-10 '>Back</button>
                     </Link>
                 </div>
             </motion.div>
@@ -48,7 +50,27 @@ export default RecipientDetails
 
 
 function RecipientTable({ data }) {
-    const { name, email, bloodGroup, contactNumber, howMuch, whereNeed, needTime, problem, createAt, message } = data;
+    const {
+        donationStatus,
+        patientName,
+        refName,
+        refEmail,
+        bloodGroup,
+        contactNumber,
+        howMuch,
+        location,
+        needTime,
+        problem,
+        createdAt,
+        message,
+        urgency,
+        hospital,
+        doctorContact,
+        patientAge,
+        preferredDate,
+
+    } = data;
+
     const { times } = useContext(GlobalState);
 
     return (
@@ -61,12 +83,24 @@ function RecipientTable({ data }) {
             </thead>
             <tbody className="bg-white">
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Refference:</td>
-                    <td className="px-6 py-4">{name}</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">Donation Status:</td>
+                    <td className="px-6 py-4">
+                        <button className={`py-3 px-8 rounded-sm border text-white ${donationStatus === "yes" ? "bg-green-700" : "bg-red-600"}`}>
+                            {donationStatus}
+                        </button>
+                    </td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Email:</td>
-                    <td className="px-6 py-4 lowercase">{email} {`(Refference)`} </td>
+                    <td className="px-6 py-4 font-medium text-gray-900">Patient Name:</td>
+                    <td className="px-6 py-4">{patientName}</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Refference Name:</td>
+                    <td className="px-6 py-4">{refName}</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Refference Email:</td>
+                    <td className="px-6 py-4 lowercase">{refEmail} {`(Refference)`}</td>
                 </tr>
                 <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Blood Group:</td>
@@ -85,28 +119,48 @@ function RecipientTable({ data }) {
                     <td className="px-6 py-4">{needTime}</td>
                 </tr>
                 <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Urgency:</td>
+                    <td className="px-6 py-4">{urgency}</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Hospital:</td>
+                    <td className="px-6 py-4">{hospital}</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Doctor Contact:</td>
+                    <td className="px-6 py-4">{doctorContact}</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Patient Age:</td>
+                    <td className="px-6 py-4">{patientAge}</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">Preferred Date:</td>
+                    <td className="px-6 py-4">{new Date(preferredDate).toLocaleDateString()}</td>
+                </tr>
+                <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Contact Number:</td>
                     <td className="px-6 py-4">+888 {contactNumber}</td>
                 </tr>
                 <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Location:</td>
-                    <td className="px-6 py-4">{whereNeed}</td>
+                    <td className="px-6 py-4">{location}</td>
                 </tr>
                 <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Posted At:</td>
-                    <td className="px-6 py-4">{times(createAt)}</td>
+                    <td className="px-6 py-4">{times(createdAt)}</td>
                 </tr>
                 <tr className="border-b">
                     <td className="px-6 py-4 font-medium text-gray-900">Message:</td>
                     <td className="px-6 py-4">{
                         message && message.split(".").map((m, i) => (
-                            <p key={i} className=' my-3'>{m}</p>
+                            <p key={i} className='my-3'>{m}</p>
                         ))
                     }</td>
                 </tr>
             </tbody>
         </table>
     );
-
 }
+
 

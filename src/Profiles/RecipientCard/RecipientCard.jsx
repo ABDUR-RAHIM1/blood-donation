@@ -5,6 +5,7 @@ import { GlobalState } from '../../State/State'
 import RecipientTable from './RecipientTable'
 import ProfileLoading from '../Loading/ProfileLoading'
 import { motion } from 'framer-motion'
+import DataNotFound from '../../components/utils/DataNotFound'
 
 export default function RecipientCard() {
     const { token } = useContext(GlobalState)
@@ -24,10 +25,10 @@ export default function RecipientCard() {
                 whileInView={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
             >
-                <div className=' my-5 primaryBg2 px-5 '>
-                    <h2 className=' text-3xl font-medium  py-4'>Recipient Cards</h2>
-                </div>
-                <RecipientTable data={data} />
+
+                {
+                    data && data.length > 0 ? <RecipientTable data={data} /> : <DataNotFound />
+                }
             </motion.div>
         </ProifleLayout>
     )

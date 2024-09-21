@@ -6,40 +6,81 @@ import { motion } from 'framer-motion'
 import Loading from '../utils/Loading'
 import Notification from '../utils/Notification'
 import ResetPassword from '../utils/ResetPassword'
-import uploadFile from '../utils/UploadFile'
-import { useEffect } from 'react'
 import loginImg2 from "../../images/loginBg2.png"
+import useFileUploader from '../../hooks/useFileUploader'
+import FileField from '../utils/FileField'
+import { API } from '../../API/API'
+import { toast } from 'react-toastify'
+
+import Cookies from 'js-cookie'
+import SelectField from '../utils/SelectField'
 
 function UserLogin() {
   const navigate = useNavigate()
-  const { handleUserRegister, handleUserLogin, message, isLoading } = useContext(GlobalState)
+  const { message } = useContext(GlobalState)
   const [isRegister, setIsRegister] = useState(false)
   const [isReset, setIsReset] = useState(false)
-  const [register, setRegister] = useState({ profilePic: "" })
-  const [imgLoading, setImgLoading] = useState(false)
+  const [formData, setFormData] = useState({ name: "", gender: "", email: "", password: "", photo: "" })
+  const { fileLoading, uploadFile } = useFileUploader()
+  const [isLoading, setIsLoading] = useState(false)
 
-
-  //   donar login changer
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e.target;
-    setRegister({ ...register, [name]: value })
+    if (name === "photo") {
+      const image = e.target.files[0];
+      await uploadFile(image, setFormData);
+    } else {
 
-  }
-
-  const handleFileChange = async (e) => {
-    const image = e.target.files[0];
-    await uploadFile(image, setRegister, setImgLoading);
-
-  }
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setTimeout(() => {
-        navigate("/profile")
-      }, 1500);
+      setFormData({ ...formData, [name]: value })
     }
-  }, [isLoading])
+  }
+
+  const handleUserLogin = (e) => {
+    setIsLoading(true)
+    e.preventDefault();
+    fetch(`${API}/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    }).then(res => res.json())
+      .then(data => {
+        setIsLoading(false)
+        if (data.ok) {
+          toast.success(data.message)
+          const token = data.token;
+          Cookies.set('BLOOD_USER_TOKEN', JSON.stringify(token))
+          setTimeout(() => {
+            navigate("/profile")
+          }, 1000);
+        } else {
+          toast.error(data.message)
+        }
+      })
+  }
+
+  const handleUserRegister = (e) => {
+    e.preventDefault();
+    setIsLoading(true)
+    e.preventDefault();
+    fetch(`${API}/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    }).then(res => res.json())
+      .then(data => {
+        setIsLoading(false)
+        if (data.ok) {
+          toast.success(data.message)
+        } else {
+          toast.error(data.message)
+        }
+      })
+  }
+
 
   return (
     <motion.div
@@ -48,24 +89,29 @@ function UserLogin() {
       transition={{
         duration: '1'
       }}
-      className='  login_page_bg w-full  pt-10'>
+      className='  login_page_bg w-full h-auto min-h-screen px-0 md:px-10 py-20'>
 
-      <div className="login_forms">
-        <img className=' w-full md:w-48 h-52 md:h-400' src={loginImg2} alt="" />
+      <div className=" bg-white py-10 rounded-md  flex items-center justify-between flex-wrap">
 
-        <div className="w-full md:w-48">
+        <div className='w-[500px] bg-blue-500'>
+          <img src={loginImg2} alt="" />
+
+        </div>
+
+        <div className="w-full md:w-[48%] mr-0 md:mr-2">
           <form onSubmit={
 
             isRegister
-              ? (e) => handleUserRegister(e, register)
-              : (e) => handleUserLogin(e, register)
+              ? handleUserRegister
+              : handleUserLogin
 
-          } className='form-w bg-gray-100 p-6'>
+          } className=' w-full bg-gray-50 shadow-md p-6'>
 
-            {
-              isRegister ? <h3 className='formHeading'>Register Account</h3>
-                : <h3 className='formHeading'>Log-in</h3>
-            }
+            <h1 className=' text-4xl text-red-700 font-bold my-10' >
+              {
+                isRegister ? "Register Account" : "Log-in"
+              }
+            </h1>
 
             {isRegister &&
 
@@ -74,21 +120,21 @@ function UserLogin() {
                 <Inputs
                   type='text'
                   name='name'
-                  value={register.name}
+                  value={formData.name}
                   required={true}
                   placeholder='Enter Your Name'
-                  lable='Enter Your Good Name'
+                  label='Enter Your Good Name'
                   handleChange={handleChange}
-                />
-                <Inputs
-                  type='text'
-                  name='gender'
-                  value={register.gender}
+                /> 
+                <SelectField
+                  label="Gender"
+                  name="gender"
+                  value={formData.gender}
                   required={true}
-                  placeholder='Gender'
-                  lable='Your Gender'
                   handleChange={handleChange}
+                  options={["Male", "Female", "Others"]}
                 />
+
 
               </>
 
@@ -97,39 +143,36 @@ function UserLogin() {
             <Inputs
               type='email'
               name='email'
-              value={register.email}
+              value={formData.email}
               required={true}
               placeholder='Enter Your Email'
-              lable='Enter Your Email'
+              label='Enter Your Email'
               handleChange={handleChange}
             />
             <Inputs
               type='password'
               name='password'
-              value={register.password}
+              value={formData.password}
               required={true}
               placeholder='********'
-              lable='Enter Your Password'
+              label='Enter Your Password'
               handleChange={handleChange}
             />
 
             {isRegister &&
-              <>
-                <input required onChange={handleFileChange} id='file' type="file" name='profilePic' className='form-control mt-3' />
-                {
-                  imgLoading ? <small className='mb-3 text-red-400'>Uploading Image</small>
-                    :
-                    <small className='mb-3 text-green-400'>Upload Your Profile Photo</small>
-                }
 
-                <br />
-              </>
+              <FileField
+                name="photo"
+                label={fileLoading ? "Uploading . . ." : "Upload Patient Photo"}
+                required={false}
+                handleChange={handleChange}
+              />
             }
 
 
 
-            <button className='button button_blue my-4'>
-              { isLoading ? <Loading size='sm' /> : isRegister ? 'Register' : 'Log-in'}
+            <button className='py-4 px-5 text-center my-10 primaryBg w-full font-bold hover:secondaryBg duration-200'>
+              {isLoading ? <Loading /> : isRegister ? 'Register' : 'Log-in'}
             </button>
 
 
@@ -150,9 +193,10 @@ function UserLogin() {
             isReset && <ResetPassword role='user' />
           }
         </div>
+
       </div>
 
-    </motion.div>
+    </motion.div >
   )
 }
 

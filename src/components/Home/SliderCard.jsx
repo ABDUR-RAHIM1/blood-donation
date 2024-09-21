@@ -12,7 +12,7 @@ export default function SliderCard() {
                 Donate Blood And <br /> Inspire Others.
             </h1>
 
-            <Link to={"/donar-register"} className=' inline-block py-3 px-8 text-3xl font-bold bg-red-600 text-white rounded-sm my-6'>Explore Now</Link>
+            <Link to={"/profile"} className=' inline-block py-3 px-8 text-3xl font-bold bg-red-600 text-white rounded-sm my-6'>Explore Now</Link>
         </div>
     )
 }

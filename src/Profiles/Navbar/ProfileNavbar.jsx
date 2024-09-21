@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import demoImg from "../../images/demo.jpg"
 import { GlobalState } from '../../State/State';
 import useFetch from '../../hooks/usefetch';
 import { MdEmail, MdHome, MdLogout } from 'react-icons/md';
 import { IoIosMan } from 'react-icons/io';
+import Cookies from 'js-cookie';
 
 export default function ProfileNavbar() {
-
+    const navigate = useNavigate()
     const { token } = useContext(GlobalState);
     const API = `/users/users-one`;
     const { isLoading, data } = useFetch(API, token);
@@ -20,9 +21,16 @@ export default function ProfileNavbar() {
         return <div className=' py-5 px-10 text-center'>Data not Found</div>
     }
 
-    const { name, email, profilePic } = data;
+    const { name, email, photo } = data;
 
 
+    const handleLogout = () => {
+        Cookies.remove("BLOOD_USER_TOKEN")
+
+        setTimeout(() => {
+            navigate("/")
+        }, 1000);
+    }
 
     return (
         <div className='px-5 mnd:px-10 flex items-center justify-between h-[100px] sticky top-0  primaryBg z-[111] border-b border-b-red-500'>
@@ -32,7 +40,7 @@ export default function ProfileNavbar() {
                 </Link>
             </div>
             <div className=' flex items-center justify-center gap-4'>
-                <img src={profilePic || demoImg} className=' w-[70px] h-[70px] rounded-md' alt="roktojoddha" />
+                <img src={photo || demoImg} className=' w-[70px] h-[70px] rounded-md' alt="roktojoddha" />
                 <div className=' flex flex-col gap-3'>
                     <div className=' flex items-center gap-2'>
                         <IoIosMan />
@@ -46,7 +54,7 @@ export default function ProfileNavbar() {
                 </div>
             </div>
             <div>
-                <button className=' py-5 px-6  primaryBg2 text-gray-100 font-medium flex items-center gap-3'>
+                <button onClick={handleLogout} className=' py-5 px-6  primaryBg2 text-gray-100 font-medium flex items-center gap-3'>
                     Log Out
                     <span className=' text-3xl'>
                         <MdLogout />

@@ -4,7 +4,7 @@ function TextArea(props) {
     const { name, required, value, placeholder, label, handleChange } = props
     return (
         <div className=' my-5'>
-            <label htmlFor={name}>{label}</label>
+            <label htmlFor={name} className=' capitalize'>{label}</label>
             <textarea name={name}
                 value={value}
                 required={required}

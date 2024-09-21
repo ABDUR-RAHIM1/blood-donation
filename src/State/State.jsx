@@ -1,6 +1,8 @@
 
 import React, { useState, createContext, useEffect } from "react";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+
 export const GlobalState = createContext();
 
 // wrap this function name on app component
@@ -17,14 +19,7 @@ export const MyState = ({ children }) => {
   const [isDelete, setIsDelete] = useState(false)
 
   //  state with data from backend 
-  const [usersAcc, setUsersAcc] = useState([])
-  const [usersAllResgister, setUsersAllResgister] = useState([])
-  const [allDonars, setAllDonars] = useState([])
-  const [loginInfo, setLoginInfo] = useState({})  // get one user data from backend
-  const [registerEventDonar, setRegisterEventDonar] = useState([])
-  const [registerEventUser, setRegisterEventUser] = useState([])
-  const [blogs, setBlogs] = useState([])
-  const [oneBlog, setOneBlog] = useState([])
+
   const [admin, setAdmin] = useState([])
   const [volunteer, setVolunteer] = useState([])
   const [sliders, setSlider] = useState([])
@@ -40,7 +35,9 @@ export const MyState = ({ children }) => {
 
   // Get token from localStorage when the app loads
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
+
+    const storedToken = Cookies.get('BLOOD_USER_TOKEN');
+
     if (storedToken) {
       const parseToken = JSON.parse(storedToken)
       setToken(parseToken)
@@ -116,35 +113,6 @@ export const MyState = ({ children }) => {
 
 
 
-
-  //111  donar / user account sign up / register //////////////////////////////////
-
-
-
-
-  //  login user
-  const handleUserLogin = (e, authInfo) => {
-    setIsLoading(true)
-    e.preventDefault();
-    fetch(`${API}/users/login`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(authInfo)
-    }).then(res => res.json())
-      .then(data => {
-        setMessage(data.message)
-        setIsLoading(false)
-        if (data.login) {
-          const token = data.token;
-          localStorage.setItem('token', JSON.stringify(token))
-        }
-      })
-  }
-
-
-
   // get login donar info start
 
 
@@ -167,12 +135,6 @@ export const MyState = ({ children }) => {
 
 
   //1111 donar/ user auth account reset password handler end here ///////////////////
-
-
-
-
-  // 222  donar register handler end
-
 
 
 
@@ -535,7 +497,7 @@ export const MyState = ({ children }) => {
     handleGetAllAdmin, admin, handleRegisterAdmin, handleAdminLogin, handleAdminResetPassword, handleAddBlogAdmin, getOneBlogAdmin,
     //  usersAcc, getUserAllRegister, usersAllResgister,
     // handleDeleteUserAccount, handleUserRegister,
-    handleUserLogin, handleUserResetPassword,
+    // handleUserLogin, handleUserResetPassword,
     // getLoginUser, loginInfo,
     // handleDonarCreateProfiles, handleDeleteRegister, handleUpdateRegister, getLoginDonarAccount, getLoginUserAccount, registerEventUser, registerEventDonar,
     // handleAppoinment, handleAppoinmentUpdate, handleDeleteUserRegister,

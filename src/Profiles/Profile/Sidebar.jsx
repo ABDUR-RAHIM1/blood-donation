@@ -21,9 +21,12 @@ const Sidebar = () => {
 
 
     return (
-        <div className='flex flex-col gap-3 text-white'>
+        <div className='flex flex-col gap-3 '>
 
+            <h2 className=' text-3xl md:text-5xl font-bold my-10 text-center to-blue-950 border-b-2'>Profile</h2>
             <div className='bg-blue-50 shadow-sm py-5 px-2 flex flex-col items-center justify-center gap-3'>
+
+
                 {manageItems.map((item, i) => (
                     <Link
                         to={`/profile${item.path}`}

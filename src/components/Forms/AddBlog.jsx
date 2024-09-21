@@ -13,7 +13,7 @@ function AddBlog() {
 
   const { state } = useLocation();
   const { postHandler, posting, editHandler, updating } = useContext(GlobalState)
-  const [formData, setFormData] = useState({ title: "", desc: "", profilePic: "" });
+  const [formData, setFormData] = useState({ title: "", desc: "", photo: "" });
 
   const { fileLoading, uploadFile } = useFileUploader()
 
@@ -34,17 +34,16 @@ function AddBlog() {
 
   const handleChange = async (e) => {
     const { name, value } = e.target;
-    if (name === "profilePic") {
+    if (name === "photo") {
       const image = e.target.files[0];
       await uploadFile(image, setFormData);
-      console.log("proiflePic")
     } else {
 
       setFormData({ ...formData, [name]: value })
     }
   }
 
-
+  console.log(formData)
 
   useEffect(() => {
 
@@ -89,7 +88,7 @@ function AddBlog() {
           />
 
           <FileField
-            name="profilePic"
+            name="photo"
             label={fileLoading ? "Uploading . . ." : "Upload Photo"}
             required={false}
             handleChange={handleChange}

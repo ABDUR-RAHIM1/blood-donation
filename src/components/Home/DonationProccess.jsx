@@ -1,8 +1,8 @@
 import React from 'react'
-import { processData } from '../../Data/Data'
-import ProcessCard from './processCard'
+import { processData } from '../../Data/Data' 
 import Heading from '../utils/Heading'
 import { motion } from 'framer-motion'
+import ProcessCard from './ProcessCard'
 
 function DonationProccess() {
 
