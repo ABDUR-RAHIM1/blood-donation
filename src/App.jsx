@@ -32,6 +32,7 @@ import RecipientCard from './Profiles/RecipientCard/RecipientCard'
 import ManageBlogs from './Profiles/ManageBlogs/ManageBlogs'
 import ProfileNavbar from './Profiles/Navbar/ProfileNavbar'
 import AddBlog from './components/Forms/AddBlog'
+import About from './components/About/About'
 function App() {
 
   const path = useLocation().pathname;
@@ -47,6 +48,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/donars" element={<Donars />} />
         <Route path="/recipients" element={<Recipients />} />
         <Route path="/donars-details" element={<DonarDetails />} />

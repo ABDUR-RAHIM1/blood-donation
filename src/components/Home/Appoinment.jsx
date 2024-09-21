@@ -1,31 +1,41 @@
-import React from 'react'
-import AppoinmentBg from './AppoinmentBg'
+import React from 'react' 
 import { MdBloodtype } from "react-icons/md"
 import AppoinmentForm from '../Forms/AppoinmentForm';
 import { helpfulInfo } from '../../Data/HelpfullInfo';
 import { motion } from 'framer-motion';
+import banner from "../../images/blog/b.jpg"
 
 export default function Appoinment() {
 
     return (
-        <section>
-            <AppoinmentBg />
+        <section className=' overflow-hidden'> 
+
+            <div className=' relative w-full h-[700px]'>
+                <img src={banner} className=' w-full h-full blur-[2px]' alt="" />
+                <div className=' w-full h-full px-5 md:px-10 bg-black bg-opacity-10 absolute top-0 left-0 flex items-center justify-center flex-col'>
+                    <h3 className=' text-2xl font-bold uppercase my-5 text-red-600'>blood owner</h3>
+                    <h1 className=' text-3xl md:text-6xl font-bold text-white'>
+                        We Are Blood Donor Group
+                    </h1>
+                </div>
+            </div>
             <motion.div
-                initial={{ x: 20, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
+                initial={{ y: 0, opacity: 0 }}
+                whileInView={{ y: -200, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className=' px-4 md:px-10 -translate-y-[500px] z-[2000] flex justify-between flex-wrap overflow-hidden'>
+                viewport={{ once: true }}
+                className=' px-4 md:px-10 z-[2000] flex justify-between flex-wrap overflow-hidden '>
 
                 <div className=' w-full md:w-[48%] bg-white text-black py-10 px-3'>
-                    <h1 className=' text-3xl md:text-4xl font-bold my-4'> Helpful Information  </h1>
-                    <div className=' my-5 overflow-hidden'>
+                    <h1 className=' text-3xl md:text-4xl font-bold my-7'> Helpful Information  </h1>
+                    <div className=' my-10 overflow-hidden'>
                         {helpfulInfo.map((item, index) => (
                             <motion.p
                                 initial={{ x: 20, opacity: 0 }}
                                 whileInView={{ x: 0, opacity: 1 }}
                                 transition={{ duration: 0.5 }}
                                 viewport={{ once: true }}
-                                key={index} className='text-[15px] my-3 flex items-center gap-3'>
+                                key={index} className='text-[15px] mb-8 flex items-center gap-3'>
                                 <span className=' text-3xl text-red-500'><MdBloodtype /></span>  {item}
                             </motion.p>
                         ))}
@@ -33,7 +43,7 @@ export default function Appoinment() {
                 </div>
 
                 <div className=' w-full md:w-[48%] bg-white text-black py-10 px-3 md:px-5'>
-                    <h1 className=' text-3xl md:text-4xl font-bold my-4'>Request Appointment Here</h1>
+
                     <div className='my-5'>
                         <AppoinmentForm />
                     </div>

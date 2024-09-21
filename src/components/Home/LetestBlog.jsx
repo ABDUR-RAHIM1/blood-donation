@@ -6,7 +6,7 @@ function LetestBlog() {
 
     const API = `/blogs/blogs`;
     const { isLoading, error, data } = useFetch(API);
- 
+    console.log(data)
     return (
         <div className=' my-20 md:my-32'>
             <div className=' text-center my-10'>
@@ -69,11 +69,11 @@ export function HomeBlog(props) {
                 <h1 className=' text-5xl md:text-8xl text-gray-300 font-bold my-4'>{formattedIndex}</h1>
 
                 <Link to='/blog-details' state={props.blog} className=' text-3xl md:text-5xl font-bold to-black hover:text-red-500 duration-300 my-4'>
-                    {title}
+                    {title && title.length > 15 ? title.slice(0, 15) + " . . ." : title}
                 </Link>
 
                 <p className=' text-2xl my-5 font-medium'>
-                    {desc}
+                {desc && desc.length > 60 ? desc.slice(0, 60) + " . . ." : desc}
                 </p>
 
                 <Link to='/blog-details' state={props.blog} className=' inline-block  py-4 md:py-6 px-8 md:px-16 font-bold my-4 md:my-7 bg-red-500 text-white hover:scale-110 hover:shadow-md duration-300 '>
