@@ -6,13 +6,13 @@ export default function useFetch(API_KEY, isToken) {
     const [error, setError] = useState(null);
     const [data, setData] = useState(null);
 
-
-
     useEffect(() => {
         const getData = async () => {
+
+            if (isToken === null) return;
+
             setIsLoading(true);
             try {
-
                 const headers = {
                     "Content-type": "application/json",
                 };
@@ -40,14 +40,11 @@ export default function useFetch(API_KEY, isToken) {
             }
         };
 
-        if (API) {
+        if (API_KEY && (isToken || !isToken)) {
             getData();
         }
 
-
-
-    }, [API, isToken]);
-
+    }, [API_KEY, isToken]);
 
     return { isLoading, error, data };
 }

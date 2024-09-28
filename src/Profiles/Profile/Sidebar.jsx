@@ -32,7 +32,7 @@ const Sidebar = () => {
                         to={`/profile${item.path}`}
                         key={i}
                         className={
-                            ` ${path === `/profile${item.path}` ? " primaryBg hover:text-gray-200 " : "bg-blue-100 text-black hover:text-gray-900 "}  inline-block w-full py-2 px-1  shadow-sm  capitalize font-medium text-center`
+                            ` ${path === `/profile${item.path}` ? " primaryBg hover:text-gray-200 " : "bg-[#dee9f7] text-black hover:text-gray-900 "}  inline-block w-full py-2 px-1  shadow-sm  capitalize font-medium text-center`
                         }
                     >
                         {item.item}
@@ -46,7 +46,7 @@ const Sidebar = () => {
                         to={`/profile${item.path}`}
                         key={i}
                         className={
-                            ` ${path === `/profile${item.path}` ? " bg-red-500 text-white hover:text-gray-200 " : "bg-blue-100 text-black hover:text-gray-900 "}  inline-block w-full py-2 px-1  shadow-sm  capitalize font-medium text-center`
+                            ` ${path === `/profile${item.path}` ? " bg-red-500 text-white hover:text-gray-200 " : "bg-[#dee9f7] text-black hover:text-gray-900 "}  inline-block w-full py-2 px-1  shadow-sm  capitalize font-medium text-center`
                         }
                     >
                         {item.item}

@@ -173,9 +173,56 @@ export const MyState = ({ children }) => {
 
 
 
+  const [profileArrow, setProfileArrow] = useState(false)
+
+
+  const [getData, setGetData] = useState({
+    loading: false,
+    data: null,
+    error: null,
+  });
+
   const [posting, setPosting] = useState(false)
   const [updating, setUpdating] = useState(false)
   const [deleting, setDeleting] = useState(false)
+
+
+
+  const handleGetData = async (API_KEY) => {
+    setGetData((prevState) => ({ ...prevState, loading: true }));
+
+    try {
+      const res = await fetch(API + API_KEY, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const result = await res.json();
+      setGetData((prevState) => ({
+        ...prevState,
+        loading: false,
+        data: result,
+        error: null,
+      }));
+    
+
+    } catch (error) {
+      setGetData((prevState) => ({
+        ...prevState,
+        loading: false,
+        error: "Cannot Fetch Data",
+        data: null,
+      }));
+    }
+  };
+
+
 
   const postHandler = async (API_KEY, formData) => {
 
@@ -511,7 +558,8 @@ export const MyState = ({ children }) => {
 
 
     // new 
-    postHandler, posting, editHandler, updating, deleteHandler, deleting,
+    profileArrow, setProfileArrow,
+    handleGetData, getData, postHandler, posting, editHandler, updating, deleteHandler, deleting,
 
   };
 

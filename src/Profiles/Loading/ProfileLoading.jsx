@@ -1,6 +1,6 @@
-import React from 'react'
-import Sidebar from '../Profile/Sidebar'
+import React from 'react' 
 import { motion } from 'framer-motion'
+import SIdebar from '../Profile/SIdebar'
 
 export default function ProfileLoading() {
 
@@ -8,7 +8,7 @@ export default function ProfileLoading() {
         <div className=' flex' >
 
             <div className='w-[300px] h-screen px-4 py-10 overflow-scroll bg-gray-100 text-gray-900'>
-                <Sidebar />
+                <SIdebar />
             </div>
 
             <div className=' flex-1 h-screen  flex items-center justify-center flex-col gap-4'>

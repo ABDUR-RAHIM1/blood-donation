@@ -125,7 +125,7 @@ function UserLogin() {
                   placeholder='Enter Your Name'
                   label='Enter Your Good Name'
                   handleChange={handleChange}
-                /> 
+                />
                 <SelectField
                   label="Gender"
                   name="gender"

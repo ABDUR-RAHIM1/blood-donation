@@ -3,25 +3,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import demoImg from "../../images/demo.jpg"
 import { GlobalState } from '../../State/State';
 import useFetch from '../../hooks/usefetch';
-import { MdEmail, MdHome, MdLogout } from 'react-icons/md';
+import { MdArrowCircleRight, MdClose, MdEmail, MdHome, MdLogout, MdMenu } from 'react-icons/md';
 import { IoIosMan } from 'react-icons/io';
 import Cookies from 'js-cookie';
 
 export default function ProfileNavbar() {
+    const { profileArrow, setProfileArrow } = useContext(GlobalState)
     const navigate = useNavigate()
-    const { token } = useContext(GlobalState);
-    const API = `/users/users-one`;
-    const { isLoading, data } = useFetch(API, token);
-
-    if (isLoading) {
-        return <div className=' py-5 px-10 text-center'>Loading . .. </div>
-    }
-
-    if (!data) {
-        return <div className=' py-5 px-10 text-center'>Data not Found</div>
-    }
-
-    const { name, email, photo } = data;
 
 
     const handleLogout = () => {
@@ -32,29 +20,28 @@ export default function ProfileNavbar() {
         }, 1000);
     }
 
+    const handleArrowClick = () => {
+        setProfileArrow(!profileArrow)
+    }
+
+
     return (
-        <div className='px-5 mnd:px-10 flex items-center justify-between h-[100px] sticky top-0  primaryBg z-[111] border-b border-b-red-500'>
-            <div className={`  w-auto px-2 md:p-4 h-full flex items-center justify-start`}>
-                <Link to="/" className="text-2xl md:text-5xl font-bold primaryBg2 py-2 px-3  rounded-md text-gray-50 hover:text-gray-200">
+        <div className='px-5 md:px-10 py-5 md:py-0 flex items-center justify-between flex-wrap h-auto md:h-[100px] sticky top-0  primaryBg z-[111] border-b border-b-red-500 text-center'>
+            <div className={` w-full md:w-[280px] flex items-center justify-between   px-2 md:p-4 h-full `}>
+                <Link to="/" className="text-3xl md:text-5xl font-bold primaryBg2 py-2 px-3  rounded-md text-gray-50 hover:text-gray-200">
                     <MdHome />
                 </Link>
-            </div>
-            <div className=' flex items-center justify-center gap-4'>
-                <img src={photo || demoImg} className=' w-[70px] h-[70px] rounded-md' alt="roktojoddha" />
-                <div className=' flex flex-col gap-3'>
-                    <div className=' flex items-center gap-2'>
-                        <IoIosMan />
-                        <p>{name}</p>
-                    </div>
-                    <div className=' flex items-center gap-2'>
-                        <MdEmail />
-                        <p>{email}</p>
-                    </div>
 
-                </div>
+                <span onClick={handleArrowClick} className={` text-2xl md:text-3xl font-bold primaryBg2 py-2 px-3  rounded-md text-gray-50 hover:text-gray-200 ${profileArrow ? " rotate-0" : " rotate-180"} duration-200 cursor-pointer`}>
+                    {
+                        profileArrow ? <MdClose /> :  <MdMenu />
+
+                    }
+                </span>
             </div>
-            <div>
-                <button onClick={handleLogout} className=' py-5 px-6  primaryBg2 text-gray-100 font-medium flex items-center gap-3'>
+
+            <div className=' m-auto md:m-0'>
+                <button onClick={handleLogout} className=' py-2 md:py-5 px-3 md:px-6  primaryBg2 text-gray-100 font-medium flex items-center gap-3'>
                     Log Out
                     <span className=' text-3xl'>
                         <MdLogout />
