@@ -31,7 +31,7 @@ export default function Profile() {
         transition={{
           duration: 0.5
         }}
-        className='py-10'>
+        >
         <Welcome />
         <DonationInfo />
         <Shedule />

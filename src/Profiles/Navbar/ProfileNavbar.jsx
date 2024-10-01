@@ -1,10 +1,7 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import demoImg from "../../images/demo.jpg"
 import { GlobalState } from '../../State/State';
-import useFetch from '../../hooks/usefetch';
-import { MdArrowCircleRight, MdClose, MdEmail, MdHome, MdLogout, MdMenu } from 'react-icons/md';
-import { IoIosMan } from 'react-icons/io';
+import { MdClose, MdHome, MdLogout, MdMenu } from 'react-icons/md';
 import Cookies from 'js-cookie';
 
 export default function ProfileNavbar() {
@@ -34,7 +31,7 @@ export default function ProfileNavbar() {
 
                 <span onClick={handleArrowClick} className={` text-2xl md:text-3xl font-bold primaryBg2 py-2 px-3  rounded-md text-gray-50 hover:text-gray-200 ${profileArrow ? " rotate-0" : " rotate-180"} duration-200 cursor-pointer`}>
                     {
-                        profileArrow ? <MdClose /> :  <MdMenu />
+                        profileArrow ? <MdClose /> : <MdMenu />
 
                     }
                 </span>

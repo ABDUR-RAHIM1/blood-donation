@@ -3,20 +3,15 @@ import { GlobalState } from '../../State/State';
 import ProfileLoading from '../Loading/ProfileLoading';
 import ErrorMessage from '../../components/utils/ErrorMessage';
 import CountDown from '../../components/utils/CountDown';
+import useFetch from '../../hooks/usefetch';
 
 export default function DonationInfo() {
-    const { handleGetData, getData } = useContext(GlobalState);
     const [nextDonationDate, setNextDonationDate] = useState(null);
     const [remainingDays, setRemainingDays] = useState(0);
+    const { token } = useContext(GlobalState)
+    const API = '/donar-register/donars-one'
 
-
-    useEffect(() => {
-        const API_KEY = '/donar-register/donars-one';
-        handleGetData(API_KEY);
-    }, []);
-
-    const { loading, data, error } = getData;
-
+    const { isLoading, data, error } = useFetch(API, token);
 
     useEffect(() => {
         if (data && data.donationDate) {
@@ -26,7 +21,8 @@ export default function DonationInfo() {
         }
     }, [data]);
 
-    if (loading) {
+
+    if (isLoading) {
         return <ProfileLoading />;
     }
 

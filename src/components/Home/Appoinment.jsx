@@ -1,4 +1,4 @@
-import React from 'react' 
+import React from 'react'
 import { MdBloodtype } from "react-icons/md"
 import AppoinmentForm from '../Forms/AppoinmentForm';
 import { helpfulInfo } from '../../Data/HelpfullInfo';
@@ -8,7 +8,7 @@ import banner from "../../images/blog/b.jpg"
 export default function Appoinment() {
 
     return (
-        <section className=' overflow-hidden'> 
+        <section className=' overflow-hidden'>
 
             <div className=' relative w-full h-[700px]'>
                 <img src={banner} className=' w-full h-full blur-[2px]' alt="" />
@@ -24,7 +24,7 @@ export default function Appoinment() {
                 whileInView={{ y: -200, opacity: 1 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
-                className=' px-4 md:px-10 z-[2000] flex justify-between flex-wrap overflow-hidden '>
+                className=' px-4 md:px-10 z-[2000] flex items-start justify-between flex-wrap overflow-hidden '>
 
                 <div className=' w-full md:w-[48%] bg-white text-black py-10 px-3'>
                     <h1 className=' text-3xl md:text-4xl font-bold my-7'> Helpful Information  </h1>

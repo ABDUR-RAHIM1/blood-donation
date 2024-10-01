@@ -33,7 +33,6 @@ export const MyState = ({ children }) => {
 
   const [token, setToken] = useState(null);
 
-  // Get token from localStorage when the app loads
   useEffect(() => {
 
     const storedToken = Cookies.get('BLOOD_USER_TOKEN');
@@ -42,7 +41,7 @@ export const MyState = ({ children }) => {
       const parseToken = JSON.parse(storedToken)
       setToken(parseToken)
     }
-  }, []);
+  }, [token]);
 
   // 0000 admin start
 
@@ -187,7 +186,7 @@ export const MyState = ({ children }) => {
   const [deleting, setDeleting] = useState(false)
 
 
-
+  // no use / delete letter
   const handleGetData = async (API_KEY) => {
     setGetData((prevState) => ({ ...prevState, loading: true }));
 
@@ -210,7 +209,7 @@ export const MyState = ({ children }) => {
         data: result,
         error: null,
       }));
-    
+
 
     } catch (error) {
       setGetData((prevState) => ({
@@ -559,7 +558,8 @@ export const MyState = ({ children }) => {
 
     // new 
     profileArrow, setProfileArrow,
-    handleGetData, getData, postHandler, posting, editHandler, updating, deleteHandler, deleting,
+    // handleGetData, getData,
+    postHandler, posting, editHandler, updating, deleteHandler, deleting,
 
   };
 

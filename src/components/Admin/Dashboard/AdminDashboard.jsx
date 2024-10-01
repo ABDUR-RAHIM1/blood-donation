@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Sidebar from './Sidebar'
-import { motion } from 'framer-motion'    
-import {FaRegArrowAltCircleLeft} from "react-icons/fa"
-function AdminDashboard({children}) {  
+import { motion } from 'framer-motion'
+import { FaRegArrowAltCircleLeft } from "react-icons/fa"
+function AdminDashboard({ children }) {
   const [arrowClick, setArrowClick] = useState(false)
-console.log(arrowClick)
+  console.log(arrowClick)
   return (
     <motion.div
       className='flex-b items-start'>
@@ -12,9 +12,9 @@ console.log(arrowClick)
         <Sidebar />
       </div>
       <div className="dahboard_main scroll-none pb-32 relative">
-     
-         <FaRegArrowAltCircleLeft onClick={() => setArrowClick(!arrowClick)} className={`${arrowClick ? "rotate-180" : "rotate-0"} duration-200 arrow`} />
-        {children} 
+
+        <FaRegArrowAltCircleLeft onClick={() => setArrowClick(!arrowClick)} className={`${arrowClick ? "rotate-180" : "rotate-0"} duration-200 arrow`} />
+        {children}
       </div>
     </motion.div>
   )

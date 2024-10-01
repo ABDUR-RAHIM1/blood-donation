@@ -8,7 +8,7 @@ function Volantiars() {
     const { handleGetVolunteer, volunteer } = useContext(GlobalState);
 
 
-    const volunteers = volunteer.filter(vl => vl.title === "co-founder" || vl.title === "founder");
+    // const volunteers = volunteer.filter(vl => vl.title === "co-founder" || vl.title === "founder");
 
     useEffect(() => {
         handleGetVolunteer()
@@ -26,7 +26,7 @@ function Volantiars() {
             {/*  voluteers card */}
             <div className='flex justify-center gap-4 md:gap-6 flex-wrap'>
                 {
-                    volunteers && volunteers.slice(0, 3).map(vt => (
+                    volunteer && volunteer.slice(0, 3).map(vt => (
                         <Card
                             key={vt._id}
                             volunteer={vt}
