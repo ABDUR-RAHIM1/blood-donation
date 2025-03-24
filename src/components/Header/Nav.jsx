@@ -3,20 +3,23 @@ import { Link, useLocation } from 'react-router-dom'
 import { GlobalState } from '../../State/State';
 import { MdOutlineExpandLess } from "react-icons/md"
 
+const navItems = [
+    { name: "Home", nameBN: "হোম ", path: "/" },
+    { name: "Donors", nameBN: "ডোনার তালিকা", path: "/donars" },
+    { name: "Recipients", nameBN: " গ্রহীতার তালিকা", path: "/recipients" },
+    { name: "About Us", nameBN: "আমাদের সম্পর্কে", path: "/about" },
+    { name: "Blogs", nameBN: "ব্লগ সমুহ ", path: "/blogs" },
+];
+
 export default function Nav(props) {
-    const { show } = props
+    const { show, setShow } = props
     const path = useLocation().pathname;
-
-    const navItems = [
-        { name: "Home", path: "/" },
-        { name: "Donors", path: "/donars" },
-        { name: "Recipients", path: "/recipients" },
-        { name: "About Us", path: "/about" },
-        { name: "Blogs", path: "/blogs" },
-    ];
-
     const { token } = useContext(GlobalState)
 
+
+    const handleCloseNavbar = () => {
+        setShow(false)
+    }
 
 
     return (
@@ -27,12 +30,12 @@ export default function Nav(props) {
 
             </div>
 
-            <div className=' w-full md:w-[75%] m-auto flex flex-col text-2xl md:text-3xl font-bold gap-5 my-5'>
+            <div onClick={handleCloseNavbar} className=' w-full md:w-[75%] m-auto flex flex-col text-xl font-bold gap-5 my-5'>
 
                 {
                     navItems.map((n, i) => (
                         <Link to={n.path} key={i} className={` flex items-center justify-between ${path === n.path ? "scale-110 text-black font-extrabold" : ""}`}>
-                            <span>{n.name}</span>
+                            <span>{n.nameBN}</span>
                             <span className=' text-4xl text-white rotate-[90deg]'>
                                 <MdOutlineExpandLess />
                             </span>

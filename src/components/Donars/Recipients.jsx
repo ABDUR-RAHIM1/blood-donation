@@ -67,7 +67,7 @@ const Recipients = () => {
             <SelectField
               name="bloodGroup"
               label=""
-              defaultOption={"Filter On Blood group"}
+              defaultOption={"রক্তের গ্রুপ খুঁজুন "}
               options={["A+", "B+", "AB+", "O+", "A-", "B-", "AB-", "O-"]}
               handleChange={handleSearch}
             />
@@ -77,7 +77,7 @@ const Recipients = () => {
             <SelectField
               name="donationStatus"
               label=""
-              defaultOption={"Filter On Status"}
+              defaultOption={"গ্রহন করা হয়েছে"}
               options={["yes", "no"]}
               handleChange={handleFilter}
             />
@@ -93,7 +93,7 @@ const Recipients = () => {
               <Recipient key={index} recipient={recipient} />
             ))
           ) : (
-            <h1 className='text-red-500 text-3xl text-center my-4'>There is no Request! 😔</h1>
+            <h1 className='text-red-500 text-3xl text-center my-4'> কোন আবেদন পাওয়া যায়নি! 😔</h1>
           )}
         </div>
       </div>

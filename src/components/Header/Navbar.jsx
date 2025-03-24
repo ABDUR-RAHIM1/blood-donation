@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { MdClose, MdMenu } from 'react-icons/md';
 import Nav from './Nav';
 import { Link, useLocation } from 'react-router-dom';
@@ -29,7 +29,7 @@ export default function Navbar() {
             </nav>
 
             {/* Nav Component */}
-            <Nav show={show} />
+            <Nav show={show} setShow={setShow} />
         </div>
     );
 }

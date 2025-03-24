@@ -10,7 +10,6 @@ function RecipientDetails() {
     const { state, pathname } = useLocation();
     const { photo } = state;
 
-    console.log(state)
 
     return (
 
@@ -83,75 +82,76 @@ function RecipientTable({ data }) {
             </thead>
             <tbody className="bg-white">
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Donation Status:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">সম্পূর্ণ হয়েছে ?</td>
                     <td className="px-6 py-4">
                         <button className={`py-3 px-8 rounded-sm border text-white ${donationStatus === "yes" ? "bg-green-700" : "bg-red-600"}`}>
-                            {donationStatus}
+                            {donationStatus === "yes" ? "হ্যাঁ" :"না"}
                         </button>
                     </td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Patient Name:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">গ্রহিতার নাম:</td>
                     <td className="px-6 py-4">{patientName}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Refference Name:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">রেফারেন্স নাম:</td>
                     <td className="px-6 py-4">{refName}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Refference Email:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">রেফারেন্স ইমেইল:</td>
                     <td className="px-6 py-4 lowercase">{refEmail} {`(Refference)`}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Blood Group:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900"> রক্তের গ্রুপ:</td>
                     <td className="px-6 py-4">{bloodGroup}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Patient's Problem:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">  গ্রহীতার সমস্যা  :</td>
                     <td className="px-6 py-4">{problem}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Blood Needed (Amount):</td>
+                    <td className="px-6 py-4 font-medium text-gray-900"> রক্ত দরকার:</td>
                     <td className="px-6 py-4">{howMuch} (bag)</td>
                 </tr>
+
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Time Needed:</td>
-                    <td className="px-6 py-4">{needTime}</td>
-                </tr>
-                <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Urgency:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">  জরুরী ? :</td>
                     <td className="px-6 py-4">{urgency}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Hospital:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900"> হাসপাতাল / ক্লিনিক:</td>
                     <td className="px-6 py-4">{hospital}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Doctor Contact:</td>
-                    <td className="px-6 py-4">{doctorContact}</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">ডক্টর কন্টাক্ট :</td>
+                    <td className="px-6 py-4">{doctorContact || "N/A"}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Patient Age:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">গ্রহীতার বয়স:</td>
                     <td className="px-6 py-4">{patientAge}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Preferred Date:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">গ্রহনের তারিখ:</td>
                     <td className="px-6 py-4">{new Date(preferredDate).toLocaleDateString()}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Contact Number:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900">গ্রহনের সময়:</td>
+                    <td className="px-6 py-4">{needTime}</td>
+                </tr>
+                <tr className="border-b">
+                    <td className="px-6 py-4 font-medium text-gray-900">কন্টাক্ট নাম্বার:</td>
                     <td className="px-6 py-4">+888 {contactNumber}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Location:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900"> ঠিকানা:</td>
                     <td className="px-6 py-4">{location}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Posted At:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900"> পোস্ট করছেন:</td>
                     <td className="px-6 py-4">{times(createdAt)}</td>
                 </tr>
                 <tr className="border-b">
-                    <td className="px-6 py-4 font-medium text-gray-900">Message:</td>
+                    <td className="px-6 py-4 font-medium text-gray-900"> মেসেজ :</td>
                     <td className="px-6 py-4">{
                         message && message.split(".").map((m, i) => (
                             <p key={i} className='my-3'>{m}</p>
@@ -159,7 +159,7 @@ function RecipientTable({ data }) {
                     }</td>
                 </tr>
             </tbody>
-        </table>
+        </table> 
     );
 }
 

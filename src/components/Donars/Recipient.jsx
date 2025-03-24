@@ -34,31 +34,31 @@ function Recipient(props) {
                 <table className="my-0 w-full  border-collapse">
                     <tbody className="space-y-4">
                         <tr className="border-b border-b-gray-100">
-                            <td className="p-2 font-bold">Name:</td>
+                            <td className="p-2 font-bold">নাম:</td>
                             <td className="p-2">{patientName}</td>
                         </tr>
                         <tr className="border-b border-b-gray-100">
-                            <td className="p-2 font-bold">Required Group:</td>
+                            <td className="p-2 font-bold">রক্তের গ্রুপ:</td>
                             <td className="p-2">{bloodGroup}</td>
                         </tr>
                         <tr className="border-b border-b-gray-100">
-                            <td className="p-2 font-bold">Bags Required:</td>
-                            <td className="p-2">{howMuch}</td>
+                            <td className="p-2 font-bold">দরকার:</td>
+                            <td className="p-2">{howMuch} ব্যাগ</td>
                         </tr>
                         <tr className="border-b border-b-gray-100">
-                            <td className="p-2 font-bold">Address:</td>
+                            <td className="p-2 font-bold"> ঠিকানা:</td>
                             <td className="p-2">{location}</td>
                         </tr>
                         <tr className="border-b border-b-gray-100">
-                            <td className="p-2 font-bold">Required Time:</td>
+                            <td className="p-2 font-bold"> গ্রহনের তারিখ :</td>
                             <td className="p-2">{new Date(preferredDate).toLocaleDateString()}</td>
                         </tr>
 
                         <tr className="border-b border-b-gray-100">
-                            <td className="p-2 font-bold">Status:</td>
+                            <td className="p-2 font-bold">সম্পূর্ণ হয়েছে ?</td>
                             <td className="p-2">
                                 <button className={`py-2 px-3 rounded-sm border w-full text-white ${donationStatus === "yes" ? "bg-green-700" : "bg-red-600"}`}>
-                                    {donationStatus}
+                                    {donationStatus === "yes" ? "হ্যাঁ" : "না"}
                                 </button>
                             </td>
                         </tr>
@@ -70,7 +70,7 @@ function Recipient(props) {
             <Link to='/recipient-details' state={props.recipient} >
                 <button
                     className="group-hover:bg-red-500 duration-300 py-4 px-6 bg-black text-white text-center rounded-sm my-5 w-full"
-                > See Details</button>
+                > বিস্তারিত দেখুন</button>
             </Link>
         </motion.div >
     )

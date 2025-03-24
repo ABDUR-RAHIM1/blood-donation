@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import Sidebar from './Profile/SIdebar'
+import Sidebar from './Profile/Sidebar'
 import { GlobalState } from '../State/State'
 
 export default function ProifleLayout({ children }) {

@@ -1,5 +1,4 @@
-import React from 'react'
-import { BsFacebook, BsTwitter, BsLinkedin } from "react-icons/bs"
+import React from 'react' 
 import { Link } from 'react-router-dom'
 
 function Footer() {

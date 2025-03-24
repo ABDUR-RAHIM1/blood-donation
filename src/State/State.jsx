@@ -43,6 +43,27 @@ export const MyState = ({ children }) => {
   }, []);
 
 
+  //  all user data posting (fetch) reusable
+  const postData = async (API_KEY, formData) => {
+    const response = await fetch(API + API_KEY, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(formData)
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      toast.success(data.message)
+    } else {
+      toast.error(data.message)
+    }
+
+    return data
+  }
 
   //  all users data fecting (reUsable)
   const fetchData = async (API_KEY) => {
@@ -58,7 +79,27 @@ export const MyState = ({ children }) => {
     return data
   }
 
+  //  delete data api call for User (reusable)
+  const deleteData = async (API_KEY) => {
+    const response = await fetch(API + API_KEY, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+     
+    });
 
+    const data = await response.json();
+
+    if (response.ok) {
+      toast.success(data.message)
+    } else {
+      toast.error(data.message)
+    }
+
+    return data
+  }
 
   // 0000 admin start
 
@@ -554,7 +595,9 @@ export const MyState = ({ children }) => {
   }
 
   const value = {
+    postData,
     fetchData,
+    deleteData,
     API, token, setToken, ADMIN_TOKEN, times,
     isAdminLogin, setIsAdminLogin,
     message, setMessage, isLoading, setIsLoading, isDelete,

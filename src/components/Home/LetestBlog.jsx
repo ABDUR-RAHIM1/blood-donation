@@ -6,7 +6,7 @@ function LetestBlog() {
 
     const API = `/blogs/blogs`;
     const { isLoading, error, data } = useFetch(API);
-    console.log(data)
+
     return (
         <div className=' my-20 md:my-32'>
             <div className=' text-center my-10'>
@@ -20,7 +20,7 @@ function LetestBlog() {
             </div>
             <div className='px-5 md:px-10'>
                 <div className='flex-b mt-10 flex-wrap'>
-                    {data && data.slice(0, 4).map((lb, index) => (
+                    {data && data.slice(-4).map((lb, index) => (
                         <HomeBlog key={lb._id} blog={lb} index={index} />
                     ))
 
@@ -44,7 +44,7 @@ import useFetch from '../../hooks/usefetch';
 import ErrorMessage from '../utils/ErrorMessage';
 
 export function HomeBlog(props) {
-    const { postAt, title, profilePic, desc } = props.blog;
+    const { postAt, title, photo, desc } = props.blog;
     const { index } = props
     const { times } = useContext(GlobalState)
 
@@ -59,7 +59,7 @@ export function HomeBlog(props) {
             viewport={{ once: true }}
             className={` w-full flex items-center justify-between flex-wrap my-10 ${indexing ? " flex-row-reverse" : ""}`}>
             <div className=' w-full md:w-[50%] h-[500px] my-3 overflow-hidden relative'>
-                <img src={profilePic || demoImg} className=' w-full h-full duration-300 hover:scale-125' alt="roktojoddha" />
+                <img src={photo || demoImg} className=' w-full h-full duration-300 hover:scale-125' alt="roktojoddha" />
                 <span className=' bg-black text-white bg-opacity-40 py-3 px-5 rounded-md absolute top-0 left-0'>
                     {times(postAt)}
                 </span>

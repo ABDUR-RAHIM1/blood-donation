@@ -1,6 +1,6 @@
 import React from 'react' 
 import { motion } from 'framer-motion'
-import SIdebar from '../Profile/SIdebar'
+// import SIdebar from '../Profile/Sidebar'
 import ProifleLayout from '../ProifleLayout'
 
 export default function ProfileLoading() {

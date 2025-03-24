@@ -6,7 +6,6 @@ import Blogs from './components/Blogs/Blogs'
 import Error from './components/Error/Error'
 import AdminLogin from './components/Admin/AdminLogin/AdminLogin'
 import BlogDetails from './components/BlogDetails/BlogDetails'
-import Footer from './components/Footer/footer'
 import GetBlogs from './components/Admin/Admin/GetBlogs'
 import Add_Volunteer from './components/Admin/Admin/Add_Volunteer'
 import Manage_volunteer from './components/Admin/Admin/Manage_volunteer'
@@ -33,6 +32,7 @@ import ManageBlogs from './Profiles/ManageBlogs/ManageBlogs'
 import ProfileNavbar from './Profiles/Navbar/ProfileNavbar'
 import AddBlog from './components/Forms/AddBlog'
 import About from './components/About/About'
+import Footer from './components/Footer/Footer'
 function App() {
 
   const path = useLocation().pathname;

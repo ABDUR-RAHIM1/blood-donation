@@ -76,7 +76,7 @@ function Donars() {
                                         <Donar key={dr._id} donar={dr} />
                                     ))
                                 ) : (
-                                    <h1 className='text-red-500 text-3xl text-center my-4'>There is no donor ! 😔</h1>
+                                    <h1 className='text-red-500 text-3xl text-center my-4'> কোন ডোনার পাওয়া যায়নি 😔</h1>
                                 )}
                             </div>
                         </div>

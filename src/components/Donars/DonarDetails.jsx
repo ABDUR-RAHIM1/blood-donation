@@ -3,11 +3,11 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import demoImg from '../../images/demo.jpg'
 import Banner from '../utils/Banner';
+import DonorReviews from './DonarReviews';
+
 function DonarDetails() {
     const { state, pathname } = useLocation();
-
-    const { profilePic, name } = state;
-
+    const { photo, name, reviews } = state;
 
     return (
         <>
@@ -15,33 +15,40 @@ function DonarDetails() {
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{
-                    duration: '1'
-                }}
-
-                className=' px-5 md:px-10 py-10 md:py-20 bg-gray-200'>
-                <div className="w-full ">
-                    <div className=' w-full  overflow-hidden'>
-                        <img className='w-full m-auto  h-auto max-h-[80vh] rounded-sm' src={profilePic || demoImg} alt="roktojoddha" />
+                transition={{ duration: 1 }}
+                className="px-5 md:px-10 py-10 md:py-20 bg-gray-200"
+            >
+                <div className="w-full">
+                    <div className="w-full overflow-hidden">
+                        <img
+                            className="max-w-full w-auto m-auto h-auto max-h-[80vh] rounded-sm"
+                            src={photo || demoImg}
+                            alt="roktojoddha"
+                        />
                     </div>
-                    <h1 className='heading text-center text-red-500 font-bold my-10 italic uppercase'>Name : {name}</h1>
+                    <h1 className="heading text-center text-red-500 font-bold my-10 italic uppercase">
+                        Name : {name}
+                    </h1>
 
-                    {/*  this table component under this page */}
-                    <DonarTable
-                        data={state}
-                    />
+                    {/* Donar Table */}
+                    <DonarTable data={state} />
 
-                    <Link to='/donars'>
-                        <button className='py-5 md:py-7 px-10 md:px-16 bg-red-500 hover:bg-black duration-200 font-bold my-10 text-white'>Back</button>
+                    {/* Review Section */}
+                    <DonorReviews reviews={reviews} donarId={state._id} />
+
+                    <Link to="/donars">
+                        <button className="py-5 md:py-7 px-10 md:px-16 bg-red-500 hover:bg-black duration-200 font-bold my-10 text-white">
+                            Back
+                        </button>
                     </Link>
                 </div>
             </motion.div>
         </>
-    )
+    );
 }
 
-export default DonarDetails
-
+export default DonarDetails;
+ 
 
 
 function DonarTable({ data }) {

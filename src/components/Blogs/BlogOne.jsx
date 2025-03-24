@@ -9,12 +9,8 @@ import demoImg from "../../images/demo1.png"
 
 function BlogOne(props) {
     const { handleDeleteBlog, times } = useContext(GlobalState)
-    const { _id, title, desc, profilePic, postAt } = props.blog;
-    const [isClick, setIsClick] = useState(false);
-
-
-
-
+    const { _id, title, desc, profilePic, postAt } = props.blog
+    
     return (
         <motion.tr
             initial={{ opacity: 0 }}

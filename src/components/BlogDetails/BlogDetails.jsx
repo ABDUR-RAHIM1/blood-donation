@@ -15,7 +15,7 @@ function BlogDetails() {
     const { state, pathname } = useLocation();
     const { times } = useContext(GlobalState)
 
-    const { profilePic, title, desc, name, role, postAt, } = state;
+    const { photo, title, desc, name, role, postAt, } = state;
 
 
     return (
@@ -32,10 +32,10 @@ function BlogDetails() {
 
             <div className=' px-5  py-10  flex-b flex-wrap items-start'>
                 <div className="w-full">
-                    <img className=' w-full h-auto max-h-[80vh]' src={profilePic ? profilePic : demoImg} alt="" />
+                    <img className=' w-full h-auto max-h-[80vh]' src={photo ? photo : demoImg} alt="" />
 
 
-                    <div className=' my-8 flex items-center gap-4'>
+                    <div className=' my-8 flex items-center gap-4 flex-wrap'>
                         <p className='text-xl md:text-2xl text-red-500 font-medium flex items-center gap-2'>
                             <IoIosTimer />   {times(postAt)}
                         </p>

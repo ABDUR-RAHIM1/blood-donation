@@ -1,8 +1,7 @@
 import React from 'react'
 import AddBanner from './AddBanner'
 import DonationProccess from './DonationProccess'
-import Appoinment from './Appoinment'
-import Up from '../utils/Up'
+import Appoinment from './Appoinment'  
 import Volantiars from './Volantiars'
 import Testimonial from './Testimonial'
 import { motion } from 'framer-motion'
@@ -31,8 +30,7 @@ function Home() {
       <Appoinment />
       <Volantiars />
       <LetestBlog />
-      <Testimonial />
-      <Up />
+      <Testimonial />   
     </motion.div>
   )
 }
